@@ -7,9 +7,11 @@
 
 import Foundation
 
-struct NewUser: Codable {
+struct NewStudent: Codable {
     var firstName: String = ""
     var lastName: String = ""
     var email: String = ""
     var password: String = ""
+    var dob: Date = Date.now
+    var tos: Bool = false
 }

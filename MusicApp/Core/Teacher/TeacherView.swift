@@ -14,7 +14,7 @@ struct TeacherView: View {
     @State private var hasAppeared = false
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             
             ZStack {
                 // add background colour
@@ -48,11 +48,6 @@ struct TeacherView: View {
                 }
             }
             .alert(isPresented: $vm.hasError, error: vm.error) {
-//                Button("Retry") {
-//                    Task {
-//                        await vm.getTeacherDetails(teacherId: teacherId)
-//                    }
-//                }
             }
         }
     }

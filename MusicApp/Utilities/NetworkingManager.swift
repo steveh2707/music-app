@@ -47,9 +47,15 @@ final class NetworkingManager {
         
         let (_, response) = try await URLSession.shared.data(for: request)
         
+        
         guard let response = response as? HTTPURLResponse,
               (200...300) ~= response.statusCode else {
             let statusCode = (response as! HTTPURLResponse).statusCode
+            
+            if statusCode == 401 {
+                throw NetworkingError.invalidCredentials
+            }
+            
             throw NetworkingError.invalidStatusCode(statusCode: statusCode)
         }
     }
@@ -61,6 +67,7 @@ final class NetworkingManager {
         case invalidStatusCode(statusCode: Int)
         case invalidData
         case failedToDecode(error: Error)
+        case invalidCredentials
         
         var errorDescription: String? {
             switch self {
@@ -74,6 +81,8 @@ final class NetworkingManager {
                 return "Failed to decode"
             case .custom(let err):
                 return "Something went wrong. \(err.localizedDescription)"
+            case .invalidCredentials:
+                return "Either your email or password are incorrect. Please try again"
             }
         }
     }
@@ -86,12 +95,8 @@ final class NetworkingManager {
             request.httpMethod = "GET"
         case .POST(let data):
             request.httpMethod = "POST"
-//            request.addValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
             request.addValue("application/json", forHTTPHeaderField: "content-type")
             request.httpBody = data
-            
-        
-
         }
         return request
     }

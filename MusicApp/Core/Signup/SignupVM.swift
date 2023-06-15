@@ -7,22 +7,20 @@
 
 import Foundation
 
-final class NewUserVM: ObservableObject {
+final class SignupVM: ObservableObject {
     
-    @Published var newUser = NewUser()
+    @Published var newUser = NewStudent()
     @Published var state: SubmissionState?
     @Published var hasError = false
     @Published var error: FormError?
-    @Published var showError = false
     
-    private let validator = NewUserValidator()
+    private let validator = SignupValidator()
     
 
     @MainActor
-    func create() async {
+    func signUp() async {
     
         do {
-            
             try validator.validate(newUser)
             
             state = .submitting
@@ -44,8 +42,8 @@ final class NewUserVM: ObservableObject {
             switch error {
             case is NetworkingManager.NetworkingError:
                 self.error = .networking(error: error as! NetworkingManager.NetworkingError)
-            case is NewUserValidator.NewUserValidatorError:
-                self.error = .validation(error: error as! NewUserValidator.NewUserValidatorError)
+            case is SignupValidator.NewUserValidatorError:
+                self.error = .validation(error: error as! SignupValidator.NewUserValidatorError)
             default:
                 self.error = .system(error: error)
             }
@@ -53,25 +51,5 @@ final class NewUserVM: ObservableObject {
         
     }
     
-    enum SubmissionState {
-        case unsuccessful
-        case successful
-        case submitting
-    }
-    
-    enum FormError: LocalizedError {
-        case networking(error: LocalizedError)
-        case validation(error: LocalizedError)
-        case system(error: Error)
-        
-        var errorDescription: String? {
-            switch self {
-            case .networking(let err), .validation(let err):
-                return err.errorDescription
-            case .system(let err):
-                return err.localizedDescription
-            }
-        }
-    }
-    
+
 }

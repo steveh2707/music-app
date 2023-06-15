@@ -9,24 +9,40 @@ import SwiftUI
 
 @main
 struct MusicApp: App {
+
+    @StateObject var authentication = Authentication()
+    @State var selectedTab = 1
+    
     var body: some Scene {
         WindowGroup {
             
-            TabView {
+            TabView(selection: $selectedTab) {
                 TeacherView(teacherId: 1)
                     .tabItem {
                         Image(systemName: "figure.arms.open")
                         Text("Teacher")
                     }
+                    .tag(1)
                 
-                NewUserView()
+                ProfileLoginSwitcher()
                     .tabItem {
                         Image(systemName: "person.fill")
-                        Text("Me")
+                        Text("Profile")
+                        
                     }
+                    .environmentObject(authentication)
+                    .tag(2)
             }
             
+            .onAppear {
+                #if DEBUG
+                UserDefaults.standard.set(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
+                #endif
+            }
             
         }
+        
+        
+        
     }
 }
