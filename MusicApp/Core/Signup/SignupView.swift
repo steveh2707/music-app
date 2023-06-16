@@ -16,7 +16,7 @@ struct SignupView: View {
     var body: some View {
         NavigationStack {
             Form {
-                heading
+                HeadingView()
                     .listRowBackground(Color.clear)
 
                 Section {
@@ -50,17 +50,36 @@ struct SignupView: View {
                     } label: {
                         Text("Already have an account?")
                     }
+//                    NavigationLink {
+//                        EmptyView()
+//                    } label: {
+//                        Text("Sign up as Teacher?")
+//                    }
                     NavigationLink {
                         EmptyView()
                     } label: {
-                        Text("Sign up as Teacher?")
+                        Text("Terms of Service")
+                    }
+                    NavigationLink {
+                        EmptyView()
+                    } label: {
+                        Text("Privacy Policy")
                     }
                 }
                 
             }
+            .navigationTitle("Sign Up")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    NavigationLink {
+                        LoginView()
+                    } label: {
+                        Text("Login")
+                    }
+                }
+            }
             .autocorrectionDisabled()
             .disabled(vm.state == .submitting)
-            .navigationTitle("Sign Up")
             .onChange(of: vm.state) { newState in
                 if newState == .successful {
                     authentication.isValidated = true
@@ -73,20 +92,6 @@ struct SignupView: View {
                 }
             }
         }
-    }
-    
-    private var heading: some View {
-        HStack {
-            Spacer()
-            Image(systemName: "music.note.list")
-                .font(.largeTitle)
-            Text("Treble")
-                .font(.largeTitle)
-                .monospaced()
-                .kerning(/*@START_MENU_TOKEN@*/2.0/*@END_MENU_TOKEN@*/)
-            Spacer()
-        }
-        .padding(.top)
     }
     
     private var firstName: some View {
@@ -106,7 +111,7 @@ struct SignupView: View {
     }
     
     private var password: some View {
-        TextField("Password", text: $vm.newUser.password)
+        SecureField("Password", text: $vm.newUser.password)
             .focused($focusedField, equals: .password)
     }
     
@@ -129,10 +134,10 @@ struct SignupView: View {
                 
                 Text("I agree to the Terms of Servce and acknowledge the Privacy Statement")
             }
+            .padding(.vertical, 2.0)
             .foregroundColor(.primary)
-            .font(.callout)
+            .font(.footnote)
         }
-        .padding(.top)
     }
     
     private var submit: some View {
@@ -149,8 +154,8 @@ struct SignupView: View {
             }
         }
         .padding()
-        .background(Color(red: 0, green: 0, blue: 0.5))
-        .foregroundColor(.white)
+        .background(Color.theme.accent)
+        .foregroundColor(Color.theme.primaryTextInverse)
         .clipShape(Capsule())
     }
     

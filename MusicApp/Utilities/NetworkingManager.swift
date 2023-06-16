@@ -7,6 +7,12 @@
 
 import Foundation
 
+//struct ApiError: Codable, Error {
+//  let statusCode: Int
+//  let name: String
+//  let message: String
+//}
+
 final class NetworkingManager {
     
     static let shared = NetworkingManager()
@@ -32,9 +38,17 @@ final class NetworkingManager {
         }
         
         let decoder = JSONDecoder()
-        let res = try decoder.decode(T.self, from: data)
         
-        return res
+        do {
+            return try decoder.decode(T.self, from: data)
+        } catch {
+            throw NetworkingError.failedToDecode
+        }
+        
+        
+//        let res = try decoder.decode(T.self, from: data)
+//
+//        return res
     }
     
     func request(_ endpoint: EndPoint) async throws {
@@ -47,16 +61,19 @@ final class NetworkingManager {
         
         let (_, response) = try await URLSession.shared.data(for: request)
         
-        
         guard let response = response as? HTTPURLResponse,
               (200...300) ~= response.statusCode else {
             let statusCode = (response as! HTTPURLResponse).statusCode
             
-            if statusCode == 401 {
+            switch statusCode {
+            case 401:
                 throw NetworkingError.invalidCredentials
+            case 409:
+                throw NetworkingError.emailExists
+            default:
+                throw NetworkingError.invalidStatusCode(statusCode: statusCode)
             }
             
-            throw NetworkingError.invalidStatusCode(statusCode: statusCode)
         }
     }
     
@@ -66,8 +83,9 @@ final class NetworkingManager {
         case custom(error: Error)
         case invalidStatusCode(statusCode: Int)
         case invalidData
-        case failedToDecode(error: Error)
+        case failedToDecode
         case invalidCredentials
+        case emailExists
         
         var errorDescription: String? {
             switch self {
@@ -78,11 +96,13 @@ final class NetworkingManager {
             case .invalidData:
                 return "Response data is invalid"
             case .failedToDecode:
-                return "Failed to decode"
+                return "Failed to decode."
             case .custom(let err):
                 return "Something went wrong. \(err.localizedDescription)"
             case .invalidCredentials:
                 return "Either your email or password are incorrect. Please try again"
+            case .emailExists:
+                return "Email already exists. Please login"
             }
         }
     }

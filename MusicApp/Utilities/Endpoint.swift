@@ -11,13 +11,13 @@ enum EndPoint {
     case teacher(id: Int)
     case newUser(submissionData: Data?)
     case login(submissionData: Data?)
-    case search
+    case search(submissionData: Data?)
 
     var methodType: MethodType {
         switch self {
-        case .teacher, .search:
+        case .teacher:
             return .GET
-        case .newUser(let data), .login(let data):
+        case .newUser(let data), .login(let data), .search(let data):
             return .POST(data: data)
         }
     }

@@ -9,7 +9,7 @@ import Foundation
 
 struct SignupValidator {
     
-    private let ageLimit = 5
+    private let ageLimit = 13
     
     func validate(_ user: NewStudent) throws {
 

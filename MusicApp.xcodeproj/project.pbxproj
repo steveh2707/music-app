@@ -7,12 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AA17C6492A3CA0D2006F04FD /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA17C6482A3CA0D2006F04FD /* Date.swift */; };
+		AA17C64C2A3CB3F5006F04FD /* SearchResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA17C64B2A3CB3F5006F04FD /* SearchResultsView.swift */; };
+		AA17C64E2A3CB501006F04FD /* SearchResultsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA17C64D2A3CB501006F04FD /* SearchResultsVM.swift */; };
+		AA17C6502A3CB51E006F04FD /* SearchResultsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA17C64F2A3CB51E006F04FD /* SearchResultsModel.swift */; };
 		AA400A352A3B2A2E006C5448 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA400A342A3B2A2E006C5448 /* ProfileView.swift */; };
 		AA400A372A3B2A9B006C5448 /* ProfileLoginSwitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA400A362A3B2A9B006C5448 /* ProfileLoginSwitcher.swift */; };
 		AA400A3A2A3B2FBF006C5448 /* LoginVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA400A392A3B2FBF006C5448 /* LoginVM.swift */; };
 		AA400A3C2A3B3173006C5448 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA400A3B2A3B3173006C5448 /* Networking.swift */; };
 		AA400A3E2A3B3260006C5448 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA400A3D2A3B3260006C5448 /* LoginView.swift */; };
 		AA400A402A3B370D006C5448 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA400A3F2A3B370D006C5448 /* Authentication.swift */; };
+		AAE4ED1B2A3BAFED00ED630C /* HeadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE4ED1A2A3BAFED00ED630C /* HeadingView.swift */; };
+		AAE4ED1D2A3BB50B00ED630C /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE4ED1C2A3BB50B00ED630C /* Color.swift */; };
 		AAF4C3212A38AA5B0082C142 /* MusicApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF4C3202A38AA5B0082C142 /* MusicApp.swift */; };
 		AAF4C3232A38AA5B0082C142 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF4C3222A38AA5B0082C142 /* ContentView.swift */; };
 		AAF4C3252A38AA5C0082C142 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AAF4C3242A38AA5C0082C142 /* Assets.xcassets */; };
@@ -40,12 +46,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AA17C6482A3CA0D2006F04FD /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		AA17C64B2A3CB3F5006F04FD /* SearchResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsView.swift; sourceTree = "<group>"; };
+		AA17C64D2A3CB501006F04FD /* SearchResultsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsVM.swift; sourceTree = "<group>"; };
+		AA17C64F2A3CB51E006F04FD /* SearchResultsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsModel.swift; sourceTree = "<group>"; };
 		AA400A342A3B2A2E006C5448 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		AA400A362A3B2A9B006C5448 /* ProfileLoginSwitcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLoginSwitcher.swift; sourceTree = "<group>"; };
 		AA400A392A3B2FBF006C5448 /* LoginVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVM.swift; sourceTree = "<group>"; };
 		AA400A3B2A3B3173006C5448 /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		AA400A3D2A3B3260006C5448 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		AA400A3F2A3B370D006C5448 /* Authentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
+		AAE4ED1A2A3BAFED00ED630C /* HeadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadingView.swift; sourceTree = "<group>"; };
+		AAE4ED1C2A3BB50B00ED630C /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		AAF4C31D2A38AA5B0082C142 /* MusicApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAF4C3202A38AA5B0082C142 /* MusicApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicApp.swift; sourceTree = "<group>"; };
 		AAF4C3222A38AA5B0082C142 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -82,6 +94,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AA17C64A2A3CB3BF006F04FD /* SearchResults */ = {
+			isa = PBXGroup;
+			children = (
+				AA17C64B2A3CB3F5006F04FD /* SearchResultsView.swift */,
+				AA17C64D2A3CB501006F04FD /* SearchResultsVM.swift */,
+				AA17C64F2A3CB51E006F04FD /* SearchResultsModel.swift */,
+			);
+			path = SearchResults;
+			sourceTree = "<group>";
+		};
 		AA400A312A3B261D006C5448 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
@@ -102,8 +124,18 @@
 		AA400A422A3B5AF4006C5448 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				AAE4ED1C2A3BB50B00ED630C /* Color.swift */,
+				AA17C6482A3CA0D2006F04FD /* Date.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		AAE4ED172A3BAFBF00ED630C /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				AAE4ED1A2A3BAFED00ED630C /* HeadingView.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 		AAF4C3142A38AA5B0082C142 = {
@@ -127,9 +159,9 @@
 		AAF4C31F2A38AA5B0082C142 /* MusicApp */ = {
 			isa = PBXGroup;
 			children = (
-				AA400A422A3B5AF4006C5448 /* Extensions */,
 				AAF4C3202A38AA5B0082C142 /* MusicApp.swift */,
 				AA400A3F2A3B370D006C5448 /* Authentication.swift */,
+				AA400A422A3B5AF4006C5448 /* Extensions */,
 				AAF4C3372A38B66A0082C142 /* Utilities */,
 				AAF4C3342A38AB0E0082C142 /* Models */,
 				AAF4C32E2A38AAAC0082C142 /* Core */,
@@ -152,6 +184,8 @@
 			isa = PBXGroup;
 			children = (
 				AA400A362A3B2A9B006C5448 /* ProfileLoginSwitcher.swift */,
+				AA17C64A2A3CB3BF006F04FD /* SearchResults */,
+				AAE4ED172A3BAFBF00ED630C /* Components */,
 				AA400A382A3B2FA7006C5448 /* Login */,
 				AA400A312A3B261D006C5448 /* Profile */,
 				AAF4C34D2A39D8D60082C142 /* Signup */,
@@ -309,6 +343,7 @@
 				AAF4C33D2A38CA6F0082C142 /* Endpoint.swift in Sources */,
 				AAF4C3542A39F9040082C142 /* SignupValidator.swift in Sources */,
 				AA400A352A3B2A2E006C5448 /* ProfileView.swift in Sources */,
+				AA17C64E2A3CB501006F04FD /* SearchResultsVM.swift in Sources */,
 				AA400A3C2A3B3173006C5448 /* Networking.swift in Sources */,
 				AAF4C34C2A39D8C50082C142 /* SignupModel.swift in Sources */,
 				AAF4C3512A39D9E80082C142 /* SignupView.swift in Sources */,
@@ -317,9 +352,14 @@
 				AAF4C3362A38AB220082C142 /* TeacherModel.swift in Sources */,
 				AA400A372A3B2A9B006C5448 /* ProfileLoginSwitcher.swift in Sources */,
 				AA400A3E2A3B3260006C5448 /* LoginView.swift in Sources */,
+				AA17C6492A3CA0D2006F04FD /* Date.swift in Sources */,
+				AAE4ED1D2A3BB50B00ED630C /* Color.swift in Sources */,
 				AAF4C3332A38AAE20082C142 /* TeacherVM.swift in Sources */,
 				AAF4C3392A38B6770082C142 /* NetworkingManager.swift in Sources */,
+				AAE4ED1B2A3BAFED00ED630C /* HeadingView.swift in Sources */,
+				AA17C64C2A3CB3F5006F04FD /* SearchResultsView.swift in Sources */,
 				AAF4C3212A38AA5B0082C142 /* MusicApp.swift in Sources */,
+				AA17C6502A3CB51E006F04FD /* SearchResultsModel.swift in Sources */,
 				AAF4C3312A38AACF0082C142 /* TeacherView.swift in Sources */,
 				AA400A3A2A3B2FBF006C5448 /* LoginVM.swift in Sources */,
 				AA400A402A3B370D006C5448 /* Authentication.swift in Sources */,

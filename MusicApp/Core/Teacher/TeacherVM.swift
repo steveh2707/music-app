@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import MapKit
 
 
 class TeacherVM: ObservableObject {
@@ -14,6 +15,8 @@ class TeacherVM: ObservableObject {
     @Published var error: NetworkingManager.NetworkingError?
     @Published var hasError = false
     @Published var isLoading = false
+    @Published var mapRegion = MKCoordinateRegion()
+    @Published var locations = [Location]()
     
     @MainActor
     func getTeacherDetails(teacherId: Int) async {
@@ -22,6 +25,12 @@ class TeacherVM: ObservableObject {
         
         do {
             self.teacherDetails = try await NetworkingManager.shared.request(.teacher(id: teacherId), type: TeacherDetails.self)
+            
+            if let teacherDetails {
+                self.mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: teacherDetails.locationLatitude, longitude: teacherDetails.locationLongitude), span: MKCoordinateSpan(latitudeDelta: 0.03, longitudeDelta: 0.03))
+                let newLocation = Location(id: UUID(), latitude: teacherDetails.locationLatitude, longitude: teacherDetails.locationLongitude)
+                locations.append(newLocation)
+            }
             
         } catch {
             

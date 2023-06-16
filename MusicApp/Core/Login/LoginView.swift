@@ -16,13 +16,15 @@ struct LoginView: View {
     var body: some View {
         NavigationStack {
             Form {
-                heading
+                HeadingView()
                     .listRowBackground(Color.clear)
                 
                 Section {
                     email
                     password
                 }
+                .disabled(vm.state == .submitting)
+                
                 submit
                     .listRowBackground(Color.clear)
                 
@@ -36,8 +38,9 @@ struct LoginView: View {
                 }
             }
             .textInputAutocapitalization(.never)
-            .disabled(vm.state == .submitting)
+            
         }
+        .navigationTitle("Log In")
         .alert(isPresented: $vm.hasError, error: vm.error) { }
         .onChange(of: vm.state) { newState in
             if newState == .successful {
@@ -46,29 +49,16 @@ struct LoginView: View {
         }
     }
     
-    private var heading: some View {
-        HStack {
-            Spacer()
-            Image(systemName: "music.note.list")
-                .font(.largeTitle)
-            Text("Treble")
-                .font(.largeTitle)
-                .monospaced()
-                .kerning(/*@START_MENU_TOKEN@*/2.0/*@END_MENU_TOKEN@*/)
-            Spacer()
-        }
-        .padding(.top)
-    }
     
     
     private var email: some View {
         TextField("Email", text: $vm.credentials.email)
-//            .keyboardType(.emailAddress)
             .focused($focusedField, equals: .email)
+            .keyboardType(.emailAddress)
     }
     
     private var password: some View {
-        TextField("Password", text: $vm.credentials.password)
+        SecureField("Password", text: $vm.credentials.password)
             .focused($focusedField, equals: .password)
     }
     
@@ -86,8 +76,8 @@ struct LoginView: View {
             }
         }
         .padding()
-        .background(Color(red: 0, green: 0, blue: 0.5))
-        .foregroundColor(.white)
+        .background(Color.theme.accent)
+        .foregroundColor(Color.theme.primaryTextInverse)
         .clipShape(Capsule())
         
     }

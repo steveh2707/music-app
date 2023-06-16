@@ -17,10 +17,11 @@ struct MusicApp: App {
         WindowGroup {
             
             TabView(selection: $selectedTab) {
-                TeacherView(teacherId: 1)
+                
+                SearchResultsView()
                     .tabItem {
-                        Image(systemName: "figure.arms.open")
-                        Text("Teacher")
+                        Image(systemName: "magnifyingglass")
+                        Text("Search")
                     }
                     .tag(1)
                 
