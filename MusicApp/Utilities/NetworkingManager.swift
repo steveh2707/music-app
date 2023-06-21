@@ -39,6 +39,7 @@ final class NetworkingManager {
         
         let decoder = JSONDecoder()
         
+        
         do {
             return try decoder.decode(T.self, from: data)
         } catch {

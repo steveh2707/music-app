@@ -9,7 +9,7 @@ import SwiftUI
 
 @main
 struct MusicApp: App {
-
+    
     @StateObject var authentication = Authentication()
     @State var selectedTab = 1
     
@@ -18,7 +18,14 @@ struct MusicApp: App {
             
             TabView(selection: $selectedTab) {
                 
-                SearchResultsView()
+                //                SearchResultsView()
+                //                    .tabItem {
+                //                        Image(systemName: "magnifyingglass")
+                //                        Text("Search")
+                //                    }
+                //                    .tag(1)
+                
+                SearchView()
                     .tabItem {
                         Image(systemName: "magnifyingglass")
                         Text("Search")
@@ -33,12 +40,14 @@ struct MusicApp: App {
                     }
                     .environmentObject(authentication)
                     .tag(2)
+                
+                
             }
             
             .onAppear {
-                #if DEBUG
+#if DEBUG
                 UserDefaults.standard.set(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
-                #endif
+#endif
             }
             
         }

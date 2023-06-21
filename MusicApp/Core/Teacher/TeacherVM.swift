@@ -15,7 +15,7 @@ class TeacherVM: ObservableObject {
     @Published var error: NetworkingManager.NetworkingError?
     @Published var hasError = false
     @Published var isLoading = false
-    @Published var mapRegion = MKCoordinateRegion()
+    @Published var mapRegion = MKCoordinateRegion.defaultRegion()
     @Published var locations = [Location]()
     
     @MainActor

@@ -7,20 +7,18 @@
 
 import Foundation
 
-struct SearchCriteria: Codable {
-    var userLatitude = 12
-    var userLongitude = 12
-    var instrumentId = 10
-    var gradeRankId = 5
-}
 
 class searchResultsVM: ObservableObject {
     
+    @Published var searchCriteria: SearchCriteria
     @Published var teachers: [Result] = []
-    @Published var searchCriteria = SearchCriteria()
     @Published var state: SubmissionState?
     @Published var hasError = false
     @Published var error: FormError?
+    
+    init(searchCriteria: SearchCriteria) {
+        self.searchCriteria = searchCriteria
+    }
     
     @MainActor
     func seachForTeachers() async {

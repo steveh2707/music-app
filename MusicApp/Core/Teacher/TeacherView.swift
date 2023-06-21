@@ -16,7 +16,7 @@ struct TeacherView: View {
     @State private var showFullDescription: Bool = false
     
     var body: some View {
-        NavigationStack {
+//        NavigationStack {
             ZStack {
 //                Color.theme.background
 //                    .ignoresSafeArea()
@@ -44,15 +44,11 @@ struct TeacherView: View {
                                 Divider()
                                 
                                 reviewSection
-                                
-                                
                             }
                             
                         }
                         .padding(.horizontal)
-                        
-                        
-                        
+
                         footer
                     }
                     
@@ -83,7 +79,7 @@ struct TeacherView: View {
                     ProgressView()
                 }
             }
-        }
+//        }
     }
     
     var refresh: some View {
@@ -100,8 +96,8 @@ struct TeacherView: View {
     private var headingSection: some View {
         HStack(alignment: .center) {
             if let teacher = vm.teacherDetails {
-                Circle()
-                    .frame(width: 110)
+                UserImageView(imageURL: teacher.profileImageURL ?? "")
+                    .frame(width: 110, height: 110)
                 
                 VStack(alignment: .leading) {
                     Text("\(teacher.firstName) \(teacher.lastName)")
@@ -146,7 +142,6 @@ struct TeacherView: View {
                                 Capsule()
                                     .fill(Color.theme.accent)
                             )
-                        
                     }
                 }
             }
@@ -208,8 +203,8 @@ struct TeacherView: View {
                     } label: {
                         Text("Chat")
                             .fontWeight(.semibold)
-                            .foregroundColor(Color.theme.accent)
-                            .frame(width: 150, height: 30)
+                            .foregroundColor(Color.theme.primaryText)
+                            .frame(width: 150, height: 35)
                             .background(
                                 Capsule()
                                     .fill(Color.theme.background)
@@ -219,12 +214,12 @@ struct TeacherView: View {
                     Spacer()
                     
                     NavigationLink {
-                        EmptyView()
+                        TimelineView2()
                     } label: {
                         Text("Book Now")
                             .fontWeight(.semibold)
-                            .foregroundColor(Color.theme.accent)
-                            .frame(width: 150, height: 30)
+                            .foregroundColor(Color.theme.primaryText)
+                            .frame(width: 150, height: 35)
                             .background(
                                 Capsule()
                                     .fill(Color.theme.background)
@@ -254,16 +249,9 @@ struct TeacherView: View {
                     VStack {
                         
                         HStack(alignment: .center) {
-                            ZStack {
-                                Circle()
-                                    .fill(Color.theme.accent)
-                                    .frame(width: 70)
-                                Image(systemName: "music.note")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 20)
-                                    .opacity(0.5)
-                            }
+
+                            UserImageView(imageURL: "")
+                                .frame(width: 70)
                             
 
                             VStack(alignment: .leading) {

@@ -14,7 +14,7 @@ struct TeacherDetails: Codable {
     let userID, teacherID: Int
     let firstName, lastName, tagline, bio: String
     let locationLatitude, locationLongitude: Double
-    let imageURL: String?
+    let profileImageURL: String?
     let instrumentsTaught: [InstrumentTaught]
     let reviews: [Review]
     let averageReviewScore: Double
@@ -28,7 +28,7 @@ struct TeacherDetails: Codable {
         case bio
         case locationLatitude = "location_latitude"
         case locationLongitude = "location_longitude"
-        case imageURL = "image_url"
+        case profileImageURL = "profile_image_url"
         case instrumentsTaught = "instruments_taught"
         case reviews
         case averageReviewScore = "average_review_score"

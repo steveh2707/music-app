@@ -7,6 +7,16 @@
 
 import Foundation
 
+
+struct SearchCriteria: Codable {
+    var userLatitude: Double?
+    var userLongitude: Double?
+    var instrumentId: Int?
+    var gradeRankId: Int?
+}
+
+
+// MARK: - SearchResults
 struct SearchResults: Codable {
     let numResults: Int
     let results: [Result]
@@ -18,16 +28,18 @@ struct SearchResults: Codable {
 }
 
 // MARK: - Result
-struct Result: Codable, Identifiable {
+struct Result: Codable, Identifiable, Hashable {
     let teacherID: Int
     let firstName, lastName, tagline, bio: String
     let locationLatitude, locationLongitude: Double
     let averageReviewScore: Double
-    let imageURL: String
+    let profileImageURL: String?
     let instrumentID: Int
+    let instrumentName: String
+    let instrumentSfSymbol: String
     let gradeTeachable: String
     let rank: Int
-    let distanceInKM: Double
+    let distanceInKM: Double?
 
     enum CodingKeys: String, CodingKey {
         case teacherID = "teacher_id"
@@ -37,8 +49,10 @@ struct Result: Codable, Identifiable {
         case locationLatitude = "location_latitude"
         case locationLongitude = "location_longitude"
         case averageReviewScore = "average_review_score"
-        case imageURL = "image_url"
+        case profileImageURL = "profile_image_url"
         case instrumentID = "instrument_id"
+        case instrumentName = "instrument_name"
+        case instrumentSfSymbol = "instrument_sf_symbol"
         case gradeTeachable = "grade_teachable"
         case rank
         case distanceInKM = "distance_in_km"

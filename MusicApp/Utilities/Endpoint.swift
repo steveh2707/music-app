@@ -8,6 +8,7 @@
 import Foundation
 
 enum EndPoint {
+    case configuration
     case teacher(id: Int)
     case newUser(submissionData: Data?)
     case login(submissionData: Data?)
@@ -15,7 +16,7 @@ enum EndPoint {
 
     var methodType: MethodType {
         switch self {
-        case .teacher:
+        case .teacher, .configuration:
             return .GET
         case .newUser(let data), .login(let data), .search(let data):
             return .POST(data: data)
@@ -24,6 +25,8 @@ enum EndPoint {
     
     var path: String {
         switch self {
+        case .configuration:
+            return "/configuration"
         case .teacher(let id):
             return "/teacher/\(id)"
         case .newUser:
