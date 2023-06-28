@@ -1,0 +1,42 @@
+{
+    "user_id":1,
+    "teacher_id":1,
+    "first_name":"John",
+    "last_name":"Smith",
+    "tagline":"Etiam tincidunt leo suscipit malesuada condimentum.",
+    "bio":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce lorem turpis, semper eget arcu et, elementum accumsan justo. Nulla elementum urna a libero viverra, porttitor eleifend enim euismod. Etiam tincidunt leo suscipit malesuada condimentum. Duis vitae leo condimentum, volutpat nisi sed, ultrices lorem. Sed quis molestie purus, sit amet ullamcorper risus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Pellentesque vitae tincidunt odio. Phasellus fermentum nunc ut nisi aliquam condimentum. Suspendisse aliquet efficitur lectus, eget consequat ante pharetra ut. Suspendisse dictum ipsum quis metus vestibulum consectetur. Nunc convallis vitae nisl quis tristique.\r\n\r\nSed efficitur ultrices ante sed malesuada. Maecenas non mi tristique tellus dictum dapibus. Nunc ornare nec ex ac porta. Maecenas ut diam sit amet urna molestie sagittis. Vestibulum eros nibh, convallis et ante et, rutrum aliquet sapien. Proin faucibus non est nec mattis. Aliquam ligula eros, posuere malesuada ligula eu, laoreet vestibulum metus. Ut nisi ante, suscipit non erat ut, iaculis facilisis eros. Cras sed nunc sit amet libero pharetra lacinia. In hac habitasse platea dictumst. Etiam dapibus tristique ante, in elementum libero congue vel. Nulla a placerat tortor, id rutrum enim. Aenean tortor justo, semper eget dapibus et, varius sed dui. ",
+    "location_latitude":54.5973,
+    "location_longitude":-5.9301,
+    "average_review_score":3.75,
+    "profile_image_url":"https://images.unsplash.com/photo-1540569014015-19a7be504e3a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=735&q=80",
+    "instruments_taught":[
+        {
+            "id":1,
+            "instrument_id":1,
+            "instrument_name":"Piano",
+            "sf_symbol":"pianokeys","grade_id":6,
+            "grade_name":"Grade 6"
+            
+        },{
+            "id":2,
+            "instrument_id":10,
+            "instrument_name":"Voice"
+            ,"sf_symbol":"music.mic"
+            ,"grade_id":5,"grade_name":"Grade 5"
+        }],
+    "reviews":[
+        {
+            "review_id":1,
+            "num_stars":3,
+            "created_timestamp":"2023-06-13T13:12:59.000Z",
+            "details":"Lorem ipsum dolor sit amet. Et esse aspernatur non ipsum quis et iure dolorem ad molestiae perspiciatis sit officiis reiciendis. Qui natus magnam qui dignissimos voluptas qui facere dolor eos eveniet aperiam est eligendi minima. ",
+            "user_id":2,
+            "first_name":"Field",
+            "last_name":"Rawsthorn",
+            "instrument_id":1,
+            "instrument_name":"Piano",
+            "sf_symbol":"pianokeys",
+            "grade_id":4,
+            "grade_name":"Grade 4"
+        },{
+            "review_id":2,"num_stars":5,"created_timestamp":"2023-06-13T13:12:59.000Z","details":"Lorem ipsum dolor sit amet. Est blanditiis accusamus ea odit galisum vel eius quasi aut labore corrupti. Et nihil quae qui impedit inventore sed dolorem autem in nisi pariatur sed corporis dignissimos qui vitae consequuntur ea rerum vitae. Sed voluptatem molestias qui laboriosam voluptate sit dicta consequuntur et quaerat provident. ","user_id":3,"first_name":"Marin","last_name":"Guidera","instrument_id":1,"instrument_name":"Piano","sf_symbol":"pianokeys","grade_id":5,"grade_name":"Grade 5"},{"review_id":3,"num_stars":4,"created_timestamp":"2023-06-13T13:12:59.000Z","details":"Lorem ipsum dolor sit amet. Sed aliquam velit ut minus sunt et molestiae maxime eos nemo doloribus. ","user_id":7,"first_name":"Anthe","last_name":"Seleway","instrument_id":10,"instrument_name":"Voice","sf_symbol":"music.mic","grade_id":3,"grade_name":"Grade 3"},{"review_id":5,"num_stars":3,"created_timestamp":"2023-06-13T13:13:59.000Z","details":"Lorem ipsum dolor sit amet. Qui facilis architecto et corporis reprehenderit 33 accusamus enim et voluptatem minus. Eos rerum impedit non dolores illum et excepturi dolorem? Est eius recusandae et optio mollitia est dolore debitis. ","user_id":10,"first_name":"Blondy","last_name":"Duthie","instrument_id":10,"instrument_name":"Voice","sf_symbol":"music.mic","grade_id":5,"grade_name":"Grade 5"}]}

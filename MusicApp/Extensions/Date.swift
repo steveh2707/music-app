@@ -29,4 +29,18 @@ extension Date {
         return mediumFormatter.string(from: self)
     }
     
+    private var sqlDateFormatter: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter
+    }
+    
+    func asSqlDateString() -> String {
+        return sqlDateFormatter.string(from: self)
+    }
+    
+    func addOrSubtractYear(year:Int)->Date{
+      return Calendar.current.date(byAdding: .year, value: year, to: Date())!
+    }
+    
 }

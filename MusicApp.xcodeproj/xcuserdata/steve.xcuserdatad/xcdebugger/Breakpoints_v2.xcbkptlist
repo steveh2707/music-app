@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "1BD7711E-7C94-40DD-8243-9C4362FB0EC0"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1001DB87-8DA0-4096-AC1C-56635B8C2EF7"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MusicApp/Core/SearchResults/SearchResultsVM.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
+            landmarkName = "fetchTeachers()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "20A1B216-BA24-4226-9CE5-547A502E1E38"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MusicApp/Core/SearchResults/SearchResultsVM.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "46"
+            endingLineNumber = "46"
+            landmarkName = "fetchTeachers()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "20A1B216-BA24-4226-9CE5-547A502E1E38 - b065eaaa41d6e2af"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for MusicApp.SearchResultsVM.fetchTeachers() async -&gt; ()"
+                  moduleName = "MusicApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/steve/Developer/Uni/Individual%20Project/MusicApp/MusicApp/Core/SearchResults/SearchResultsVM.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "46"
+                  endingLineNumber = "46"
+                  offsetFromSymbolStart = "228">
+               </Location>
+               <Location
+                  uuid = "20A1B216-BA24-4226-9CE5-547A502E1E38 - b065eaaa41d6e2af"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for MusicApp.SearchResultsVM.fetchTeachers() async -&gt; ()"
+                  moduleName = "MusicApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/steve/Developer/Uni/Individual%20Project/MusicApp/MusicApp/Core/SearchResults/SearchResultsVM.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "46"
+                  endingLineNumber = "46"
+                  offsetFromSymbolStart = "220">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "FC301A85-1BC6-4CA1-9CF9-6FB85A319C2B"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MusicApp/Core/SearchResults/SearchResultsVM.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
+            landmarkName = "fetchTeachers()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
