@@ -10,7 +10,7 @@ import SwiftUI
 struct SignupView: View {
     
     @EnvironmentObject var global: Global
-    @StateObject var vm = SignupVM()
+    @StateObject var vm = SignUpVM()
     @FocusState private var focusedField: Field?
     
     var body: some View {
@@ -46,15 +46,10 @@ struct SignupView: View {
 
                 Section {
                     NavigationLink {
-                        LoginView()
+                        SignInView()
                     } label: {
                         Text("Already have an account?")
                     }
-//                    NavigationLink {
-//                        EmptyView()
-//                    } label: {
-//                        Text("Sign up as Teacher?")
-//                    }
                     NavigationLink {
                         EmptyView()
                     } label: {
@@ -73,9 +68,9 @@ struct SignupView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     NavigationLink {
-                        LoginView()
+                        SignInView()
                     } label: {
-                        Text("Login")
+                        Text("Sign In")
                     }
                 }
             }

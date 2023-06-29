@@ -12,7 +12,7 @@ struct Credentials: Codable {
     var password: String = ""
 }
 
-class LoginVM: ObservableObject {
+class SignInVM: ObservableObject {
     
     @Published var credentials = Credentials()
     @Published var state: SubmissionState?

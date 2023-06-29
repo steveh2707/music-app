@@ -99,7 +99,6 @@ final class NetworkingManager: NetworkingManagerImpl {
                 return "Failed to decode."
             case .custom(let err):
                 return "Something went wrong. \(err.localizedDescription)"
-                
             }
         }
         

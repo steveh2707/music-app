@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class SignupVM: ObservableObject {
+final class SignUpVM: ObservableObject {
     
     @Published var newUser = NewStudent()
     @Published var state: SubmissionState?

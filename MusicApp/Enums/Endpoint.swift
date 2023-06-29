@@ -16,6 +16,7 @@ enum EndPoint {
     case chat(id: Int, token: String?)
     case newMessage(chatId: Int, token: String, submissionData: Data?)
     case allChats(token: String?)
+    case allUnreadChats(token: String?)
 
     // Use this for any items that need appended to request
     var methodType: MethodType {
@@ -35,9 +36,10 @@ enum EndPoint {
         case .newMessage(_, let token, let data):
             return .POST(token: token, data: data)
             
-        case .allChats(let token):
+        case .allChats(let token), .allUnreadChats(let token):
             return .GET(token: token)
         }
+        
     }
     
     var host: String { "localhost" }
@@ -56,11 +58,13 @@ enum EndPoint {
         case .search:
             return "/teacher/search"
         case .chat(let id, _):
-            return "/chat/\(id)"
+            return "/chat/conversation/\(id)"
         case .newMessage(let chatId, _, _):
             return "/chat/message/\(chatId)"
         case .allChats:
-            return "/chat"
+            return "/chat/conversation"
+        case .allUnreadChats:
+            return "/chat/unread"
         }
     }
     

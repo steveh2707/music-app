@@ -25,20 +25,24 @@ struct MusicApp: App {
                     }
                     .tag(1)
                 
-                AllChatsView()
-                    .tabItem {
-                        Image(systemName: "bubble.left.and.bubble.right")
-                        Text("Chats")
-                    }
-                    .tag(2)
+                if global.isValidated {
+                    AllChatsView()
+                        .tabItem {
+                            Image(systemName: "bubble.left.and.bubble.right")
+                            Text("Chats")
+                        }
+                        .badge(global.unreadMessages)
+                        .tag(2)
+                }
                 
-                ProfileLoginSwitcher()
+                MoreView()
                     .tabItem {
-                        Image(systemName: "person.fill")
-                        Text("Profile")
+                        Image(systemName: "ellipsis")
+                        Text("More")
                         
                     }
                     .tag(3)
+
             }
             .environmentObject(global)
             

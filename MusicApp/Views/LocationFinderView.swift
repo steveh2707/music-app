@@ -48,9 +48,11 @@ struct LocationFinderView: View {
                 List {
                     Button {
                     } label: {
-                        Text("Use current Location")
-                            .font(.body)
-                            .fontWeight(.medium)
+                        HStack {
+                            Image(systemName: "location")
+                            Text("Use Current Location")
+                        }
+                            
                     }
                     ForEach(vm.results) { address in
                         Button {

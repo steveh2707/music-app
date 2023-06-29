@@ -23,7 +23,6 @@ class ChatVM: ObservableObject {
     
     @MainActor
     func searchForChat(teacherId: Int, token: String?) async {
-       
         do {
             state = .submitting
             

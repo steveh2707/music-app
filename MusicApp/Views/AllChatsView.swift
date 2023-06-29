@@ -13,6 +13,7 @@ struct AllChatsView: View {
     @StateObject var vm = AllChatsVM()
     @State var hasAppeared = false
     @State var searchText = ""
+//    @State var showIndividualChat = false
     
     var body: some View {
         NavigationView {
@@ -31,6 +32,22 @@ struct AllChatsView: View {
                         }
                     }
                     
+//                    Button {
+//                        showIndividualChat = true
+//                    } label: {
+//                        HStack(spacing: 20) {
+//                            UserImageView(imageURL: chat.profileImageURL ?? "")
+//                                .frame(width: 80, height: 80)
+//                            Text("\(chat.firstName) \(chat.lastName)")
+//                                .font(.title3)
+//                            Spacer()
+//                        }
+//                    }
+
+                    
+   
+                    
+                    
                 }
             }
             .navigationTitle("Chats")
@@ -47,6 +64,9 @@ struct AllChatsView: View {
             }
         }
         .alert(isPresented: $vm.hasError, error: vm.error) { }
+//        .sheet(isPresented: $showIndividualChat) {
+//            ChatView(teacherId: 1)
+//        }
     }
 }
 

@@ -25,6 +25,7 @@ class AllChatsVM: ObservableObject {
             self.chats = decodedResponse.results
             
             state = .successful
+            
         } catch {
             self.hasError = true
             self.state = .unsuccessful

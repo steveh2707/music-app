@@ -7,14 +7,15 @@
 
 import SwiftUI
 
-struct LoginView: View {
+struct SignInView: View {
     @EnvironmentObject var global: Global
-    @StateObject var vm = LoginVM()
+    @StateObject var vm = SignInVM()
     @FocusState private var focusedField: Field?
     @State private var navigationIsActive = false
     
     var body: some View {
-        NavigationStack {
+        //        NavigationStack {
+        ZStack {
             Form {
                 HeadingView()
                     .listRowBackground(Color.clear)
@@ -28,19 +29,35 @@ struct LoginView: View {
                 submit
                     .listRowBackground(Color.clear)
                 
-                if vm.state == .submitting {
-                    HStack {
-                        Spacer()
-                        ProgressView()
-                        Spacer()
+                
+                
+                Section {
+                    NavigationLink {
+                        SignupView()
+                    } label: {
+                        Text("New to Treble?")
                     }
-                    .listRowBackground(Color.clear)
+                    NavigationLink {
+                        EmptyView()
+                    } label: {
+                        Text("Terms of Service")
+                    }
+                    NavigationLink {
+                        EmptyView()
+                    } label: {
+                        Text("Privacy Policy")
+                    }
                 }
             }
             .textInputAutocapitalization(.never)
             
+            
+            if vm.state == .submitting {
+                ProgressView()
+            }
         }
-        .navigationTitle("Log In")
+        //        }
+        .navigationTitle("Sign In")
         .alert(isPresented: $vm.hasError, error: vm.error) { }
         .onChange(of: vm.state) { newState in
             if newState == .successful {
@@ -87,12 +104,12 @@ struct LoginView: View {
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView()
+        SignInView()
     }
 }
 
 
-extension LoginView {
+extension SignInView {
     enum Field: Hashable {
         case email
         case password

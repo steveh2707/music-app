@@ -17,14 +17,17 @@ struct ChatView: View {
     let teacherId: Int
     
     var body: some View {
-        
+        //        NavigationView {
         VStack {
             
             if let chat = vm.chat {
-            ScrollViewReader { value in
-                
+                ScrollViewReader { value in
+                    
                     ScrollView {
-
+                        
+                        //                        if chat.messages.count > 0 {
+                        
+                        
                         ForEach(chat.messages, id: \.self) { message in
                             HStack {
                                 
@@ -47,12 +50,12 @@ struct ChatView: View {
                         }
                         .padding(.horizontal)
                         .onAppear {
-                                value.scrollTo(bottomID)
+                            value.scrollTo(bottomID)
                         }
                         .onChange(of: chat.messages) { _ in
                             value.scrollTo(bottomID)
                         }
-                        
+                        //                        }
                         Spacer()
                             .id(bottomID)
                     }
@@ -77,7 +80,7 @@ struct ChatView: View {
                 }
                 .padding()
             }
-
+            
         }
         .alert(isPresented: $vm.hasError, error: vm.error) { }
         .navigationBarTitleDisplayMode(.inline)
@@ -94,6 +97,7 @@ struct ChatView: View {
                 }
             }
         }
+        //        }
         .task {
             await vm.searchForChat(teacherId: teacherId, token: global.token)
         }
@@ -103,14 +107,14 @@ struct ChatView: View {
             }
         }
         
-
+        
     }
 }
 
 struct ChatView_Previews: PreviewProvider {
-
+    
     static var previews: some View {
-
+        
         ChatView(teacherId: 1)
             .environmentObject(dev.globalVM)
     }

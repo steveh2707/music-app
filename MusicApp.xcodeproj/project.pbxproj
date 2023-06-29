@@ -22,11 +22,10 @@
 		AA17C64E2A3CB501006F04FD /* SearchResultsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA17C64D2A3CB501006F04FD /* SearchResultsVM.swift */; };
 		AA17C6502A3CB51E006F04FD /* SearchResultsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA17C64F2A3CB51E006F04FD /* SearchResultsModel.swift */; };
 		AA17C6522A3CF015006F04FD /* TimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA17C6512A3CF015006F04FD /* TimelineView.swift */; };
-		AA400A352A3B2A2E006C5448 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA400A342A3B2A2E006C5448 /* ProfileView.swift */; };
-		AA400A372A3B2A9B006C5448 /* ProfileLoginSwitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA400A362A3B2A9B006C5448 /* ProfileLoginSwitcher.swift */; };
-		AA400A3A2A3B2FBF006C5448 /* LoginVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA400A392A3B2FBF006C5448 /* LoginVM.swift */; };
+		AA400A352A3B2A2E006C5448 /* MoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA400A342A3B2A2E006C5448 /* MoreView.swift */; };
+		AA400A3A2A3B2FBF006C5448 /* SignInVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA400A392A3B2FBF006C5448 /* SignInVM.swift */; };
 		AA400A3C2A3B3173006C5448 /* ApiErrorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA400A3B2A3B3173006C5448 /* ApiErrorModel.swift */; };
-		AA400A3E2A3B3260006C5448 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA400A3D2A3B3260006C5448 /* LoginView.swift */; };
+		AA400A3E2A3B3260006C5448 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA400A3D2A3B3260006C5448 /* SignInView.swift */; };
 		AA400A402A3B370D006C5448 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA400A3F2A3B370D006C5448 /* Global.swift */; };
 		AA55201F2A41A2BB0089225B /* LocationFinderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA55201E2A41A2BB0089225B /* LocationFinderView.swift */; };
 		AA5520272A41B6A40089225B /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5520262A41B6A40089225B /* SearchView.swift */; };
@@ -68,7 +67,7 @@
 		AAF4C3392A38B6770082C142 /* NetworkingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF4C3382A38B6770082C142 /* NetworkingManager.swift */; };
 		AAF4C33D2A38CA6F0082C142 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF4C33C2A38CA6F0082C142 /* Endpoint.swift */; };
 		AAF4C34C2A39D8C50082C142 /* SignupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF4C34B2A39D8C50082C142 /* SignupModel.swift */; };
-		AAF4C34F2A39D91E0082C142 /* SignupVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF4C34E2A39D91E0082C142 /* SignupVM.swift */; };
+		AAF4C34F2A39D91E0082C142 /* SignUpVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF4C34E2A39D91E0082C142 /* SignUpVM.swift */; };
 		AAF4C3512A39D9E80082C142 /* SignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF4C3502A39D9E80082C142 /* SignupView.swift */; };
 		AAF4C3542A39F9040082C142 /* SignupValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF4C3532A39F9040082C142 /* SignupValidator.swift */; };
 /* End PBXBuildFile section */
@@ -99,11 +98,10 @@
 		AA17C64D2A3CB501006F04FD /* SearchResultsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsVM.swift; sourceTree = "<group>"; };
 		AA17C64F2A3CB51E006F04FD /* SearchResultsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsModel.swift; sourceTree = "<group>"; };
 		AA17C6512A3CF015006F04FD /* TimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineView.swift; sourceTree = "<group>"; };
-		AA400A342A3B2A2E006C5448 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
-		AA400A362A3B2A9B006C5448 /* ProfileLoginSwitcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLoginSwitcher.swift; sourceTree = "<group>"; };
-		AA400A392A3B2FBF006C5448 /* LoginVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVM.swift; sourceTree = "<group>"; };
+		AA400A342A3B2A2E006C5448 /* MoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreView.swift; sourceTree = "<group>"; };
+		AA400A392A3B2FBF006C5448 /* SignInVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInVM.swift; sourceTree = "<group>"; };
 		AA400A3B2A3B3173006C5448 /* ApiErrorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiErrorModel.swift; sourceTree = "<group>"; };
-		AA400A3D2A3B3260006C5448 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		AA400A3D2A3B3260006C5448 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		AA400A3F2A3B370D006C5448 /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		AA55201E2A41A2BB0089225B /* LocationFinderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationFinderView.swift; sourceTree = "<group>"; };
 		AA5520262A41B6A40089225B /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
@@ -147,7 +145,7 @@
 		AAF4C33C2A38CA6F0082C142 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		AAF4C3422A39D4AF0082C142 /* MusicAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MusicAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAF4C34B2A39D8C50082C142 /* SignupModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupModel.swift; sourceTree = "<group>"; };
-		AAF4C34E2A39D91E0082C142 /* SignupVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupVM.swift; sourceTree = "<group>"; };
+		AAF4C34E2A39D91E0082C142 /* SignUpVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVM.swift; sourceTree = "<group>"; };
 		AAF4C3502A39D9E80082C142 /* SignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
 		AAF4C3532A39F9040082C142 /* SignupValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupValidator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -283,12 +281,12 @@
 		AA8633A72A4C3DBF00AF11A2 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				AA5520312A434CCA0089225B /* ChatVM.swift */,
 				AA55203C2A45D3E00089225B /* AllChatsVM.swift */,
+				AA5520312A434CCA0089225B /* ChatVM.swift */,
 				AA0B35812A41A0B900BD9A08 /* SearchVM.swift */,
 				AA17C64D2A3CB501006F04FD /* SearchResultsVM.swift */,
-				AA400A392A3B2FBF006C5448 /* LoginVM.swift */,
-				AAF4C34E2A39D91E0082C142 /* SignupVM.swift */,
+				AA400A392A3B2FBF006C5448 /* SignInVM.swift */,
+				AAF4C34E2A39D91E0082C142 /* SignUpVM.swift */,
 				AAF4C3322A38AAE20082C142 /* TeacherVM.swift */,
 			);
 			path = ViewModels;
@@ -297,15 +295,14 @@
 		AA8633A82A4C3E3C00AF11A2 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				AA400A362A3B2A9B006C5448 /* ProfileLoginSwitcher.swift */,
-				AA55202D2A4326750089225B /* ChatView.swift */,
 				AA5520382A45D2FB0089225B /* AllChatsView.swift */,
+				AA55202D2A4326750089225B /* ChatView.swift */,
 				AA5520262A41B6A40089225B /* SearchView.swift */,
 				AA55201E2A41A2BB0089225B /* LocationFinderView.swift */,
 				AA17C64B2A3CB3F5006F04FD /* SearchResultsView.swift */,
 				AA55202A2A41F7010089225B /* SearchResultsRowView.swift */,
-				AA400A342A3B2A2E006C5448 /* ProfileView.swift */,
-				AA400A3D2A3B3260006C5448 /* LoginView.swift */,
+				AA400A342A3B2A2E006C5448 /* MoreView.swift */,
+				AA400A3D2A3B3260006C5448 /* SignInView.swift */,
 				AAF4C3502A39D9E80082C142 /* SignupView.swift */,
 				AAF4C3302A38AACF0082C142 /* TeacherView.swift */,
 			);
@@ -540,7 +537,7 @@
 				AA0B35652A40628F00BD9A08 /* ImageRetriever.swift in Sources */,
 				AAF4C33D2A38CA6F0082C142 /* Endpoint.swift in Sources */,
 				AAF4C3542A39F9040082C142 /* SignupValidator.swift in Sources */,
-				AA400A352A3B2A2E006C5448 /* ProfileView.swift in Sources */,
+				AA400A352A3B2A2E006C5448 /* MoreView.swift in Sources */,
 				AA5520302A434CB30089225B /* ChatModel.swift in Sources */,
 				AA0B35762A40A1E200BD9A08 /* LocationManager.swift in Sources */,
 				AA86338F2A49C8F100AF11A2 /* StaticJSONMapper.swift in Sources */,
@@ -554,15 +551,14 @@
 				AA55202E2A4326750089225B /* ChatView.swift in Sources */,
 				AAF4C3512A39D9E80082C142 /* SignupView.swift in Sources */,
 				AA17C6522A3CF015006F04FD /* TimelineView.swift in Sources */,
-				AAF4C34F2A39D91E0082C142 /* SignupVM.swift in Sources */,
+				AAF4C34F2A39D91E0082C142 /* SignUpVM.swift in Sources */,
 				AA5520362A45897D0089225B /* PreviewProvider.swift in Sources */,
 				AA0B35672A40646100BD9A08 /* ImageCache.swift in Sources */,
 				AA0B35692A4065E900BD9A08 /* CachedImageManager.swift in Sources */,
 				AA55202B2A41F7010089225B /* SearchResultsRowView.swift in Sources */,
 				AA8633AC2A4C4BF600AF11A2 /* Networking.swift in Sources */,
 				AAF4C3362A38AB220082C142 /* TeacherModel.swift in Sources */,
-				AA400A372A3B2A9B006C5448 /* ProfileLoginSwitcher.swift in Sources */,
-				AA400A3E2A3B3260006C5448 /* LoginView.swift in Sources */,
+				AA400A3E2A3B3260006C5448 /* SignInView.swift in Sources */,
 				AA17C6492A3CA0D2006F04FD /* Date.swift in Sources */,
 				AA5520272A41B6A40089225B /* SearchView.swift in Sources */,
 				AA55201F2A41A2BB0089225B /* LocationFinderView.swift in Sources */,
@@ -581,7 +577,7 @@
 				AA17C6502A3CB51E006F04FD /* SearchResultsModel.swift in Sources */,
 				AA5520342A449FD10089225B /* LoginModel.swift in Sources */,
 				AAF4C3312A38AACF0082C142 /* TeacherView.swift in Sources */,
-				AA400A3A2A3B2FBF006C5448 /* LoginVM.swift in Sources */,
+				AA400A3A2A3B2FBF006C5448 /* SignInVM.swift in Sources */,
 				AA400A402A3B370D006C5448 /* Global.swift in Sources */,
 				AA0B356B2A40664800BD9A08 /* CachedImage.swift in Sources */,
 				AA0B35782A40A4D400BD9A08 /* MKCoordinateRegion.swift in Sources */,
