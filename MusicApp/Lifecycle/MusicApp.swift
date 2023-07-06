@@ -11,12 +11,12 @@ import SwiftUI
 struct MusicApp: App {
     
     @StateObject var global = Global()
-    @State var selectedTab = 1
+
     
     var body: some Scene {
         WindowGroup {
             
-            TabView(selection: $selectedTab) {
+            TabView(selection: $global.selectedTab) {
                 
                 SearchView()
                     .tabItem {

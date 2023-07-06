@@ -18,7 +18,7 @@ class SignInVM: ObservableObject {
     @Published var state: SubmissionState?
     @Published var hasError = false
     @Published var error: NetworkingManager.NetworkingError?
-    @Published var loginResponse: LoginResponse? = nil
+    @Published var loginResponse: SignInResponse? = nil
     
     var loginDisabled: Bool {
         credentials.email.isEmpty || credentials.password.isEmpty
@@ -34,7 +34,7 @@ class SignInVM: ObservableObject {
             encoder.keyEncodingStrategy = .convertToSnakeCase
             let data = try encoder.encode(credentials)
             
-            self.loginResponse = try await NetworkingManager.shared.request(.login(submissionData: data), type: LoginResponse.self)
+            self.loginResponse = try await NetworkingManager.shared.request(.login(submissionData: data), type: SignInResponse.self)
 
             state = .successful
         } catch {

@@ -60,7 +60,6 @@ class SearchResultsVM: ObservableObject {
     
     @MainActor
     func fetchNextSetOfTeachers() async {
-       
         viewState = .fetching
         defer { viewState = .finished }
         

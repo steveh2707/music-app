@@ -14,9 +14,7 @@ class SearchVM: NSObject, ObservableObject {
     @Published var searchableText = ""
     @Published var selectedLocation: SelectedLocation?
     @Published var instruments: [Instrument] = []
-//    @Published var selectedInstrument: Instrument? = nil
     @Published var grades: [Grade] = []
-//    @Published var selectedGrade: Grade? = nil
     @Published var searchCrtieria: SearchCriteria?
     
     @Published var state: SubmissionState?
@@ -46,20 +44,6 @@ class SearchVM: NSObject, ObservableObject {
         }
     }
     
-
-    
-    
-    private lazy var localSearchCompleter: MKLocalSearchCompleter = {
-        let completer = MKLocalSearchCompleter()
-        completer.delegate = self
-        return completer
-    }()
-    
-    func searchAddress(_ searchableText: String) {
-        guard searchableText.isEmpty == false else { return }
-        localSearchCompleter.queryFragment = searchableText
-    }
-    
     @MainActor
     func getPlace(from address: AddressResult) {
         let request = MKLocalSearch.Request()
@@ -76,8 +60,20 @@ class SearchVM: NSObject, ObservableObject {
             }
         }
     }
+    
+    
+    private lazy var localSearchCompleter: MKLocalSearchCompleter = {
+        let completer = MKLocalSearchCompleter()
+        completer.delegate = self
+        return completer
+    }()
+    
+    func searchAddress(_ searchableText: String) {
+        guard searchableText.isEmpty == false else { return }
+        localSearchCompleter.queryFragment = searchableText
+    }
+    
 }
-
 
 extension SearchVM: MKLocalSearchCompleterDelegate {
     func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {

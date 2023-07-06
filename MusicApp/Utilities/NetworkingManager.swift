@@ -31,8 +31,6 @@ final class NetworkingManager: NetworkingManagerImpl {
             throw NetworkingError.invalidUrl
         }
         
-        print(url)
-        
         let request = buildRequest(from: url, methodType: endpoint.methodType)
         
         let (data, response) = try await session.data(for: request)
@@ -57,7 +55,8 @@ final class NetworkingManager: NetworkingManagerImpl {
     
     
     // request with no response
-    func request(session: URLSession = .shared, _ endpoint: EndPoint) async throws {
+    func request(session: URLSession = .shared,
+                _ endpoint: EndPoint) async throws {
         
         guard let url = endpoint.url else {
             throw NetworkingError.invalidUrl

@@ -26,7 +26,7 @@ class ChatVM: ObservableObject {
         do {
             state = .submitting
             
-            let decodedResponse = try await NetworkingManager.shared.request(.chat(id: teacherId, token: token), type: ChatDetails.self)
+            let decodedResponse = try await NetworkingManager.shared.request(.chat(token: token, id: teacherId), type: ChatDetails.self)
             self.chat = decodedResponse
             
             state = .successful
@@ -51,7 +51,7 @@ class ChatVM: ObservableObject {
             encoder.keyEncodingStrategy = .convertToSnakeCase
             let data = try encoder.encode(newMessage)
             
-            let decodedResponse = try await NetworkingManager.shared.request(.newMessage(chatId: chat?.chatID ?? 0, token: token ?? "", submissionData: data), type: Message.self)
+            let decodedResponse = try await NetworkingManager.shared.request(.newMessage(token: token ?? "", chatId: chat?.chatID ?? 0, submissionData: data), type: Message.self)
             self.chat?.messages.append(decodedResponse)
             
 //            state = .successful

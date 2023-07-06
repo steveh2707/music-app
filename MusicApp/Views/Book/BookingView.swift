@@ -9,8 +9,10 @@ import SwiftUI
 
 struct BookingView: View {
     
-    @State private var showMakeBookingView = false
+    @EnvironmentObject var global: Global
     @StateObject private var vm: BookingVM
+    
+    @State private var showMakeBookingView = false
     
     init(teacher: Teacher) {
         _vm = StateObject(wrappedValue: BookingVM(teacher: teacher))
@@ -44,16 +46,17 @@ struct BookingView: View {
         }
         .alert(isPresented: $vm.hasError, error: vm.error) { }
         .task {
-            await vm.getTeacherAvailability(teacherId: vm.teacher.teacherID)
+            await vm.getTeacherAvailability(token: global.token)
         }
         .onChange(of: vm.searchDate) { _ in
             Task {
-                await vm.getTeacherAvailability(teacherId: vm.teacher.teacherID)
+                await vm.getTeacherAvailability(token: global.token)
             }
         }
         .sheet(isPresented: $showMakeBookingView) {
             MakeBookingView(vm: vm)
         }
+        
         
     }
     

@@ -32,8 +32,8 @@ struct MoreView: View {
                             EmptyView()
                         } label: {
                             HStack {
-                                Image(systemName: "clock.arrow.circlepath")
-                                Text("History")
+                                Image(systemName: "calendar")
+                                Text("Bookings")
                             }
                         }
                         

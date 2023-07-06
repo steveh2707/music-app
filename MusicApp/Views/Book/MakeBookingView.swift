@@ -52,7 +52,7 @@ struct MakeBookingView: View {
                     HStack {
                         Image(systemName: "sterlingsign")
                             .frame(width: 25)
-                        Text("50.00")
+                        Text(String(vm.priceFinal))
                     }
 //                    HStack {
 //                        Image(systemName: "banknote")
@@ -81,7 +81,9 @@ struct MakeBookingView: View {
                 
                 Section {
                     Button("Make Booking") {
-                        
+                        Task {
+                            await vm.makeBooking(token: global.token, instrumentId: global.selectedInstrument?.instrumentID ?? 0, gradeId: global.selectedGrade?.gradeID ?? 0)
+                        }
                     }
                     Button("Cancel") {
                         
@@ -100,7 +102,16 @@ struct MakeBookingView: View {
                     })
                 }
             }
+            .alert(isPresented: $vm.hasError, error: vm.error) { }
             .navigationTitle("New Booking")
+            .alert("Booking Saved", isPresented: $vm.showSuccessMessage) {
+                Button("OK", role: .cancel) {
+                    presentationMode.wrappedValue.dismiss()
+                    Task {
+                        await vm.getTeacherAvailability(token: global.token)
+                    }
+                }
+            }
         }
     }
 }

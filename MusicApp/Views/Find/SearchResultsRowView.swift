@@ -18,7 +18,7 @@ struct SearchResultsRowView: View {
                 HStack(alignment: .center) {
                     Image(systemName: teacher.instrumentSfSymbol)
                     Text(teacher.instrumentName)
-                    Text(teacher.gradeTeachable)
+                    Text("Grade 1 \(Image(systemName: "arrowshape.forward")) \(teacher.gradeTeachable)")
                         .foregroundColor(Color.theme.primaryTextInverse)
                         .font(.footnote)
                         .padding(.horizontal, 8)
@@ -72,6 +72,9 @@ struct SearchResultsRowView: View {
         .padding(.horizontal, -10)
         .foregroundColor(Color.theme.primaryText)
     }
+    
+    
+    
 }
 
 //struct SearchResultsRowView_Previews: PreviewProvider {

@@ -11,74 +11,84 @@ import MapKit
 struct TeacherView: View {
     
     let teacherId: Int
+    
+    @EnvironmentObject var global: Global
+    @Environment(\.dismiss) private var dismiss
     @StateObject private var vm = TeacherVM()
     @State private var hasAppeared = false
     @State private var showFullDescription: Bool = false
+    @State private var showLoginMessage: Bool = false
     
     var body: some View {
-//        NavigationStack {
-            ZStack {
-//                Color.theme.background
-//                    .ignoresSafeArea()
-                
-                if (vm.teacher != nil) {
-                    VStack {
-                        
-                        ScrollView(showsIndicators: false) {
-                            
-                            VStack(alignment: .leading) {
-                                headingSection
-                                
-                                Divider()
-                                
-                                instrumentSection
-                                
-                                Divider()
-                                
-                                aboutSection
-                                
-                                Divider()
-                                
-                                locationSection
-                                
-                                Divider()
-                                
-                                reviewSection
-                            }
-                            
-                        }
-                        .padding(.horizontal)
-
-                        footer
-                    }
+        ZStack {
+            //                Color.theme.background
+            //                    .ignoresSafeArea()
+            
+            if (vm.teacher != nil) {
+                VStack {
                     
+                    ScrollView(showsIndicators: false) {
+                        
+                        VStack(alignment: .leading) {
+                            headingSection
+                            
+                            Divider()
+                            
+                            instrumentSection
+                            
+                            Divider()
+                            
+                            aboutSection
+                            
+                            Divider()
+                            
+                            locationSection
+                            
+                            Divider()
+                            
+                            reviewSection
+                        }
+                        
+                    }
+                    .padding(.horizontal)
+                    
+                    footer
                 }
-                //                }
+                
             }
-            .alert(isPresented: $vm.hasError, error: vm.error) { }
-            .toolbar(.hidden, for: .tabBar)
-            .toolbar{
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    refresh
-                }
+            //                }
+        }
+        .alert(isPresented: $vm.hasError, error: vm.error) { }
+        .alert("You must Sign In", isPresented: $showLoginMessage) {
+            Button("Sign In / Sign Up", action: {
+                dismiss()
+                global.selectedTab = 3
+            })
+            Button("Cancel", role: .cancel, action: {})
+        }
+        
+        .toolbar(.hidden, for: .tabBar)
+        .toolbar{
+            ToolbarItem(placement: .navigationBarTrailing) {
+                refresh
             }
-            .task {
-                if !hasAppeared {
-                    await vm.getTeacherDetails(teacherId: teacherId)
-                    hasAppeared = true
-                }
+        }
+        .task {
+            if !hasAppeared {
+                await vm.getTeacherDetails(teacherId: teacherId)
+                hasAppeared = true
             }
-            .refreshable {
-                Task {
-                    await vm.getTeacherDetails(teacherId: teacherId)
-                }
+        }
+        .refreshable {
+            Task {
+                await vm.getTeacherDetails(teacherId: teacherId)
             }
-            .overlay {
-                if vm.state == .submitting {
-                    ProgressView()
-                }
+        }
+        .overlay {
+            if vm.state == .submitting {
+                ProgressView()
             }
-//        }
+        }
     }
     
     var refresh: some View {
@@ -180,7 +190,7 @@ struct TeacherView: View {
             
             Map(coordinateRegion: .constant(vm.mapRegion), interactionModes: [], annotationItems: vm.locations) { location in
                 MapMarker(coordinate: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude))
-                    
+                
             }
             .frame(maxWidth: .infinity)
             .frame(height: 200)
@@ -202,11 +212,11 @@ struct TeacherView: View {
                     VStack {
                         
                         HStack(alignment: .center) {
-
+                            
                             UserImageView(imageURL: "")
                                 .frame(width: 70)
                             
-
+                            
                             VStack(alignment: .leading) {
                                 Text("\(review.firstName) \(review.lastName)")
                                 
@@ -214,7 +224,7 @@ struct TeacherView: View {
                                 Text(date.asMediumDateString())
                                     .font(.callout)
                                     .foregroundColor(Color("SecondaryTextColor"))
-
+                                
                                 
                                 HStack(alignment: .center) {
                                     Image(systemName: review.sfSymbol)
@@ -261,38 +271,34 @@ struct TeacherView: View {
                     Spacer()
                     HStack {
                         Spacer()
-                        
-                        NavigationLink {
-                            ChatView(teacherId: teacher.teacherID)
-                        } label: {
-                            Text("Chat")
-                                .fontWeight(.semibold)
-                                .foregroundColor(Color.theme.primaryText)
-                                .frame(width: 150, height: 35)
-                                .background(
-                                    Capsule()
-                                        .fill(Color.theme.background)
-                                )
+
+                        if global.isValidated {
+                            NavigationLink {
+                                ChatView(teacherId: teacher.teacherID)
+                            } label: {
+                                footerButton(buttonText: "Chat")
+                            }
+                            Spacer()
+                            NavigationLink {
+                                BookingView(teacher: teacher)
+                            } label: {
+                                footerButton(buttonText: "Book Now")
+                            }
+                        } else {
+                            Button {
+                                showLoginMessage = true
+                            } label: {
+                                footerButton(buttonText: "Chat")
+                            }
+                            Spacer()
+                            Button {
+                                showLoginMessage = true
+                            } label: {
+                                footerButton(buttonText: "Book Now")
+                            }
                         }
                         
                         Spacer()
-                        
-                        NavigationLink {
-                            BookingView(teacher: teacher)
-                        } label: {
-                            Text("Book Now")
-                                .fontWeight(.semibold)
-                                .foregroundColor(Color.theme.primaryText)
-                                .frame(width: 150, height: 35)
-                                .background(
-                                    Capsule()
-                                        .fill(Color.theme.background)
-                                )
-                        }
-                        Spacer()
-                        
-                        
-                        
                     }
                     Spacer()
                 }
@@ -300,6 +306,17 @@ struct TeacherView: View {
         }
         .padding(.top, -10)
         .frame(height: 50)
+    }
+    
+    private func footerButton(buttonText: String) -> some View {
+        Text(buttonText)
+            .fontWeight(.semibold)
+            .foregroundColor(Color.theme.primaryText)
+            .frame(width: 150, height: 35)
+            .background(
+                Capsule()
+                    .fill(Color.theme.background)
+            )
     }
     
 }

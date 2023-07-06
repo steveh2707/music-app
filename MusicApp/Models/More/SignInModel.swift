@@ -8,7 +8,7 @@
 import Foundation
 
 
-struct LoginResponse: Codable {
+struct SignInResponse: Codable {
     let token: String
 
     enum CodingKeys: String, CodingKey {

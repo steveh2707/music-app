@@ -18,7 +18,7 @@ struct SearchResultsView: View {
     }
     
     var body: some View {
-//        NavigationStack {
+
         ZStack(alignment: .bottom) {
 //                Color.theme.background
 //                    .ignoresSafeArea()
@@ -27,22 +27,7 @@ struct SearchResultsView: View {
                     
                     List {
                         Section {
-                            ForEach(vm.teachers, id: \.self) { teacher in
-                                ZStack {
-                                    NavigationLink {
-                                        TeacherView(teacherId: teacher.teacherID)
-                                    } label: {
-                                        EmptyView()
-                                    }
-                                    .opacity(0)
-                                    SearchResultsRowView(teacher: teacher)
-                                }
-                                .task {
-                                    if vm.shouldLoadData(id: teacher.id) {
-                                        await vm.fetchNextSetOfTeachers()
-                                    }
-                                }
-                            }
+                            resultsSection
                         } header: {
                             Text("\(vm.totalResults ?? 0) results found")
                         }
@@ -67,8 +52,26 @@ struct SearchResultsView: View {
                 }
             }
             .navigationBarTitle("Results", displayMode: .inline)
-            
-//        }
+
+    }
+    
+    private var resultsSection: some View {
+        ForEach(vm.teachers, id: \.self) { teacher in
+            ZStack {
+                NavigationLink {
+                    TeacherView(teacherId: teacher.teacherID)
+                } label: {
+                    EmptyView()
+                }
+                .opacity(0)
+                SearchResultsRowView(teacher: teacher)
+            }
+            .task {
+                if vm.shouldLoadData(id: teacher.id) {
+                    await vm.fetchNextSetOfTeachers()
+                }
+            }
+        }
     }
 }
 

@@ -13,7 +13,7 @@ final class SignUpVM: ObservableObject {
     @Published var state: SubmissionState?
     @Published var hasError = false
     @Published var error: FormError?
-    @Published var loginResponse: LoginResponse? = nil
+    @Published var loginResponse: SignInResponse? = nil
     
     private let validator = SignupValidator()
     
@@ -29,7 +29,7 @@ final class SignUpVM: ObservableObject {
             let encoder = JSONEncoder()
             let data = try encoder.encode(newUser)
             
-            self.loginResponse = try await NetworkingManager.shared.request(.newUser(submissionData: data), type: LoginResponse.self)
+            self.loginResponse = try await NetworkingManager.shared.request(.newUser(submissionData: data), type: SignInResponse.self)
             
             state = .successful
             
@@ -50,18 +50,5 @@ final class SignUpVM: ObservableObject {
         
     }
     
-    enum FormError: LocalizedError {
-        case networking(error: LocalizedError)
-        case validation(error: LocalizedError)
-        case system(error: Error)
-        
-        var errorDescription: String? {
-            switch self {
-            case .networking(let err), .validation(let err):
-                return err.errorDescription
-            case .system(let err):
-                return err.localizedDescription
-            }
-        }
-    }
+
 }

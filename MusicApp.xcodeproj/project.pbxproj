@@ -34,7 +34,7 @@
 		AA55202E2A4326750089225B /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA55202D2A4326750089225B /* ChatView.swift */; };
 		AA5520302A434CB30089225B /* ChatModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA55202F2A434CB30089225B /* ChatModel.swift */; };
 		AA5520322A434CCA0089225B /* ChatVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5520312A434CCA0089225B /* ChatVM.swift */; };
-		AA5520342A449FD10089225B /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5520332A449FD10089225B /* LoginModel.swift */; };
+		AA5520342A449FD10089225B /* SignInModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5520332A449FD10089225B /* SignInModel.swift */; };
 		AA5520362A45897D0089225B /* PreviewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5520352A45897D0089225B /* PreviewProvider.swift */; };
 		AA5520392A45D2FB0089225B /* AllChatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5520382A45D2FB0089225B /* AllChatsView.swift */; };
 		AA55203B2A45D3650089225B /* AllChatsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA55203A2A45D3650089225B /* AllChatsModel.swift */; };
@@ -54,8 +54,7 @@
 		AA86339F2A4B1F5300AF11A2 /* NetworkingManagerTeacherSearchResponseFailureMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA86339E2A4B1F5300AF11A2 /* NetworkingManagerTeacherSearchResponseFailureMock.swift */; };
 		AA8633A32A4B2BE400AF11A2 /* NetworkingManagerTeacherResponseFailureMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8633A22A4B2BE400AF11A2 /* NetworkingManagerTeacherResponseFailureMock.swift */; };
 		AA8633A52A4B2DAC00AF11A2 /* TeacherVMFailureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8633A42A4B2DAC00AF11A2 /* TeacherVMFailureTests.swift */; };
-		AA8633AC2A4C4BF600AF11A2 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8633AB2A4C4BF600AF11A2 /* Networking.swift */; };
-		AA8633AE2A4C4C1A00AF11A2 /* ViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8633AD2A4C4C1A00AF11A2 /* ViewState.swift */; };
+		AA8633AC2A4C4BF600AF11A2 /* Error&State.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8633AB2A4C4BF600AF11A2 /* Error&State.swift */; };
 		AA8633B32A4DC31700AF11A2 /* BookingVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8633B22A4DC31700AF11A2 /* BookingVM.swift */; };
 		AA8633B52A4DC33D00AF11A2 /* BookingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8633B42A4DC33D00AF11A2 /* BookingModel.swift */; };
 		AA8633B72A4DC4F900AF11A2 /* BookingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8633B62A4DC4F900AF11A2 /* BookingView.swift */; };
@@ -117,7 +116,7 @@
 		AA55202D2A4326750089225B /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		AA55202F2A434CB30089225B /* ChatModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatModel.swift; sourceTree = "<group>"; };
 		AA5520312A434CCA0089225B /* ChatVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatVM.swift; sourceTree = "<group>"; };
-		AA5520332A449FD10089225B /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
+		AA5520332A449FD10089225B /* SignInModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInModel.swift; sourceTree = "<group>"; };
 		AA5520352A45897D0089225B /* PreviewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewProvider.swift; sourceTree = "<group>"; };
 		AA5520382A45D2FB0089225B /* AllChatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllChatsView.swift; sourceTree = "<group>"; };
 		AA55203A2A45D3650089225B /* AllChatsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllChatsModel.swift; sourceTree = "<group>"; };
@@ -137,8 +136,7 @@
 		AA86339E2A4B1F5300AF11A2 /* NetworkingManagerTeacherSearchResponseFailureMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingManagerTeacherSearchResponseFailureMock.swift; sourceTree = "<group>"; };
 		AA8633A22A4B2BE400AF11A2 /* NetworkingManagerTeacherResponseFailureMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingManagerTeacherResponseFailureMock.swift; sourceTree = "<group>"; };
 		AA8633A42A4B2DAC00AF11A2 /* TeacherVMFailureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherVMFailureTests.swift; sourceTree = "<group>"; };
-		AA8633AB2A4C4BF600AF11A2 /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
-		AA8633AD2A4C4C1A00AF11A2 /* ViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewState.swift; sourceTree = "<group>"; };
+		AA8633AB2A4C4BF600AF11A2 /* Error&State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Error&State.swift"; sourceTree = "<group>"; };
 		AA8633B22A4DC31700AF11A2 /* BookingVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingVM.swift; sourceTree = "<group>"; };
 		AA8633B42A4DC33D00AF11A2 /* BookingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingModel.swift; sourceTree = "<group>"; };
 		AA8633B62A4DC4F900AF11A2 /* BookingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingView.swift; sourceTree = "<group>"; };
@@ -295,14 +293,10 @@
 		AA8633A72A4C3DBF00AF11A2 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				AA55203C2A45D3E00089225B /* AllChatsVM.swift */,
-				AA5520312A434CCA0089225B /* ChatVM.swift */,
-				AA0B35812A41A0B900BD9A08 /* SearchVM.swift */,
-				AA17C64D2A3CB501006F04FD /* SearchResultsVM.swift */,
-				AA400A392A3B2FBF006C5448 /* SignInVM.swift */,
-				AAF4C34E2A39D91E0082C142 /* SignUpVM.swift */,
-				AAF4C3322A38AAE20082C142 /* TeacherVM.swift */,
-				AA8633B22A4DC31700AF11A2 /* BookingVM.swift */,
+				AA8633CA2A56FA4E00AF11A2 /* Find */,
+				AA8633C92A56FA4900AF11A2 /* Book */,
+				AA8633C82A56FA4100AF11A2 /* Chat */,
+				AA8633C72A56FA3D00AF11A2 /* More */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -310,18 +304,11 @@
 		AA8633A82A4C3E3C00AF11A2 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				AA5520382A45D2FB0089225B /* AllChatsView.swift */,
-				AA55202D2A4326750089225B /* ChatView.swift */,
-				AA5520262A41B6A40089225B /* SearchView.swift */,
-				AA55201E2A41A2BB0089225B /* LocationFinderView.swift */,
-				AA17C64B2A3CB3F5006F04FD /* SearchResultsView.swift */,
-				AA55202A2A41F7010089225B /* SearchResultsRowView.swift */,
-				AA400A342A3B2A2E006C5448 /* MoreView.swift */,
-				AA400A3D2A3B3260006C5448 /* SignInView.swift */,
-				AAF4C3502A39D9E80082C142 /* SignupView.swift */,
-				AAF4C3302A38AACF0082C142 /* TeacherView.swift */,
-				AA8633B62A4DC4F900AF11A2 /* BookingView.swift */,
-				AA8633B82A54410100AF11A2 /* MakeBookingView.swift */,
+				AA8633C32A56F9CE00AF11A2 /* Find */,
+				AA8633C52A56FA1A00AF11A2 /* Book */,
+				AA8633C42A56F9FA00AF11A2 /* Chat */,
+				AA8633C62A56FA2400AF11A2 /* More */,
+				AAE4ED172A3BAFBF00ED630C /* Components */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -338,8 +325,7 @@
 		AA8633AA2A4C4BDF00AF11A2 /* Enums */ = {
 			isa = PBXGroup;
 			children = (
-				AA8633AB2A4C4BF600AF11A2 /* Networking.swift */,
-				AA8633AD2A4C4C1A00AF11A2 /* ViewState.swift */,
+				AA8633AB2A4C4BF600AF11A2 /* Error&State.swift */,
 				AAF4C33C2A38CA6F0082C142 /* Endpoint.swift */,
 			);
 			path = Enums;
@@ -352,6 +338,118 @@
 				AA0B356A2A40664800BD9A08 /* CachedImage.swift */,
 			);
 			path = CachedImage;
+			sourceTree = "<group>";
+		};
+		AA8633C32A56F9CE00AF11A2 /* Find */ = {
+			isa = PBXGroup;
+			children = (
+				AA5520262A41B6A40089225B /* SearchView.swift */,
+				AA55201E2A41A2BB0089225B /* LocationFinderView.swift */,
+				AA17C64B2A3CB3F5006F04FD /* SearchResultsView.swift */,
+				AA55202A2A41F7010089225B /* SearchResultsRowView.swift */,
+				AAF4C3302A38AACF0082C142 /* TeacherView.swift */,
+			);
+			path = Find;
+			sourceTree = "<group>";
+		};
+		AA8633C42A56F9FA00AF11A2 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				AA5520382A45D2FB0089225B /* AllChatsView.swift */,
+				AA55202D2A4326750089225B /* ChatView.swift */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
+		AA8633C52A56FA1A00AF11A2 /* Book */ = {
+			isa = PBXGroup;
+			children = (
+				AA8633B62A4DC4F900AF11A2 /* BookingView.swift */,
+				AA8633B82A54410100AF11A2 /* MakeBookingView.swift */,
+			);
+			path = Book;
+			sourceTree = "<group>";
+		};
+		AA8633C62A56FA2400AF11A2 /* More */ = {
+			isa = PBXGroup;
+			children = (
+				AA400A342A3B2A2E006C5448 /* MoreView.swift */,
+				AA400A3D2A3B3260006C5448 /* SignInView.swift */,
+				AAF4C3502A39D9E80082C142 /* SignupView.swift */,
+			);
+			path = More;
+			sourceTree = "<group>";
+		};
+		AA8633C72A56FA3D00AF11A2 /* More */ = {
+			isa = PBXGroup;
+			children = (
+				AA400A392A3B2FBF006C5448 /* SignInVM.swift */,
+				AAF4C34E2A39D91E0082C142 /* SignUpVM.swift */,
+			);
+			path = More;
+			sourceTree = "<group>";
+		};
+		AA8633C82A56FA4100AF11A2 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				AA55203C2A45D3E00089225B /* AllChatsVM.swift */,
+				AA5520312A434CCA0089225B /* ChatVM.swift */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
+		AA8633C92A56FA4900AF11A2 /* Book */ = {
+			isa = PBXGroup;
+			children = (
+				AA8633B22A4DC31700AF11A2 /* BookingVM.swift */,
+			);
+			path = Book;
+			sourceTree = "<group>";
+		};
+		AA8633CA2A56FA4E00AF11A2 /* Find */ = {
+			isa = PBXGroup;
+			children = (
+				AA0B35812A41A0B900BD9A08 /* SearchVM.swift */,
+				AA17C64D2A3CB501006F04FD /* SearchResultsVM.swift */,
+				AAF4C3322A38AAE20082C142 /* TeacherVM.swift */,
+			);
+			path = Find;
+			sourceTree = "<group>";
+		};
+		AA8633CB2A56FA8300AF11A2 /* More */ = {
+			isa = PBXGroup;
+			children = (
+				AA5520332A449FD10089225B /* SignInModel.swift */,
+				AAF4C34B2A39D8C50082C142 /* SignupModel.swift */,
+			);
+			path = More;
+			sourceTree = "<group>";
+		};
+		AA8633CC2A56FA8800AF11A2 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				AA55202F2A434CB30089225B /* ChatModel.swift */,
+				AA55203A2A45D3650089225B /* AllChatsModel.swift */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
+		AA8633CD2A56FA8C00AF11A2 /* Book */ = {
+			isa = PBXGroup;
+			children = (
+				AA8633B42A4DC33D00AF11A2 /* BookingModel.swift */,
+			);
+			path = Book;
+			sourceTree = "<group>";
+		};
+		AA8633CE2A56FAC000AF11A2 /* Find */ = {
+			isa = PBXGroup;
+			children = (
+				AAF4C3352A38AB220082C142 /* TeacherModel.swift */,
+				AA5520282A41C5F30089225B /* SearchModels.swift */,
+				AA17C64F2A3CB51E006F04FD /* SearchResultsModel.swift */,
+			);
+			path = Find;
 			sourceTree = "<group>";
 		};
 		AAE4ED172A3BAFBF00ED630C /* Components */ = {
@@ -393,7 +491,6 @@
 				AA8633A72A4C3DBF00AF11A2 /* ViewModels */,
 				AAF4C3342A38AB0E0082C142 /* Models */,
 				AA8633AA2A4C4BDF00AF11A2 /* Enums */,
-				AAE4ED172A3BAFBF00ED630C /* Components */,
 				AA400A422A3B5AF4006C5448 /* Extensions */,
 				AAF4C3372A38B66A0082C142 /* Utilities */,
 				AA8633A92A4C3F2300AF11A2 /* Validators */,
@@ -416,14 +513,10 @@
 			isa = PBXGroup;
 			children = (
 				AA400A3B2A3B3173006C5448 /* ApiErrorModel.swift */,
-				AA55202F2A434CB30089225B /* ChatModel.swift */,
-				AA55203A2A45D3650089225B /* AllChatsModel.swift */,
-				AA5520282A41C5F30089225B /* SearchModels.swift */,
-				AA17C64F2A3CB51E006F04FD /* SearchResultsModel.swift */,
-				AA5520332A449FD10089225B /* LoginModel.swift */,
-				AAF4C34B2A39D8C50082C142 /* SignupModel.swift */,
-				AAF4C3352A38AB220082C142 /* TeacherModel.swift */,
-				AA8633B42A4DC33D00AF11A2 /* BookingModel.swift */,
+				AA8633CE2A56FAC000AF11A2 /* Find */,
+				AA8633CD2A56FA8C00AF11A2 /* Book */,
+				AA8633CC2A56FA8800AF11A2 /* Chat */,
+				AA8633CB2A56FA8300AF11A2 /* More */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -586,7 +679,7 @@
 				AA55202B2A41F7010089225B /* SearchResultsRowView.swift in Sources */,
 				AA8633BB2A5579D600AF11A2 /* SearchValidator.swift in Sources */,
 				AA8633B32A4DC31700AF11A2 /* BookingVM.swift in Sources */,
-				AA8633AC2A4C4BF600AF11A2 /* Networking.swift in Sources */,
+				AA8633AC2A4C4BF600AF11A2 /* Error&State.swift in Sources */,
 				AAF4C3362A38AB220082C142 /* TeacherModel.swift in Sources */,
 				AA8633B92A54410100AF11A2 /* MakeBookingView.swift in Sources */,
 				AA400A3E2A3B3260006C5448 /* SignInView.swift in Sources */,
@@ -603,11 +696,10 @@
 				AA17C64C2A3CB3F5006F04FD /* SearchResultsView.swift in Sources */,
 				AA55203D2A45D3E00089225B /* AllChatsVM.swift in Sources */,
 				AA8633C22A55B7E200AF11A2 /* NotificationCountView.swift in Sources */,
-				AA8633AE2A4C4C1A00AF11A2 /* ViewState.swift in Sources */,
 				AAF4C3212A38AA5B0082C142 /* MusicApp.swift in Sources */,
 				AA5520392A45D2FB0089225B /* AllChatsView.swift in Sources */,
 				AA17C6502A3CB51E006F04FD /* SearchResultsModel.swift in Sources */,
-				AA5520342A449FD10089225B /* LoginModel.swift in Sources */,
+				AA5520342A449FD10089225B /* SignInModel.swift in Sources */,
 				AAF4C3312A38AACF0082C142 /* TeacherView.swift in Sources */,
 				AA400A3A2A3B2FBF006C5448 /* SignInVM.swift in Sources */,
 				AA400A402A3B370D006C5448 /* Global.swift in Sources */,

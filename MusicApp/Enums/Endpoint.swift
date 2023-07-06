@@ -13,24 +13,26 @@ enum EndPoint {
     case newUser(submissionData: Data?)
     case login(submissionData: Data?)
     case search(submissionData: Data?, page: Int)
-    case chat(id: Int, token: String?)
-    case newMessage(chatId: Int, token: String, submissionData: Data?)
+    case chat(token: String?, id: Int)
+    case newMessage(token: String, chatId: Int, submissionData: Data?)
     case allChats(token: String?)
     case allUnreadChats(token: String?)
-    case teacherAvailability(id: Int, date: String)
+    case teacherAvailability(token: String?, id: Int, date: String)
+    case makeBooking(token: String, submissionData: Data?)
 
     // Use this for any items that need appended to request
     var methodType: MethodType {
         switch self {
         case .teacher,
-                .configuration,
-                .teacherAvailability:
+                .configuration:
             return .GET()
             
-        case .chat(_, let token):
+        case .chat(let token, _):
             return .GET(token: token)
                         
-        case .allChats(let token), .allUnreadChats(let token):
+        case .allChats(let token),
+                .allUnreadChats(let token),
+                .teacherAvailability(let token, _, _):
             return .GET(token: token)
             
         case .newUser(let data),
@@ -38,8 +40,10 @@ enum EndPoint {
                 .search(let data, _):
             return .POST(data: data)
             
-        case .newMessage(_, let token, let data):
+        case .newMessage(let token, _, let data),
+                .makeBooking(let token, let data):
             return .POST(token: token, data: data)
+            
         }
         
     }
@@ -59,7 +63,7 @@ enum EndPoint {
             return "/user/login"
         case .search:
             return "/teacher/search"
-        case .chat(let id, _):
+        case .chat(_, let id):
             return "/chat/conversation/\(id)"
         case .newMessage(let chatId, _, _):
             return "/chat/message/\(chatId)"
@@ -67,8 +71,10 @@ enum EndPoint {
             return "/chat/conversation"
         case .allUnreadChats:
             return "/chat/unread"
-        case .teacherAvailability(let id, _):
+        case .teacherAvailability(_, let id, _):
             return "/booking/availability/\(id)"
+        case .makeBooking:
+            return "/booking"
         }
     }
     
@@ -76,7 +82,7 @@ enum EndPoint {
         switch self {
         case .search(_, let page):
             return ["page": "\(page)"]
-        case .teacherAvailability(_, let date):
+        case .teacherAvailability(_, _, let date):
             return ["date": "\(date)"]
         default:
             return nil

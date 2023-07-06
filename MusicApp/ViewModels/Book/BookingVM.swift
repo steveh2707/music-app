@@ -8,6 +8,8 @@
 import Foundation
 
 
+
+
 class BookingVM: ObservableObject {
     
     @Published var teacher: Teacher
@@ -17,10 +19,13 @@ class BookingVM: ObservableObject {
     @Published var searchedDates: [Date] = []
     @Published var selectedDate: String?
     @Published var selectedTime: String?
+    @Published var priceFinal = 50.00
     
     @Published var state: SubmissionState?
     @Published var hasError = false
     @Published var error: NetworkingManager.NetworkingError?
+    
+    @Published var showSuccessMessage = false
     
     private let networkingManager: NetworkingManagerImpl!
     
@@ -30,13 +35,13 @@ class BookingVM: ObservableObject {
     }
     
     @MainActor
-    func getTeacherAvailability(teacherId: Int) async {
+    func getTeacherAvailability(token: String?) async {
         
         do {
             state = .submitting
             
             self.teacherAvailability = try await networkingManager.request(session: .shared,
-                                                                           .teacherAvailability(id: teacherId, date: searchDate.asSqlDateString()),
+                                                                           .teacherAvailability(token: token ?? "", id: teacher.teacherID, date: searchDate.asSqlDateString()),
                                                                            type: TeacherAvailability.self)
             searchedDates = [searchDate.addOrSubtractDays(day: -1),
                              searchDate,
@@ -56,6 +61,38 @@ class BookingVM: ObservableObject {
                 self.error = .custom(error: error)
             }
         }
+    }
+    
+    
+    @MainActor
+    func makeBooking(token: String?, instrumentId: Int, gradeId: Int) async {
+        
+        do {
+//            try validator.validate(newUser)
+            state = .submitting
+            
+            let newBooking = NewBooking(teacherId: teacher.teacherID, date: selectedDate, startTime: selectedTime, endTime: selectedTime, instrumentId: instrumentId, gradeId: gradeId, priceFinal: priceFinal)
+            
+            let encoder = JSONEncoder()
+            let data = try encoder.encode(newBooking)
+            
+            try await networkingManager.request(session: .shared,
+                                                .makeBooking(token: token ?? "", submissionData: data))
+            
+            state = .successful
+            showSuccessMessage = true
+        } catch {
+            
+            self.hasError = true
+            self.state = .unsuccessful
+            
+            if let networkingError = error as? NetworkingManager.NetworkingError {
+                self.error = networkingError
+            } else {
+                self.error = .custom(error: error)
+            }
+        }
+        
     }
     
 }

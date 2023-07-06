@@ -18,6 +18,9 @@ struct UnreadResponse: Codable {
 
 
 class Global: ObservableObject {
+    
+    @Published var selectedTab = 1
+    
     @Published var isValidated = false
     @Published var token: String = ""
     @Published var unreadMessages: Int = 0
