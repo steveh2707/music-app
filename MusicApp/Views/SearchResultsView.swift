@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SearchResultsView: View {
     
+    @EnvironmentObject var global: Global
     @StateObject private var vm: SearchResultsVM
     @State private var hasAppeared = false
     

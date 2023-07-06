@@ -11,7 +11,7 @@ import MapKit
 
 class TeacherVM: ObservableObject {
     
-    @Published var teacherDetails: TeacherDetails? = nil
+    @Published var teacher: Teacher? = nil
     @Published var mapRegion = MKCoordinateRegion.defaultRegion()
     @Published var locations = [Location]()
     
@@ -32,13 +32,13 @@ class TeacherVM: ObservableObject {
         do {
             state = .submitting
             
-            self.teacherDetails = try await networkingManager.request(session: .shared,
+            self.teacher = try await networkingManager.request(session: .shared,
                                                                       .teacher(id: teacherId),
-                                                                      type: TeacherDetails.self)
+                                                                      type: Teacher.self)
             
-            if let teacherDetails {
-                self.mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: teacherDetails.locationLatitude, longitude: teacherDetails.locationLongitude), span: MKCoordinateSpan(latitudeDelta: 0.03, longitudeDelta: 0.03))
-                let newLocation = Location(id: UUID(), latitude: teacherDetails.locationLatitude, longitude: teacherDetails.locationLongitude)
+            if let teacher {
+                self.mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: teacher.locationLatitude, longitude: teacher.locationLongitude), span: MKCoordinateSpan(latitudeDelta: 0.03, longitudeDelta: 0.03))
+                let newLocation = Location(id: UUID(), latitude: teacher.locationLatitude, longitude: teacher.locationLongitude)
                 locations.append(newLocation)
             }
             

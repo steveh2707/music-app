@@ -14,9 +14,10 @@ class SearchVM: NSObject, ObservableObject {
     @Published var searchableText = ""
     @Published var selectedLocation: SelectedLocation?
     @Published var instruments: [Instrument] = []
-    @Published var selectedInstrument: Instrument? = nil
+//    @Published var selectedInstrument: Instrument? = nil
     @Published var grades: [Grade] = []
-    @Published var selectedGrade: Grade? = nil
+//    @Published var selectedGrade: Grade? = nil
+    @Published var searchCrtieria: SearchCriteria?
     
     @Published var state: SubmissionState?
     @Published var hasError = false
@@ -44,6 +45,8 @@ class SearchVM: NSObject, ObservableObject {
             }
         }
     }
+    
+
     
     
     private lazy var localSearchCompleter: MKLocalSearchCompleter = {

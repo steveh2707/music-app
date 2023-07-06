@@ -43,9 +43,9 @@ final class NetworkingManagerTests: XCTestCase {
         
         let res = try await NetworkingManager.shared.request(session: session,
                                                        .teacher(id: 1),
-                                                       type: TeacherDetails.self)
+                                                       type: Teacher.self)
         
-        let staticJSON = try StaticJSONMapper.decode(file: "TeacherStaticTestData", type: TeacherDetails.self)
+        let staticJSON = try StaticJSONMapper.decode(file: "TeacherStaticTestData", type: Teacher.self)
         
         XCTAssertEqual(res, staticJSON, "The returned response type should be decoded properly")
     }
@@ -79,7 +79,7 @@ final class NetworkingManagerTests: XCTestCase {
         do {
             _ = try await NetworkingManager.shared.request(session: session,
                                                            .teacher(id: 1),
-                                                           type: TeacherDetails.self)
+                                                           type: Teacher.self)
         } catch  {
         
             guard let networkingError = error as? NetworkingManager.NetworkingError else {

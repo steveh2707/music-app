@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - Welcome
-struct Chat: Codable, Equatable {
+struct ChatDetails: Codable, Equatable {
     let chatID: Int
     let createdTimestampUtc: String
     let teacherID, teacherUserID: Int

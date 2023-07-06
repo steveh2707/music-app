@@ -42,6 +42,7 @@ struct MusicApp: App {
                         
                     }
                     .tag(3)
+                
 
             }
             .environmentObject(global)

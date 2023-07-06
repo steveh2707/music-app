@@ -21,7 +21,7 @@ struct TeacherView: View {
 //                Color.theme.background
 //                    .ignoresSafeArea()
                 
-                if (vm.teacherDetails != nil) {
+                if (vm.teacher != nil) {
                     VStack {
                         
                         ScrollView(showsIndicators: false) {
@@ -94,7 +94,7 @@ struct TeacherView: View {
     
     private var headingSection: some View {
         HStack(alignment: .center) {
-            if let teacher = vm.teacherDetails {
+            if let teacher = vm.teacher {
                 UserImageView(imageURL: teacher.profileImageURL ?? "")
                     .frame(width: 110, height: 110)
                 
@@ -121,7 +121,7 @@ struct TeacherView: View {
     
     private var instrumentSection: some View {
         VStack(alignment: .leading) {
-            if let teacher = vm.teacherDetails {
+            if let teacher = vm.teacher {
                 Text("Instruments Taught")
                     .font(.headline)
                     .padding(.vertical, 5)
@@ -149,7 +149,7 @@ struct TeacherView: View {
     
     private var aboutSection: some View {
         VStack(alignment: .leading) {
-            if let teacher = vm.teacherDetails {
+            if let teacher = vm.teacher {
                 Text("About")
                     .font(.headline)
                     .padding(.vertical, 5)
@@ -193,7 +193,7 @@ struct TeacherView: View {
     
     private var reviewSection: some View {
         VStack(alignment: .leading) {
-            if let teacher = vm.teacherDetails {
+            if let teacher = vm.teacher {
                 Text("Reviews")
                     .font(.headline)
                     .padding(.vertical, 5)
@@ -256,7 +256,7 @@ struct TeacherView: View {
             Color.theme.accent
                 .ignoresSafeArea()
             
-            if let teacher = vm.teacherDetails {
+            if let teacher = vm.teacher {
                 VStack {
                     Spacer()
                     HStack {
@@ -278,7 +278,7 @@ struct TeacherView: View {
                         Spacer()
                         
                         NavigationLink {
-                            TimelineView2()
+                            BookingView(teacher: teacher)
                         } label: {
                             Text("Book Now")
                                 .fontWeight(.semibold)

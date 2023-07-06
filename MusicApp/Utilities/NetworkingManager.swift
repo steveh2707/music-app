@@ -31,6 +31,8 @@ final class NetworkingManager: NetworkingManagerImpl {
             throw NetworkingError.invalidUrl
         }
         
+        print(url)
+        
         let request = buildRequest(from: url, methodType: endpoint.methodType)
         
         let (data, response) = try await session.data(for: request)
@@ -46,10 +48,11 @@ final class NetworkingManager: NetworkingManagerImpl {
             throw NetworkingError.apiError(message: apiError.message)
         }
         
-        guard let decodedResponse = try? decoder.decode(T.self, from: data) else {
-            throw NetworkingError.failedToDecode
-        }
-        return decodedResponse
+//        guard let decodedResponse = try? decoder.decode(T.self, from: data) else {
+//            throw NetworkingError.failedToDecode
+//        }
+        
+        return try decoder.decode(T.self, from: data)
     }
     
     

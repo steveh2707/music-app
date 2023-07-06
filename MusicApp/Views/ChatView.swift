@@ -17,15 +17,12 @@ struct ChatView: View {
     let teacherId: Int
     
     var body: some View {
-        //        NavigationView {
         VStack {
             
             if let chat = vm.chat {
                 ScrollViewReader { value in
                     
                     ScrollView {
-                        
-                        //                        if chat.messages.count > 0 {
                         
                         
                         ForEach(chat.messages, id: \.self) { message in
@@ -55,7 +52,6 @@ struct ChatView: View {
                         .onChange(of: chat.messages) { _ in
                             value.scrollTo(bottomID)
                         }
-                        //                        }
                         Spacer()
                             .id(bottomID)
                     }
@@ -87,12 +83,17 @@ struct ChatView: View {
         .toolbar {
             ToolbarItem(placement: .principal) {
                 if let chat = vm.chat {
-                    HStack {
-                        Spacer()
-                        UserImageView(imageURL: chat.profileImageURL)
-                            .frame(width: 30, height: 30)
-                        Text("\(chat.teacherFirstName) \(chat.teacherLastName)")
-                        Spacer()
+                    NavigationLink {
+                        TeacherView(teacherId: teacherId)
+                    } label: {
+                        HStack {
+                            Spacer()
+                            UserImageView(imageURL: chat.profileImageURL)
+                                .frame(width: 30, height: 30)
+                            Text("\(chat.teacherFirstName) \(chat.teacherLastName)")
+                                .foregroundColor(Color.theme.primaryText)
+                            Spacer()
+                        }
                     }
                 }
             }

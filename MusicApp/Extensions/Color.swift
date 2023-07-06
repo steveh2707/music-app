@@ -20,4 +20,5 @@ struct ColorTheme {
     let primaryTextInverse = Color("PrimaryTextInverseColor")
     let secondaryText = Color("SecondaryTextColor")
     let linkText = Color("LinkColor")
+    let red = Color("Red")
 }

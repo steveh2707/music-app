@@ -13,50 +13,46 @@ struct AllChatsView: View {
     @StateObject var vm = AllChatsVM()
     @State var hasAppeared = false
     @State var searchText = ""
-//    @State var showIndividualChat = false
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             List {
                 ForEach(vm.chats) { chat in
                     
-                    NavigationLink {
-                        ChatView(teacherId: chat.teacherID)
-                    } label: {
-                        HStack(spacing: 20) {
-                            UserImageView(imageURL: chat.profileImageURL ?? "")
-                                .frame(width: 80, height: 80)
-                            Text("\(chat.firstName) \(chat.lastName)")
-                                .font(.title3)
-                            Spacer()
+                    ZStack {
+                        
+                        NavigationLink {
+                            ChatView(teacherId: chat.teacherID)
+                        } label: {
+                            HStack(spacing: 20) {
+                                UserImageView(imageURL: chat.profileImageURL ?? "")
+                                    .frame(width: 80, height: 80)
+                                VStack(alignment: .leading, spacing: 5) {
+                                    Text("\(chat.firstName) \(chat.lastName)")
+                                        .font(.title3)
+                                    Text(chat.mostRecentMessage ?? "")
+                                        .font(.callout)
+                                }
+                                Spacer()
+                            }
                         }
+                        if chat.unreadMessages > 0 {
+                            HStack {
+                                Spacer()
+                                NotificationCountView(value: chat.unreadMessages)
+                            }
+                        }
+ 
+                        
                     }
-                    
-//                    Button {
-//                        showIndividualChat = true
-//                    } label: {
-//                        HStack(spacing: 20) {
-//                            UserImageView(imageURL: chat.profileImageURL ?? "")
-//                                .frame(width: 80, height: 80)
-//                            Text("\(chat.firstName) \(chat.lastName)")
-//                                .font(.title3)
-//                            Spacer()
-//                        }
-//                    }
 
-                    
-   
-                    
-                    
                 }
             }
             .navigationTitle("Chats")
         }
         .searchable(text: $searchText)
         .task {
-            
             await vm.getChats(token: global.token)
-            
         }
         .overlay {
             if vm.state == .submitting {

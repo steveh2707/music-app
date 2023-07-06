@@ -11,7 +11,7 @@ import Foundation
 class NetworkingManagerTeacherResponseSuccessMock: NetworkingManagerImpl {
     
     func request<T>(session: URLSession, _ endpoint: EndPoint, type: T.Type) async throws -> T where T : Decodable, T : Encodable {
-        return try StaticJSONMapper.decode(file: "TeacherStaticTestData", type: TeacherDetails.self) as! T
+        return try StaticJSONMapper.decode(file: "TeacherStaticTestData", type: Teacher.self) as! T
     }
     
     func request(session: URLSession, _ endpoint: EndPoint) async throws {

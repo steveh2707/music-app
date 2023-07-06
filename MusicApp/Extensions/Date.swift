@@ -29,6 +29,16 @@ extension Date {
         return mediumFormatter.string(from: self)
     }
     
+    private var shortFormatter: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        return formatter
+    }
+    
+    func asShortDateString() -> String {
+        return shortFormatter.string(from: self)
+    }
+    
     private var sqlDateFormatter: DateFormatter {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
@@ -39,8 +49,17 @@ extension Date {
         return sqlDateFormatter.string(from: self)
     }
     
-    func addOrSubtractYear(year:Int)->Date{
+    func addOrSubtractYear(year:Int) -> Date{
       return Calendar.current.date(byAdding: .year, value: year, to: Date())!
     }
     
+    func addOrSubtractDays(day:Int) -> Date{
+      return Calendar.current.date(byAdding: .day, value: day, to: self)!
+    }
+    
+    func dayOfWeek() -> String? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEEE"
+        return dateFormatter.string(from: self).capitalized
+    }
 }

@@ -17,15 +17,20 @@ enum EndPoint {
     case newMessage(chatId: Int, token: String, submissionData: Data?)
     case allChats(token: String?)
     case allUnreadChats(token: String?)
+    case teacherAvailability(id: Int, date: String)
 
     // Use this for any items that need appended to request
     var methodType: MethodType {
         switch self {
         case .teacher,
-                .configuration:
+                .configuration,
+                .teacherAvailability:
             return .GET()
             
         case .chat(_, let token):
+            return .GET(token: token)
+                        
+        case .allChats(let token), .allUnreadChats(let token):
             return .GET(token: token)
             
         case .newUser(let data),
@@ -35,9 +40,6 @@ enum EndPoint {
             
         case .newMessage(_, let token, let data):
             return .POST(token: token, data: data)
-            
-        case .allChats(let token), .allUnreadChats(let token):
-            return .GET(token: token)
         }
         
     }
@@ -65,6 +67,8 @@ enum EndPoint {
             return "/chat/conversation"
         case .allUnreadChats:
             return "/chat/unread"
+        case .teacherAvailability(let id, _):
+            return "/booking/availability/\(id)"
         }
     }
     
@@ -72,6 +76,8 @@ enum EndPoint {
         switch self {
         case .search(_, let page):
             return ["page": "\(page)"]
+        case .teacherAvailability(_, let date):
+            return ["date": "\(date)"]
         default:
             return nil
         }

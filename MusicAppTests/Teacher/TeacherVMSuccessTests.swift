@@ -28,11 +28,11 @@ final class TeacherVMSuccessTests: XCTestCase {
         XCTAssertEqual(vm.state, .none, "The view model shouldn't be loading any data")
         
         await vm.getTeacherDetails(teacherId: 1)
-        XCTAssertNotNil(vm.teacherDetails, "The teacher details should not be nil")
-        XCTAssertEqual(vm.teacherDetails?.userID, 1, "The userId should be 1")
+        XCTAssertNotNil(vm.teacher, "The teacher details should not be nil")
+        XCTAssertEqual(vm.teacher?.userID, 1, "The userId should be 1")
 
-        let teacherDetailsData = try StaticJSONMapper.decode(file: "TeacherStaticTestData", type: TeacherDetails.self)
-        XCTAssertEqual(vm.teacherDetails, teacherDetailsData, "The response from our networking mock should match")
+        let teacherDetailsData = try StaticJSONMapper.decode(file: "TeacherStaticTestData", type: Teacher.self)
+        XCTAssertEqual(vm.teacher, teacherDetailsData, "The response from our networking mock should match")
         
         XCTAssertEqual(vm.state, .successful, "The view state should be successful")
     }

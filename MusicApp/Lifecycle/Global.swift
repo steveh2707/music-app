@@ -22,6 +22,11 @@ class Global: ObservableObject {
     @Published var token: String = ""
     @Published var unreadMessages: Int = 0
     
+    @Published var selectedInstrument: Instrument? = nil
+    @Published var selectedGrade: Grade? = nil
+    
+    
+    
     func logout() {
         self.isValidated = false
         self.token = ""
@@ -40,6 +45,7 @@ class Global: ObservableObject {
         self.token = token
         return self
     }
+
     
     @MainActor
     func fetchUnreadMessages(token: String) async {

@@ -15,7 +15,7 @@ struct TimelineView2: View {
     @State var date = Date()
     
     var body: some View {
-        ScrollView {
+        VStack {
             DatePicker(selection: $date, in: ...Date.now, displayedComponents: .date) {
                 Text("Selected Date")
             }
@@ -49,7 +49,7 @@ struct TimelineView2: View {
                 }
                 Image(systemName: "chevron.right")
             }
-            
+            Spacer()
         }
         
     }

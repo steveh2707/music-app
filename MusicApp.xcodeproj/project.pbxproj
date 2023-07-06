@@ -56,6 +56,13 @@
 		AA8633A52A4B2DAC00AF11A2 /* TeacherVMFailureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8633A42A4B2DAC00AF11A2 /* TeacherVMFailureTests.swift */; };
 		AA8633AC2A4C4BF600AF11A2 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8633AB2A4C4BF600AF11A2 /* Networking.swift */; };
 		AA8633AE2A4C4C1A00AF11A2 /* ViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8633AD2A4C4C1A00AF11A2 /* ViewState.swift */; };
+		AA8633B32A4DC31700AF11A2 /* BookingVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8633B22A4DC31700AF11A2 /* BookingVM.swift */; };
+		AA8633B52A4DC33D00AF11A2 /* BookingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8633B42A4DC33D00AF11A2 /* BookingModel.swift */; };
+		AA8633B72A4DC4F900AF11A2 /* BookingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8633B62A4DC4F900AF11A2 /* BookingView.swift */; };
+		AA8633B92A54410100AF11A2 /* MakeBookingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8633B82A54410100AF11A2 /* MakeBookingView.swift */; };
+		AA8633BB2A5579D600AF11A2 /* SearchValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8633BA2A5579D600AF11A2 /* SearchValidator.swift */; };
+		AA8633BE2A559DE800AF11A2 /* SocketIO in Frameworks */ = {isa = PBXBuildFile; productRef = AA8633BD2A559DE800AF11A2 /* SocketIO */; };
+		AA8633C22A55B7E200AF11A2 /* NotificationCountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8633C12A55B7E200AF11A2 /* NotificationCountView.swift */; };
 		AAE4ED1B2A3BAFED00ED630C /* HeadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE4ED1A2A3BAFED00ED630C /* HeadingView.swift */; };
 		AAE4ED1D2A3BB50B00ED630C /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE4ED1C2A3BB50B00ED630C /* Color.swift */; };
 		AAF4C3212A38AA5B0082C142 /* MusicApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF4C3202A38AA5B0082C142 /* MusicApp.swift */; };
@@ -132,6 +139,12 @@
 		AA8633A42A4B2DAC00AF11A2 /* TeacherVMFailureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherVMFailureTests.swift; sourceTree = "<group>"; };
 		AA8633AB2A4C4BF600AF11A2 /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		AA8633AD2A4C4C1A00AF11A2 /* ViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewState.swift; sourceTree = "<group>"; };
+		AA8633B22A4DC31700AF11A2 /* BookingVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingVM.swift; sourceTree = "<group>"; };
+		AA8633B42A4DC33D00AF11A2 /* BookingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingModel.swift; sourceTree = "<group>"; };
+		AA8633B62A4DC4F900AF11A2 /* BookingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingView.swift; sourceTree = "<group>"; };
+		AA8633B82A54410100AF11A2 /* MakeBookingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeBookingView.swift; sourceTree = "<group>"; };
+		AA8633BA2A5579D600AF11A2 /* SearchValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchValidator.swift; sourceTree = "<group>"; };
+		AA8633C12A55B7E200AF11A2 /* NotificationCountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCountView.swift; sourceTree = "<group>"; };
 		AAE4ED1A2A3BAFED00ED630C /* HeadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadingView.swift; sourceTree = "<group>"; };
 		AAE4ED1C2A3BB50B00ED630C /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		AAF4C31D2A38AA5B0082C142 /* MusicApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -155,6 +168,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA8633BE2A559DE800AF11A2 /* SocketIO in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -288,6 +302,7 @@
 				AA400A392A3B2FBF006C5448 /* SignInVM.swift */,
 				AAF4C34E2A39D91E0082C142 /* SignUpVM.swift */,
 				AAF4C3322A38AAE20082C142 /* TeacherVM.swift */,
+				AA8633B22A4DC31700AF11A2 /* BookingVM.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -305,6 +320,8 @@
 				AA400A3D2A3B3260006C5448 /* SignInView.swift */,
 				AAF4C3502A39D9E80082C142 /* SignupView.swift */,
 				AAF4C3302A38AACF0082C142 /* TeacherView.swift */,
+				AA8633B62A4DC4F900AF11A2 /* BookingView.swift */,
+				AA8633B82A54410100AF11A2 /* MakeBookingView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -313,6 +330,7 @@
 			isa = PBXGroup;
 			children = (
 				AAF4C3532A39F9040082C142 /* SignupValidator.swift */,
+				AA8633BA2A5579D600AF11A2 /* SearchValidator.swift */,
 			);
 			path = Validators;
 			sourceTree = "<group>";
@@ -344,6 +362,7 @@
 				AA0B35612A3CF7B500BD9A08 /* TimelineView2.swift */,
 				AA0B356C2A40737A00BD9A08 /* UserImageView.swift */,
 				AA8633AF2A4C4EE100AF11A2 /* CachedImage */,
+				AA8633C12A55B7E200AF11A2 /* NotificationCountView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -404,6 +423,7 @@
 				AA5520332A449FD10089225B /* LoginModel.swift */,
 				AAF4C34B2A39D8C50082C142 /* SignupModel.swift */,
 				AAF4C3352A38AB220082C142 /* TeacherModel.swift */,
+				AA8633B42A4DC33D00AF11A2 /* BookingModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -447,6 +467,9 @@
 			dependencies = (
 			);
 			name = MusicApp;
+			packageProductDependencies = (
+				AA8633BD2A559DE800AF11A2 /* SocketIO */,
+			);
 			productName = MusicApp;
 			productReference = AAF4C31D2A38AA5B0082C142 /* MusicApp.app */;
 			productType = "com.apple.product-type.application";
@@ -498,6 +521,9 @@
 				Base,
 			);
 			mainGroup = AAF4C3142A38AA5B0082C142;
+			packageReferences = (
+				AA8633BC2A559DE800AF11A2 /* XCRemoteSwiftPackageReference "socket" */,
+			);
 			productRefGroup = AAF4C31E2A38AA5B0082C142 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -538,6 +564,7 @@
 				AAF4C33D2A38CA6F0082C142 /* Endpoint.swift in Sources */,
 				AAF4C3542A39F9040082C142 /* SignupValidator.swift in Sources */,
 				AA400A352A3B2A2E006C5448 /* MoreView.swift in Sources */,
+				AA8633B72A4DC4F900AF11A2 /* BookingView.swift in Sources */,
 				AA5520302A434CB30089225B /* ChatModel.swift in Sources */,
 				AA0B35762A40A1E200BD9A08 /* LocationManager.swift in Sources */,
 				AA86338F2A49C8F100AF11A2 /* StaticJSONMapper.swift in Sources */,
@@ -545,6 +572,7 @@
 				AA17C64E2A3CB501006F04FD /* SearchResultsVM.swift in Sources */,
 				AA0B35622A3CF7B500BD9A08 /* TimelineView2.swift in Sources */,
 				AA400A3C2A3B3173006C5448 /* ApiErrorModel.swift in Sources */,
+				AA8633B52A4DC33D00AF11A2 /* BookingModel.swift in Sources */,
 				AA0B356F2A4094A700BD9A08 /* Double.swift in Sources */,
 				AA0B356D2A40737A00BD9A08 /* UserImageView.swift in Sources */,
 				AAF4C34C2A39D8C50082C142 /* SignupModel.swift in Sources */,
@@ -556,8 +584,11 @@
 				AA0B35672A40646100BD9A08 /* ImageCache.swift in Sources */,
 				AA0B35692A4065E900BD9A08 /* CachedImageManager.swift in Sources */,
 				AA55202B2A41F7010089225B /* SearchResultsRowView.swift in Sources */,
+				AA8633BB2A5579D600AF11A2 /* SearchValidator.swift in Sources */,
+				AA8633B32A4DC31700AF11A2 /* BookingVM.swift in Sources */,
 				AA8633AC2A4C4BF600AF11A2 /* Networking.swift in Sources */,
 				AAF4C3362A38AB220082C142 /* TeacherModel.swift in Sources */,
+				AA8633B92A54410100AF11A2 /* MakeBookingView.swift in Sources */,
 				AA400A3E2A3B3260006C5448 /* SignInView.swift in Sources */,
 				AA17C6492A3CA0D2006F04FD /* Date.swift in Sources */,
 				AA5520272A41B6A40089225B /* SearchView.swift in Sources */,
@@ -571,6 +602,7 @@
 				AAE4ED1B2A3BAFED00ED630C /* HeadingView.swift in Sources */,
 				AA17C64C2A3CB3F5006F04FD /* SearchResultsView.swift in Sources */,
 				AA55203D2A45D3E00089225B /* AllChatsVM.swift in Sources */,
+				AA8633C22A55B7E200AF11A2 /* NotificationCountView.swift in Sources */,
 				AA8633AE2A4C4C1A00AF11A2 /* ViewState.swift in Sources */,
 				AAF4C3212A38AA5B0082C142 /* MusicApp.swift in Sources */,
 				AA5520392A45D2FB0089225B /* AllChatsView.swift in Sources */,
@@ -740,6 +772,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MusicApp/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Treble;
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "This app requires your location";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app requires your location";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -772,6 +805,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MusicApp/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Treble;
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "This app requires your location";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app requires your location";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -862,6 +896,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		AA8633BC2A559DE800AF11A2 /* XCRemoteSwiftPackageReference "socket" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/socketio/socket.io-client-swift";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		AA8633BD2A559DE800AF11A2 /* SocketIO */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AA8633BC2A559DE800AF11A2 /* XCRemoteSwiftPackageReference "socket" */;
+			productName = SocketIO;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = AAF4C3152A38AA5B0082C142 /* Project object */;
 }

@@ -9,7 +9,7 @@ import Foundation
 
 
 // MARK: - Welcome
-struct TeacherDetails: Codable, Equatable {
+struct Teacher: Codable, Equatable {
     
     let userID, teacherID: Int
     let firstName, lastName, tagline, bio: String

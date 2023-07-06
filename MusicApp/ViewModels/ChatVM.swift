@@ -14,7 +14,7 @@ struct NewMessage: Codable {
 
 class ChatVM: ObservableObject {
     
-    @Published var chat: Chat? = nil
+    @Published var chat: ChatDetails? = nil
     @Published var newMessage = NewMessage()
     
     @Published var state: SubmissionState?
@@ -26,7 +26,7 @@ class ChatVM: ObservableObject {
         do {
             state = .submitting
             
-            let decodedResponse = try await NetworkingManager.shared.request(.chat(id: teacherId, token: token), type: Chat.self)
+            let decodedResponse = try await NetworkingManager.shared.request(.chat(id: teacherId, token: token), type: ChatDetails.self)
             self.chat = decodedResponse
             
             state = .successful
