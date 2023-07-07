@@ -90,7 +90,7 @@ struct BookingView: View {
             
             ForEach(vm.searchedDates, id: \.self) { day in
                 VStack {
-                    Text(day.dayOfWeek() ?? "")
+                    Text(day.asDayOfWeekString() ?? "")
                         .font(.subheadline)
                     Text(day.asShortDateString())
                         .font(.caption)

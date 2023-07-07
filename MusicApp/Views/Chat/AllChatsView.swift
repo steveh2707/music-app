@@ -11,7 +11,6 @@ struct AllChatsView: View {
     
     @EnvironmentObject var global: Global
     @StateObject var vm = AllChatsVM()
-    @State var hasAppeared = false
     @State var searchText = ""
     
     var body: some View {
@@ -54,6 +53,11 @@ struct AllChatsView: View {
         .task {
             await vm.getChats(token: global.token)
         }
+        .onChange(of: global.unreadMessages, perform: { newValue in
+            Task {
+                await vm.getChats(token: global.token)
+            }
+        })
         .overlay {
             if vm.state == .submitting {
                 ProgressView()

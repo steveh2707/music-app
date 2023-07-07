@@ -101,6 +101,7 @@ struct ChatView: View {
         //        }
         .task {
             await vm.searchForChat(teacherId: teacherId, token: global.token)
+//            await global.fetchUnreadMessages()
         }
         .overlay {
             if vm.state == .submitting {

@@ -43,13 +43,13 @@ struct NewBooking: Codable {
         case priceFinal = "price_final"
     }
     
-    func getEndTime(startTime: String) -> String {
-        let startTimeInt = Int(startTime.prefix(2)) ?? 0
-        let endTimeInt = startTimeInt + 1
-        let endTimeString = String(endTimeInt) + ":00"
-        
-        return endTimeString
-    }
+//    func getEndTime(startTime: String) -> String {
+//        let startTimeInt = Int(startTime.prefix(2)) ?? 0
+//        let endTimeInt = startTimeInt + 1
+//        let endTimeString = String(endTimeInt) + ":00"
+//        
+//        return endTimeString
+//    }
 }
 
 
@@ -68,11 +68,11 @@ struct TeacherAvailability: Codable, Equatable {
 struct Availability: Codable, Identifiable, Equatable {
     var id: UUID { UUID() }
     let date: String
-    let slots, bookings: [Booking]
+    let slots, bookings: [ExistingBooking]
 }
 
 // MARK: - Booking
-struct Booking: Codable, Equatable {
+struct ExistingBooking: Codable, Equatable {
     let startTime, endTime: String
 
     enum CodingKeys: String, CodingKey {

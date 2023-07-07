@@ -62,6 +62,9 @@
 		AA8633BB2A5579D600AF11A2 /* SearchValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8633BA2A5579D600AF11A2 /* SearchValidator.swift */; };
 		AA8633BE2A559DE800AF11A2 /* SocketIO in Frameworks */ = {isa = PBXBuildFile; productRef = AA8633BD2A559DE800AF11A2 /* SocketIO */; };
 		AA8633C22A55B7E200AF11A2 /* NotificationCountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8633C12A55B7E200AF11A2 /* NotificationCountView.swift */; };
+		AA8633D02A58007400AF11A2 /* UserBookingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8633CF2A58007400AF11A2 /* UserBookingsView.swift */; };
+		AA8633D22A58008300AF11A2 /* UserBookingsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8633D12A58008300AF11A2 /* UserBookingsVM.swift */; };
+		AA8633D52A58009D00AF11A2 /* UserBookingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8633D42A58009D00AF11A2 /* UserBookingsModel.swift */; };
 		AAE4ED1B2A3BAFED00ED630C /* HeadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE4ED1A2A3BAFED00ED630C /* HeadingView.swift */; };
 		AAE4ED1D2A3BB50B00ED630C /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE4ED1C2A3BB50B00ED630C /* Color.swift */; };
 		AAF4C3212A38AA5B0082C142 /* MusicApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF4C3202A38AA5B0082C142 /* MusicApp.swift */; };
@@ -143,6 +146,9 @@
 		AA8633B82A54410100AF11A2 /* MakeBookingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeBookingView.swift; sourceTree = "<group>"; };
 		AA8633BA2A5579D600AF11A2 /* SearchValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchValidator.swift; sourceTree = "<group>"; };
 		AA8633C12A55B7E200AF11A2 /* NotificationCountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCountView.swift; sourceTree = "<group>"; };
+		AA8633CF2A58007400AF11A2 /* UserBookingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserBookingsView.swift; sourceTree = "<group>"; };
+		AA8633D12A58008300AF11A2 /* UserBookingsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserBookingsVM.swift; sourceTree = "<group>"; };
+		AA8633D42A58009D00AF11A2 /* UserBookingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserBookingsModel.swift; sourceTree = "<group>"; };
 		AAE4ED1A2A3BAFED00ED630C /* HeadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadingView.swift; sourceTree = "<group>"; };
 		AAE4ED1C2A3BB50B00ED630C /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		AAF4C31D2A38AA5B0082C142 /* MusicApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -366,6 +372,7 @@
 			children = (
 				AA8633B62A4DC4F900AF11A2 /* BookingView.swift */,
 				AA8633B82A54410100AF11A2 /* MakeBookingView.swift */,
+				AA8633CF2A58007400AF11A2 /* UserBookingsView.swift */,
 			);
 			path = Book;
 			sourceTree = "<group>";
@@ -402,6 +409,7 @@
 			isa = PBXGroup;
 			children = (
 				AA8633B22A4DC31700AF11A2 /* BookingVM.swift */,
+				AA8633D12A58008300AF11A2 /* UserBookingsVM.swift */,
 			);
 			path = Book;
 			sourceTree = "<group>";
@@ -438,6 +446,7 @@
 			isa = PBXGroup;
 			children = (
 				AA8633B42A4DC33D00AF11A2 /* BookingModel.swift */,
+				AA8633D42A58009D00AF11A2 /* UserBookingsModel.swift */,
 			);
 			path = Book;
 			sourceTree = "<group>";
@@ -656,10 +665,12 @@
 				AA0B35652A40628F00BD9A08 /* ImageRetriever.swift in Sources */,
 				AAF4C33D2A38CA6F0082C142 /* Endpoint.swift in Sources */,
 				AAF4C3542A39F9040082C142 /* SignupValidator.swift in Sources */,
+				AA8633D52A58009D00AF11A2 /* UserBookingsModel.swift in Sources */,
 				AA400A352A3B2A2E006C5448 /* MoreView.swift in Sources */,
 				AA8633B72A4DC4F900AF11A2 /* BookingView.swift in Sources */,
 				AA5520302A434CB30089225B /* ChatModel.swift in Sources */,
 				AA0B35762A40A1E200BD9A08 /* LocationManager.swift in Sources */,
+				AA8633D22A58008300AF11A2 /* UserBookingsVM.swift in Sources */,
 				AA86338F2A49C8F100AF11A2 /* StaticJSONMapper.swift in Sources */,
 				AA0B35822A41A0B900BD9A08 /* SearchVM.swift in Sources */,
 				AA17C64E2A3CB501006F04FD /* SearchResultsVM.swift in Sources */,
@@ -687,6 +698,7 @@
 				AA5520272A41B6A40089225B /* SearchView.swift in Sources */,
 				AA55201F2A41A2BB0089225B /* LocationFinderView.swift in Sources */,
 				AA5520292A41C5F30089225B /* SearchModels.swift in Sources */,
+				AA8633D02A58007400AF11A2 /* UserBookingsView.swift in Sources */,
 				AAE4ED1D2A3BB50B00ED630C /* Color.swift in Sources */,
 				AA55203B2A45D3650089225B /* AllChatsModel.swift in Sources */,
 				AA5520322A434CCA0089225B /* ChatVM.swift in Sources */,

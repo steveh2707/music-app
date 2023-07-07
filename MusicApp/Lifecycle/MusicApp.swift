@@ -35,6 +35,15 @@ struct MusicApp: App {
                         .tag(2)
                 }
                 
+                if global.isValidated {
+                    UserBookingsView()
+                        .tabItem {
+                            Image(systemName: "calendar")
+                            Text("Bookings")
+                        }
+                        .tag(4)
+                }
+                
                 MoreView()
                     .tabItem {
                         Image(systemName: "ellipsis")
@@ -46,7 +55,11 @@ struct MusicApp: App {
 
             }
             .environmentObject(global)
-            
+//            .task {
+//                if global.isValidated {
+//                    await global.fetchUnreadMessages()
+//                }
+//            }
             .onAppear {
 #if DEBUG
                 UserDefaults.standard.set(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")

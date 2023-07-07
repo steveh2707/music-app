@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import Dispatch
 
 struct UnreadResponse: Codable {
     let unreadMessages: Int
@@ -28,6 +29,7 @@ class Global: ObservableObject {
     @Published var selectedInstrument: Instrument? = nil
     @Published var selectedGrade: Grade? = nil
     
+    private var stopFetching = false
     
     
     func logout() {
@@ -39,7 +41,7 @@ class Global: ObservableObject {
         self.isValidated = true
         self.token = token
         Task {
-            await fetchUnreadMessages(token: token)
+            await fetchUnreadMessages()
         }
     }
     
@@ -51,13 +53,24 @@ class Global: ObservableObject {
 
     
     @MainActor
-    func fetchUnreadMessages(token: String) async {
+    func fetchUnreadMessages() async {
+
         do {
             let decodedResponse = try await NetworkingManager.shared.request(.allUnreadChats(token: token), type: UnreadResponse.self)
             self.unreadMessages = decodedResponse.unreadMessages
-        } catch {
 
+
+            // Schedule the next execution of the function after 10 seconds
+            try await Task.sleep(nanoseconds: 60 * 1_000_000_000) // Sleep for 10 seconds
+
+        } catch {
+            print(error)
         }
+
+        if isValidated {
+            await fetchUnreadMessages()
+        }
+
     }
-    
+  
 }

@@ -19,6 +19,7 @@ enum EndPoint {
     case allUnreadChats(token: String?)
     case teacherAvailability(token: String?, id: Int, date: String)
     case makeBooking(token: String, submissionData: Data?)
+    case allBookings(token: String?)
 
     // Use this for any items that need appended to request
     var methodType: MethodType {
@@ -32,7 +33,8 @@ enum EndPoint {
                         
         case .allChats(let token),
                 .allUnreadChats(let token),
-                .teacherAvailability(let token, _, _):
+                .teacherAvailability(let token, _, _),
+                .allBookings(let token):
             return .GET(token: token)
             
         case .newUser(let data),
@@ -75,6 +77,8 @@ enum EndPoint {
             return "/booking/availability/\(id)"
         case .makeBooking:
             return "/booking"
+        case .allBookings:
+            return "/booking/user_bookings"
         }
     }
     
