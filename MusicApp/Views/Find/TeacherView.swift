@@ -85,7 +85,7 @@ struct TeacherView: View {
             }
         }
         .overlay {
-            if vm.state == .submitting {
+            if vm.viewState == .fetching {
                 ProgressView()
             }
         }
@@ -99,7 +99,7 @@ struct TeacherView: View {
         } label: {
             Image(systemName: "arrow.clockwise")
         }
-        .disabled(vm.state == .submitting)
+        .disabled(vm.viewState == .fetching)
     }
     
     private var headingSection: some View {
@@ -137,21 +137,7 @@ struct TeacherView: View {
                     .padding(.vertical, 5)
                 
                 ForEach(teacher.instrumentsTaught) { instrument in
-                    HStack(alignment: .center) {
-                        Image(systemName: instrument.sfSymbol)
-                            .frame(width: 30)
-                        Text(instrument.instrumentName)
-                            .frame(width: 80)
-                        Text(instrument.gradeName)
-                            .foregroundColor(Color.theme.primaryTextInverse)
-                            .font(.footnote)
-                            .padding(.horizontal, 8)
-                            .padding(.vertical, 2)
-                            .background(
-                                Capsule()
-                                    .fill(Color.theme.accent)
-                            )
-                    }
+                    InstrumentGradeView(sfSymbol: instrument.sfSymbol, instrumentName: instrument.instrumentName, gradeName: instrument.gradeName, showGradeFrom: false, fixedLength: true)
                 }
             }
         }
@@ -324,6 +310,7 @@ struct TeacherView: View {
 struct TeacherView_Previews: PreviewProvider {
     static var previews: some View {
         TeacherView(teacherId: 1)
+            .environmentObject(dev.globalVM)
     }
 }
 

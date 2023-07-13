@@ -139,7 +139,19 @@ final class NetworkingManager: NetworkingManagerImpl {
             request.addValue("application/json", forHTTPHeaderField: "content-type")
             request.httpBody = data
             if let token { request.setValue(token, forHTTPHeaderField: "authorization") }
+            
+        case .PUT(token: let token, data: let data):
+            request.httpMethod = "PUT"
+            if let token { request.setValue(token, forHTTPHeaderField: "authorization") }
+            request.addValue("application/json", forHTTPHeaderField: "content-type")
+            request.httpBody = data
+            
+        case .POSTImg(let data):
+            request.httpMethod = "POST"
+            request.addValue("application/x-www-form-urlencoded", forHTTPHeaderField: "content-type")
+            request.httpBody = data
         }
+        
         return request
     }
 }

@@ -10,26 +10,30 @@ import Foundation
 class AllChatsVM: ObservableObject {
     
     @Published var chats: [ChatGeneral] = []
-    @Published var state: SubmissionState?
+    
+    @Published var viewState: ViewState?
     @Published var hasError = false
     @Published var error: NetworkingManager.NetworkingError?
     
     
     @MainActor
     func getChats(token: String?) async {
+        
+        viewState = .fetching
+        defer { viewState = .finished }
        
         do {
-            state = .submitting
             
             let decodedResponse = try await NetworkingManager.shared.request(.allChats(token: token), type: AllChatsResponse.self)
             self.chats = decodedResponse.results
-            
-            state = .successful
-            
+                        
         } catch {
-            self.hasError = true
-            self.state = .unsuccessful
             
+            if let errorCode = (error as NSError?)?.code, errorCode == NSURLErrorCancelled {
+                return
+            }
+            
+            self.hasError = true
             if let networkingError = error as? NetworkingManager.NetworkingError {
                 self.error = networkingError
             } else {
@@ -38,27 +42,6 @@ class AllChatsVM: ObservableObject {
         }
     }
     
-    
-    func getChatExtras(token: String?, chat: ChatGeneral) async {
-       
-        do {
-            state = .submitting
-            
-            let decodedResponse = try await NetworkingManager.shared.request(.allChats(token: token), type: AllChatsResponse.self)
-            self.chats = decodedResponse.results
-            
-            state = .successful
-            
-        } catch {
-            self.hasError = true
-            self.state = .unsuccessful
-            
-            if let networkingError = error as? NetworkingManager.NetworkingError {
-                self.error = networkingError
-            } else {
-                self.error = .custom(error: error)
-            }
-        }
-    }
+
     
 }

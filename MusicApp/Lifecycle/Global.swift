@@ -24,7 +24,9 @@ class Global: ObservableObject {
     
     @Published var isValidated = false
     @Published var token: String = ""
+    @Published var userDetails: UserDetails? = nil
     @Published var unreadMessages: Int = 0
+    
     
     @Published var selectedInstrument: Instrument? = nil
     @Published var selectedGrade: Grade? = nil
@@ -35,22 +37,21 @@ class Global: ObservableObject {
     func logout() {
         self.isValidated = false
         self.token = ""
+        self.userDetails = nil
     }
     
-    func login(token: String) {
+    func login(signInResponse: SignInResponse) {
         self.isValidated = true
-        self.token = token
+        self.token = signInResponse.token
+        self.userDetails = signInResponse.details
         Task {
             await fetchUnreadMessages()
         }
     }
     
-    func test(token: String) -> Global {
-        self.isValidated = true
-        self.token = token
-        return self
-    }
 
+
+    
     
     @MainActor
     func fetchUnreadMessages() async {
@@ -59,10 +60,13 @@ class Global: ObservableObject {
             let decodedResponse = try await NetworkingManager.shared.request(.allUnreadChats(token: token), type: UnreadResponse.self)
             self.unreadMessages = decodedResponse.unreadMessages
 
-
-            // Schedule the next execution of the function after 10 seconds
-            try await Task.sleep(nanoseconds: 60 * 1_000_000_000) // Sleep for 10 seconds
-
+        } catch {
+            print(error)
+        }
+        
+        do {
+            // Schedule the next execution of the function after 30 seconds
+            try await Task.sleep(nanoseconds: 30 * 1_000_000_000)
         } catch {
             print(error)
         }
@@ -71,6 +75,16 @@ class Global: ObservableObject {
             await fetchUnreadMessages()
         }
 
+    }
+    
+    
+    
+    func test(token: String) -> Global {
+        self.isValidated = true
+        self.token = token
+        
+        
+        return self
     }
   
 }

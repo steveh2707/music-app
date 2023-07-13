@@ -15,7 +15,7 @@ class TeacherVM: ObservableObject {
     @Published var mapRegion = MKCoordinateRegion.defaultRegion()
     @Published var locations = [Location]()
     
-    @Published var state: SubmissionState?
+    @Published var viewState: ViewState?
     @Published var hasError = false
     @Published var error: NetworkingManager.NetworkingError?
     
@@ -29,24 +29,27 @@ class TeacherVM: ObservableObject {
     @MainActor
     func getTeacherDetails(teacherId: Int) async {
         
+        viewState = .fetching
+        defer { viewState = .finished }
+        
         do {
-            state = .submitting
-            
+
             self.teacher = try await networkingManager.request(session: .shared,
                                                                       .teacher(id: teacherId),
                                                                       type: Teacher.self)
-            
             if let teacher {
                 self.mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: teacher.locationLatitude, longitude: teacher.locationLongitude), span: MKCoordinateSpan(latitudeDelta: 0.03, longitudeDelta: 0.03))
                 let newLocation = Location(id: UUID(), latitude: teacher.locationLatitude, longitude: teacher.locationLongitude)
                 locations.append(newLocation)
             }
             
-            state = .successful
         } catch {
-            self.hasError = true
-            self.state = .unsuccessful
+           
+            if let errorCode = (error as NSError?)?.code, errorCode == NSURLErrorCancelled {
+                return
+            }
             
+            self.hasError = true
             if let networkingError = error as? NetworkingManager.NetworkingError {
                 self.error = networkingError
             } else {

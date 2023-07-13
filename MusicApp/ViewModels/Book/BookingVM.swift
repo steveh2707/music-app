@@ -21,7 +21,8 @@ class BookingVM: ObservableObject {
     @Published var selectedTime: String?
     @Published var priceFinal = 50.00
     
-    @Published var state: SubmissionState?
+    @Published var viewState: ViewState?
+    @Published var submissionState: SubmissionState?
     @Published var hasError = false
     @Published var error: NetworkingManager.NetworkingError?
     
@@ -36,10 +37,10 @@ class BookingVM: ObservableObject {
     
     @MainActor
     func getTeacherAvailability(token: String?) async {
+        viewState = .fetching
+        defer { viewState = .finished }
         
         do {
-            state = .submitting
-            
             self.teacherAvailability = try await networkingManager.request(session: .shared,
                                                                            .teacherAvailability(token: token ?? "", id: teacher.teacherID, date: searchDate.asSqlDateString()),
                                                                            type: TeacherAvailability.self)
@@ -48,13 +49,13 @@ class BookingVM: ObservableObject {
                              searchDate.addOrSubtractDays(day: 1)
             ]
             
-            state = .successful
         } catch {
+            
+            if let errorCode = (error as NSError?)?.code, errorCode == NSURLErrorCancelled {
+                return
+            }
+            
             self.hasError = true
-            self.state = .unsuccessful
-            
-            print(error)
-            
             if let networkingError = error as? NetworkingManager.NetworkingError {
                 self.error = networkingError
             } else {
@@ -68,8 +69,7 @@ class BookingVM: ObservableObject {
     func makeBooking(token: String?, instrumentId: Int, gradeId: Int) async {
         
         do {
-//            try validator.validate(newUser)
-            state = .submitting
+            submissionState = .submitting
             
             let newBooking = NewBooking(teacherId: teacher.teacherID, date: selectedDate, startTime: selectedTime, endTime: selectedTime, instrumentId: instrumentId, gradeId: gradeId, priceFinal: priceFinal)
             
@@ -79,12 +79,12 @@ class BookingVM: ObservableObject {
             try await networkingManager.request(session: .shared,
                                                 .makeBooking(token: token ?? "", submissionData: data))
             
-            state = .successful
+            submissionState = .successful
             showSuccessMessage = true
         } catch {
             
             self.hasError = true
-            self.state = .unsuccessful
+            self.submissionState = .unsuccessful
             
             if let networkingError = error as? NetworkingManager.NetworkingError {
                 self.error = networkingError

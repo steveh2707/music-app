@@ -14,7 +14,7 @@ struct SignInView: View {
     @State private var navigationIsActive = false
     
     var body: some View {
-        //        NavigationStack {
+                NavigationStack {
         ZStack {
             Form {
                 HeadingView()
@@ -24,12 +24,10 @@ struct SignInView: View {
                     email
                     password
                 }
-                .disabled(vm.state == .submitting)
+                .disabled(vm.submissionState == .submitting)
                 
                 submit
                     .listRowBackground(Color.clear)
-                
-                
                 
                 Section {
                     NavigationLink {
@@ -48,20 +46,50 @@ struct SignInView: View {
                         Text("Privacy Policy")
                     }
                 }
+                
+                
+#if DEBUG
+                Section {
+                    if global.isValidated {
+                        Button("Log out") {
+                            global.logout()
+                        }
+                    } else {
+                        Button("Use saved details") {
+                            vm.credentials.email = "shanna@gmail.com"
+                            vm.credentials.password = "password"
+                            Task {
+                                await vm.login()
+                            }
+                        }
+                    }
+                }
+#endif
+                
+                
             }
             .textInputAutocapitalization(.never)
             
             
-            if vm.state == .submitting {
+            if vm.submissionState == .submitting {
                 ProgressView()
             }
         }
-        //        }
+                }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                NavigationLink {
+                    SignupView()
+                } label: {
+                    Text("Sign Up")
+                }
+            }
+        }
         .navigationTitle("Sign In")
         .alert(isPresented: $vm.hasError, error: vm.error) { }
-        .onChange(of: vm.state) { newState in
-            if newState == .successful {
-                global.login(token: vm.loginResponse?.token ?? "")
+        .onChange(of: vm.submissionState) { newState in
+            if newState == .successful, let signInResponse = vm.signInResponse {
+                global.login(signInResponse: signInResponse)
             }
         }
     }

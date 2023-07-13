@@ -65,6 +65,12 @@
 		AA8633D02A58007400AF11A2 /* UserBookingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8633CF2A58007400AF11A2 /* UserBookingsView.swift */; };
 		AA8633D22A58008300AF11A2 /* UserBookingsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8633D12A58008300AF11A2 /* UserBookingsVM.swift */; };
 		AA8633D52A58009D00AF11A2 /* UserBookingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8633D42A58009D00AF11A2 /* UserBookingsModel.swift */; };
+		AA8633D72A5C2A6900AF11A2 /* Filters.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8633D62A5C2A6900AF11A2 /* Filters.swift */; };
+		AA8633D92A5C3D2500AF11A2 /* InstrumentGradeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8633D82A5C3D2500AF11A2 /* InstrumentGradeView.swift */; };
+		AA8633DB2A5C5D3D00AF11A2 /* CancelUserBookingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8633DA2A5C5D3D00AF11A2 /* CancelUserBookingView.swift */; };
+		AA8633DD2A5D709700AF11A2 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8633DC2A5D709700AF11A2 /* ProfileView.swift */; };
+		AA8633E12A5DA24100AF11A2 /* LoginResponseTestData.json in Resources */ = {isa = PBXBuildFile; fileRef = AA8633E02A5DA24100AF11A2 /* LoginResponseTestData.json */; };
+		AA8633E32A5EB29E00AF11A2 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8633E22A5EB29E00AF11A2 /* ImagePicker.swift */; };
 		AAE4ED1B2A3BAFED00ED630C /* HeadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE4ED1A2A3BAFED00ED630C /* HeadingView.swift */; };
 		AAE4ED1D2A3BB50B00ED630C /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE4ED1C2A3BB50B00ED630C /* Color.swift */; };
 		AAF4C3212A38AA5B0082C142 /* MusicApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF4C3202A38AA5B0082C142 /* MusicApp.swift */; };
@@ -149,6 +155,12 @@
 		AA8633CF2A58007400AF11A2 /* UserBookingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserBookingsView.swift; sourceTree = "<group>"; };
 		AA8633D12A58008300AF11A2 /* UserBookingsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserBookingsVM.swift; sourceTree = "<group>"; };
 		AA8633D42A58009D00AF11A2 /* UserBookingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserBookingsModel.swift; sourceTree = "<group>"; };
+		AA8633D62A5C2A6900AF11A2 /* Filters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filters.swift; sourceTree = "<group>"; };
+		AA8633D82A5C3D2500AF11A2 /* InstrumentGradeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstrumentGradeView.swift; sourceTree = "<group>"; };
+		AA8633DA2A5C5D3D00AF11A2 /* CancelUserBookingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelUserBookingView.swift; sourceTree = "<group>"; };
+		AA8633DC2A5D709700AF11A2 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		AA8633E02A5DA24100AF11A2 /* LoginResponseTestData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = LoginResponseTestData.json; sourceTree = "<group>"; };
+		AA8633E22A5EB29E00AF11A2 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		AAE4ED1A2A3BAFED00ED630C /* HeadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadingView.swift; sourceTree = "<group>"; };
 		AAE4ED1C2A3BB50B00ED630C /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		AAF4C31D2A38AA5B0082C142 /* MusicApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -245,6 +257,7 @@
 		AA8633892A49C4C600AF11A2 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				AA8633E02A5DA24100AF11A2 /* LoginResponseTestData.json */,
 				AA86339A2A4AD6EB00AF11A2 /* TeacherSearchStaticTestData.json */,
 				AA86338C2A49C54F00AF11A2 /* TeacherStaticTestData.json */,
 			);
@@ -333,6 +346,7 @@
 			children = (
 				AA8633AB2A4C4BF600AF11A2 /* Error&State.swift */,
 				AAF4C33C2A38CA6F0082C142 /* Endpoint.swift */,
+				AA8633D62A5C2A6900AF11A2 /* Filters.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -373,6 +387,7 @@
 				AA8633B62A4DC4F900AF11A2 /* BookingView.swift */,
 				AA8633B82A54410100AF11A2 /* MakeBookingView.swift */,
 				AA8633CF2A58007400AF11A2 /* UserBookingsView.swift */,
+				AA8633DA2A5C5D3D00AF11A2 /* CancelUserBookingView.swift */,
 			);
 			path = Book;
 			sourceTree = "<group>";
@@ -383,6 +398,8 @@
 				AA400A342A3B2A2E006C5448 /* MoreView.swift */,
 				AA400A3D2A3B3260006C5448 /* SignInView.swift */,
 				AAF4C3502A39D9E80082C142 /* SignupView.swift */,
+				AA8633DC2A5D709700AF11A2 /* ProfileView.swift */,
+				AA8633E22A5EB29E00AF11A2 /* ImagePicker.swift */,
 			);
 			path = More;
 			sourceTree = "<group>";
@@ -470,6 +487,7 @@
 				AA0B356C2A40737A00BD9A08 /* UserImageView.swift */,
 				AA8633AF2A4C4EE100AF11A2 /* CachedImage */,
 				AA8633C12A55B7E200AF11A2 /* NotificationCountView.swift */,
+				AA8633D82A5C3D2500AF11A2 /* InstrumentGradeView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -643,6 +661,7 @@
 			files = (
 				AA86339B2A4AD6EB00AF11A2 /* TeacherSearchStaticTestData.json in Resources */,
 				AA86338D2A49C54F00AF11A2 /* TeacherStaticTestData.json in Resources */,
+				AA8633E12A5DA24100AF11A2 /* LoginResponseTestData.json in Resources */,
 				AAF4C3282A38AA5C0082C142 /* Preview Assets.xcassets in Resources */,
 				AAF4C3252A38AA5C0082C142 /* Assets.xcassets in Resources */,
 			);
@@ -678,6 +697,7 @@
 				AA400A3C2A3B3173006C5448 /* ApiErrorModel.swift in Sources */,
 				AA8633B52A4DC33D00AF11A2 /* BookingModel.swift in Sources */,
 				AA0B356F2A4094A700BD9A08 /* Double.swift in Sources */,
+				AA8633DD2A5D709700AF11A2 /* ProfileView.swift in Sources */,
 				AA0B356D2A40737A00BD9A08 /* UserImageView.swift in Sources */,
 				AAF4C34C2A39D8C50082C142 /* SignupModel.swift in Sources */,
 				AA55202E2A4326750089225B /* ChatView.swift in Sources */,
@@ -691,6 +711,7 @@
 				AA8633BB2A5579D600AF11A2 /* SearchValidator.swift in Sources */,
 				AA8633B32A4DC31700AF11A2 /* BookingVM.swift in Sources */,
 				AA8633AC2A4C4BF600AF11A2 /* Error&State.swift in Sources */,
+				AA8633DB2A5C5D3D00AF11A2 /* CancelUserBookingView.swift in Sources */,
 				AAF4C3362A38AB220082C142 /* TeacherModel.swift in Sources */,
 				AA8633B92A54410100AF11A2 /* MakeBookingView.swift in Sources */,
 				AA400A3E2A3B3260006C5448 /* SignInView.swift in Sources */,
@@ -703,6 +724,7 @@
 				AA55203B2A45D3650089225B /* AllChatsModel.swift in Sources */,
 				AA5520322A434CCA0089225B /* ChatVM.swift in Sources */,
 				AAF4C3332A38AAE20082C142 /* TeacherVM.swift in Sources */,
+				AA8633D92A5C3D2500AF11A2 /* InstrumentGradeView.swift in Sources */,
 				AAF4C3392A38B6770082C142 /* NetworkingManager.swift in Sources */,
 				AAE4ED1B2A3BAFED00ED630C /* HeadingView.swift in Sources */,
 				AA17C64C2A3CB3F5006F04FD /* SearchResultsView.swift in Sources */,
@@ -711,10 +733,12 @@
 				AAF4C3212A38AA5B0082C142 /* MusicApp.swift in Sources */,
 				AA5520392A45D2FB0089225B /* AllChatsView.swift in Sources */,
 				AA17C6502A3CB51E006F04FD /* SearchResultsModel.swift in Sources */,
+				AA8633D72A5C2A6900AF11A2 /* Filters.swift in Sources */,
 				AA5520342A449FD10089225B /* SignInModel.swift in Sources */,
 				AAF4C3312A38AACF0082C142 /* TeacherView.swift in Sources */,
 				AA400A3A2A3B2FBF006C5448 /* SignInVM.swift in Sources */,
 				AA400A402A3B370D006C5448 /* Global.swift in Sources */,
+				AA8633E32A5EB29E00AF11A2 /* ImagePicker.swift in Sources */,
 				AA0B356B2A40664800BD9A08 /* CachedImage.swift in Sources */,
 				AA0B35782A40A4D400BD9A08 /* MKCoordinateRegion.swift in Sources */,
 			);

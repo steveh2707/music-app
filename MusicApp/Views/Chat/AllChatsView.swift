@@ -13,10 +13,18 @@ struct AllChatsView: View {
     @StateObject var vm = AllChatsVM()
     @State var searchText = ""
     
+    var filteredChats: [ChatGeneral] {
+        if searchText == "" {
+            return vm.chats
+        } else {
+            return vm.chats.filter { $0.fullName.lowercased().contains(searchText.lowercased()) }
+        }
+    }
+    
     var body: some View {
         NavigationStack {
             List {
-                ForEach(vm.chats) { chat in
+                ForEach(filteredChats) { chat in
                     
                     ZStack {
                         
@@ -27,7 +35,7 @@ struct AllChatsView: View {
                                 UserImageView(imageURL: chat.profileImageURL ?? "")
                                     .frame(width: 80, height: 80)
                                 VStack(alignment: .leading, spacing: 5) {
-                                    Text("\(chat.firstName) \(chat.lastName)")
+                                    Text(chat.fullName)
                                         .font(.title3)
                                     Text(chat.mostRecentMessage ?? "")
                                         .font(.callout)
@@ -48,10 +56,16 @@ struct AllChatsView: View {
                 }
             }
             .navigationTitle("Chats")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    refresh
+                }
+            }
         }
         .searchable(text: $searchText)
         .task {
             await vm.getChats(token: global.token)
+//            await global.fetchUnreadMessages()
         }
         .onChange(of: global.unreadMessages, perform: { newValue in
             Task {
@@ -59,14 +73,24 @@ struct AllChatsView: View {
             }
         })
         .overlay {
-            if vm.state == .submitting {
+            if vm.viewState == .fetching{
                 ProgressView()
             }
         }
         .alert(isPresented: $vm.hasError, error: vm.error) { }
-//        .sheet(isPresented: $showIndividualChat) {
-//            ChatView(teacherId: 1)
-//        }
+
+    }
+    
+    
+    var refresh: some View {
+        Button {
+            Task {
+                await vm.getChats(token: global.token)
+            }
+        } label: {
+            Image(systemName: "arrow.clockwise")
+        }
+        .disabled(vm.viewState == .fetching)
     }
 }
 

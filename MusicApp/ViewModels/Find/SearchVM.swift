@@ -17,25 +17,29 @@ class SearchVM: NSObject, ObservableObject {
     @Published var grades: [Grade] = []
     @Published var searchCrtieria: SearchCriteria?
     
-    @Published var state: SubmissionState?
+    @Published var viewState: ViewState?
+    @Published var submissionState: SubmissionState?
     @Published var hasError = false
     @Published var error: NetworkingManager.NetworkingError?
     
     @MainActor
+    /// Makes an API call to get instrument and grades available and assigns them to local variables
     func getConfiguration() async {
+        
+        viewState = .fetching
+        defer { viewState = .finished }
        
         do {
-            state = .submitting
-
             let decodedResponse = try await NetworkingManager.shared.request(.configuration, type: Configuration.self)
             self.instruments = decodedResponse.instruments
             self.grades = decodedResponse.grades
+
+        } catch {            
+            if let errorCode = (error as NSError?)?.code, errorCode == NSURLErrorCancelled {
+                return
+            }
             
-            state = .successful
-        } catch {
             self.hasError = true
-            self.state = .unsuccessful
-            
             if let networkingError = error as? NetworkingManager.NetworkingError {
                 self.error = networkingError
             } else {
@@ -45,6 +49,8 @@ class SearchVM: NSObject, ObservableObject {
     }
     
     @MainActor
+    /// Finds the latitude and longitude of the location selected by the user and assigns to the local selectedLocation variable
+    /// - Parameter address: The selected location
     func getPlace(from address: AddressResult) {
         let request = MKLocalSearch.Request()
         let title = address.title
@@ -68,6 +74,8 @@ class SearchVM: NSObject, ObservableObject {
         return completer
     }()
     
+    /// Adds text to the local search completer to allow locations to be found
+    /// - Parameter searchableText: This is the searchable text
     func searchAddress(_ searchableText: String) {
         guard searchableText.isEmpty == false else { return }
         localSearchCompleter.queryFragment = searchableText
@@ -76,6 +84,10 @@ class SearchVM: NSObject, ObservableObject {
 }
 
 extension SearchVM: MKLocalSearchCompleterDelegate {
+    
+    
+    /// Adds title and subtitle of SeachCompleter results to an AddressResult Type then adds to the local results array.
+    /// - Parameter completer: The MKLocalSearchCompleter
     func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
         Task { @MainActor in
             results = completer.results.map {
@@ -84,6 +96,11 @@ extension SearchVM: MKLocalSearchCompleterDelegate {
         }
     }
     
+    
+    /// Handle errors from the MKLocalSearchCompleter
+    /// - Parameters:
+    ///   - completer: The SearchCompleter
+    ///   - error: Any error
     func completer(_ completer: MKLocalSearchCompleter, didFailWithError error: Error) {
         print(error)
     }

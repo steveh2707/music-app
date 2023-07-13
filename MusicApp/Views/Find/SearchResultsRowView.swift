@@ -16,17 +16,24 @@ struct SearchResultsRowView: View {
             VStack(alignment: .leading) {
                 
                 HStack(alignment: .center) {
-                    Image(systemName: teacher.instrumentSfSymbol)
-                    Text(teacher.instrumentName)
-                    Text("Grade 1 \(Image(systemName: "arrowshape.forward")) \(teacher.gradeTeachable)")
-                        .foregroundColor(Color.theme.primaryTextInverse)
-                        .font(.footnote)
-                        .padding(.horizontal, 8)
-                        .padding(.vertical, 2)
-                        .background(
-                            Capsule()
-                                .fill(Color.theme.accent)
-                        )
+                    
+//                    InstrumentGradeView(sfSymbol: teacher.instrumentSfSymbol, instrumentName: teacher.instrumentName, gradeName: teacher.gradeTeachable, showGradeFrom: true, fixedLength: false)
+
+//                    InstrumentGradeView(sfSymbol: teacher.instrumentSfSymbol, instrumentName: teacher.instrumentName, gradeName: teacher.gradeTeachable)
+                    
+                    InstrumentGradeView(sfSymbol: teacher.instrumentSfSymbol, instrumentName: teacher.instrumentName, gradeName: teacher.gradeTeachable, showGradeFrom: true, fixedLength: false)
+                    
+//                    Image(systemName: teacher.instrumentSfSymbol)
+//                    Text(teacher.instrumentName)
+//                    Text("Grade 1 \(Image(systemName: "arrowshape.forward")) \(teacher.gradeTeachable)")
+//                        .foregroundColor(Color.theme.primaryTextInverse)
+//                        .font(.footnote)
+//                        .padding(.horizontal, 8)
+//                        .padding(.vertical, 2)
+//                        .background(
+//                            Capsule()
+//                                .fill(Color.theme.accent)
+//                        )
                     Spacer()
                     Image(systemName: "star.fill")
                         .font(.subheadline)

@@ -28,7 +28,7 @@ struct LocationFinderView: View {
                 
             }
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
+                ToolbarItem(placement: .navigationBarTrailing) {
                     closeButton
                 }
             }

@@ -20,14 +20,7 @@ struct SignupView: View {
                     .listRowBackground(Color.clear)
 
                 Section {
-                    HStack {
-                        firstName
-                        lastName
-                    }
-                    email
-                    password
-                    dob
-                    tos
+                    userDetailsSection
                     
                 } footer: {
                     if case .validation(let err) = vm.error, let errorDesc = err.errorDescription {
@@ -44,27 +37,10 @@ struct SignupView: View {
                 submit
                     .listRowBackground(Color.clear)
 
-                Section {
-                    NavigationLink {
-                        SignInView()
-                    } label: {
-                        Text("Already have an account?")
-                    }
-                    NavigationLink {
-                        EmptyView()
-                    } label: {
-                        Text("Terms of Service")
-                    }
-                    NavigationLink {
-                        EmptyView()
-                    } label: {
-                        Text("Privacy Policy")
-                    }
-                }
+                linksSection
                 
             }
             .navigationTitle("Sign Up")
-//            .toolbar(.hidden, for: .tabBar)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     NavigationLink {
@@ -75,69 +51,58 @@ struct SignupView: View {
                 }
             }
             .autocorrectionDisabled()
-            .disabled(vm.state == .submitting)
-            .onChange(of: vm.state) { newState in
-                if newState == .successful {
-                    global.isValidated = true
-                }
+            .disabled(vm.submissionState == .submitting)
+        }
+        .onChange(of: vm.submissionState) { newState in
+            if newState == .successful, let signInResponse = vm.signInResponse {
+                global.login(signInResponse: signInResponse)
             }
-            .alert(isPresented: $vm.hasError, error: vm.error) { }
-            .onChange(of: vm.state) { newState in
-                if newState == .successful {
-                    global.login(token: vm.loginResponse?.token ?? "")
-                }
-            }
-            .overlay {
-                if vm.state == .submitting {
-                    ProgressView()
-                }
+        }
+        .alert(isPresented: $vm.hasError, error: vm.error) { }
+        .overlay {
+            if vm.submissionState == .submitting {
+                ProgressView()
             }
         }
     }
     
-    private var firstName: some View {
-        TextField("First Name", text: $vm.newUser.firstName)
-            .focused($focusedField, equals: .firstName)
-    }
-    
-    private var lastName: some View {
-        TextField("Last Name", text: $vm.newUser.lastName)
-            .focused($focusedField, equals: .lastName)
-    }
-    
-    private var email: some View {
-        TextField("Email Address", text: $vm.newUser.email)
-            .keyboardType(.emailAddress)
-            .focused($focusedField, equals: .email)
-    }
-    
-    private var password: some View {
-        SecureField("Password", text: $vm.newUser.password)
-            .focused($focusedField, equals: .password)
-    }
-    
-    private var dob: some View {
-        DatePicker(selection: $vm.newUser.inputDob, in: ...Date.now, displayedComponents: .date) {
-            Text("Date of Birth")
-        }
-        .datePickerStyle(.automatic)
-        .focused($focusedField, equals: .dob)
-    }
-    
-    private var tos: some View {
-        Button {
-            vm.newUser.tos.toggle()
-        } label: {
-            HStack{
-                Image(systemName: vm.newUser.tos ? "checkmark.square": "square")
-                    .font(.title3)
-                    .padding(.trailing, 5)
-                
-                Text("I agree to the Terms of Servce and acknowledge the Privacy Statement")
+
+    private var userDetailsSection: some View {
+        Group {
+            HStack {
+                TextField("First Name", text: $vm.newUser.firstName)
+                    .focused($focusedField, equals: .firstName)
+                TextField("Last Name", text: $vm.newUser.lastName)
+                    .focused($focusedField, equals: .lastName)
             }
-            .padding(.vertical, 2.0)
-            .foregroundColor(.primary)
-            .font(.footnote)
+            
+            TextField("Email Address", text: $vm.newUser.email)
+                .keyboardType(.emailAddress)
+                .focused($focusedField, equals: .email)
+            
+            SecureField("Password", text: $vm.newUser.password)
+                .focused($focusedField, equals: .password)
+            
+            DatePicker(selection: $vm.newUser.inputDob, in: ...Date.now, displayedComponents: .date) {
+                Text("Date of Birth")
+            }
+            .datePickerStyle(.automatic)
+            .focused($focusedField, equals: .dob)
+            
+            Button {
+                vm.newUser.tos.toggle()
+            } label: {
+                HStack{
+                    Image(systemName: vm.newUser.tos ? "checkmark.square": "square")
+                        .font(.title3)
+                        .padding(.trailing, 5)
+                    
+                    Text("I agree to the Terms of Servce and acknowledge the Privacy Statement")
+                }
+                .padding(.vertical, 2.0)
+                .foregroundColor(.primary)
+                .font(.footnote)
+            }
         }
     }
     
@@ -160,6 +125,26 @@ struct SignupView: View {
         .clipShape(Capsule())
     }
     
+    
+    private var linksSection: some View {
+        Section {
+            NavigationLink {
+                SignInView()
+            } label: {
+                Text("Already have an account?")
+            }
+            NavigationLink {
+                EmptyView()
+            } label: {
+                Text("Terms of Service")
+            }
+            NavigationLink {
+                EmptyView()
+            } label: {
+                Text("Privacy Policy")
+            }
+        }
+    }
     
 }
 

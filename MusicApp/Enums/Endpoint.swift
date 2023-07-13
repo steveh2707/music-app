@@ -14,12 +14,14 @@ enum EndPoint {
     case login(submissionData: Data?)
     case search(submissionData: Data?, page: Int)
     case chat(token: String?, id: Int)
-    case newMessage(token: String, chatId: Int, submissionData: Data?)
+    case newMessage(token: String?, chatId: Int, submissionData: Data?)
     case allChats(token: String?)
     case allUnreadChats(token: String?)
     case teacherAvailability(token: String?, id: Int, date: String)
-    case makeBooking(token: String, submissionData: Data?)
+    case makeBooking(token: String?, submissionData: Data?)
     case allBookings(token: String?)
+    case cancelBooking(token: String?, bookingId: Int, submissionData: Data?)
+    case image(submissionData: Data?)
 
     // Use this for any items that need appended to request
     var methodType: MethodType {
@@ -46,6 +48,11 @@ enum EndPoint {
                 .makeBooking(let token, let data):
             return .POST(token: token, data: data)
             
+        case .cancelBooking(let token, _, let submissionData):
+            return .PUT(token: token, data: submissionData)
+            
+        case .image(submissionData: let submissionData):
+            return .POST(data: submissionData)
         }
         
     }
@@ -67,7 +74,7 @@ enum EndPoint {
             return "/teacher/search"
         case .chat(_, let id):
             return "/chat/conversation/\(id)"
-        case .newMessage(let chatId, _, _):
+        case .newMessage(_, let chatId, _):
             return "/chat/message/\(chatId)"
         case .allChats:
             return "/chat/conversation"
@@ -79,6 +86,10 @@ enum EndPoint {
             return "/booking"
         case .allBookings:
             return "/booking/user_bookings"
+        case .cancelBooking(_, let bookingId, _):
+            return "/booking/cancel/\(bookingId)"
+        case .image:
+            return "/image"
         }
     }
     
@@ -118,4 +129,6 @@ enum EndPoint {
 enum MethodType : Equatable {
     case GET(token: String? = nil)
     case POST(token: String? = nil, data: Data? = nil)
+    case PUT(token: String? = nil, data: Data? = nil)
+    case POSTImg(data: Data? = nil)
 }

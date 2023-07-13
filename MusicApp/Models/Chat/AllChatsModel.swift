@@ -34,4 +34,5 @@ struct ChatGeneral: Codable, Identifiable {
     }
     
     var id: Int {chatID}
+    var fullName: String {firstName + " " + lastName}
 }

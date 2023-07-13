@@ -104,7 +104,7 @@ struct ChatView: View {
 //            await global.fetchUnreadMessages()
         }
         .overlay {
-            if vm.state == .submitting {
+            if vm.viewState == .fetching {
                 ProgressView()
             }
         }

@@ -56,7 +56,7 @@ struct BookingView: View {
         .sheet(isPresented: $showMakeBookingView) {
             MakeBookingView(vm: vm)
         }
-        
+        .animation(.linear, value: vm.teacherAvailability)
         
     }
     
@@ -105,7 +105,7 @@ struct BookingView: View {
             }
             
         }
-        .animation(.easeInOut, value: vm.teacherAvailability)
+//        .animation(.linear, value: vm.teacherAvailability)
         .padding(.bottom, 20)
     }
     
@@ -162,7 +162,7 @@ struct BookingView: View {
                 }
             }
         }
-        .animation(.easeOut, value: vm.teacherAvailability)
+//        .animation(.easeOut, value: vm.teacherAvailability)
     }
     
 }

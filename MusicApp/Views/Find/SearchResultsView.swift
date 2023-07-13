@@ -47,7 +47,7 @@ struct SearchResultsView: View {
                 }
             }
             .overlay {
-                if vm.viewState == .loading {
+                if vm.viewState == .fetching {
                     ProgressView()
                 }
             }

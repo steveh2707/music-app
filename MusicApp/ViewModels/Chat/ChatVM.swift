@@ -17,23 +17,28 @@ class ChatVM: ObservableObject {
     @Published var chat: ChatDetails? = nil
     @Published var newMessage = NewMessage()
     
-    @Published var state: SubmissionState?
+    @Published var viewState: ViewState?
+    @Published var submissionState: SubmissionState?
     @Published var hasError = false
     @Published var error: NetworkingManager.NetworkingError?
     
     @MainActor
     func searchForChat(teacherId: Int, token: String?) async {
+        
+        viewState = .fetching
+        defer { viewState = .finished }
+        
         do {
-            state = .submitting
-            
             let decodedResponse = try await NetworkingManager.shared.request(.chat(token: token, id: teacherId), type: ChatDetails.self)
             self.chat = decodedResponse
             
-            state = .successful
         } catch {
-            self.hasError = true
-            self.state = .unsuccessful
             
+            if let errorCode = (error as NSError?)?.code, errorCode == NSURLErrorCancelled {
+                return
+            }
+            
+            self.hasError = true
             if let networkingError = error as? NetworkingManager.NetworkingError {
                 self.error = networkingError
             } else {
@@ -45,7 +50,7 @@ class ChatVM: ObservableObject {
     @MainActor
     func sendChatMessage(teacherId: Int, token: String?) async {
         do {
-//            state = .submitting
+            submissionState = .submitting
             
             let encoder = JSONEncoder()
             encoder.keyEncodingStrategy = .convertToSnakeCase
@@ -54,10 +59,11 @@ class ChatVM: ObservableObject {
             let decodedResponse = try await NetworkingManager.shared.request(.newMessage(token: token ?? "", chatId: chat?.chatID ?? 0, submissionData: data), type: Message.self)
             self.chat?.messages.append(decodedResponse)
             
-//            state = .successful
+            submissionState = .successful
+            
         } catch {
             self.hasError = true
-//            self.state = .unsuccessful
+            self.submissionState = .unsuccessful
             
             if let networkingError = error as? NetworkingManager.NetworkingError {
                 self.error = networkingError

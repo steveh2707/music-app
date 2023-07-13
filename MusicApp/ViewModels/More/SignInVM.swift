@@ -7,18 +7,15 @@
 
 import Foundation
 
-struct Credentials: Codable {
-    var email: String = ""
-    var password: String = ""
-}
+
 
 class SignInVM: ObservableObject {
     
     @Published var credentials = Credentials()
-    @Published var state: SubmissionState?
+    @Published var submissionState: SubmissionState?
     @Published var hasError = false
     @Published var error: NetworkingManager.NetworkingError?
-    @Published var loginResponse: SignInResponse? = nil
+    @Published var signInResponse: SignInResponse? = nil
     
     var loginDisabled: Bool {
         credentials.email.isEmpty || credentials.password.isEmpty
@@ -28,18 +25,18 @@ class SignInVM: ObservableObject {
     func login() async {
         
         do {
-            state = .submitting
+            submissionState = .submitting
             
             let encoder = JSONEncoder()
             encoder.keyEncodingStrategy = .convertToSnakeCase
             let data = try encoder.encode(credentials)
             
-            self.loginResponse = try await NetworkingManager.shared.request(.login(submissionData: data), type: SignInResponse.self)
+            self.signInResponse = try await NetworkingManager.shared.request(.login(submissionData: data), type: SignInResponse.self)
 
-            state = .successful
+            submissionState = .successful
         } catch {
             self.hasError = true
-            self.state = .unsuccessful
+            self.submissionState = .unsuccessful
             
             if let networkingError = error as? NetworkingManager.NetworkingError {
                 self.error = networkingError

@@ -33,7 +33,7 @@ class SearchResultsVM: ObservableObject {
     @MainActor
     func fetchTeachers() async {
         reset()
-        viewState = .loading
+        viewState = .fetching
         defer { viewState = .finished }
         
         do {
@@ -47,8 +47,12 @@ class SearchResultsVM: ObservableObject {
             self.totalResults = decodedResponse.numResults
             self.teachers = decodedResponse.results
         } catch {
-            self.hasError = true
+           
+            if let errorCode = (error as NSError?)?.code, errorCode == NSURLErrorCancelled {
+                return
+            }
             
+            self.hasError = true
             if let networkingError = error as? NetworkingManager.NetworkingError {
                 self.error = networkingError
             } else {

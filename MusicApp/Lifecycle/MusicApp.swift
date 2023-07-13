@@ -44,6 +44,7 @@ struct MusicApp: App {
                         .tag(4)
                 }
                 
+                
                 MoreView()
                     .tabItem {
                         Image(systemName: "ellipsis")
@@ -51,7 +52,7 @@ struct MusicApp: App {
                         
                     }
                     .tag(3)
-                
+            
 
             }
             .environmentObject(global)

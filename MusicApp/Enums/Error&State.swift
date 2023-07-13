@@ -8,13 +8,12 @@
 import Foundation
 
 enum SubmissionState {
-    case unsuccessful
-    case successful
     case submitting
+    case successful
+    case unsuccessful
 }
 
 enum ViewState {
-    case loading
     case fetching
     case finished
 }

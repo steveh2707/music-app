@@ -21,7 +21,7 @@ struct MakeBookingView: View {
                     HStack {
                         Image(systemName: "person")
                             .frame(width: 25)
-                        Text("John Smith")
+                        Text("\(vm.teacher.firstName) \(vm.teacher.lastName)")
                     }
                     HStack {
                         Image(systemName: "calendar")
@@ -93,7 +93,7 @@ struct MakeBookingView: View {
 
             }
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
+                ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
                         presentationMode.wrappedValue.dismiss()
                     }, label: {
@@ -122,6 +122,7 @@ struct MakeBookingView: View {
 //    
 //    static var previews: some View {
 //        MakeBookingView(vm: vm)
+//            .environmentObject(dev.globalVM)
 //    }
 //    
 //}

@@ -9,6 +9,8 @@ import SwiftUI
 
 struct SearchView: View {
     
+    // MARK: PROPERTIES
+    
     @EnvironmentObject var global: Global
     @StateObject var vm = SearchVM()
     @State private var hasAppeared = false
@@ -18,6 +20,7 @@ struct SearchView: View {
         global.selectedInstrument == nil || global.selectedGrade == nil
     }
     
+    // MARK: BODY
     
     var body: some View {
         NavigationView {
@@ -50,7 +53,7 @@ struct SearchView: View {
             }
             .navigationTitle("Search")
             .task {
-                if !hasAppeared {
+                if !hasAppeared || vm.instruments.isEmpty {
                     await vm.getConfiguration()
                     hasAppeared = true
                 }
@@ -59,6 +62,9 @@ struct SearchView: View {
         }
     }
     
+    // MARK: VARIABLES
+    
+    /// This is the instrument selector that holds a horizontal ScrollView
     private var instrumentSelector: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 5) {
@@ -192,6 +198,8 @@ struct SearchView: View {
     }
     
 }
+
+// MARK: PREVIEW
 
 struct SearchView_Previews: PreviewProvider {
     static var previews: some View {

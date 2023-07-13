@@ -10,10 +10,11 @@ import Foundation
 final class SignUpVM: ObservableObject {
     
     @Published var newUser = NewStudent()
-    @Published var state: SubmissionState?
+    @Published var signInResponse: SignInResponse? = nil
+    
+    @Published var submissionState: SubmissionState?
     @Published var hasError = false
     @Published var error: FormError?
-    @Published var loginResponse: SignInResponse? = nil
     
     private let validator = SignupValidator()
     
@@ -24,19 +25,19 @@ final class SignUpVM: ObservableObject {
         do {
             try validator.validate(newUser)
             
-            state = .submitting
+            submissionState = .submitting
             
             let encoder = JSONEncoder()
             let data = try encoder.encode(newUser)
             
-            self.loginResponse = try await NetworkingManager.shared.request(.newUser(submissionData: data), type: SignInResponse.self)
+            self.signInResponse = try await NetworkingManager.shared.request(.newUser(submissionData: data), type: SignInResponse.self)
             
-            state = .successful
+            submissionState = .successful
             
         } catch {
             
             self.hasError = true
-            self.state = .unsuccessful
+            self.submissionState = .unsuccessful
             
             switch error {
             case is NetworkingManager.NetworkingError:
