@@ -53,6 +53,13 @@ struct MusicApp: App {
                     }
                     .tag(3)
             
+//                SignInSignUpView()
+//                    .tabItem {
+//                        Image(systemName: "ellipsis")
+//                        Text("Sign In")
+//                        
+//                    }
+//                    .tag(5)
 
             }
             .environmentObject(global)

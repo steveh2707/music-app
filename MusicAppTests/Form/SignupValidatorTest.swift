@@ -41,7 +41,7 @@ final class SignupValidatorTest: XCTestCase {
     }
     
     func test_with_empty_first_name_error_thrown() {
-        let newStudent = NewStudent(lastName: "Test", email: "Test@test", password: "test", dob: dobValid, tos: true)
+        let newStudent = NewStudent(lastName: "Test", email: "Test@test", password: "test", inputDob: dobValid, tos: true)
         XCTAssertThrowsError(try validator.validate(newStudent), "Error for empty first name should be thrown")
         
         do {
@@ -57,7 +57,7 @@ final class SignupValidatorTest: XCTestCase {
     }
     
     func test_with_empty_last_name_error_thrown() {
-        let newStudent = NewStudent(firstName: "Test", email: "Test@test", password: "test", dob: dobValid, tos: true)
+        let newStudent = NewStudent(firstName: "Test", email: "Test@test", password: "test", inputDob: dobValid, tos: true)
         XCTAssertThrowsError(try validator.validate(newStudent), "Error for empty last name should be thrown")
         
         do {
@@ -73,7 +73,7 @@ final class SignupValidatorTest: XCTestCase {
     }
     
     func test_with_empty_email_error_thrown() {
-        let newStudent = NewStudent(firstName: "Test", lastName: "Test", password: "test", dob: dobValid, tos: true)
+        let newStudent = NewStudent(firstName: "Test", lastName: "Test", password: "test", inputDob: dobValid, tos: true)
         XCTAssertThrowsError(try validator.validate(newStudent), "Error for empty email should be thrown")
         
         do {
@@ -89,7 +89,7 @@ final class SignupValidatorTest: XCTestCase {
     }
     
     func test_with_empty_password_error_thrown() {
-        let newStudent = NewStudent(firstName: "Test", lastName: "Test", email: "test@test.com", dob: dobValid, tos: true)
+        let newStudent = NewStudent(firstName: "Test", lastName: "Test", email: "test@test.com", inputDob: dobValid, tos: true)
         XCTAssertThrowsError(try validator.validate(newStudent), "Error for empty password should be thrown")
         
         do {
@@ -105,7 +105,7 @@ final class SignupValidatorTest: XCTestCase {
     }
     
     func test_with_invalid_dob_error_thrown() {
-        let newStudent = NewStudent(firstName: "Test", lastName: "Test", email: "test@test.com", password: "test", dob: dobInvalid, tos: true)
+        let newStudent = NewStudent(firstName: "Test", lastName: "Test", email: "test@test.com", password: "test", inputDob: dobInvalid, tos: true)
         XCTAssertThrowsError(try validator.validate(newStudent), "Error for invalid dob should be thrown")
         
         do {
@@ -121,7 +121,7 @@ final class SignupValidatorTest: XCTestCase {
     }
     
     func test_with_invalid_tos_error_thrown() {
-        let newStudent = NewStudent(firstName: "Test", lastName: "Test", email: "test@test.com", password: "test", dob: dobValid)
+        let newStudent = NewStudent(firstName: "Test", lastName: "Test", email: "test@test.com", password: "test", inputDob: dobValid)
         XCTAssertThrowsError(try validator.validate(newStudent), "Error for invalid tos should be thrown")
         
         do {
@@ -138,7 +138,7 @@ final class SignupValidatorTest: XCTestCase {
     
     
     func test_with_valid_person_error_not_thrown() {
-        let newStudent = NewStudent(firstName: "test", lastName: "test", email: "email", password: "test", dob: dobValid, tos: true)
+        let newStudent = NewStudent(firstName: "test", lastName: "test", email: "email", password: "test", inputDob: dobValid, tos: true)
         
         do {
             _ = try validator.validate(newStudent)

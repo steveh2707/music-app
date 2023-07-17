@@ -10,9 +10,11 @@ import SwiftUI
 struct ImagePicker: View {
     
     @Environment(\.presentationMode) var presentationMode
+    @EnvironmentObject var global: Global
+    @StateObject var vm = ImagePickerVM()
     @State private var avatarItem: PhotosPickerItem?
-    @State private var data: Data?
-    
+
+
     var currentImageUrl: String?
     
     var body: some View {
@@ -20,52 +22,26 @@ struct ImagePicker: View {
             VStack {
                 PhotosPicker("Select Photo", selection: $avatarItem, matching: .images)
                     .padding(.bottom, 20)
-                if let data = data, let uiImage = UIImage(data: data) {
+                if let uiImage = vm.uiImage {
                     Image(uiImage: uiImage)
                         .resizable()
                         .scaledToFill()
                         .frame(width: 200, height: 200)
                         .clipShape(Circle())
                         .allowsHitTesting(false)
-                    .padding(.top, 20)
+                        .padding(.top, 20)
                 } else if let currentImageUrl {
                     UserImageView(imageURL: currentImageUrl)
                         .frame(width: 200, height: 200)
                         .allowsHitTesting(false)
                 }
                 Spacer()
-                
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-//                    if data != nil {
-                    if let data = data {
-                        Button("SAVE") {
-                            // TODO: Post photo to backend
-                            
-                            Task {
-                                do {
-
-                                    let imageString: String = data.base64EncodedString()
-                                    
-                                    let paramStr: String = "image=\(imageString)"
-                                    let paramData: Data = paramStr.data(using: .utf8) ?? Data()
-                                    
-                                    try await NetworkingManager.shared.request(.image(submissionData: paramData))
-
-
-                                } catch {
-
-                                }
-                            }
-                        
-                            }
-                            
-
-                            
-                        }
-//                    }
-
+                    if vm.uiImage != nil {
+                        saveButton
+                    }
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     closeButton
@@ -78,13 +54,15 @@ struct ImagePicker: View {
                 switch result {
                 case .success(let data):
                     if let data = data {
-                        self.data = data
+                        DispatchQueue.main.async {
+                            vm.uiImage = UIImage(data: data)
+                        }
                     } else {
-                        self.data = nil
+                        vm.uiImage = nil
                         print("Data is nil")
                     }
                 case .failure(let failure):
-                    self.data = nil
+                    vm.uiImage = nil
                     print("\(failure)")
                 }
             }
@@ -99,10 +77,20 @@ struct ImagePicker: View {
                 .font(.headline)
         })
     }
-}
-
-struct ImagePicker_Previews: PreviewProvider {
-    static var previews: some View {
-        ImagePicker()
+    
+    private var saveButton: some View {
+        Button("SAVE") {
+            Task {
+                await vm.uploadImage(token: global.token)
+                global.updateImageUrl(url: vm.imageUrl)
+            }
+            presentationMode.wrappedValue.dismiss()
+        }
     }
 }
+
+//struct ImagePicker_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ImagePicker()
+//    }
+//}

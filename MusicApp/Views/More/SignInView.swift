@@ -14,68 +14,68 @@ struct SignInView: View {
     @State private var navigationIsActive = false
     
     var body: some View {
-                NavigationStack {
-        ZStack {
-            Form {
-                HeadingView()
-                    .listRowBackground(Color.clear)
-                
-                Section {
-                    email
-                    password
-                }
-                .disabled(vm.submissionState == .submitting)
-                
-                submit
-                    .listRowBackground(Color.clear)
-                
-                Section {
-                    NavigationLink {
-                        SignupView()
-                    } label: {
-                        Text("New to Treble?")
+        NavigationStack {
+            ZStack {
+                Form {
+                    HeadingView()
+                        .listRowBackground(Color.clear)
+                    
+                    Section {
+                        email
+                        password
                     }
-                    NavigationLink {
-                        EmptyView()
-                    } label: {
-                        Text("Terms of Service")
-                    }
-                    NavigationLink {
-                        EmptyView()
-                    } label: {
-                        Text("Privacy Policy")
-                    }
-                }
-                
-                
-#if DEBUG
-                Section {
-                    if global.isValidated {
-                        Button("Log out") {
-                            global.logout()
+                    .disabled(vm.submissionState == .submitting)
+                    
+                    submit
+                        .listRowBackground(Color.clear)
+                    
+                    Section {
+                        NavigationLink {
+                            SignupView()
+                        } label: {
+                            Text("New to Treble?")
                         }
-                    } else {
-                        Button("Use saved details") {
-                            vm.credentials.email = "shanna@gmail.com"
-                            vm.credentials.password = "password"
-                            Task {
-                                await vm.login()
+                        NavigationLink {
+                            EmptyView()
+                        } label: {
+                            Text("Terms of Service")
+                        }
+                        NavigationLink {
+                            EmptyView()
+                        } label: {
+                            Text("Privacy Policy")
+                        }
+                    }
+                    
+                    
+#if DEBUG
+                    Section {
+                        if global.isValidated {
+                            Button("Log out") {
+                                global.logout()
+                            }
+                        } else {
+                            Button("Use saved details") {
+                                vm.credentials.email = "shanna@gmail.com"
+                                vm.credentials.password = "password"
+                                Task {
+                                    await vm.login()
+                                }
                             }
                         }
                     }
-                }
 #endif
+                    
+                    
+                }
+                .textInputAutocapitalization(.never)
                 
                 
-            }
-            .textInputAutocapitalization(.never)
-            
-            
-            if vm.submissionState == .submitting {
-                ProgressView()
+                if vm.submissionState == .submitting {
+                    ProgressView()
+                }
             }
         }
-                }
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 NavigationLink {

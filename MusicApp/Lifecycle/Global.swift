@@ -6,8 +6,6 @@
 //
 
 import Foundation
-import SwiftUI
-import Dispatch
 
 struct UnreadResponse: Codable {
     let unreadMessages: Int
@@ -26,7 +24,6 @@ class Global: ObservableObject {
     @Published var token: String = ""
     @Published var userDetails: UserDetails? = nil
     @Published var unreadMessages: Int = 0
-    
     
     @Published var selectedInstrument: Instrument? = nil
     @Published var selectedGrade: Grade? = nil
@@ -49,10 +46,13 @@ class Global: ObservableObject {
         }
     }
     
+    func updateImageUrl(url: String?) {
+        if let url {
+            self.userDetails?.profileImageURL = url
+            print(url)
+        }
+    }
 
-
-    
-    
     @MainActor
     func fetchUnreadMessages() async {
 
@@ -66,13 +66,13 @@ class Global: ObservableObject {
         
         do {
             // Schedule the next execution of the function after 30 seconds
-            try await Task.sleep(nanoseconds: 30 * 1_000_000_000)
+            try await Task.sleep(nanoseconds: 60 * 1_000_000_000)
         } catch {
             print(error)
         }
 
         if isValidated {
-            await fetchUnreadMessages()
+//            await fetchUnreadMessages()
         }
 
     }

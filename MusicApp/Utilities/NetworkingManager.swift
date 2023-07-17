@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+import SwiftUI
 
 protocol NetworkingManagerImpl {
     func request<T:Codable>(session: URLSession,
@@ -140,19 +140,48 @@ final class NetworkingManager: NetworkingManagerImpl {
             request.httpBody = data
             if let token { request.setValue(token, forHTTPHeaderField: "authorization") }
             
-        case .PUT(token: let token, data: let data):
+        case .PUT(let token, let data):
             request.httpMethod = "PUT"
             if let token { request.setValue(token, forHTTPHeaderField: "authorization") }
             request.addValue("application/json", forHTTPHeaderField: "content-type")
             request.httpBody = data
             
-        case .POSTImg(let data):
+        case .POSTImg(let token, let data):
             request.httpMethod = "POST"
-            request.addValue("application/x-www-form-urlencoded", forHTTPHeaderField: "content-type")
-            request.httpBody = data
+            if let token { request.setValue(token, forHTTPHeaderField: "authorization") }
+            
+            let boundary = "Boundary-\(UUID().uuidString)"
+            request.setValue("multipart/form-data; boundary="+boundary, forHTTPHeaderField:"Content-Type");
+            if let data = data { request.httpBody = multipartFormDataBody(boundary, data) }
         }
         
         return request
     }
+    
+    
+    private func multipartFormDataBody(_ boundary: String, _ imageData: Data) -> Data {
+        
+        let lineBreak = "\r\n"
+        let fromName = "test"
+        
+        var body = Data()
+        body.append("--\(boundary + lineBreak)")
+        body.append("Content-Disposition: form-data; name=\"fromName\"\(lineBreak + lineBreak)")
+        body.append("\(fromName + lineBreak)")
+        
+        
+        if let uuid = UUID().uuidString.components(separatedBy: "-").first {
+            body.append("--\(boundary + lineBreak)")
+            body.append("Content-Disposition: form-data; name=\"imageUploads\"; fileName=\"\(uuid).jpg\"\(lineBreak)")
+            body.append("Content-Type: image/jpeg\(lineBreak + lineBreak)")
+            body.append(imageData)
+            body.append(lineBreak)
+        }
+        
+        body.append("--\(boundary)--\(lineBreak)") // End multipart form
+        
+        return body
+    }
 }
+
 

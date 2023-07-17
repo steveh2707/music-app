@@ -6,8 +6,11 @@
 //
 
 import Foundation
+import SwiftUI
+
 
 enum EndPoint {
+
     case configuration
     case teacher(id: Int)
     case newUser(submissionData: Data?)
@@ -21,7 +24,7 @@ enum EndPoint {
     case makeBooking(token: String?, submissionData: Data?)
     case allBookings(token: String?)
     case cancelBooking(token: String?, bookingId: Int, submissionData: Data?)
-    case image(submissionData: Data?)
+    case image(token: String?, submissionData: Data?)
 
     // Use this for any items that need appended to request
     var methodType: MethodType {
@@ -51,13 +54,13 @@ enum EndPoint {
         case .cancelBooking(let token, _, let submissionData):
             return .PUT(token: token, data: submissionData)
             
-        case .image(submissionData: let submissionData):
-            return .POST(data: submissionData)
+        case .image(let token, let submissionData):
+            return .POSTImg(token: token, data: submissionData)
         }
         
     }
     
-    var host: String { "localhost" }
+//    var host: String { "localhost" }
     
     // Use this for any items that need included in the URL
     var path: String {
@@ -108,8 +111,12 @@ enum EndPoint {
     var url: URL? {
         var urlComponents = URLComponents()
         urlComponents.scheme = "http"
-        urlComponents.host = host
+        urlComponents.host = "192.168.1.159"
         urlComponents.port = 4000
+        
+//        urlComponents.scheme = "https"
+//        urlComponents.host = "frail-seal-snaps.cyclic.app"
+        
         urlComponents.path = path
         
         var requestQueryItems = [URLQueryItem]()
@@ -130,5 +137,5 @@ enum MethodType : Equatable {
     case GET(token: String? = nil)
     case POST(token: String? = nil, data: Data? = nil)
     case PUT(token: String? = nil, data: Data? = nil)
-    case POSTImg(data: Data? = nil)
+    case POSTImg(token: String? = nil, data: Data? = nil)
 }

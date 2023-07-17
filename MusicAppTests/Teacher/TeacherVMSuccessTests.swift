@@ -25,7 +25,7 @@ final class TeacherVMSuccessTests: XCTestCase {
     
     func test_with_successful_response_teacher_details_is_set() async throws {
         
-        XCTAssertEqual(vm.state, .none, "The view model shouldn't be loading any data")
+        XCTAssertEqual(vm.viewState, .none, "The view model shouldn't be loading any data")
         
         await vm.getTeacherDetails(teacherId: 1)
         XCTAssertNotNil(vm.teacher, "The teacher details should not be nil")
@@ -34,7 +34,7 @@ final class TeacherVMSuccessTests: XCTestCase {
         let teacherDetailsData = try StaticJSONMapper.decode(file: "TeacherStaticTestData", type: Teacher.self)
         XCTAssertEqual(vm.teacher, teacherDetailsData, "The response from our networking mock should match")
         
-        XCTAssertEqual(vm.state, .successful, "The view state should be successful")
+        XCTAssertEqual(vm.viewState, .finished, "The view state should be successful")
     }
     
 

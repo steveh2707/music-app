@@ -8,7 +8,6 @@
 import Foundation
 
 extension Date {
-    
 
     init(mySqlDateTimeString: String) {
         let formatter = DateFormatter()
@@ -80,4 +79,9 @@ extension Date {
         return dateFormatter.string(from: self).capitalized
     }
 
+}
+
+
+extension DateFormatter {
+    
 }

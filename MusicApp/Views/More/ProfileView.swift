@@ -14,26 +14,24 @@ struct ProfileView: View {
     @State var updateField = false
     @State var updateFieldTitle = ""
     @State var newValue = ""
+    @State var updatedView = 0
     
     @State private var showImagePickerView: Bool = false
     
     var body: some View {
         List {
-            if let user = global.userDetails {
-                
-                HStack {
-                    Text("Profile Image")
-                    Spacer()
-                    Button {
-                        showImagePickerView.toggle()
-                    } label: {
-                        UserImageView(imageURL: user.profileImageURL)
-                            .frame(width: 50, height: 50)
-                    }
-                    
+            
+            HStack {
+                Text("Profile Image")
+                Spacer()
+                Button {
+                    showImagePickerView.toggle()
+                } label: {
+                    UserImageView(imageURL: global.userDetails?.profileImageURL ?? "")
+                        .frame(width: 50, height: 50)
                 }
-                
-
+            }
+            if let user = global.userDetails {
                 
                 HStack {
                     Text("First Name")
@@ -50,25 +48,45 @@ struct ProfileView: View {
                 HStack {
                     Text("Last Name")
                     Spacer()
-                    Text(user.lastName)
+                    Button {
+                        updateField = true
+                        updateFieldTitle = "Last Name"
+                    } label: {
+                        Text(user.lastName)
+                    }
                 }
                 
                 HStack {
                     Text("Email")
                     Spacer()
-                    Text(user.email)
+                    Button {
+                        updateField = true
+                        updateFieldTitle = "Email"
+                    } label: {
+                        Text(user.email)
+                    }
                 }
                 
                 HStack {
                     Text("Date of Birth")
                     Spacer()
-                    Text(user.formattedDob.asMediumDateString())
+                    Button {
+                        updateField = true
+                        updateFieldTitle = "Dob"
+                    } label: {
+                        Text(user.formattedDob.asMediumDateString())
+                    }
                 }
                 
                 HStack {
                     Text("Password")
                     Spacer()
-                    Text("Update Password")
+                    Button {
+                        updateField = true
+                        updateFieldTitle = "Password"
+                    } label: {
+                        Text("Update")
+                    }
                 }
             }
             
@@ -79,9 +97,12 @@ struct ProfileView: View {
             
             TextField(updateFieldTitle, text: $newValue)
             Button("Save", action: {
+                newValue = ""
                 print("Updated")
             })
-            Button("Cancel", role: .cancel, action: {})
+            Button("Cancel", role: .cancel, action: {
+                newValue = ""
+            })
         }
         .sheet(isPresented: $showImagePickerView) {
             ImagePicker(currentImageUrl: global.userDetails?.profileImageURL)
