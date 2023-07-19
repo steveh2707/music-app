@@ -23,13 +23,24 @@ class Global: ObservableObject {
     @Published var isValidated = false
     @Published var token: String = ""
     @Published var userDetails: UserDetails? = nil
+    @Published var teacherDetails: TeacherDetails? = nil
     @Published var unreadMessages: Int = 0
     
     @Published var selectedInstrument: Instrument? = nil
     @Published var selectedGrade: Grade? = nil
     
-    private var stopFetching = false
     
+    func login(signInResponse: SignInResponse) {
+        self.isValidated = true
+        self.token = signInResponse.token
+        self.userDetails = signInResponse.userDetails
+        if let teacherDetails = signInResponse.teacherDetails {
+            self.teacherDetails = teacherDetails
+        }
+        Task {
+            await fetchUnreadMessages()
+        }
+    }
     
     func logout() {
         self.isValidated = false
@@ -37,29 +48,17 @@ class Global: ObservableObject {
         self.userDetails = nil
     }
     
-    func login(signInResponse: SignInResponse) {
-        self.isValidated = true
-        self.token = signInResponse.token
-        self.userDetails = signInResponse.details
-        Task {
-            await fetchUnreadMessages()
-        }
-    }
-    
     func updateImageUrl(url: String?) {
         if let url {
             self.userDetails?.profileImageURL = url
-            print(url)
         }
     }
 
     @MainActor
     func fetchUnreadMessages() async {
-
         do {
             let decodedResponse = try await NetworkingManager.shared.request(.allUnreadChats(token: token), type: UnreadResponse.self)
             self.unreadMessages = decodedResponse.unreadMessages
-
         } catch {
             print(error)
         }
@@ -77,13 +76,49 @@ class Global: ObservableObject {
 
     }
     
+    @Published var instruments: [Instrument] = []
+    @Published var grades: [Grade] = []
+    
+    @Published var viewState: ViewState?
+    @Published var submissionState: SubmissionState?
+    @Published var hasError = false
+    @Published var error: NetworkingManager.NetworkingError?
+    
+    
+    @MainActor
+    /// Makes an API call to get instrument and grades available and assigns them to local variables
+    func getConfiguration() async {
+        if self.viewState == .fetching { return }
+        
+        print("Getting config")
+        
+        viewState = .fetching
+        defer { viewState = .finished }
+       
+        do {
+            let decodedResponse = try await NetworkingManager.shared.request(.configuration, type: Configuration.self)
+            self.instruments = decodedResponse.instruments
+            self.grades = decodedResponse.grades
+
+        } catch {
+            if let errorCode = (error as NSError?)?.code, errorCode == NSURLErrorCancelled {
+                return
+            }
+            
+            self.hasError = true
+            if let networkingError = error as? NetworkingManager.NetworkingError {
+                self.error = networkingError
+            } else {
+                self.error = .custom(error: error)
+            }
+        }
+    }
+    
     
     
     func test(token: String) -> Global {
         self.isValidated = true
         self.token = token
-        
-        
         return self
     }
   

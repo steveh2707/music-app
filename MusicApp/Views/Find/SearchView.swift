@@ -13,7 +13,7 @@ struct SearchView: View {
     
     @EnvironmentObject var global: Global
     @StateObject var vm = SearchVM()
-    @State private var hasAppeared = false
+//    @State private var hasAppeared = false
     @State private var showLocationSearch: Bool = false
     
     var searchDisabled: Bool {
@@ -49,13 +49,17 @@ struct SearchView: View {
             }
             .padding(.horizontal)
             .sheet(isPresented: $showLocationSearch) {
-                LocationFinderView(vm: vm)
+                LocationFinderView(selectedLocation: $vm.selectedLocation)
             }
             .navigationTitle("Search")
             .task {
-                if !hasAppeared || vm.instruments.isEmpty {
-                    await vm.getConfiguration()
-                    hasAppeared = true
+//                if !hasAppeared || vm.instruments.isEmpty {
+//                    await vm.getConfiguration()
+//                    hasAppeared = true
+//                }
+                if global.instruments.isEmpty {
+                    await global.getConfiguration()
+//                    hasAppeared = true
                 }
             }
             
@@ -68,7 +72,7 @@ struct SearchView: View {
     private var instrumentSelector: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 5) {
-                ForEach(vm.instruments) { instrument in
+                ForEach(global.instruments) { instrument in
                     
                     Button {
                         if global.selectedInstrument == instrument {
@@ -126,7 +130,7 @@ struct SearchView: View {
     private var gradeSelector: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 5) {
-                ForEach(vm.grades) { grade in
+                ForEach(global.grades) { grade in
                     Button {
                         if global.selectedGrade == grade {
                             global.selectedGrade = nil
@@ -201,8 +205,8 @@ struct SearchView: View {
 
 // MARK: PREVIEW
 
-struct SearchView_Previews: PreviewProvider {
-    static var previews: some View {
-        SearchView()
-    }
-}
+//struct SearchView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        SearchView()
+//    }
+//}

@@ -129,12 +129,12 @@ struct SignInView: View {
         
     }
 }
-
-struct LoginView_Previews: PreviewProvider {
-    static var previews: some View {
-        SignInView()
-    }
-}
+//
+//struct LoginView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        SignInView()
+//    }
+//}
 
 
 extension SignInView {

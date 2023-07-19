@@ -74,6 +74,14 @@
 		AA8633E52A6151F400AF11A2 /* ImagePickerVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8633E42A6151F400AF11A2 /* ImagePickerVM.swift */; };
 		AA8633E72A61557200AF11A2 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8633E62A61557200AF11A2 /* Data.swift */; };
 		AA8633E92A616BD200AF11A2 /* SignInSignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8633E82A616BD200AF11A2 /* SignInSignUpView.swift */; };
+		AA8633EB2A65732600AF11A2 /* SignInSignUpVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8633EA2A65732600AF11A2 /* SignInSignUpVM.swift */; };
+		AA8633EE2A65790300AF11A2 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8633ED2A65790300AF11A2 /* SettingsView.swift */; };
+		AA8633F12A657CAE00AF11A2 /* EditTeacherDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8633F02A657CAE00AF11A2 /* EditTeacherDetails.swift */; };
+		AA8633F32A657E1400AF11A2 /* BecomeTeacherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8633F22A657E1400AF11A2 /* BecomeTeacherModel.swift */; };
+		AA8633F52A657E5500AF11A2 /* EditTeacherDetailsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8633F42A657E5500AF11A2 /* EditTeacherDetailsVM.swift */; };
+		AA8633F72A6581D800AF11A2 /* LocationFinderVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8633F62A6581D800AF11A2 /* LocationFinderVM.swift */; };
+		AA8633F92A66B18C00AF11A2 /* ProfileTeacherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8633F82A66B18C00AF11A2 /* ProfileTeacherView.swift */; };
+		AA8633FB2A66D04600AF11A2 /* ProfileViewVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8633FA2A66D04600AF11A2 /* ProfileViewVM.swift */; };
 		AAE4ED1B2A3BAFED00ED630C /* HeadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE4ED1A2A3BAFED00ED630C /* HeadingView.swift */; };
 		AAE4ED1D2A3BB50B00ED630C /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE4ED1C2A3BB50B00ED630C /* Color.swift */; };
 		AAF4C3212A38AA5B0082C142 /* MusicApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF4C3202A38AA5B0082C142 /* MusicApp.swift */; };
@@ -167,6 +175,14 @@
 		AA8633E42A6151F400AF11A2 /* ImagePickerVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerVM.swift; sourceTree = "<group>"; };
 		AA8633E62A61557200AF11A2 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		AA8633E82A616BD200AF11A2 /* SignInSignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInSignUpView.swift; sourceTree = "<group>"; };
+		AA8633EA2A65732600AF11A2 /* SignInSignUpVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInSignUpVM.swift; sourceTree = "<group>"; };
+		AA8633ED2A65790300AF11A2 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		AA8633F02A657CAE00AF11A2 /* EditTeacherDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTeacherDetails.swift; sourceTree = "<group>"; };
+		AA8633F22A657E1400AF11A2 /* BecomeTeacherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BecomeTeacherModel.swift; sourceTree = "<group>"; };
+		AA8633F42A657E5500AF11A2 /* EditTeacherDetailsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTeacherDetailsVM.swift; sourceTree = "<group>"; };
+		AA8633F62A6581D800AF11A2 /* LocationFinderVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationFinderVM.swift; sourceTree = "<group>"; };
+		AA8633F82A66B18C00AF11A2 /* ProfileTeacherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTeacherView.swift; sourceTree = "<group>"; };
+		AA8633FA2A66D04600AF11A2 /* ProfileViewVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewVM.swift; sourceTree = "<group>"; };
 		AAE4ED1A2A3BAFED00ED630C /* HeadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadingView.swift; sourceTree = "<group>"; };
 		AAE4ED1C2A3BB50B00ED630C /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		AAF4C31D2A38AA5B0082C142 /* MusicApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -402,12 +418,13 @@
 		AA8633C62A56FA2400AF11A2 /* More */ = {
 			isa = PBXGroup;
 			children = (
-				AA400A342A3B2A2E006C5448 /* MoreView.swift */,
-				AA400A3D2A3B3260006C5448 /* SignInView.swift */,
-				AAF4C3502A39D9E80082C142 /* SignupView.swift */,
+				AA8633EC2A65787500AF11A2 /* _ss */,
+				AA8633E82A616BD200AF11A2 /* SignInSignUpView.swift */,
 				AA8633DC2A5D709700AF11A2 /* ProfileView.swift */,
 				AA8633E22A5EB29E00AF11A2 /* ImagePicker.swift */,
-				AA8633E82A616BD200AF11A2 /* SignInSignUpView.swift */,
+				AA8633ED2A65790300AF11A2 /* SettingsView.swift */,
+				AA8633F02A657CAE00AF11A2 /* EditTeacherDetails.swift */,
+				AA8633F82A66B18C00AF11A2 /* ProfileTeacherView.swift */,
 			);
 			path = More;
 			sourceTree = "<group>";
@@ -415,9 +432,11 @@
 		AA8633C72A56FA3D00AF11A2 /* More */ = {
 			isa = PBXGroup;
 			children = (
-				AA400A392A3B2FBF006C5448 /* SignInVM.swift */,
-				AAF4C34E2A39D91E0082C142 /* SignUpVM.swift */,
+				AA8633EF2A657C6A00AF11A2 /* _ss */,
+				AA8633EA2A65732600AF11A2 /* SignInSignUpVM.swift */,
 				AA8633E42A6151F400AF11A2 /* ImagePickerVM.swift */,
+				AA8633F42A657E5500AF11A2 /* EditTeacherDetailsVM.swift */,
+				AA8633FA2A66D04600AF11A2 /* ProfileViewVM.swift */,
 			);
 			path = More;
 			sourceTree = "<group>";
@@ -446,6 +465,7 @@
 				AA0B35812A41A0B900BD9A08 /* SearchVM.swift */,
 				AA17C64D2A3CB501006F04FD /* SearchResultsVM.swift */,
 				AAF4C3322A38AAE20082C142 /* TeacherVM.swift */,
+				AA8633F62A6581D800AF11A2 /* LocationFinderVM.swift */,
 			);
 			path = Find;
 			sourceTree = "<group>";
@@ -455,6 +475,7 @@
 			children = (
 				AA5520332A449FD10089225B /* SignInModel.swift */,
 				AAF4C34B2A39D8C50082C142 /* SignupModel.swift */,
+				AA8633F22A657E1400AF11A2 /* BecomeTeacherModel.swift */,
 			);
 			path = More;
 			sourceTree = "<group>";
@@ -485,6 +506,25 @@
 				AA17C64F2A3CB51E006F04FD /* SearchResultsModel.swift */,
 			);
 			path = Find;
+			sourceTree = "<group>";
+		};
+		AA8633EC2A65787500AF11A2 /* _ss */ = {
+			isa = PBXGroup;
+			children = (
+				AA400A342A3B2A2E006C5448 /* MoreView.swift */,
+				AA400A3D2A3B3260006C5448 /* SignInView.swift */,
+				AAF4C3502A39D9E80082C142 /* SignupView.swift */,
+			);
+			path = _ss;
+			sourceTree = "<group>";
+		};
+		AA8633EF2A657C6A00AF11A2 /* _ss */ = {
+			isa = PBXGroup;
+			children = (
+				AA400A392A3B2FBF006C5448 /* SignInVM.swift */,
+				AAF4C34E2A39D91E0082C142 /* SignUpVM.swift */,
+			);
+			path = _ss;
 			sourceTree = "<group>";
 		};
 		AAE4ED172A3BAFBF00ED630C /* Components */ = {
@@ -698,11 +738,14 @@
 				AA8633B72A4DC4F900AF11A2 /* BookingView.swift in Sources */,
 				AA5520302A434CB30089225B /* ChatModel.swift in Sources */,
 				AA0B35762A40A1E200BD9A08 /* LocationManager.swift in Sources */,
+				AA8633F32A657E1400AF11A2 /* BecomeTeacherModel.swift in Sources */,
 				AA8633D22A58008300AF11A2 /* UserBookingsVM.swift in Sources */,
 				AA8633E92A616BD200AF11A2 /* SignInSignUpView.swift in Sources */,
+				AA8633F12A657CAE00AF11A2 /* EditTeacherDetails.swift in Sources */,
 				AA86338F2A49C8F100AF11A2 /* StaticJSONMapper.swift in Sources */,
 				AA0B35822A41A0B900BD9A08 /* SearchVM.swift in Sources */,
 				AA17C64E2A3CB501006F04FD /* SearchResultsVM.swift in Sources */,
+				AA8633FB2A66D04600AF11A2 /* ProfileViewVM.swift in Sources */,
 				AA0B35622A3CF7B500BD9A08 /* TimelineView2.swift in Sources */,
 				AA8633E72A61557200AF11A2 /* Data.swift in Sources */,
 				AA400A3C2A3B3173006C5448 /* ApiErrorModel.swift in Sources */,
@@ -714,7 +757,9 @@
 				AA55202E2A4326750089225B /* ChatView.swift in Sources */,
 				AAF4C3512A39D9E80082C142 /* SignupView.swift in Sources */,
 				AA17C6522A3CF015006F04FD /* TimelineView.swift in Sources */,
+				AA8633F52A657E5500AF11A2 /* EditTeacherDetailsVM.swift in Sources */,
 				AAF4C34F2A39D91E0082C142 /* SignUpVM.swift in Sources */,
+				AA8633EE2A65790300AF11A2 /* SettingsView.swift in Sources */,
 				AA5520362A45897D0089225B /* PreviewProvider.swift in Sources */,
 				AA0B35672A40646100BD9A08 /* ImageCache.swift in Sources */,
 				AA0B35692A4065E900BD9A08 /* CachedImageManager.swift in Sources */,
@@ -737,10 +782,13 @@
 				AAF4C3332A38AAE20082C142 /* TeacherVM.swift in Sources */,
 				AA8633D92A5C3D2500AF11A2 /* InstrumentGradeView.swift in Sources */,
 				AAF4C3392A38B6770082C142 /* NetworkingManager.swift in Sources */,
+				AA8633F72A6581D800AF11A2 /* LocationFinderVM.swift in Sources */,
 				AA8633E52A6151F400AF11A2 /* ImagePickerVM.swift in Sources */,
+				AA8633EB2A65732600AF11A2 /* SignInSignUpVM.swift in Sources */,
 				AAE4ED1B2A3BAFED00ED630C /* HeadingView.swift in Sources */,
 				AA17C64C2A3CB3F5006F04FD /* SearchResultsView.swift in Sources */,
 				AA55203D2A45D3E00089225B /* AllChatsVM.swift in Sources */,
+				AA8633F92A66B18C00AF11A2 /* ProfileTeacherView.swift in Sources */,
 				AA8633C22A55B7E200AF11A2 /* NotificationCountView.swift in Sources */,
 				AAF4C3212A38AA5B0082C142 /* MusicApp.swift in Sources */,
 				AA5520392A45D2FB0089225B /* AllChatsView.swift in Sources */,

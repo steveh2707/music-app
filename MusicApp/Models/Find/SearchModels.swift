@@ -13,7 +13,7 @@ struct AddressResult: Identifiable, Hashable {
     let subtitle: String
 }
 
-struct SelectedLocation {
+struct SelectedLocation: Equatable {
     let title: String
     let subtitle: String
     let latitude: Double

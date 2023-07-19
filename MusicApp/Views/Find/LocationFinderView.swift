@@ -10,9 +10,10 @@ import SwiftUI
 struct LocationFinderView: View {
     
     @Environment(\.presentationMode) var presentationMode
-    @StateObject var vm: SearchVM
-    @FocusState private var isFocusedTextField: Bool
     
+    @StateObject var vm = LocationFinderVM()
+    @FocusState private var isFocusedTextField: Bool
+    @Binding var selectedLocation: SelectedLocation?
     
     var body: some View {
         NavigationView {
@@ -33,6 +34,13 @@ struct LocationFinderView: View {
                 }
             }
             .navigationTitle("Location")
+            .onChange(of: vm.selectedLocation) { newValue in
+                if let newValue = newValue {
+                    selectedLocation = newValue
+                    presentationMode.wrappedValue.dismiss()
+                }
+
+            }
         }
     }
     
@@ -80,7 +88,7 @@ struct LocationFinderView: View {
         ForEach(vm.results) { address in
             Button {
                 vm.getPlace(from: address)
-                presentationMode.wrappedValue.dismiss()
+//                presentationMode.wrappedValue.dismiss()
             } label: {
                 VStack(alignment: .leading) {
                     Text(address.title)
@@ -103,8 +111,8 @@ struct LocationFinderView: View {
     
 }
 
-struct LocationFinderView_Previews: PreviewProvider {
-    static var previews: some View {
-        LocationFinderView(vm: SearchVM())
-    }
-}
+//struct LocationFinderView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        LocationFinderView()
+//    }
+//}

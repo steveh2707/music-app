@@ -20,7 +20,7 @@ struct MoreView: View {
                     if global.isValidated {
                         
                         NavigationLink {
-                            ProfileView()
+//                            ProfileView()
                         } label: {
                             HStack {
                                 Image(systemName: "person")

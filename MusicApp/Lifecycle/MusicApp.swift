@@ -44,20 +44,30 @@ struct MusicApp: App {
                         .tag(4)
                 }
                 
-                
-                MoreView()
-                    .tabItem {
-                        Image(systemName: "ellipsis")
-                        Text("More")
-                        
-                    }
-                    .tag(3)
+                if global.isValidated, global.userDetails != nil {
+                    ProfileView(userDetails: global.userDetails!, teacherDetails: global.teacherDetails)
+                        .tabItem {
+                            Image(systemName: "person")
+                            Text("Profile")
+
+                        }
+                        .tag(3)
+                } else {
+                    SignInSignUpView()
+                        .tabItem {
+                            Image(systemName: "person")
+                            Text("Profile")
+                            
+                        }
+                        .tag(3)
+                }
+
             
 //                SignInSignUpView()
 //                    .tabItem {
 //                        Image(systemName: "ellipsis")
 //                        Text("Sign In")
-//                        
+//
 //                    }
 //                    .tag(5)
 
@@ -72,6 +82,11 @@ struct MusicApp: App {
 #if DEBUG
                 UserDefaults.standard.set(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
 #endif
+            }
+            .task {
+                if global.viewState != .fetching && global.instruments.isEmpty {
+                    await global.getConfiguration()
+                }
             }
             
         }
