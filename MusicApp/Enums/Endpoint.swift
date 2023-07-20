@@ -16,10 +16,13 @@ enum EndPoint {
     case newUser(submissionData: Data?)
     case login(submissionData: Data?)
     case search(submissionData: Data?, page: Int)
+    
     case chat(token: String?, id: Int)
+    case chatFromTeacherId(token: String?, id: Int)
     case newMessage(token: String?, chatId: Int, submissionData: Data?)
     case allChats(token: String?)
     case allUnreadChats(token: String?)
+    
     case teacherAvailability(token: String?, id: Int, date: String)
     case makeBooking(token: String?, submissionData: Data?)
     case allBookings(token: String?)
@@ -33,10 +36,12 @@ enum EndPoint {
                 .configuration:
             return .GET()
             
-        case .chat(let token, _):
-            return .GET(token: token)
-                        
-        case .allChats(let token),
+            //        case .chat(let token, _):
+            //            return .GET(token: token)
+            
+        case .chat(let token, _),
+                .chatFromTeacherId(let token, _),
+                .allChats(let token),
                 .allUnreadChats(let token),
                 .teacherAvailability(let token, _, _),
                 .allBookings(let token):
@@ -57,7 +62,6 @@ enum EndPoint {
         case .image(let token, let submissionData):
             return .POSTImg(token: token, data: submissionData)
         }
-        
     }
     
 //    var host: String { "localhost" }
@@ -80,7 +84,7 @@ enum EndPoint {
         case .newMessage(_, let chatId, _):
             return "/chat/message/\(chatId)"
         case .allChats:
-            return "/chat/conversation"
+            return "/chat"
         case .allUnreadChats:
             return "/chat/unread"
         case .teacherAvailability(_, let id, _):
@@ -88,11 +92,13 @@ enum EndPoint {
         case .makeBooking:
             return "/booking"
         case .allBookings:
-            return "/booking/user_bookings"
+            return "/booking"
         case .cancelBooking(_, let bookingId, _):
             return "/booking/cancel/\(bookingId)"
         case .image:
             return "/image"
+        case .chatFromTeacherId:
+            return "/chat/conversation"
         }
     }
     
@@ -102,6 +108,8 @@ enum EndPoint {
             return ["page": "\(page)"]
         case .teacherAvailability(_, _, let date):
             return ["date": "\(date)"]
+        case .chatFromTeacherId(_, let id):
+            return ["teacher_id": "\(id)"]
         default:
             return nil
         }

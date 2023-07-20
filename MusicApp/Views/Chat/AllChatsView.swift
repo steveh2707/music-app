@@ -17,7 +17,10 @@ struct AllChatsView: View {
         if searchText == "" {
             return vm.chats
         } else {
-            return vm.chats.filter { $0.fullName.lowercased().contains(searchText.lowercased()) }
+            return vm.chats.filter {
+                $0.student.fullName.lowercased().contains(searchText.lowercased()) ||
+                $0.teacher.fullName.lowercased().contains(searchText.lowercased())
+            }
         }
     }
     
@@ -25,21 +28,30 @@ struct AllChatsView: View {
         NavigationStack {
             List {
                 ForEach(filteredChats) { chat in
+                    var userIsTeacher: Bool { chat.teacherID == global.teacherDetails?.teacherID }
                     
                     ZStack {
-                        
                         NavigationLink {
-                            ChatView(teacherId: chat.teacherID)
+                            ChatView(chatID: chat.chatID)
                         } label: {
                             HStack(spacing: 20) {
-                                UserImageView(imageURL: chat.profileImageURL ?? "")
-                                    .frame(width: 80, height: 80)
-                                VStack(alignment: .leading, spacing: 5) {
-                                    Text(chat.fullName)
-                                        .font(.title3)
-                                    Text(chat.mostRecentMessage ?? "")
-                                        .font(.callout)
-                                }
+                                UserImageView(imageURL: userIsTeacher ? chat.student.profileImageURL : chat.teacher.profileImageURL)
+                                        .frame(width: 80, height: 80)
+                                    VStack(alignment: .leading, spacing: 5) {
+                                        HStack {
+                                            if userIsTeacher {
+                                                Image(systemName: "studentdesk")
+                                            }
+                                            Text(userIsTeacher ? chat.student.fullName : chat.teacher.fullName)
+                                                .font(.title3)
+                                        }
+   
+                                        if let message = chat.mostRecentMessage {
+                                            Text(message)
+                                                .font(.callout)
+                                        }
+
+                                    }
                                 Spacer()
                             }
                         }

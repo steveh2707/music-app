@@ -46,6 +46,9 @@ class Global: ObservableObject {
         self.isValidated = false
         self.token = ""
         self.userDetails = nil
+        self.teacherDetails = nil
+        self.selectedInstrument = nil
+        self.selectedGrade = nil
     }
     
     func updateImageUrl(url: String?) {
@@ -63,16 +66,16 @@ class Global: ObservableObject {
             print(error)
         }
         
-        do {
-            // Schedule the next execution of the function after 30 seconds
-            try await Task.sleep(nanoseconds: 60 * 1_000_000_000)
-        } catch {
-            print(error)
-        }
+//        do {
+//            // Schedule the next execution of the function after 30 seconds
+//            try await Task.sleep(nanoseconds: 60 * 1_000_000_000)
+//        } catch {
+//            print(error)
+//        }
 
-        if isValidated {
+//        if isValidated {
 //            await fetchUnreadMessages()
-        }
+//        }
 
     }
     

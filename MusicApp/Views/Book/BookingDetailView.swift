@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CancelUserBookingView: View {
+struct BookingDetailView: View {
     
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var global: Global
@@ -22,12 +22,17 @@ struct CancelUserBookingView: View {
         NavigationView {
             Form {
                 
-                if let booking = vm.bookingToBeDeleted {
+                if let booking = vm.bookingDetail {
                     Section {
                         HStack {
-                            Image(systemName: "person")
+                            Image(systemName: "person.fill")
                                 .frame(width: 25)
-                            Text("\(booking.teacherFirstName) \(booking.teacherLastName)")
+                            Text(booking.teacher.fullName)
+                        }
+                        HStack {
+                            Image(systemName: "studentdesk")
+                                .frame(width: 25)
+                            Text(booking.student.fullName)
                         }
                         HStack {
                             Image(systemName: "calendar")
@@ -40,18 +45,18 @@ struct CancelUserBookingView: View {
                             Text("\(booking.startTime) - \(booking.endTime)")
                         }
                         HStack {
-                            Image(systemName: booking.instrumendSfSymbol ?? "questionmark")
+                            Image(systemName: booking.instrument.sfSymbol)
                                 .frame(width: 25)
-                            Text(booking.instrumentName ?? "")
+                            Text(booking.instrument.name)
                         }
                         HStack {
                             Image(systemName: "music.note")
                                 .frame(width: 25)
-                            Text(booking.gradeName ?? "")
+                            Text(booking.grade.name)
                         }
 
                     }
-                    
+
                     Section {
                         TextField("Cancel Reason", text: $vm.cancelReason, axis: .vertical)
                         HStack {
@@ -76,7 +81,7 @@ struct CancelUserBookingView: View {
                     closeButton
                 }
             }
-            .navigationTitle("Cancel Booking")
+            .navigationTitle("Booking")
             
         }
     }

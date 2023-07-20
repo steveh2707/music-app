@@ -15,7 +15,7 @@ struct UserBookingsView: View {
     @StateObject var vm = UserBookingsVM()
     @State var hasAppeared = false
     @State var selectedFilter = BookingFilter.upcoming
-    @State var showDeleteSheet = false
+    @State var showDetailSheet = false
 
     
     var filteredBookings: [UserBooking] {
@@ -44,22 +44,24 @@ struct UserBookingsView: View {
                             ForEach(filteredBookings) { booking in
                                 
                                 ZStack {
-                                    NavigationLink {
-                                        TeacherView(teacherId: booking.teacherID)
+                                    Button {
+                                        vm.bookingDetail = booking
+                                        showDetailSheet.toggle()
                                     } label: {
-                                        EmptyView()
+                                        bookingRowView(booking)
+                                            .foregroundColor(Color.theme.primaryText)
                                     }
-                                    .opacity(0)
+                                    
                                     .swipeActions {
                                         Button {
-                                            vm.bookingToBeDeleted = booking
-                                            showDeleteSheet.toggle()
+                                            vm.bookingDetail = booking
+                                            showDetailSheet.toggle()
                                         } label: {
                                             Label("Cancel", systemImage: "calendar.badge.minus")
                                         }
                                         .tint(.red)
                                     }
-                                    bookingRowView(booking)
+                                    
                                 }
                                 .saturation(booking.cancelled == 1 ? 0 : 1)
                                 .disabled(booking.cancelled == 1)
@@ -95,9 +97,9 @@ struct UserBookingsView: View {
         .alert("Booking Cancelled", isPresented: $vm.showBookingCancelledMessage) {
             Button("OK", role: .cancel) { }
         }
-        .sheet(isPresented: $showDeleteSheet) {
-            CancelUserBookingView(vm: vm)
-                    .presentationDetents([.fraction(0.6)])
+        .sheet(isPresented: $showDetailSheet) {
+            BookingDetailView(vm: vm)
+                    .presentationDetents([.fraction(0.7)])
 
         }
     }
@@ -131,7 +133,7 @@ struct UserBookingsView: View {
         HStack {
             VStack(alignment: .leading) {
                 HStack(alignment: .center, spacing: 10) {
-                    CachedImage(url: booking.instrumentImageURL ?? "") { phase in
+                    CachedImage(url: booking.instrument.imageURL) { phase in
                         switch phase {
                         case .empty:
                             Color
@@ -163,18 +165,25 @@ struct UserBookingsView: View {
                     .cornerRadius(20)
                     
                     VStack(alignment: .leading, spacing: 5) {
-                        Text("\(booking.teacherFirstName) \(booking.teacherLastName)")
-                            .font(.title3)
-                            .lineLimit(1)
-                        if let instrumentName = booking.instrumentName, let grade = booking.gradeName {
-                            HStack(spacing: 5) {
-                                Text(instrumentName)
-                                Text("-")
-                                Text(grade)
+                        HStack(spacing: 5) {
+                            var userIsTeacher: Bool { booking.teacherID == global.teacherDetails?.teacherID }
+                            
+                            if userIsTeacher {
+                                Image(systemName: "studentdesk")
                             }
-                            .font(.subheadline)
-                            .lineLimit(1)
+                            Text(userIsTeacher ? booking.student.fullName : booking.teacher.fullName)
+                                .font(.title3)
                         }
+                            .lineLimit(1)
+                        
+                        HStack(spacing: 5) {
+                            Text(booking.instrument.name)
+                            Text("-")
+                            Text(booking.grade.name)
+                        }
+                        .font(.subheadline)
+                        .lineLimit(1)
+                        
                         Text("\(booking.startTime) - \(booking.endTime)")
                             .font(.footnote)
                     }

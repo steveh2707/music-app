@@ -8,13 +8,16 @@
 import Foundation
 
 class EditTeacherDetailsVM: ObservableObject {
-    @Published var teacher: TeacherDetails
+    @Published var teacherDetails: TeacherDetails
     
     @Published var searchableText = ""
     @Published var selectedLocation: SelectedLocation?
     
+    var teacherDetailsStart: TeacherDetails
+    
     
     init(teacher: TeacherDetails) {
-        self.teacher = teacher
+        self.teacherDetailsStart = teacher
+        self.teacherDetails = teacher
     }
 }

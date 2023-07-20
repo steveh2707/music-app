@@ -16,9 +16,8 @@ struct AllChatsResponse: Codable {
 struct ChatGeneral: Codable, Identifiable {
     let chatID: Int
     let createdTimestampUTC: String
-    let teacherID: Int
-    let firstName, lastName: String
-    let profileImageURL: String?
+    let teacherID, studentID: Int
+    let student, teacher: UserSimple
     let mostRecentMessage: String?
     let unreadMessages: Int
 
@@ -26,13 +25,11 @@ struct ChatGeneral: Codable, Identifiable {
         case chatID = "chat_id"
         case createdTimestampUTC = "created_timestamp_utc"
         case teacherID = "teacher_id"
-        case firstName = "first_name"
-        case lastName = "last_name"
-        case profileImageURL = "profile_image_url"
+        case studentID = "student_id"
+        case student, teacher
         case mostRecentMessage = "most_recent_message"
         case unreadMessages = "unread_messages"
     }
     
     var id: Int {chatID}
-    var fullName: String {firstName + " " + lastName}
 }

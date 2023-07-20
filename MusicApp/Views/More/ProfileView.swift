@@ -18,14 +18,6 @@ struct ProfileView: View {
     @State private var editable = false
 
     init(userDetails: UserDetails, teacherDetails: TeacherDetails? = nil) {
-//        let emptyTeacher = TeacherDetails(teacherID: 0, tagline: "", bio: "", locationLatitude: 0.0, locationLongitude: 0.0, averageReviewScore: 0.0)
-        
-//        if let teacherDetails {
-//            _vm = StateObject(wrappedValue: ProfileViewVM(userDetails: userDetails, teacherDetails: teacherDetails))
-//        } else {
-//            _vm = StateObject(wrappedValue: ProfileViewVM(userDetails: userDetails))
-//        }
-
         _vm = StateObject(wrappedValue: ProfileViewVM(userDetails: userDetails, teacherDetails: teacherDetails))
     }
     
@@ -189,8 +181,8 @@ struct ProfileView: View {
                         Image(systemName: "rectangle.portrait.and.arrow.right")
                     }
                 }
-                
             }
+            //TODO: Add save changes alert here and to EditTeacherDetails
         }
     }
 }

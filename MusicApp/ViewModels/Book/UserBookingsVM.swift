@@ -10,7 +10,7 @@ import Foundation
 class UserBookingsVM: ObservableObject {
     
     @Published var bookings: [UserBooking] = []
-    @Published var bookingToBeDeleted: UserBooking?
+    @Published var bookingDetail: UserBooking?
     @Published var cancelReason = ""
     
     @Published var viewState: ViewState?
@@ -56,7 +56,7 @@ class UserBookingsVM: ObservableObject {
             let encoder = JSONEncoder()
             let data = try encoder.encode(cancelReason)
             
-            try await NetworkingManager.shared.request(.cancelBooking(token: token, bookingId: bookingToBeDeleted?.bookingID ?? 0, submissionData: data))
+            try await NetworkingManager.shared.request(.cancelBooking(token: token, bookingId: bookingDetail?.bookingID ?? 0, submissionData: data))
             
             submissionState = .successful
             showBookingCancelledMessage = true

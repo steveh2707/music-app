@@ -23,13 +23,18 @@ class ChatVM: ObservableObject {
     @Published var error: NetworkingManager.NetworkingError?
     
     @MainActor
-    func searchForChat(teacherId: Int, token: String?) async {
+    func searchForChatUsingChatID(chatID: Int?, teacherID: Int?, token: String?) async {
         
         viewState = .fetching
         defer { viewState = .finished }
         
         do {
-            let decodedResponse = try await NetworkingManager.shared.request(.chat(token: token, id: teacherId), type: ChatDetails.self)
+            var decodedResponse: ChatDetails
+            if let chatID {
+                decodedResponse = try await NetworkingManager.shared.request(.chat(token: token, id: chatID), type: ChatDetails.self)
+            } else {
+                decodedResponse = try await NetworkingManager.shared.request(.chatFromTeacherId(token: token, id: teacherID ?? 0), type: ChatDetails.self)
+            }
             self.chat = decodedResponse
             
         } catch {

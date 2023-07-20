@@ -24,6 +24,11 @@ struct MusicApp: App {
                         Text("Search")
                     }
                     .tag(1)
+                    .task {
+                        if global.isValidated {
+                            await global.fetchUnreadMessages()
+                        }
+                    }
                 
                 if global.isValidated {
                     AllChatsView()
@@ -33,6 +38,11 @@ struct MusicApp: App {
                         }
                         .badge(global.unreadMessages)
                         .tag(2)
+                        .task {
+                            if global.isValidated {
+                                await global.fetchUnreadMessages()
+                            }
+                        }
                 }
                 
                 if global.isValidated {
@@ -42,6 +52,11 @@ struct MusicApp: App {
                             Text("Bookings")
                         }
                         .tag(4)
+                        .task {
+                            if global.isValidated {
+                                await global.fetchUnreadMessages()
+                            }
+                        }
                 }
                 
                 if global.isValidated, global.userDetails != nil {
@@ -52,6 +67,11 @@ struct MusicApp: App {
 
                         }
                         .tag(3)
+                        .task {
+                            if global.isValidated {
+                                await global.fetchUnreadMessages()
+                            }
+                        }
                 } else {
                     SignInSignUpView()
                         .tabItem {

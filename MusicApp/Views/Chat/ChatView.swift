@@ -14,34 +14,62 @@ struct ChatView: View {
     
     @Namespace var bottomID
     
-    let teacherId: Int
+    var chatID: Int?
+    var teacherID: Int?
     
+    var userIsTeacher: Bool { vm.chat?.teacherID == global.teacherDetails?.teacherID }
+    
+    init(chatID: Int? = nil, teacherID: Int? = nil) {
+        self.chatID = chatID
+        self.teacherID = teacherID
+    }
+    
+
     var body: some View {
         VStack {
             
             if let chat = vm.chat {
                 ScrollViewReader { value in
-                    
                     ScrollView {
-                        
                         
                         ForEach(chat.messages, id: \.self) { message in
                             HStack {
                                 
-                                if message.senderID == 1 {
-                                    UserImageView(imageURL: chat.profileImageURL)
+                                var messageSent: Bool {
+                                    message.senderID == global.userDetails?.userID
+                                }
+
+                                
+                                if !messageSent {
+                                    UserImageView(imageURL: userIsTeacher ? chat.student.profileImageURL : chat.teacher.profileImageURL)
                                         .frame(width: 30, height: 30)
                                 } else {
                                     Spacer(minLength: 60)
                                 }
+                                
                                 Text(message.message)
-                                    .foregroundColor(message.senderID == 1 ? Color.theme.primaryText : Color.theme.primaryTextInverse)
+                                    .foregroundColor(messageSent ? Color.theme.primaryTextInverse : Color.theme.primaryText)
                                     .padding(10)
-                                    .background(message.senderID == 1 ? Color.theme.backgroundSecondary : Color.theme.accent)
+                                    .background(messageSent ? Color.theme.accent : Color.theme.backgroundSecondary)
                                     .cornerRadius(15)
-                                if message.senderID == 1 {
+                                if !messageSent {
                                     Spacer(minLength: 40)
                                 }
+                                
+//                                if message.senderID == global.userDetails.userID {
+//                                    UserImageView(imageURL: chat.profileImageURL)
+//                                        .frame(width: 30, height: 30)
+//                                } else {
+//                                    Spacer(minLength: 60)
+//                                }
+//                                Text(message.message)
+//                                    .foregroundColor(message.senderID == 1 ? Color.theme.primaryText : Color.theme.primaryTextInverse)
+//                                    .padding(10)
+//                                    .background(message.senderID == 1 ? Color.theme.backgroundSecondary : Color.theme.accent)
+//                                    .cornerRadius(15)
+//                                if message.senderID == 1 {
+//                                    Spacer(minLength: 40)
+//                                }
                             }
                             
                         }
@@ -83,25 +111,35 @@ struct ChatView: View {
         .toolbar {
             ToolbarItem(placement: .principal) {
                 if let chat = vm.chat {
-                    NavigationLink {
-                        TeacherView(teacherId: teacherId)
-                    } label: {
+                    
+                    if !userIsTeacher {
+                        NavigationLink {
+                            TeacherView(teacherId: vm.chat?.teacherID ?? 0)
+                            
+                        } label: {
+                            HStack {
+                                UserImageView(imageURL: chat.teacher.profileImageURL)
+                                    .frame(width: 30, height: 30)
+                                Text(chat.teacher.fullName)
+                                    .foregroundColor(Color.theme.primaryText)
+                            }
+                        }
+                    } else {
                         HStack {
-                            Spacer()
-                            UserImageView(imageURL: chat.profileImageURL)
+                            UserImageView(imageURL: chat.student.profileImageURL)
                                 .frame(width: 30, height: 30)
-                            Text("\(chat.teacherFirstName) \(chat.teacherLastName)")
+                            Text(chat.student.fullName)
                                 .foregroundColor(Color.theme.primaryText)
-                            Spacer()
                         }
                     }
+                    
+
+
                 }
             }
         }
-        //        }
         .task {
-            await vm.searchForChat(teacherId: teacherId, token: global.token)
-//            await global.fetchUnreadMessages()
+            await vm.searchForChatUsingChatID(chatID: chatID, teacherID: teacherID, token: global.token)
         }
         .overlay {
             if vm.viewState == .fetching {
@@ -117,7 +155,7 @@ struct ChatView_Previews: PreviewProvider {
     
     static var previews: some View {
         
-        ChatView(teacherId: 1)
+        ChatView()
             .environmentObject(dev.globalVM)
     }
 }

@@ -128,6 +128,7 @@ final class NetworkingManager: NetworkingManagerImpl {
     
     private func buildRequest(from url: URL, methodType: MethodType) -> URLRequest {
         var request = URLRequest(url: url)
+        print(url.absoluteString)
         
         switch methodType {
         case .GET(let token):

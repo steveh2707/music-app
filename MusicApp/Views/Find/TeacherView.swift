@@ -260,7 +260,8 @@ struct TeacherView: View {
 
                         if global.isValidated {
                             NavigationLink {
-                                ChatView(teacherId: teacher.teacherID)
+//                                ChatView(teacherId: chat.teacherID)
+                                ChatView(teacherID: teacher.teacherID)
                             } label: {
                                 footerButton(buttonText: "Chat")
                             }
