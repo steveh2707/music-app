@@ -12,7 +12,6 @@ class SignInSignUpVM: ObservableObject {
     @Published var credentials = Credentials()
     @Published var newUser = NewStudent()
     
-    
     @Published var submissionState: SubmissionState?
     @Published var hasError = false
     @Published var error: FormError?
@@ -35,8 +34,10 @@ class SignInSignUpVM: ObservableObject {
             let data = try encoder.encode(credentials)
             
             self.signInResponse = try await NetworkingManager.shared.request(.login(submissionData: data), type: SignInResponse.self)
-
+            
+            credentials = Credentials()
             submissionState = .successful
+            
         } catch {
             self.hasError = true
             self.submissionState = .unsuccessful
@@ -64,6 +65,7 @@ class SignInSignUpVM: ObservableObject {
             
             self.signInResponse = try await NetworkingManager.shared.request(.newUser(submissionData: data), type: SignInResponse.self)
             
+            newUser = NewStudent()
             submissionState = .successful
             
         } catch {

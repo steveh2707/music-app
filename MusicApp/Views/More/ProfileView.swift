@@ -9,114 +9,30 @@ import SwiftUI
 
 struct ProfileView: View {
     
+    // MARK: PROPERTIES
     @EnvironmentObject var global: Global
     @StateObject private var vm: ProfileViewVM
     
     @State private var showImagePickerView = false
     @State private var showLocationFinderView = false
     @State private var showSaveChangesAlert = false
-    @State private var editable = false
+
 
     init(userDetails: UserDetails, teacherDetails: TeacherDetails? = nil) {
         _vm = StateObject(wrappedValue: ProfileViewVM(userDetails: userDetails, teacherDetails: teacherDetails))
     }
     
+    // MARK: BODY
     var body: some View {
         NavigationStack {
             List {
-                
-                Section {
-                    HStack {
-                        Text("Profile Image")
-                        Spacer()
-                        Button {
-                            showImagePickerView.toggle()
-                        } label: {
-                            UserImageView(imageURL: global.userDetails?.profileImageURL ?? "")
-                                .frame(width: 50, height: 50)
-                        }
-                    }
-                    
-                    HStack {
-                        Text("First Name")
-                        TextField("", text: $vm.userDetails.firstName)
-                            .multilineTextAlignment(.trailing)
-                            .foregroundColor(editable ? Color.theme.accent : Color.theme.primaryText)
-                            .disabled(!editable)
-                    }
-                    
-                    HStack {
-                        Text("Last Name")
-                        TextField("", text: $vm.userDetails.lastName)
-                            .multilineTextAlignment(.trailing)
-                            .foregroundColor(editable ? Color.theme.accent : Color.theme.primaryText)
-                            .disabled(!editable)
-                    }
-                    
-                    HStack {
-                        Text("Email")
-                        TextField("", text: $vm.userDetails.email)
-                            .multilineTextAlignment(.trailing)
-                            .foregroundColor(editable ? Color.theme.accent : Color.theme.primaryText)
-                            .disabled(!editable)
-                    }
-                    
-                    HStack {
-                        Text("Date of Birth")
-                        Spacer()
-                        DatePicker(selection: $vm.userDetails.formattedDob, in: ...Date.now, displayedComponents: .date) {}
-                            .padding(.trailing, -10)
-                            .labelsHidden()
-                            .datePickerStyle(.automatic)
-                            .colorInvert()
-                            .colorMultiply(editable ? Color.theme.accent : Color.theme.primaryText)
-                            .disabled(!editable)
-                    }
-                    
-                    HStack {
-                        Text("Password")
-                        Spacer()
-                        Button {
-//                            updateField = true
-//                            updateFieldTitle = "Password"
-                        } label: {
-                            Text("Update")
-                        }
-                        .disabled(!editable)
-                    }
-                } header: {
-                    Text("User Details")
-                }
+                userDetailsSection
                 
                 if let  teacherDetails = vm.teacherDetails {
-
                     Section {
-                        
-                        NavigationLink("Update Teacher Details") {
+                        NavigationLink("Teacher Details") {
                             EditTeacherDetails(teacherDetails: teacherDetails)
                         }
-                        
-//                        TextField("Tagline", text: $vm.teacherDetails.tagline, axis: .vertical)
-//                            .lineLimit(1...)
-//                            .foregroundColor(editable ? Color.theme.accent : Color.theme.primaryText)
-//                            .disabled(!editable)
-//
-//                        TextField("Bio", text: $vm.teacherDetails.bio, axis: .vertical)
-//                            .lineLimit(5...)
-//                            .foregroundColor(editable ? Color.theme.accent : Color.theme.primaryText)
-//                            .disabled(!editable)
-//
-//                        HStack {
-//                            Text("Location")
-//                            Spacer()
-//                            Button {
-//                                showLocationFinderView = true
-//                            } label: {
-//                                Text(vm.selectedLocation?.title == "" ? "Update" : vm.selectedLocation?.title ?? "Update")
-//                            }
-//                            .disabled(!editable)
-//
-//                        }
                     } header: {
                         Text("Teacher Details")
                     }
@@ -124,69 +40,135 @@ struct ProfileView: View {
                 
             }
             .navigationTitle("Profile")
-//            .alert("Do you want to save changes?", isPresented: $showSaveChangesAlert) {
-//                Button("Save Changes", action: {
-//                    // TODO: post changes
-//                })
-//                Button("Delete Changes", role: .destructive, action: {
-//                    vm.userDetails = vm.userDetailsStart
-//                    vm.teacherDetails = vm.teacherDetailsStart
-//                    vm.selectedLocation = nil
-//                    editable = false
-//                })
-//            }
             .sheet(isPresented: $showImagePickerView) {
                 ImagePicker(currentImageUrl: global.userDetails?.profileImageURL)
                     .presentationDetents([.medium])
             }
-//            .sheet(isPresented: $showLocationFinderView) {
-//                LocationFinderView(selectedLocation: $vm.selectedLocation)
-//            }
-//            .onChange(of: vm.selectedLocation, perform: { newValue in
-//                if let newValue {
-//                    vm.teacherDetails.locationLatitude = newValue.latitude
-//                    vm.teacherDetails.locationLongitude = newValue.longitude
-//                }
-//
-//            })
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    NavigationLink {
-                        SettingsView()
-                    } label: {
-                        Image(systemName: "gear")
-                    }
+                    settingsLink
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button {
-                        if vm.userDetailsStart == vm.userDetails
-//                            && vm.teacherDetailsStart == vm.teacherDetails
-                        {
-                            editable.toggle()
-                        } else {
-                            showSaveChangesAlert.toggle()
-                        }
-                    } label: {
-                        if editable {
-                            Image(systemName: "lock.open.fill")
-                        } else {
-                            Image(systemName: "lock.fill")
-                        }
-                    }
+                    editableToggleButton
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button {
-                        global.logout()
-                    } label: {
-                        Image(systemName: "rectangle.portrait.and.arrow.right")
-                    }
+                    logoutButton
                 }
             }
-            //TODO: Add save changes alert here and to EditTeacherDetails
+            .alert("Do you want to save changes?", isPresented: $showSaveChangesAlert) {
+                Button("Save", action: {
+                     Task {
+                         await vm.updateUserDetails(token: global.token)
+                     }
+                 })
+                 Button("Discard", role: .destructive, action: {
+                     vm.userDetails = vm.userDetailsStart
+                     vm.editable.toggle()
+                 })
+             }
         }
     }
+    
+    // MARK: VARIABLES
+    private var settingsLink: some View {
+        NavigationLink {
+            SettingsView()
+        } label: {
+            Image(systemName: "gear")
+        }
+    }
+    
+    private var editableToggleButton: some View {
+        Button {
+            if vm.userDetailsStart == vm.userDetails {
+                vm.editable.toggle()
+            } else {
+                showSaveChangesAlert.toggle()
+            }
+        } label: {
+            if vm.editable {
+                Image(systemName: "lock.open.fill")
+            } else {
+                Image(systemName: "lock.fill")
+            }
+        }
+    }
+    
+    private var logoutButton: some View {
+        Button {
+            global.logout()
+        } label: {
+            Image(systemName: "rectangle.portrait.and.arrow.right")
+        }
+    }
+    
+    private var userDetailsSection: some View {
+        Section {
+            HStack {
+                Text("Profile Image")
+                Spacer()
+                Button {
+                    showImagePickerView.toggle()
+                } label: {
+                    UserImageView(imageURL: global.userDetails?.profileImageURL ?? "")
+                        .frame(width: 50, height: 50)
+                }
+            }
+            
+            HStack {
+                Text("First Name")
+                TextField("", text: $vm.userDetails.firstName)
+                    .multilineTextAlignment(.trailing)
+                    .foregroundColor(vm.editable ? Color.theme.accent : Color.theme.primaryText)
+                    .disabled(!vm.editable)
+            }
+            
+            HStack {
+                Text("Last Name")
+                TextField("", text: $vm.userDetails.lastName)
+                    .multilineTextAlignment(.trailing)
+                    .foregroundColor(vm.editable ? Color.theme.accent : Color.theme.primaryText)
+                    .disabled(!vm.editable)
+            }
+            
+            HStack {
+                Text("Email")
+                TextField("", text: $vm.userDetails.email)
+                    .multilineTextAlignment(.trailing)
+                    .foregroundColor(vm.editable ? Color.theme.accent : Color.theme.primaryText)
+                    .disabled(!vm.editable)
+            }
+            
+            HStack {
+                Text("Date of Birth")
+                Spacer()
+                DatePicker(selection: $vm.userDetails.formattedDob, in: ...Date.now, displayedComponents: .date) {}
+                    .padding(.trailing, -10)
+                    .labelsHidden()
+                    .datePickerStyle(.automatic)
+                    .colorInvert()
+                    .colorMultiply(vm.editable ? Color.theme.accent : Color.theme.primaryText)
+                    .disabled(!vm.editable)
+            }
+            
+            HStack {
+                Text("Password")
+                Spacer()
+                Button {
+                    // TODO: Add update password flow
+                } label: {
+                    Text("Update")
+                }
+                .disabled(!vm.editable)
+            }
+        } header: {
+            Text("User Details")
+        }
+    }
+    
 }
 
+// MARK: PREVIEW
 //struct ProfileView_Previews: PreviewProvider {
 //
 //    static var previews: some View {
@@ -196,9 +178,3 @@ struct ProfileView: View {
 //    }
 //}
 
-//func ??<T>(lhs: Binding<Optional<T>>, rhs: T) -> Binding<T> {
-//    Binding(
-//        get: { lhs.wrappedValue ?? rhs },
-//        set: { lhs.wrappedValue = $0 }
-//    )
-//}

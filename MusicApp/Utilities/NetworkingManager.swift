@@ -40,7 +40,7 @@ final class NetworkingManager: NetworkingManagerImpl {
               (200...300) ~= response.statusCode else {
             let statusCode = (response as! HTTPURLResponse).statusCode
             
-            guard let apiError = try? decoder.decode(ApiError.self, from: data) else {
+            guard let apiError = try? decoder.decode(ApiGenericResponse.self, from: data) else {
                 throw NetworkingError.invalidStatusCode(statusCode: statusCode)
             }
             throw NetworkingError.apiError(message: apiError.message)
@@ -71,7 +71,7 @@ final class NetworkingManager: NetworkingManagerImpl {
               (200...300) ~= response.statusCode else {
             let statusCode = (response as! HTTPURLResponse).statusCode
             
-            guard let apiError = try? decoder.decode(ApiError.self, from: data) else {
+            guard let apiError = try? decoder.decode(ApiGenericResponse.self, from: data) else {
                 throw NetworkingError.invalidStatusCode(statusCode: statusCode)
             }
             throw NetworkingError.apiError(message: apiError.message)

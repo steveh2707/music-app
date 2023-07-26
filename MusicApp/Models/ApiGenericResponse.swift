@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ApiError: Codable {
+struct ApiGenericResponse: Codable {
     let success: Bool
     let message: String
     let code: Int

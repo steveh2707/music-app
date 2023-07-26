@@ -16,6 +16,8 @@ enum EndPoint {
     case newUser(submissionData: Data?)
     case login(submissionData: Data?)
     case search(submissionData: Data?, page: Int)
+    case updateUserDetails(token: String?, submissionData: Data?)
+    case updateTeacherDetails(token: String?, submissionData: Data?)
     
     case chat(token: String?, id: Int)
     case chatFromTeacherId(token: String?, id: Int)
@@ -36,9 +38,6 @@ enum EndPoint {
                 .configuration:
             return .GET()
             
-            //        case .chat(let token, _):
-            //            return .GET(token: token)
-            
         case .chat(let token, _),
                 .chatFromTeacherId(let token, _),
                 .allChats(let token),
@@ -56,7 +55,9 @@ enum EndPoint {
                 .makeBooking(let token, let data):
             return .POST(token: token, data: data)
             
-        case .cancelBooking(let token, _, let submissionData):
+        case .cancelBooking(let token, _, let submissionData),
+                .updateUserDetails(let token, let submissionData),
+                .updateTeacherDetails(let token, let submissionData):
             return .PUT(token: token, data: submissionData)
             
         case .image(let token, let submissionData):
@@ -99,6 +100,10 @@ enum EndPoint {
             return "/image"
         case .chatFromTeacherId:
             return "/chat/conversation"
+        case .updateUserDetails:
+            return "/user"
+        case .updateTeacherDetails:
+            return "/teacher"
         }
     }
     
@@ -119,7 +124,8 @@ enum EndPoint {
     var url: URL? {
         var urlComponents = URLComponents()
         urlComponents.scheme = "http"
-        urlComponents.host = "192.168.1.159"
+//        urlComponents.host = "192.168.1.159"
+        urlComponents.host = "localhost"
         urlComponents.port = 4000
         
 //        urlComponents.scheme = "https"
