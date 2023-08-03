@@ -12,12 +12,16 @@ import Foundation
 struct Teacher: Codable, Equatable {
     
     let userID, teacherID: Int
-    let firstName, lastName, tagline, bio: String
+    let firstName, lastName, tagline, bio, locationTitle: String
     let locationLatitude, locationLongitude: Double
     let profileImageURL: String?
     let instrumentsTaught: [InstrumentTaught]
     let reviews: [Review]
     let averageReviewScore: Double
+    
+    var fullName: String {
+        firstName + " " + lastName
+    }
 
     enum CodingKeys: String, CodingKey {
         case userID = "user_id"
@@ -26,6 +30,7 @@ struct Teacher: Codable, Equatable {
         case lastName = "last_name"
         case tagline
         case bio
+        case locationTitle = "location_title"
         case locationLatitude = "location_latitude"
         case locationLongitude = "location_longitude"
         case profileImageURL = "profile_image_url"
@@ -66,6 +71,7 @@ struct Review: Codable, Identifiable, Equatable {
     let sfSymbol: String
     let gradeID: Int
     let gradeName: String
+    let profileImageUrl: String
 
     enum CodingKeys: String, CodingKey {
         case reviewID = "review_id"
@@ -80,15 +86,12 @@ struct Review: Codable, Identifiable, Equatable {
         case sfSymbol = "sf_symbol"
         case gradeID = "grade_id"
         case gradeName = "grade_name"
+        case profileImageUrl = "profile_image_url"
     }
     
-    var id: Int { userID }
+    var id: Int { reviewID }
+    var fullName: String { firstName + " " + lastName }
 }
 
 
 
-struct Location: Identifiable, Codable, Equatable {
-    let id: UUID
-    let latitude: Double
-    let longitude: Double
-}

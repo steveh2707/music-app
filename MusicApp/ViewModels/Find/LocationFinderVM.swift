@@ -22,13 +22,12 @@ class LocationFinderVM: NSObject, ObservableObject {
         let title = address.title
         let subtitle = address.subtitle
         
-        request.naturalLanguageQuery = subtitle.contains(title)
-        ? subtitle : title + ", " + subtitle
+        request.naturalLanguageQuery = subtitle.contains(title) ? subtitle : title + ", " + subtitle
         
         let search = MKLocalSearch(request: request)
         search.start { response, error in
             if let response = response, let coords = response.mapItems.first?.placemark.coordinate {
-                self.selectedLocation = SelectedLocation(title: title, subtitle: subtitle, latitude: coords.latitude, longitude: coords.longitude)
+                self.selectedLocation = SelectedLocation(title: title, latitude: coords.latitude, longitude: coords.longitude)
             }
         }
     }

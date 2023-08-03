@@ -73,15 +73,16 @@ struct UserDetails: Codable, Equatable {
 // MARK: - TeacherDetails
 struct TeacherDetails: Codable, Equatable {
     let teacherID: Int
-    var tagline, bio: String
+    var tagline, bio, locationTitle: String
     var locationLatitude, locationLongitude, averageReviewScore: Double
     var instrumentsTeachable: [InstrumentsTeachable]
     var instrumentsRemovedIds: [Int]
     
-    init(teacherID: Int, tagline: String, bio: String, locationLatitude: Double, locationLongitude: Double, averageReviewScore: Double, instrumentsTeachable: [InstrumentsTeachable]) {
+    init(teacherID: Int, tagline: String, bio: String, locationTitle: String, locationLatitude: Double, locationLongitude: Double, averageReviewScore: Double, instrumentsTeachable: [InstrumentsTeachable]) {
         self.teacherID = teacherID
         self.tagline = tagline
         self.bio = bio
+        self.locationTitle = locationTitle
         self.locationLatitude = locationLatitude
         self.locationLongitude = locationLongitude
         self.averageReviewScore = averageReviewScore
@@ -94,6 +95,7 @@ struct TeacherDetails: Codable, Equatable {
         self.teacherID = try container.decode(Int.self, forKey: .teacherID)
         self.tagline = try container.decode(String.self, forKey: .tagline)
         self.bio = try container.decode(String.self, forKey: .bio)
+        self.locationTitle = try container.decode(String.self, forKey: .locationTitle)
         self.locationLatitude = try container.decode(Double.self, forKey: .locationLatitude)
         self.locationLongitude = try container.decode(Double.self, forKey: .locationLongitude)
         self.averageReviewScore = try container.decode(Double.self, forKey: .averageReviewScore)
@@ -104,6 +106,7 @@ struct TeacherDetails: Codable, Equatable {
     enum CodingKeys: String, CodingKey {
         case teacherID = "teacher_id"
         case tagline, bio
+        case locationTitle = "location_title"
         case locationLatitude = "location_latitude"
         case locationLongitude = "location_longitude"
         case averageReviewScore = "average_review_score"

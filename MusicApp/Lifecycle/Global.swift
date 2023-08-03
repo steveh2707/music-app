@@ -28,6 +28,7 @@ class Global: ObservableObject {
     
     @Published var selectedInstrument: Instrument? = nil
     @Published var selectedGrade: Grade? = nil
+    @Published var lessonCost: Double? = nil
     
     
     func login(signInResponse: SignInResponse) {
@@ -47,8 +48,6 @@ class Global: ObservableObject {
         self.token = ""
         self.userDetails = nil
         self.teacherDetails = nil
-        self.selectedInstrument = nil
-        self.selectedGrade = nil
     }
     
     func updateImageUrl(url: String?) {

@@ -16,30 +16,16 @@ struct SearchResultsRowView: View {
             VStack(alignment: .leading) {
                 
                 HStack(alignment: .center) {
-                    
-//                    InstrumentGradeView(sfSymbol: teacher.instrumentSfSymbol, instrumentName: teacher.instrumentName, gradeName: teacher.gradeTeachable, showGradeFrom: true, fixedLength: false)
 
-//                    InstrumentGradeView(sfSymbol: teacher.instrumentSfSymbol, instrumentName: teacher.instrumentName, gradeName: teacher.gradeTeachable)
-                    
                     InstrumentGradeView(sfSymbol: teacher.instrumentSfSymbol, instrumentName: teacher.instrumentName, gradeName: teacher.gradeTeachable, showGradeFrom: true, fixedLength: false)
-                    
-//                    Image(systemName: teacher.instrumentSfSymbol)
-//                    Text(teacher.instrumentName)
-//                    Text("Grade 1 \(Image(systemName: "arrowshape.forward")) \(teacher.gradeTeachable)")
-//                        .foregroundColor(Color.theme.primaryTextInverse)
-//                        .font(.footnote)
-//                        .padding(.horizontal, 8)
-//                        .padding(.vertical, 2)
-//                        .background(
-//                            Capsule()
-//                                .fill(Color.theme.accent)
-//                        )
+
                     Spacer()
-                    Image(systemName: "star.fill")
-                        .font(.subheadline)
-                    Text(String(teacher.averageReviewScore))
-                        .font(.subheadline)
-                        .padding(.leading, -5)
+                    if let baseCost = teacher.baseCost {
+                        Text("£"+baseCost.asNumberString())
+                            .font(.title3)
+                            .foregroundColor(Color.theme.accent)
+                    }
+
                 }
                 .font(.callout)
                 
@@ -49,8 +35,16 @@ struct SearchResultsRowView: View {
                         .frame(width: 100, height: 100)
                     
                     VStack(alignment: .leading, spacing: 5) {
-                        Text("\(teacher.firstName) \(teacher.lastName)")
-                            .font(.title2)
+                        HStack {
+                            Text("\(teacher.firstName) \(teacher.lastName)")
+                                .font(.title2)
+                            Spacer()
+                            Image(systemName: "star.fill")
+                                .font(.subheadline)
+                            Text(String(teacher.averageReviewScore))
+                                .font(.subheadline)
+                                .padding(.leading, -5)
+                        }
                         Text(teacher.tagline)
                             .opacity(0.8)
                             .lineLimit(2)
@@ -75,9 +69,12 @@ struct SearchResultsRowView: View {
                     .opacity(0.8)
                 
             }
+
+
         }
         .padding(.horizontal, -10)
         .foregroundColor(Color.theme.primaryText)
+        
     }
     
     

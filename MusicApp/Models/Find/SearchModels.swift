@@ -14,10 +14,9 @@ struct AddressResult: Identifiable, Hashable {
 }
 
 struct SelectedLocation: Equatable {
-    let title: String
-    let subtitle: String
-    let latitude: Double
-    let longitude: Double
+    var title: String
+    var latitude: Double
+    var longitude: Double
 }
 
 // MARK: - Configuration

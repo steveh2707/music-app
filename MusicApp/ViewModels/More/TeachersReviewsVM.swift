@@ -1,19 +1,15 @@
 //
-//  TeacherVM.swift
+//  TeachersReviewsVM.swift
 //  MusicApp
 //
-//  Created by Steve on 13/06/2023.
+//  Created by Steve on 02/08/2023.
 //
 
 import Foundation
-import MapKit
 
-
-class TeacherVM: ObservableObject {
+class TeacherReviewsVM: ObservableObject {
     
-    @Published var teacher: Teacher? = nil
-    @Published var mapLatitude: Double = 0
-    @Published var mapLongitude: Double = 0
+    @Published var reviews: [Review] = []
     
     @Published var viewState: ViewState?
     @Published var hasError = false
@@ -25,23 +21,21 @@ class TeacherVM: ObservableObject {
         self.networkingManager = networkingManager
     }
     
-    
+
     @MainActor
-    func getTeacherDetails(teacherId: Int) async {
+    func getReviews(teacherId: Int) async {
         
         viewState = .fetching
         defer { viewState = .finished }
         
         do {
 
-            self.teacher = try await networkingManager.request(session: .shared,
-                                                                      .teacher(id: teacherId),
-                                                                      type: Teacher.self)
-            mapLatitude = teacher?.locationLatitude ?? 0
-            mapLongitude = teacher?.locationLongitude ?? 0
+            let decodedResponse = try await networkingManager.request(session: .shared,
+                                                                      .getTeachersReviews(id: teacherId),
+                                                                      type: ReviewResults.self)
+            reviews = decodedResponse.results
             
         } catch {
-           
             if let errorCode = (error as NSError?)?.code, errorCode == NSURLErrorCancelled {
                 return
             }

@@ -14,6 +14,16 @@ extension Date {
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
         //    formatter.dateFormat = "yyyy-MM-dd"
         let date = formatter.date(from: mySqlDateTimeString) ?? Date()
+//        var secondsFromGMT: Int { return TimeZone.current.secondsFromGMT() }
+        self.init(timeInterval: 0, since: date)
+    }
+
+    init(mySqlDateString: String) {
+        let stringArr = mySqlDateString.components(separatedBy: "T")
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        let date = formatter.date(from: stringArr[0]) ?? Date()
         self.init(timeInterval: 0, since: date)
     }
     
@@ -25,9 +35,19 @@ extension Date {
       return Calendar.current.date(byAdding: .day, value: day, to: self)!
     }
     
+    func addOrSubtractMinutes(minutes: Int) -> Date{
+      return Calendar.current.date(byAdding: .minute, value: minutes, to: self)!
+    }
+    
     func asSqlDateString() -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
+        return formatter.string(from: self)
+    }
+    
+    func asSqlDateTimeString() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
         return formatter.string(from: self)
     }
     
@@ -52,7 +72,7 @@ extension Date {
     func asdayOfMonthString() -> String? {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd"
-        return dateFormatter.string(from: self).capitalized
+        return dateFormatter.string(from: self)
     }
     
     func asMonthOfYearNumberString() -> String? {
@@ -76,6 +96,24 @@ extension Date {
     func asYearString() -> String? {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy"
+        return dateFormatter.string(from: self)
+    }
+    
+    func asTime() -> String? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm"
+        return dateFormatter.string(from: self)
+    }
+    
+    func asHour() -> String? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH"
+        return dateFormatter.string(from: self)
+    }
+    
+    func asLongDateTime() -> String? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM-dd-yyyy HH:mm"
         return dateFormatter.string(from: self).capitalized
     }
 

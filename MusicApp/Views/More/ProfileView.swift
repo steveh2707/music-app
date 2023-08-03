@@ -33,6 +33,12 @@ struct ProfileView: View {
                         NavigationLink("Teacher Details") {
                             EditTeacherDetails(teacherDetails: teacherDetails)
                         }
+                        NavigationLink("Preview Profile") {
+                            TeacherView(teacherId: teacherDetails.teacherID)
+                        }
+                        NavigationLink("Teaching Reviews") {
+                            TeachersReviewsView(teacherId: teacherDetails.teacherID)
+                        }
                     } header: {
                         Text("Teacher Details")
                     }
@@ -161,6 +167,11 @@ struct ProfileView: View {
                 }
                 .disabled(!vm.editable)
             }
+            
+            NavigationLink("My Reviews") {
+                UsersReviewsView()
+            }
+            
         } header: {
             Text("User Details")
         }

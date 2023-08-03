@@ -29,13 +29,18 @@ enum EndPoint {
     case makeBooking(token: String?, submissionData: Data?)
     case allBookings(token: String?)
     case cancelBooking(token: String?, bookingId: Int, submissionData: Data?)
+    case getTeachersReviews(id: Int)
+    case getUsersReviews(token: String?)
+    case newReview(token: String?, submissionData: Data?)
     case image(token: String?, submissionData: Data?)
 
     // Use this for any items that need appended to request
     var methodType: MethodType {
         switch self {
         case .teacher,
-                .configuration:
+                .configuration,
+                .getTeachersReviews:
+               
             return .GET()
             
         case .chat(let token, _),
@@ -43,7 +48,8 @@ enum EndPoint {
                 .allChats(let token),
                 .allUnreadChats(let token),
                 .teacherAvailability(let token, _, _),
-                .allBookings(let token):
+                .allBookings(let token),
+                .getUsersReviews(let token):
             return .GET(token: token)
             
         case .newUser(let data),
@@ -52,7 +58,8 @@ enum EndPoint {
             return .POST(data: data)
             
         case .newMessage(let token, _, let data),
-                .makeBooking(let token, let data):
+                .makeBooking(let token, let data),
+                .newReview(let token, let data):
             return .POST(token: token, data: data)
             
         case .cancelBooking(let token, _, let submissionData),
@@ -104,6 +111,12 @@ enum EndPoint {
             return "/user"
         case .updateTeacherDetails:
             return "/teacher"
+        case .newReview:
+            return "/teacher/review"
+        case .getTeachersReviews(let id):
+            return "/teacher/\(id)/review"
+        case .getUsersReviews:
+            return "/user/review"
         }
     }
     

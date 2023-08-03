@@ -10,11 +10,7 @@ import SwiftUI
 struct SignInSignUpView: View {
     
     @EnvironmentObject var global: Global
-    //    @StateObject var signInVM = SignInVM()
-    //    @StateObject var vm = SignUpVM()
-    
     @StateObject var vm = SignInSignUpVM()
-    
     @State var showSignIn = false
     
     var body: some View {
@@ -37,10 +33,10 @@ struct SignInSignUpView: View {
                 HeadingView()
                     .listRowBackground(Color.clear)
                 
-                if showSignIn {
-                    signInView
-                } else {
+                if !showSignIn {
                     signUpView
+                } else {
+                    signInView
                 }
                 Section {
                     
@@ -57,11 +53,6 @@ struct SignInSignUpView: View {
                 }
             }
             .navigationBarTitle("", displayMode: .inline)
-//            .toolbar {
-//                ToolbarItem(placement: .navigationBarLeading) {
-//                    Image(systemName: "gear")
-//                }
-//            }
 #if DEBUG
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -100,43 +91,7 @@ struct SignInSignUpView: View {
             }
         }
     }
-    
-    private var signInView: some View {
-        Group {
-            Section {
-                TextField("Email", text: $vm.credentials.email)
-                    .keyboardType(.emailAddress)
-                
-                SecureField("Password", text: $vm.credentials.password)
-            }
-            .disabled(vm.submissionState == .submitting)
-            
-            submit
-                .listRowBackground(Color.clear)
-        }
-    }
-    
-    
-    private var submit: some View {
-        Button {
-            Task {
-                await vm.login()
-            }
-        } label: {
-            HStack {
-                Spacer()
-                Text("Sign In")
-                Spacer()
-            }
-        }
-        .padding()
-        .background(Color.theme.accent)
-        .foregroundColor(Color.theme.primaryTextInverse)
-        .clipShape(Capsule())
-        .opacity(vm.loginDisabled ? 0.6 : 1)
-        .disabled(vm.loginDisabled)
-        
-    }
+
     
     private var signUpView: some View {
         Group {
@@ -154,7 +109,7 @@ struct SignInSignUpView: View {
                 }
             }
             
-            submit2
+            signUpButton
                 .listRowBackground(Color.clear)
         }
     }
@@ -200,9 +155,9 @@ struct SignInSignUpView: View {
         
     }
     
-    private var submit2: some View {
+    
+    private var signUpButton: some View {
         Button {
-            //            focusedField = nil
             Task {
                 await vm.signUp()
             }
@@ -218,6 +173,45 @@ struct SignInSignUpView: View {
         .foregroundColor(Color.theme.primaryTextInverse)
         .clipShape(Capsule())
     }
+    
+    
+    private var signInView: some View {
+        Group {
+            Section {
+                TextField("Email", text: $vm.credentials.email)
+                    .keyboardType(.emailAddress)
+                
+                SecureField("Password", text: $vm.credentials.password)
+            }
+            .disabled(vm.submissionState == .submitting)
+            
+            signInButton
+                .listRowBackground(Color.clear)
+        }
+    }
+    
+    
+    private var signInButton: some View {
+        Button {
+            Task {
+                await vm.login()
+            }
+        } label: {
+            HStack {
+                Spacer()
+                Text("Sign In")
+                Spacer()
+            }
+        }
+        .padding()
+        .background(Color.theme.accent)
+        .foregroundColor(Color.theme.primaryTextInverse)
+        .clipShape(Capsule())
+        .opacity(vm.loginDisabled ? 0.6 : 1)
+        .disabled(vm.loginDisabled)
+    }
+    
+
     
 }
 

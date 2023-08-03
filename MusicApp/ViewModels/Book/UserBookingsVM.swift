@@ -11,10 +11,13 @@ class UserBookingsVM: ObservableObject {
     
     @Published var bookings: [UserBooking] = []
     @Published var bookingDetail: UserBooking?
-    @Published var cancelReason = ""
+//    @Published var cancelReason = ""
+//    @Published var reviewDetails = ""
+//    @Published var reviewRating = 0
+//    @Published var review: NewReview?
     
     @Published var viewState: ViewState?
-    @Published var submissionState: SubmissionState?
+//    @Published var submissionState: SubmissionState?
     @Published var hasError = false
     @Published var error: NetworkingManager.NetworkingError?
     @Published var showBookingCancelledMessage = false
@@ -31,7 +34,6 @@ class UserBookingsVM: ObservableObject {
             self.bookings = decodedResponse.results
             
         } catch {
-                        
             if let errorCode = (error as NSError?)?.code, errorCode == NSURLErrorCancelled {
                 return
             }
@@ -42,41 +44,40 @@ class UserBookingsVM: ObservableObject {
             } else {
                 self.error = .custom(error: error)
             }
-            
         }
     }
     
-    @MainActor
-    func cancelBooking(token: String?) async {
-        do {
-            submissionState = .submitting
-            
-            let cancelReason = CancelBooking(cancelReason: cancelReason)
-            
-            let encoder = JSONEncoder()
-            let data = try encoder.encode(cancelReason)
-            
-            try await NetworkingManager.shared.request(.cancelBooking(token: token, bookingId: bookingDetail?.bookingID ?? 0, submissionData: data))
-            
-            submissionState = .successful
-            showBookingCancelledMessage = true
-            
-            await getBookings(token: token)
-            
-        } catch {
-            
-            self.hasError = true
-            self.submissionState = .unsuccessful
-            
-            if let networkingError = error as? NetworkingManager.NetworkingError {
-                self.error = networkingError
-            } else {
-                self.error = .custom(error: error)
-            }
-        }
-        
-        
-    }
+//    @MainActor
+//    func cancelBooking(token: String?) async {
+//        do {
+//            submissionState = .submitting
+//            
+//            let cancelReason = CancelBooking(cancelReason: cancelReason)
+//            
+//            let encoder = JSONEncoder()
+//            let data = try encoder.encode(cancelReason)
+//            
+//            try await NetworkingManager.shared.request(.cancelBooking(token: token, bookingId: bookingDetail?.bookingID ?? 0, submissionData: data))
+//            
+//            submissionState = .successful
+//            showBookingCancelledMessage = true
+//            
+//            await getBookings(token: token)
+//            
+//        } catch {
+//            
+//            self.hasError = true
+//            self.submissionState = .unsuccessful
+//            
+//            if let networkingError = error as? NetworkingManager.NetworkingError {
+//                self.error = networkingError
+//            } else {
+//                self.error = .custom(error: error)
+//            }
+//        }
+//        
+//        
+//    }
     
 }
 

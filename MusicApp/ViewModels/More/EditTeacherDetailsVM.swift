@@ -9,20 +9,21 @@ import Foundation
 
 class EditTeacherDetailsVM: ObservableObject {
     @Published var teacherDetails: TeacherDetails
+    
     @Published var submissionState: SubmissionState?
     @Published var hasError = false
     @Published var error: FormError?
     @Published var searchableText = ""
-    @Published var selectedLocation: SelectedLocation?
-    @Published var editable: Bool
+    @Published var selectedLocation: SelectedLocation
+    @Published var editable = false
     
     var teacherDetailsStart: TeacherDetails
     
-    
-    init(teacher: TeacherDetails, editable: Bool) {
+    init(teacher: TeacherDetails) {
         self.teacherDetailsStart = teacher
         self.teacherDetails = teacher
-        self.editable = editable
+//        self.editable = editable
+        self.selectedLocation = SelectedLocation(title: teacher.locationTitle, latitude: teacher.locationLatitude, longitude: teacher.locationLongitude)
     }
     
     

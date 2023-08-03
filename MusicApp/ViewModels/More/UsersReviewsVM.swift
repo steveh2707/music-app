@@ -1,19 +1,15 @@
 //
-//  TeacherVM.swift
+//  ReviewVM.swift
 //  MusicApp
 //
-//  Created by Steve on 13/06/2023.
+//  Created by Steve on 02/08/2023.
 //
 
 import Foundation
-import MapKit
 
-
-class TeacherVM: ObservableObject {
+class UsersReviewsVM: ObservableObject {
     
-    @Published var teacher: Teacher? = nil
-    @Published var mapLatitude: Double = 0
-    @Published var mapLongitude: Double = 0
+    @Published var reviews: [Review] = []
     
     @Published var viewState: ViewState?
     @Published var hasError = false
@@ -25,23 +21,21 @@ class TeacherVM: ObservableObject {
         self.networkingManager = networkingManager
     }
     
-    
+
     @MainActor
-    func getTeacherDetails(teacherId: Int) async {
+    func getReviews(token: String?) async {
         
         viewState = .fetching
         defer { viewState = .finished }
         
         do {
 
-            self.teacher = try await networkingManager.request(session: .shared,
-                                                                      .teacher(id: teacherId),
-                                                                      type: Teacher.self)
-            mapLatitude = teacher?.locationLatitude ?? 0
-            mapLongitude = teacher?.locationLongitude ?? 0
+            let decodedResponse = try await networkingManager.request(session: .shared,
+                                                                      .getUsersReviews(token: token),
+                                                                      type: ReviewResults.self)
+            reviews = decodedResponse.results
             
         } catch {
-           
             if let errorCode = (error as NSError?)?.code, errorCode == NSURLErrorCancelled {
                 return
             }
@@ -55,4 +49,19 @@ class TeacherVM: ObservableObject {
         }
     }
     
+}
+
+
+
+
+struct ReviewResults: Codable {
+    let numResults, page, totalPages: Int
+    let results: [Review]
+
+    enum CodingKeys: String, CodingKey {
+        case numResults = "num_results"
+        case page
+        case totalPages = "total_pages"
+        case results
+    }
 }

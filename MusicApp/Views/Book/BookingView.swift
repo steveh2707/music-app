@@ -17,10 +17,6 @@ struct BookingView: View {
     init(teacher: Teacher) {
         _vm = StateObject(wrappedValue: BookingVM(teacher: teacher))
     }
-
-    let hours: [String] = ["07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00"]
-    
-//    let teacher: Teacher
     
     
     var body: some View {
@@ -30,10 +26,23 @@ struct BookingView: View {
             
             dayHeadings
             
-            ZStack {
-                timelineBackground
+            if vm.lastBookingSlot == "00" {
                 
-                buttonOverlay
+                VStack {
+                    Spacer()
+                    Image(systemName: "magnifyingglass")
+                        .font(.title)
+                    Spacer()
+                    Text(vm.teacher.fullName + " has no availability on any of the selected dates. Please try a new date.")
+                        .multilineTextAlignment(.center)
+                }
+                
+            } else {
+                ZStack {
+                    timelineBackground
+                    
+                    buttonOverlay
+                }
             }
             Spacer()
             
@@ -83,7 +92,6 @@ struct BookingView: View {
             
             Button {
                 vm.searchDate = vm.searchDate.addOrSubtractDays(day: -1)
-                
             } label: {
                 Image(systemName: "chevron.left")
             }
@@ -111,18 +119,20 @@ struct BookingView: View {
     
     private var timelineBackground: some View {
         VStack(spacing: 15) {
-            ForEach(hours, id: \.self) { hour in
-                
-                HStack {
-                    Text(hour)
-                        .font(Font.custom("Avenir", size: 9))
-                        .frame(width: 28, height: 20, alignment: .center)
-                    VStack {
-                        Divider()
+            
+        
+            ForEach(vm.filteredHours, id: \.self) { hour in
+//                if hour > vm.firstBookingSlot {
+                    HStack {
+                        Text(hour+":00")
+                            .font(Font.custom("Avenir", size: 9))
+                            .frame(width: 28, height: 20, alignment: .center)
+                        VStack {
+                            Divider()
+                        }
                     }
-                }
-                .offset(y:-17.5)
-                
+                    .offset(y:-17.5)
+//                }
             }
         }
     }
@@ -134,16 +144,20 @@ struct BookingView: View {
                 ForEach(teacherAvailability) { day in
                     VStack(spacing: 15) {
                         
-                        ForEach(hours, id: \.self) { hour in
-                            let matchingSlot = day.slots.first { hour >= $0.startTime && hour < $0.endTime }
-                            let matchingBooking = day.bookings.first { hour >= $0.startTime && hour < $0.endTime }
+                        ForEach(vm.filteredHours, id: \.self) { hour in
+                            let matchingSlot = day.slots.first { hour >= $0.parsedStartTime.asHour()! && hour < $0.parsedEndTime.asHour()! }
+                            let matchingBooking = day.bookings.first { hour >= $0.parsedStartTime.asHour()! && hour < $0.parsedEndTime.asHour()! }
                             
                             Button(action: {
-                                print("\(day.date): \(hour)")
+                                print("\(day.parsedDate.asShortDateString()): \(hour)")
                                 if matchingBooking == nil {
-                                    vm.selectedDate = day.date
-                                    vm.selectedTime = hour
+//                                    vm.selectedDate = day.date
+//                                    vm.selectedTime = hour
                                     showMakeBookingView.toggle()
+                                    let hoursOffset = Double(hour.replacingOccurrences(of: ":", with: "."))
+                                    let minutesOffset = Int((hoursOffset ?? 0) * 60)
+                                    vm.selectedDateTime = day.parsedDate.addOrSubtractMinutes(minutes: minutesOffset)
+
                                 }
                                 
                             }, label: {

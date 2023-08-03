@@ -14,15 +14,7 @@ struct InstrumentGradeView: View {
     let showGradeFrom: Bool
     let fixedLength: Bool
     
-    init(sfSymbol: String, instrumentName: String, gradeName: String) {
-        self.sfSymbol = sfSymbol
-        self.instrumentName = instrumentName
-        self.gradeName = gradeName
-        self.showGradeFrom = false
-        self.fixedLength = false
-    }
-    
-    init(sfSymbol: String, instrumentName: String, gradeName: String, showGradeFrom: Bool, fixedLength: Bool) {
+    init(sfSymbol: String, instrumentName: String, gradeName: String, showGradeFrom: Bool = false, fixedLength: Bool = false) {
         self.sfSymbol = sfSymbol
         self.instrumentName = instrumentName
         self.gradeName = gradeName

@@ -12,8 +12,9 @@ struct SearchView: View {
     // MARK: PROPERTIES
     
     @EnvironmentObject var global: Global
-    @StateObject var vm = SearchVM()
-//    @State private var hasAppeared = false
+    @State var selectedLocation: SelectedLocation = SelectedLocation(title: "", latitude: 200, longitude: 200)
+    @State var searchCrtieria: SearchCriteria?
+    
     @State private var showLocationSearch: Bool = false
     
     var searchDisabled: Bool {
@@ -49,7 +50,7 @@ struct SearchView: View {
             }
             .padding(.horizontal)
             .sheet(isPresented: $showLocationSearch) {
-                LocationFinderView(selectedLocation: $vm.selectedLocation)
+                LocationFinderView(selectedLocation: $selectedLocation)
             }
             .navigationTitle("Search")
             .task {
@@ -161,8 +162,8 @@ struct SearchView: View {
                 Text("Location")
                     .font(.title3)
                 Spacer()
-                if let location = vm.selectedLocation {
-                    Text(location.title)
+                if selectedLocation.title != "" {
+                    Text(selectedLocation.title)
                         .opacity(0.5)
                 } else {
                     Image(systemName: "chevron.right")
@@ -178,8 +179,8 @@ struct SearchView: View {
             NavigationLink {
                 
                 let searchCriteria = SearchCriteria(
-                    userLatitude: vm.selectedLocation?.latitude,
-                    userLongitude: vm.selectedLocation?.longitude,
+                    userLatitude: selectedLocation.latitude == 200 ? nil : selectedLocation.latitude,
+                    userLongitude: selectedLocation.longitude == 200 ? nil : selectedLocation.longitude,
                     instrumentId: global.selectedInstrument?.instrumentID,
                     gradeRankId: global.selectedGrade?.rank)
                 

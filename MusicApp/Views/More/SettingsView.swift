@@ -16,7 +16,7 @@ struct SettingsView: View {
             
             Section {
                 NavigationLink {
-                    EditTeacherDetails(updatingExistingTeacher: false)
+//                    EditTeacherDetails(updatingExistingTeacher: false)
                 } label: {
                     Text("Become a Teacher")
                 }

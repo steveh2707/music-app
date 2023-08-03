@@ -13,7 +13,7 @@ struct LocationFinderView: View {
     
     @StateObject var vm = LocationFinderVM()
     @FocusState private var isFocusedTextField: Bool
-    @Binding var selectedLocation: SelectedLocation?
+    @Binding var selectedLocation: SelectedLocation
     
     var body: some View {
         NavigationView {

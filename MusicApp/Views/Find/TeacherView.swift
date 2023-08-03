@@ -27,7 +27,7 @@ struct TeacherView: View {
             if (vm.teacher != nil) {
                 VStack {
                     
-                    ScrollView(showsIndicators: false) {
+                    ScrollView {
                         
                         VStack(alignment: .leading) {
                             headingSection
@@ -48,9 +48,9 @@ struct TeacherView: View {
                             
                             reviewSection
                         }
-                        
+                        .padding(.horizontal)
                     }
-                    .padding(.horizontal)
+                    
                     
                     footer
                 }
@@ -169,17 +169,19 @@ struct TeacherView: View {
     
     private var locationSection: some View {
         VStack(alignment: .leading) {
-            
-            Text("Location")
-                .font(.headline)
+            if let teacher = vm.teacher {
+                HStack {
+                    Text("Location")
+                        .font(.headline)
+                    
+                    Spacer()
+                    Text(teacher.locationTitle)
+                        .foregroundColor(Color.theme.accent)
+                }
                 .padding(.vertical, 5)
-            
-            Map(coordinateRegion: .constant(vm.mapRegion), interactionModes: [], annotationItems: vm.locations) { location in
-                MapMarker(coordinate: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude))
                 
+                MapView(latitude: $vm.mapLatitude, longitude: $vm.mapLongitude)
             }
-            .frame(maxWidth: .infinity)
-            .frame(height: 200)
         }
     }
     
@@ -195,53 +197,9 @@ struct TeacherView: View {
                     .padding(.vertical, 5)
                 
                 ForEach(teacher.reviews) { review in
-                    VStack {
-                        
-                        HStack(alignment: .center) {
-                            
-                            UserImageView(imageURL: "")
-                                .frame(width: 70)
-                            
-                            
-                            VStack(alignment: .leading) {
-                                Text("\(review.firstName) \(review.lastName)")
-                                
-                                let date = Date(mySqlDateTimeString: review.createdTimestamp)
-                                Text(date.asMediumDateString())
-                                    .font(.callout)
-                                    .foregroundColor(Color("SecondaryTextColor"))
-                                
-                                
-                                HStack(alignment: .center) {
-                                    Image(systemName: review.sfSymbol)
-                                        .frame(width: 25)
-                                    Text(review.instrumentName)
-                                        .frame(width: 60)
-                                    Text(review.gradeName)
-                                        .foregroundColor(Color.theme.primaryTextInverse)
-                                        .font(.footnote)
-                                        .padding(.horizontal, 8)
-                                        .padding(.vertical, 2)
-                                        .background(
-                                            Capsule()
-                                                .fill(Color.theme.accent)
-                                        )
-                                }
-                                .padding(.top, -5)
-                            }
-                            Spacer()
-                            HStack {
-                                Image(systemName: "star.fill")
-                                    .foregroundColor(.yellow)
-                                Text(String(review.numStars))
-                                    .padding(.leading, -5)
-                            }
-                            .font(.title3)
-                        }
-                        Text(review.details)
-                        Divider()
-                    }
+                    ReviewRowView(review: review, showDivider: true)
                 }
+
             }
         }
     }
@@ -257,10 +215,9 @@ struct TeacherView: View {
                     Spacer()
                     HStack {
                         Spacer()
-
+                        
                         if global.isValidated {
                             NavigationLink {
-//                                ChatView(teacherId: chat.teacherID)
                                 ChatView(teacherID: teacher.teacherID)
                             } label: {
                                 footerButton(buttonText: "Chat")

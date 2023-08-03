@@ -14,18 +14,17 @@ struct EditTeacherDetails: View {
     @StateObject var vm: EditTeacherDetailsVM
     @State private var showLocationSearch = false
     @State private var showSaveChangesAlert = false
-
     
-//    let updatingExistingTeacher: Bool
+//    init (teacherDetails: TeacherDetails? = nil, updatingExistingTeacher: Bool = true) {
+//        if let teacherDetails {
+//            _vm = StateObject(wrappedValue: EditTeacherDetailsVM(teacher: teacherDetails, editable: false))
+//        } else {
+//            _vm = StateObject(wrappedValue: EditTeacherDetailsVM(teacher: TeacherDetails(teacherID: 0, tagline: "", bio: "", locationLatitude: 0.0, locationLongitude: 0.0, averageReviewScore: 0.0, instrumentsTeachable: []), editable:  true))
+//        }
+//    }
     
-    init (teacherDetails: TeacherDetails? = nil, updatingExistingTeacher: Bool = true) {
-        if let teacherDetails {
-            _vm = StateObject(wrappedValue: EditTeacherDetailsVM(teacher: teacherDetails, editable: false))
-//            self.updatingExistingTeacher = true
-        } else {
-            _vm = StateObject(wrappedValue: EditTeacherDetailsVM(teacher: TeacherDetails(teacherID: 0, tagline: "", bio: "", locationLatitude: 0.0, locationLongitude: 0.0, averageReviewScore: 0.0, instrumentsTeachable: []), editable:  true))
-//            self.updatingExistingTeacher = false
-        }
+    init (teacherDetails: TeacherDetails) {
+        _vm = StateObject(wrappedValue: EditTeacherDetailsVM(teacher: teacherDetails))
     }
     
     
@@ -54,10 +53,9 @@ struct EditTeacherDetails: View {
             }
         }
         .onChange(of: vm.selectedLocation, perform: { newLocation in
-            if let newLocation {
-                vm.teacherDetails.locationLatitude = newLocation.latitude
-                vm.teacherDetails.locationLongitude = newLocation.longitude
-            }
+            vm.teacherDetails.locationTitle = newLocation.title
+            vm.teacherDetails.locationLatitude = newLocation.latitude
+            vm.teacherDetails.locationLongitude = newLocation.longitude
         })
         .alert("Do you want to save changes?", isPresented: $showSaveChangesAlert) {
             Button("Save", action: {
@@ -124,6 +122,8 @@ struct EditTeacherDetails: View {
             }
 
             locationSelector
+            MapView(latitude: $vm.selectedLocation.latitude, longitude: $vm.selectedLocation.longitude)
+            
         }
     }
     
@@ -134,15 +134,11 @@ struct EditTeacherDetails: View {
             HStack {
                 Text("Location")
                 Spacer()
-                if let location = vm.selectedLocation {
-                    Text(location.title)
-                        .opacity(0.5)
-                } else {
-                    Image(systemName: "chevron.right")
-                }
+                Text(vm.selectedLocation.title)
+                    .opacity(0.7)
             }
         }
-        .foregroundColor(Color.theme.primaryText)
+        .foregroundColor(vm.editable ? Color.theme.accent : Color.theme.primaryText)
         .disabled(!vm.editable)
     }
     
@@ -201,11 +197,11 @@ struct EditTeacherDetails: View {
 }
 
 // MARK: PREVIEW
-struct BecomeTeacherView_Previews: PreviewProvider {
-    static var previews: some View {
-        EditTeacherDetails()
-    }
-}
+//struct BecomeTeacherView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        EditTeacherDetails()
+//    }
+//}
 
 
 

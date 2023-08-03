@@ -16,16 +16,18 @@ struct UserBookingsView: View {
     @State var hasAppeared = false
     @State var selectedFilter = BookingFilter.upcoming
     @State var showDetailSheet = false
-
+    @State var reloadUserBookings = false
+    
+    var currentDate = Date()
     
     var filteredBookings: [UserBooking] {
         switch selectedFilter {
         case .all:
             return vm.bookings
         case .upcoming:
-            return vm.bookings.filter { $0.formattedDate > Date()}
+            return vm.bookings.filter { $0.parsedStartTime > currentDate}
         case .past:
-            return vm.bookings.filter { $0.formattedDate < Date()}
+            return vm.bookings.filter { $0.parsedStartTime < currentDate}
         }
     }
     
@@ -53,13 +55,24 @@ struct UserBookingsView: View {
                                     }
                                     
                                     .swipeActions {
-                                        Button {
-                                            vm.bookingDetail = booking
-                                            showDetailSheet.toggle()
-                                        } label: {
-                                            Label("Cancel", systemImage: "calendar.badge.minus")
+     
+                                        if booking.parsedStartTime > currentDate {
+                                            Button {
+                                                vm.bookingDetail = booking
+                                                showDetailSheet.toggle()
+                                            } label: {
+                                                Label("Cancel", systemImage: "calendar.badge.minus")
+                                            }
+                                            .tint(.red)
+                                        } else if booking.teacherID != global.teacherDetails?.teacherID {
+                                            Button {
+                                                vm.bookingDetail = booking
+                                                showDetailSheet.toggle()
+                                            } label: {
+                                                Label("Review", systemImage: "star.bubble.fill")
+                                            }
+                                            .tint(Color.theme.accent)
                                         }
-                                        .tint(.red)
                                     }
                                     
                                 }
@@ -67,18 +80,11 @@ struct UserBookingsView: View {
                                 .disabled(booking.cancelled == 1)
                                 .opacity(booking.cancelled == 1 ? 0.4 : 1)
                             }
-                            .onDelete { booking in
-                            }
                         }
                     }
                 }
             }
             .navigationTitle("Bookings")
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-            }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     refresh
@@ -93,14 +99,23 @@ struct UserBookingsView: View {
                 ProgressView()
             }
         }
+        .onChange(of: reloadUserBookings, perform: { newValue in
+            if newValue == true {
+                Task {
+                    await vm.getBookings(token: global.token)
+                    reloadUserBookings = false
+                }
+            }
+        })
         .alert(isPresented: $vm.hasError, error: vm.error) { }
         .alert("Booking Cancelled", isPresented: $vm.showBookingCancelledMessage) {
             Button("OK", role: .cancel) { }
         }
         .sheet(isPresented: $showDetailSheet) {
-            BookingDetailView(vm: vm)
-                    .presentationDetents([.fraction(0.7)])
-
+//            BookingDetailView(vm: vm)
+//                    .presentationDetents([.fraction(0.7)])
+            BookingDetailView(bookingDetail: vm.bookingDetail!, reloadUserBookings: $reloadUserBookings)
+                .presentationDetents([.fraction(0.7)])
         }
     }
     
@@ -184,7 +199,9 @@ struct UserBookingsView: View {
                         .font(.subheadline)
                         .lineLimit(1)
                         
-                        Text("\(booking.startTime) - \(booking.endTime)")
+//                        Text("\(booking.startTime) - \(booking.endTime)")
+//                            .font(.footnote)
+                        Text("\(booking.parsedStartTime.asTime() ?? "") - \(booking.parsedEndTime.asTime() ?? "")")
                             .font(.footnote)
                     }
                 }
@@ -192,10 +209,9 @@ struct UserBookingsView: View {
             
             Spacer(minLength: 0)
             VStack {
-                Text(booking.formattedDate.asdayOfMonthString() ?? "")
-                Text(booking.formattedDate.asMonthOfYearNameShortString()?.uppercased() ?? "")
-                Text(booking.formattedDate.asYearString() ?? "")
-                
+                Text(booking.parsedStartTime.asdayOfMonthString() ?? "")
+                Text(booking.parsedStartTime.asMonthOfYearNameShortString()?.uppercased() ?? "")
+                Text(booking.parsedStartTime.asYearString() ?? "")
             }
             .font(.headline)
             .foregroundColor(Color.theme.accent)

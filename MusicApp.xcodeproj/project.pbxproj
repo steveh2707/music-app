@@ -15,7 +15,6 @@
 		AA0B356F2A4094A700BD9A08 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0B356E2A4094A700BD9A08 /* Double.swift */; };
 		AA0B35762A40A1E200BD9A08 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0B35752A40A1E200BD9A08 /* LocationManager.swift */; };
 		AA0B35782A40A4D400BD9A08 /* MKCoordinateRegion.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0B35772A40A4D400BD9A08 /* MKCoordinateRegion.swift */; };
-		AA0B35822A41A0B900BD9A08 /* SearchVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0B35812A41A0B900BD9A08 /* SearchVM.swift */; };
 		AA17C6492A3CA0D2006F04FD /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA17C6482A3CA0D2006F04FD /* Date.swift */; };
 		AA17C64C2A3CB3F5006F04FD /* SearchResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA17C64B2A3CB3F5006F04FD /* SearchResultsView.swift */; };
 		AA17C64E2A3CB501006F04FD /* SearchResultsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA17C64D2A3CB501006F04FD /* SearchResultsVM.swift */; };
@@ -38,6 +37,14 @@
 		AA55203B2A45D3650089225B /* AllChatsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA55203A2A45D3650089225B /* AllChatsModel.swift */; };
 		AA55203D2A45D3E00089225B /* AllChatsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA55203C2A45D3E00089225B /* AllChatsVM.swift */; };
 		AA5520402A4994690089225B /* SignupValidatorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA55203F2A4994690089225B /* SignupValidatorTest.swift */; };
+		AA6376472A77FA67004B5C6A /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6376462A77FA67004B5C6A /* MapView.swift */; };
+		AA6376492A7A630D004B5C6A /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6376482A7A630D004B5C6A /* RatingView.swift */; };
+		AA63764B2A7A6DA1004B5C6A /* BookingDetailVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA63764A2A7A6DA1004B5C6A /* BookingDetailVM.swift */; };
+		AA63764D2A7AA30B004B5C6A /* UsersReviewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA63764C2A7AA30B004B5C6A /* UsersReviewsView.swift */; };
+		AA63764F2A7AA31D004B5C6A /* UsersReviewsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA63764E2A7AA31D004B5C6A /* UsersReviewsVM.swift */; };
+		AA6376512A7AA865004B5C6A /* ReviewRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6376502A7AA865004B5C6A /* ReviewRowView.swift */; };
+		AA6376532A7AB28D004B5C6A /* TeachersReviewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6376522A7AB28D004B5C6A /* TeachersReviewsView.swift */; };
+		AA6376552A7AB37D004B5C6A /* TeachersReviewsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6376542A7AB37D004B5C6A /* TeachersReviewsVM.swift */; };
 		AA8633822A49A58600AF11A2 /* NetworkingEndpointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8633812A49A58600AF11A2 /* NetworkingEndpointTests.swift */; };
 		AA8633852A49B18C00AF11A2 /* MockURLSessionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8633842A49B18C00AF11A2 /* MockURLSessionProtocol.swift */; };
 		AA8633882A49B37200AF11A2 /* NetworkingManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8633872A49B37200AF11A2 /* NetworkingManagerTests.swift */; };
@@ -115,7 +122,6 @@
 		AA0B356E2A4094A700BD9A08 /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
 		AA0B35752A40A1E200BD9A08 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		AA0B35772A40A4D400BD9A08 /* MKCoordinateRegion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKCoordinateRegion.swift; sourceTree = "<group>"; };
-		AA0B35812A41A0B900BD9A08 /* SearchVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVM.swift; sourceTree = "<group>"; };
 		AA17C6482A3CA0D2006F04FD /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		AA17C64B2A3CB3F5006F04FD /* SearchResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsView.swift; sourceTree = "<group>"; };
 		AA17C64D2A3CB501006F04FD /* SearchResultsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsVM.swift; sourceTree = "<group>"; };
@@ -138,6 +144,14 @@
 		AA55203A2A45D3650089225B /* AllChatsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllChatsModel.swift; sourceTree = "<group>"; };
 		AA55203C2A45D3E00089225B /* AllChatsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllChatsVM.swift; sourceTree = "<group>"; };
 		AA55203F2A4994690089225B /* SignupValidatorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupValidatorTest.swift; sourceTree = "<group>"; };
+		AA6376462A77FA67004B5C6A /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		AA6376482A7A630D004B5C6A /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
+		AA63764A2A7A6DA1004B5C6A /* BookingDetailVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingDetailVM.swift; sourceTree = "<group>"; };
+		AA63764C2A7AA30B004B5C6A /* UsersReviewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersReviewsView.swift; sourceTree = "<group>"; };
+		AA63764E2A7AA31D004B5C6A /* UsersReviewsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersReviewsVM.swift; sourceTree = "<group>"; };
+		AA6376502A7AA865004B5C6A /* ReviewRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewRowView.swift; sourceTree = "<group>"; };
+		AA6376522A7AB28D004B5C6A /* TeachersReviewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeachersReviewsView.swift; sourceTree = "<group>"; };
+		AA6376542A7AB37D004B5C6A /* TeachersReviewsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeachersReviewsVM.swift; sourceTree = "<group>"; };
 		AA8633812A49A58600AF11A2 /* NetworkingEndpointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingEndpointTests.swift; sourceTree = "<group>"; };
 		AA8633842A49B18C00AF11A2 /* MockURLSessionProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLSessionProtocol.swift; sourceTree = "<group>"; };
 		AA8633872A49B37200AF11A2 /* NetworkingManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingManagerTests.swift; sourceTree = "<group>"; };
@@ -419,6 +433,8 @@
 				AA8633DC2A5D709700AF11A2 /* ProfileView.swift */,
 				AA8633F02A657CAE00AF11A2 /* EditTeacherDetails.swift */,
 				AA8633ED2A65790300AF11A2 /* SettingsView.swift */,
+				AA63764C2A7AA30B004B5C6A /* UsersReviewsView.swift */,
+				AA6376522A7AB28D004B5C6A /* TeachersReviewsView.swift */,
 			);
 			path = More;
 			sourceTree = "<group>";
@@ -430,6 +446,8 @@
 				AA8633EA2A65732600AF11A2 /* SignInSignUpVM.swift */,
 				AA8633F42A657E5500AF11A2 /* EditTeacherDetailsVM.swift */,
 				AA8633FA2A66D04600AF11A2 /* ProfileViewVM.swift */,
+				AA63764E2A7AA31D004B5C6A /* UsersReviewsVM.swift */,
+				AA6376542A7AB37D004B5C6A /* TeachersReviewsVM.swift */,
 			);
 			path = More;
 			sourceTree = "<group>";
@@ -448,6 +466,7 @@
 			children = (
 				AA8633B22A4DC31700AF11A2 /* BookingVM.swift */,
 				AA8633D12A58008300AF11A2 /* UserBookingsVM.swift */,
+				AA63764A2A7A6DA1004B5C6A /* BookingDetailVM.swift */,
 			);
 			path = Book;
 			sourceTree = "<group>";
@@ -455,7 +474,6 @@
 		AA8633CA2A56FA4E00AF11A2 /* Find */ = {
 			isa = PBXGroup;
 			children = (
-				AA0B35812A41A0B900BD9A08 /* SearchVM.swift */,
 				AA17C64D2A3CB501006F04FD /* SearchResultsVM.swift */,
 				AAF4C3322A38AAE20082C142 /* TeacherVM.swift */,
 				AA8633F62A6581D800AF11A2 /* LocationFinderVM.swift */,
@@ -539,6 +557,9 @@
 				AA0B356C2A40737A00BD9A08 /* UserImageView.swift */,
 				AA8633C12A55B7E200AF11A2 /* NotificationCountView.swift */,
 				AA8633D82A5C3D2500AF11A2 /* InstrumentGradeView.swift */,
+				AA6376462A77FA67004B5C6A /* MapView.swift */,
+				AA6376482A7A630D004B5C6A /* RatingView.swift */,
+				AA6376502A7AA865004B5C6A /* ReviewRowView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -734,22 +755,25 @@
 			files = (
 				AA0B35652A40628F00BD9A08 /* ImageRetriever.swift in Sources */,
 				AAF4C33D2A38CA6F0082C142 /* Endpoint.swift in Sources */,
+				AA6376532A7AB28D004B5C6A /* TeachersReviewsView.swift in Sources */,
 				AAF4C3542A39F9040082C142 /* SignupValidator.swift in Sources */,
 				AA8633D52A58009D00AF11A2 /* UserBookingsModel.swift in Sources */,
 				AA400A352A3B2A2E006C5448 /* MoreView.swift in Sources */,
 				AA8633B72A4DC4F900AF11A2 /* BookingView.swift in Sources */,
 				AA5520302A434CB30089225B /* ChatModel.swift in Sources */,
+				AA6376472A77FA67004B5C6A /* MapView.swift in Sources */,
 				AA0B35762A40A1E200BD9A08 /* LocationManager.swift in Sources */,
 				AA8633F32A657E1400AF11A2 /* BecomeTeacherModel.swift in Sources */,
 				AA8633D22A58008300AF11A2 /* UserBookingsVM.swift in Sources */,
 				AA8633E92A616BD200AF11A2 /* SignInSignUpView.swift in Sources */,
 				AA8633F12A657CAE00AF11A2 /* EditTeacherDetails.swift in Sources */,
+				AA6376492A7A630D004B5C6A /* RatingView.swift in Sources */,
 				AA86338F2A49C8F100AF11A2 /* StaticJSONMapper.swift in Sources */,
-				AA0B35822A41A0B900BD9A08 /* SearchVM.swift in Sources */,
 				AA17C64E2A3CB501006F04FD /* SearchResultsVM.swift in Sources */,
 				AA8633FB2A66D04600AF11A2 /* ProfileViewVM.swift in Sources */,
 				AA8633E72A61557200AF11A2 /* Data.swift in Sources */,
 				AA400A3C2A3B3173006C5448 /* ApiGenericResponse.swift in Sources */,
+				AA63764F2A7AA31D004B5C6A /* UsersReviewsVM.swift in Sources */,
 				AA8633B52A4DC33D00AF11A2 /* BookingModel.swift in Sources */,
 				AA0B356F2A4094A700BD9A08 /* Double.swift in Sources */,
 				AA8633DD2A5D709700AF11A2 /* ProfileView.swift in Sources */,
@@ -792,15 +816,19 @@
 				AA8633C22A55B7E200AF11A2 /* NotificationCountView.swift in Sources */,
 				AAF4C3212A38AA5B0082C142 /* MusicApp.swift in Sources */,
 				AA5520392A45D2FB0089225B /* AllChatsView.swift in Sources */,
+				AA6376512A7AA865004B5C6A /* ReviewRowView.swift in Sources */,
 				AA17C6502A3CB51E006F04FD /* SearchResultsModel.swift in Sources */,
 				AA8633D72A5C2A6900AF11A2 /* Filters.swift in Sources */,
 				AA5520342A449FD10089225B /* SignInModel.swift in Sources */,
+				AA63764D2A7AA30B004B5C6A /* UsersReviewsView.swift in Sources */,
 				AAF4C3312A38AACF0082C142 /* TeacherView.swift in Sources */,
 				AA400A3A2A3B2FBF006C5448 /* SignInVM.swift in Sources */,
 				AA400A402A3B370D006C5448 /* Global.swift in Sources */,
 				AA8633E32A5EB29E00AF11A2 /* ImagePicker.swift in Sources */,
 				AA0B356B2A40664800BD9A08 /* CachedImage.swift in Sources */,
+				AA6376552A7AB37D004B5C6A /* TeachersReviewsVM.swift in Sources */,
 				AA0B35782A40A4D400BD9A08 /* MKCoordinateRegion.swift in Sources */,
+				AA63764B2A7A6DA1004B5C6A /* BookingDetailVM.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -33,7 +33,7 @@ struct SearchResults: Codable {
 struct TeacherResult: Codable, Identifiable, Hashable {
     let id: Int
     let teacherID: Int
-    let firstName, lastName, tagline, bio: String
+    let firstName, lastName, tagline, bio, locationTitle: String
     let locationLatitude, locationLongitude: Double
     let averageReviewScore: Double
     let profileImageURL: String?
@@ -42,6 +42,7 @@ struct TeacherResult: Codable, Identifiable, Hashable {
     let instrumentSfSymbol: String
     let gradeTeachable: String
     let rank: Int
+    let baseCost: Double?
     let distanceInKM: Double?
 
     enum CodingKeys: String, CodingKey {
@@ -50,6 +51,7 @@ struct TeacherResult: Codable, Identifiable, Hashable {
         case firstName = "first_name"
         case lastName = "last_name"
         case tagline, bio
+        case locationTitle = "location_title"
         case locationLatitude = "location_latitude"
         case locationLongitude = "location_longitude"
         case averageReviewScore = "average_review_score"
@@ -59,6 +61,7 @@ struct TeacherResult: Codable, Identifiable, Hashable {
         case instrumentSfSymbol = "instrument_sf_symbol"
         case gradeTeachable = "grade_teachable"
         case rank
+        case baseCost = "base_cost"
         case distanceInKM = "distance_in_km"
     }
 

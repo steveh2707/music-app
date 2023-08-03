@@ -11,70 +11,94 @@ struct BookingDetailView: View {
     
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var global: Global
-    @StateObject var vm: UserBookingsVM
+    //    @StateObject var vm: UserBookingsVM
+    @StateObject var vm: BookingDetailVM
+    @Binding var reloadUserBookings: Bool
     
     
-    init(vm: UserBookingsVM) {
-        _vm = StateObject(wrappedValue: vm)
+    init(bookingDetail: UserBooking, reloadUserBookings: Binding<Bool>) {
+        //        _vm = StateObject(wrappedValue: vm)
+        _vm = StateObject(wrappedValue: BookingDetailVM(bookingDetail: bookingDetail))
+        _reloadUserBookings = reloadUserBookings
     }
     
     var body: some View {
         NavigationView {
             Form {
                 
-                if let booking = vm.bookingDetail {
-                    Section {
-                        HStack {
-                            Image(systemName: "person.fill")
-                                .frame(width: 25)
-                            Text(booking.teacher.fullName)
-                        }
-                        HStack {
-                            Image(systemName: "studentdesk")
-                                .frame(width: 25)
-                            Text(booking.student.fullName)
-                        }
-                        HStack {
-                            Image(systemName: "calendar")
-                                .frame(width: 25)
-                            Text(booking.formattedDate.asMediumDateString())
-                        }
-                        HStack {
-                            Image(systemName: "clock")
-                                .frame(width: 25)
-                            Text("\(booking.startTime) - \(booking.endTime)")
-                        }
-                        HStack {
-                            Image(systemName: booking.instrument.sfSymbol)
-                                .frame(width: 25)
-                            Text(booking.instrument.name)
-                        }
-                        HStack {
-                            Image(systemName: "music.note")
-                                .frame(width: 25)
-                            Text(booking.grade.name)
-                        }
-
+                Section {
+                    HStack {
+                        Image(systemName: "person.fill")
+                            .frame(width: 25)
+                        Text(vm.bookingDetail.teacher.fullName)
                     }
-
+                    HStack {
+                        Image(systemName: "studentdesk")
+                            .frame(width: 25)
+                        Text(vm.bookingDetail.student.fullName)
+                    }
+                    HStack {
+                        Image(systemName: "calendar")
+                            .frame(width: 25)
+                        Text(vm.bookingDetail.parsedStartTime.asMediumDateString())
+                    }
+                    HStack {
+                        Image(systemName: "clock")
+                            .frame(width: 25)
+                        Text("\(vm.bookingDetail.parsedStartTime.asTime() ?? "") - \(vm.bookingDetail.parsedEndTime.asTime() ?? "")")
+                    }
+                    HStack {
+                        Image(systemName: vm.bookingDetail.instrument.sfSymbol)
+                            .frame(width: 25)
+                        Text(vm.bookingDetail.instrument.name)
+                    }
+                    HStack {
+                        Image(systemName: "music.note")
+                            .frame(width: 25)
+                        Text(vm.bookingDetail.grade.name)
+                    }
+                }
+                
+                if vm.bookingDetail.parsedStartTime > Date() {
                     Section {
                         TextField("Cancel Reason", text: $vm.cancelReason, axis: .vertical)
                         HStack {
                             Spacer()
                             Button("Cancel Booking", role: .destructive) {
-                                presentationMode.wrappedValue.dismiss()
+                                
                                 Task {
                                     await vm.cancelBooking(token: global.token)
+                                    reloadUserBookings = true
+                                    presentationMode.wrappedValue.dismiss()
                                 }
                             }
                             .disabled(vm.cancelReason == "")
                             Spacer()
                         }
+                    } header: {
+                        Text("Cancel Booking")
                     }
-                    
                 }
-                
-
+                else if vm.bookingDetail.teacherID != global.teacherDetails?.teacherID {
+                    Section {
+                        RatingView(rating: $vm.review.rating)
+                        TextField("Review Details", text: $vm.review.details, axis: .vertical)
+                        HStack {
+                            Spacer()
+                            Button("Save Review") {
+                                
+                                Task {
+                                    await vm.postReview(token: global.token)
+                                    presentationMode.wrappedValue.dismiss()
+                                }
+                            }
+                            .disabled(vm.review.details == "" || vm.review.rating == 0)
+                            Spacer()
+                        }
+                    } header: {
+                        Text("Leave Review")
+                    }
+                }
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {

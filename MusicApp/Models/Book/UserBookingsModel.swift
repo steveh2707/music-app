@@ -16,10 +16,12 @@ struct UserBookingsResponse: Codable {
 // MARK: - Result
 struct UserBooking: Codable, Identifiable {
     var id: Int { bookingID }
-    var formattedDate: Date { Date(mySqlDateTimeString: date) }
+//    var formattedDate: Date { Date(mySqlDateTimeString: date) }
+    var parsedStartTime: Date { Date(mySqlDateTimeString: startTime) }
+    var parsedEndTime: Date { Date(mySqlDateTimeString: endTime) }
     
     let bookingID: Int
-    let dateCreated, date, startTime, endTime: String
+    let dateCreated, startTime, endTime: String
     let priceFinal, cancelled: Int
     let cancelReason: String?
     let studentID, teacherID: Int
@@ -30,7 +32,7 @@ struct UserBooking: Codable, Identifiable {
     enum CodingKeys: String, CodingKey {
         case bookingID = "booking_id"
         case dateCreated = "date_created"
-        case date
+//        case date
         case startTime = "start_time"
         case endTime = "end_time"
         case priceFinal = "price_final"
@@ -85,4 +87,21 @@ struct UserSimple: Codable, Equatable {
     }
     
     var fullName: String {firstName + " " + lastName}
+}
+
+
+// MARK: - NewReview
+struct NewReview: Codable {
+    let teacherId: Int
+    var rating: Int
+    var details: String
+    let gradeId: Int
+    let instrumentId: Int
+    
+    enum CodingKeys: String, CodingKey {
+        case teacherId = "teacher_id"
+        case rating, details
+        case gradeId = "grade_id"
+        case instrumentId = "instrument_id"
+    }
 }

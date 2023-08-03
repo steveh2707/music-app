@@ -52,6 +52,9 @@ struct SearchResultsView: View {
                 }
             }
             .navigationBarTitle("Results", displayMode: .inline)
+            .onAppear {
+                global.lessonCost = nil
+            }
 
     }
     
@@ -60,6 +63,9 @@ struct SearchResultsView: View {
             ZStack {
                 NavigationLink {
                     TeacherView(teacherId: teacher.teacherID)
+                        .onAppear {
+                            global.lessonCost = teacher.baseCost
+                        }
                 } label: {
                     EmptyView()
                 }

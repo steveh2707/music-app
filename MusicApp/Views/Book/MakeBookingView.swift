@@ -21,17 +21,22 @@ struct MakeBookingView: View {
                     HStack {
                         Image(systemName: "person")
                             .frame(width: 25)
-                        Text("\(vm.teacher.firstName) \(vm.teacher.lastName)")
+                        Text(vm.teacher.fullName)
                     }
                     HStack {
                         Image(systemName: "calendar")
                             .frame(width: 25)
-                        Text(vm.selectedDate ?? "")
+//                        Text(vm.selectedDate ?? "")
+                        Text(vm.selectedDateTime?.asMediumDateString() ?? "")
                     }
                     HStack {
                         Image(systemName: "clock")
                             .frame(width: 25)
-                        Text(vm.selectedTime ?? "") + Text(" (1 hour)")
+//                        Text(vm.selectedTime ?? "") + Text(" (1 hour)")
+                        if let selectedDateTime = vm.selectedDateTime {
+                            Text("\(selectedDateTime.asTime() ?? "") - \(selectedDateTime.addOrSubtractMinutes(minutes: 60).asTime() ?? "")")
+                        }
+                        
                     }
                     HStack {
                         Image(systemName: global.selectedInstrument?.sfSymbol ?? "questionmark")
@@ -52,7 +57,7 @@ struct MakeBookingView: View {
                     HStack {
                         Image(systemName: "sterlingsign")
                             .frame(width: 25)
-                        Text(String(vm.priceFinal))
+                        Text(global.lessonCost?.asNumberStringWith2DecimalPlaces() ?? "")
                     }
 //                    HStack {
 //                        Image(systemName: "banknote")
@@ -82,7 +87,7 @@ struct MakeBookingView: View {
                 Section {
                     Button("Make Booking") {
                         Task {
-                            await vm.makeBooking(token: global.token, instrumentId: global.selectedInstrument?.instrumentID ?? 0, gradeId: global.selectedGrade?.gradeID ?? 0)
+                            await vm.makeBooking(token: global.token, instrumentId: global.selectedInstrument?.instrumentID ?? 0, gradeId: global.selectedGrade?.gradeID ?? 0, priceFinal: global.lessonCost ?? 0)
                         }
                     }
                     Button("Cancel") {
