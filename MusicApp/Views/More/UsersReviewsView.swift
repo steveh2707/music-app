@@ -12,46 +12,48 @@ struct UsersReviewsView: View {
     @EnvironmentObject var global: Global
     @StateObject private var vm = UsersReviewsVM()
     
-    
     var body: some View {
-        NavigationStack {
-            List {
+        ZStack {
+            
+            if vm.reviews.isEmpty && vm.viewState == .finished {
+                NoContentView(description: "You haven't written any reviews yet. Write teacher reviews on any previous booking.")
+            } else {
                 
-                if vm.reviews.isEmpty {
-                    Text("You haven't written any reviews yet. Write teacher reviews on any previous booking.")
-//                    ContentUnavailableView.search
-                }
-                
-                ForEach(vm.reviews) { review in
-                    
-                    ReviewRowView(review: review)
-                        .swipeActions(allowsFullSwipe: false) {
-                            Button(role: .destructive) {
-                                //TODO: Delete
-                            } label: {
-                                Label("Delete", systemImage: "trash.fill")
+                List {
+                    ForEach(vm.reviews) { review in
+                        
+                        ReviewRowView(review: review)
+                            .swipeActions(allowsFullSwipe: false) {
+                                Button(role: .destructive) {
+                                    //TODO: Delete
+                                } label: {
+                                    Label("Delete", systemImage: "trash.fill")
+                                }
+                                
+                                Button {
+                                    //TODO: Edit
+                                } label: {
+                                    Label("Edit", systemImage: "pencil")
+                                }
+                                .tint(Color.theme.accent)
                             }
-                            
-                            Button {
-                                //TODO: Edit
-                            } label: {
-                                Label("Edit", systemImage: "pencil")
-                            }
-                            .tint(Color.theme.accent)
-                        }
+                    }
                 }
-                
+                .padding(.top, 5)
+                .listStyle(.plain)
             }
-            .padding(.top, 5)
-            .listStyle(.plain)
-            .navigationTitle("My Reviews")
-            .task {
-                await vm.getReviews(token: global.token)
+        }
+        .overlay {
+            if vm.viewState == .fetching {
+                ProgressView()
             }
-            .alert(isPresented: $vm.hasError, error: vm.error) { }
+        }
+        .navigationTitle("My Reviews")
+        .alert(isPresented: $vm.hasError, error: vm.error) { }
+        .task {
+            await vm.getReviews(token: global.token)
         }
     }
-    
 }
 
 struct ReviewView_Previews: PreviewProvider {

@@ -154,6 +154,10 @@ final class NetworkingManager: NetworkingManagerImpl {
             let boundary = "Boundary-\(UUID().uuidString)"
             request.setValue("multipart/form-data; boundary="+boundary, forHTTPHeaderField:"Content-Type");
             if let data = data { request.httpBody = multipartFormDataBody(boundary, data) }
+            
+        case .DELETE(token: let token):
+            request.httpMethod = "DELETE"
+            if let token { request.setValue(token, forHTTPHeaderField: "authorization") }
         }
         
         return request

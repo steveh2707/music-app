@@ -172,6 +172,10 @@ struct ProfileView: View {
                 UsersReviewsView()
             }
             
+            NavigationLink("My Favourites") {
+                FavouriteTeachersView()
+            }
+            
         } header: {
             Text("User Details")
         }

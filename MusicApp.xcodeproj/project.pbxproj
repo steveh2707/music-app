@@ -62,7 +62,7 @@
 		AA8633AC2A4C4BF600AF11A2 /* Error&State.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8633AB2A4C4BF600AF11A2 /* Error&State.swift */; };
 		AA8633B32A4DC31700AF11A2 /* BookingVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8633B22A4DC31700AF11A2 /* BookingVM.swift */; };
 		AA8633B52A4DC33D00AF11A2 /* BookingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8633B42A4DC33D00AF11A2 /* BookingModel.swift */; };
-		AA8633B72A4DC4F900AF11A2 /* BookingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8633B62A4DC4F900AF11A2 /* BookingView.swift */; };
+		AA8633B72A4DC4F900AF11A2 /* BookingScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8633B62A4DC4F900AF11A2 /* BookingScheduleView.swift */; };
 		AA8633B92A54410100AF11A2 /* MakeBookingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8633B82A54410100AF11A2 /* MakeBookingView.swift */; };
 		AA8633BB2A5579D600AF11A2 /* SearchValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8633BA2A5579D600AF11A2 /* SearchValidator.swift */; };
 		AA8633BE2A559DE800AF11A2 /* SocketIO in Frameworks */ = {isa = PBXBuildFile; productRef = AA8633BD2A559DE800AF11A2 /* SocketIO */; };
@@ -87,6 +87,13 @@
 		AA8633F72A6581D800AF11A2 /* LocationFinderVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8633F62A6581D800AF11A2 /* LocationFinderVM.swift */; };
 		AA8633F92A66B18C00AF11A2 /* ProfileTeacherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8633F82A66B18C00AF11A2 /* ProfileTeacherView.swift */; };
 		AA8633FB2A66D04600AF11A2 /* ProfileViewVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8633FA2A66D04600AF11A2 /* ProfileViewVM.swift */; };
+		AADE8B342A7CFECF00FED45B /* TempView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADE8B332A7CFECF00FED45B /* TempView.swift */; };
+		AADE8B362A7D0E0E00FED45B /* BookingInfoScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADE8B352A7D0E0E00FED45B /* BookingInfoScreen.swift */; };
+		AADE8B392A7D0E3500FED45B /* BookingSelectorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADE8B382A7D0E3500FED45B /* BookingSelectorButton.swift */; };
+		AADE8B3B2A8A327C00FED45B /* Sort.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADE8B3A2A8A327C00FED45B /* Sort.swift */; };
+		AADE8B3D2A8A62B300FED45B /* FavouriteTeachersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADE8B3C2A8A62B300FED45B /* FavouriteTeachersView.swift */; };
+		AADE8B3F2A8A62F400FED45B /* FavouriteTeachersVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADE8B3E2A8A62F400FED45B /* FavouriteTeachersVM.swift */; };
+		AADE8B412A8A699900FED45B /* NoContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADE8B402A8A699900FED45B /* NoContentView.swift */; };
 		AAE4ED1B2A3BAFED00ED630C /* HeadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE4ED1A2A3BAFED00ED630C /* HeadingView.swift */; };
 		AAE4ED1D2A3BB50B00ED630C /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE4ED1C2A3BB50B00ED630C /* Color.swift */; };
 		AAF4C3212A38AA5B0082C142 /* MusicApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF4C3202A38AA5B0082C142 /* MusicApp.swift */; };
@@ -169,7 +176,7 @@
 		AA8633AB2A4C4BF600AF11A2 /* Error&State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Error&State.swift"; sourceTree = "<group>"; };
 		AA8633B22A4DC31700AF11A2 /* BookingVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingVM.swift; sourceTree = "<group>"; };
 		AA8633B42A4DC33D00AF11A2 /* BookingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingModel.swift; sourceTree = "<group>"; };
-		AA8633B62A4DC4F900AF11A2 /* BookingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingView.swift; sourceTree = "<group>"; };
+		AA8633B62A4DC4F900AF11A2 /* BookingScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingScheduleView.swift; sourceTree = "<group>"; };
 		AA8633B82A54410100AF11A2 /* MakeBookingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeBookingView.swift; sourceTree = "<group>"; };
 		AA8633BA2A5579D600AF11A2 /* SearchValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchValidator.swift; sourceTree = "<group>"; };
 		AA8633C12A55B7E200AF11A2 /* NotificationCountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCountView.swift; sourceTree = "<group>"; };
@@ -193,6 +200,13 @@
 		AA8633F62A6581D800AF11A2 /* LocationFinderVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationFinderVM.swift; sourceTree = "<group>"; };
 		AA8633F82A66B18C00AF11A2 /* ProfileTeacherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTeacherView.swift; sourceTree = "<group>"; };
 		AA8633FA2A66D04600AF11A2 /* ProfileViewVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewVM.swift; sourceTree = "<group>"; };
+		AADE8B332A7CFECF00FED45B /* TempView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempView.swift; sourceTree = "<group>"; };
+		AADE8B352A7D0E0E00FED45B /* BookingInfoScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingInfoScreen.swift; sourceTree = "<group>"; };
+		AADE8B382A7D0E3500FED45B /* BookingSelectorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingSelectorButton.swift; sourceTree = "<group>"; };
+		AADE8B3A2A8A327C00FED45B /* Sort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sort.swift; sourceTree = "<group>"; };
+		AADE8B3C2A8A62B300FED45B /* FavouriteTeachersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteTeachersView.swift; sourceTree = "<group>"; };
+		AADE8B3E2A8A62F400FED45B /* FavouriteTeachersVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteTeachersVM.swift; sourceTree = "<group>"; };
+		AADE8B402A8A699900FED45B /* NoContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoContentView.swift; sourceTree = "<group>"; };
 		AAE4ED1A2A3BAFED00ED630C /* HeadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadingView.swift; sourceTree = "<group>"; };
 		AAE4ED1C2A3BB50B00ED630C /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		AAF4C31D2A38AA5B0082C142 /* MusicApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -380,6 +394,7 @@
 				AA8633AB2A4C4BF600AF11A2 /* Error&State.swift */,
 				AAF4C33C2A38CA6F0082C142 /* Endpoint.swift */,
 				AA8633D62A5C2A6900AF11A2 /* Filters.swift */,
+				AADE8B3A2A8A327C00FED45B /* Sort.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -417,10 +432,11 @@
 		AA8633C52A56FA1A00AF11A2 /* Book */ = {
 			isa = PBXGroup;
 			children = (
-				AA8633B62A4DC4F900AF11A2 /* BookingView.swift */,
+				AA8633B62A4DC4F900AF11A2 /* BookingScheduleView.swift */,
 				AA8633B82A54410100AF11A2 /* MakeBookingView.swift */,
 				AA8633CF2A58007400AF11A2 /* UserBookingsView.swift */,
 				AA8633DA2A5C5D3D00AF11A2 /* BookingDetailView.swift */,
+				AADE8B352A7D0E0E00FED45B /* BookingInfoScreen.swift */,
 			);
 			path = Book;
 			sourceTree = "<group>";
@@ -435,6 +451,7 @@
 				AA8633ED2A65790300AF11A2 /* SettingsView.swift */,
 				AA63764C2A7AA30B004B5C6A /* UsersReviewsView.swift */,
 				AA6376522A7AB28D004B5C6A /* TeachersReviewsView.swift */,
+				AADE8B3C2A8A62B300FED45B /* FavouriteTeachersView.swift */,
 			);
 			path = More;
 			sourceTree = "<group>";
@@ -448,6 +465,7 @@
 				AA8633FA2A66D04600AF11A2 /* ProfileViewVM.swift */,
 				AA63764E2A7AA31D004B5C6A /* UsersReviewsVM.swift */,
 				AA6376542A7AB37D004B5C6A /* TeachersReviewsVM.swift */,
+				AADE8B3E2A8A62F400FED45B /* FavouriteTeachersVM.swift */,
 			);
 			path = More;
 			sourceTree = "<group>";
@@ -548,9 +566,18 @@
 			path = ImagePicker;
 			sourceTree = "<group>";
 		};
+		AADE8B372A7D0E1E00FED45B /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				AADE8B382A7D0E3500FED45B /* BookingSelectorButton.swift */,
+			);
+			path = Buttons;
+			sourceTree = "<group>";
+		};
 		AAE4ED172A3BAFBF00ED630C /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				AADE8B372A7D0E1E00FED45B /* Buttons */,
 				AA8633FC2A69D23600AF11A2 /* ImagePicker */,
 				AA8633AF2A4C4EE100AF11A2 /* CachedImage */,
 				AAE4ED1A2A3BAFED00ED630C /* HeadingView.swift */,
@@ -560,6 +587,7 @@
 				AA6376462A77FA67004B5C6A /* MapView.swift */,
 				AA6376482A7A630D004B5C6A /* RatingView.swift */,
 				AA6376502A7AA865004B5C6A /* ReviewRowView.swift */,
+				AADE8B402A8A699900FED45B /* NoContentView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -596,6 +624,7 @@
 				AA8633892A49C4C600AF11A2 /* Assets */,
 				AAF4C3242A38AA5C0082C142 /* Assets.xcassets */,
 				AAF4C3262A38AA5C0082C142 /* Preview Content */,
+				AADE8B332A7CFECF00FED45B /* TempView.swift */,
 			);
 			path = MusicApp;
 			sourceTree = "<group>";
@@ -759,13 +788,14 @@
 				AAF4C3542A39F9040082C142 /* SignupValidator.swift in Sources */,
 				AA8633D52A58009D00AF11A2 /* UserBookingsModel.swift in Sources */,
 				AA400A352A3B2A2E006C5448 /* MoreView.swift in Sources */,
-				AA8633B72A4DC4F900AF11A2 /* BookingView.swift in Sources */,
+				AA8633B72A4DC4F900AF11A2 /* BookingScheduleView.swift in Sources */,
 				AA5520302A434CB30089225B /* ChatModel.swift in Sources */,
 				AA6376472A77FA67004B5C6A /* MapView.swift in Sources */,
 				AA0B35762A40A1E200BD9A08 /* LocationManager.swift in Sources */,
 				AA8633F32A657E1400AF11A2 /* BecomeTeacherModel.swift in Sources */,
 				AA8633D22A58008300AF11A2 /* UserBookingsVM.swift in Sources */,
 				AA8633E92A616BD200AF11A2 /* SignInSignUpView.swift in Sources */,
+				AADE8B3B2A8A327C00FED45B /* Sort.swift in Sources */,
 				AA8633F12A657CAE00AF11A2 /* EditTeacherDetails.swift in Sources */,
 				AA6376492A7A630D004B5C6A /* RatingView.swift in Sources */,
 				AA86338F2A49C8F100AF11A2 /* StaticJSONMapper.swift in Sources */,
@@ -777,6 +807,7 @@
 				AA8633B52A4DC33D00AF11A2 /* BookingModel.swift in Sources */,
 				AA0B356F2A4094A700BD9A08 /* Double.swift in Sources */,
 				AA8633DD2A5D709700AF11A2 /* ProfileView.swift in Sources */,
+				AADE8B412A8A699900FED45B /* NoContentView.swift in Sources */,
 				AA0B356D2A40737A00BD9A08 /* UserImageView.swift in Sources */,
 				AAF4C34C2A39D8C50082C142 /* SignupModel.swift in Sources */,
 				AA55202E2A4326750089225B /* ChatView.swift in Sources */,
@@ -791,13 +822,17 @@
 				AA8633BB2A5579D600AF11A2 /* SearchValidator.swift in Sources */,
 				AA8633B32A4DC31700AF11A2 /* BookingVM.swift in Sources */,
 				AA8633AC2A4C4BF600AF11A2 /* Error&State.swift in Sources */,
+				AADE8B3F2A8A62F400FED45B /* FavouriteTeachersVM.swift in Sources */,
 				AA8633DB2A5C5D3D00AF11A2 /* BookingDetailView.swift in Sources */,
 				AAF4C3362A38AB220082C142 /* TeacherModel.swift in Sources */,
 				AA8633B92A54410100AF11A2 /* MakeBookingView.swift in Sources */,
 				AA400A3E2A3B3260006C5448 /* SignInView.swift in Sources */,
+				AADE8B342A7CFECF00FED45B /* TempView.swift in Sources */,
 				AA17C6492A3CA0D2006F04FD /* Date.swift in Sources */,
 				AA5520272A41B6A40089225B /* SearchView.swift in Sources */,
+				AADE8B3D2A8A62B300FED45B /* FavouriteTeachersView.swift in Sources */,
 				AA55201F2A41A2BB0089225B /* LocationFinderView.swift in Sources */,
+				AADE8B392A7D0E3500FED45B /* BookingSelectorButton.swift in Sources */,
 				AA5520292A41C5F30089225B /* SearchModels.swift in Sources */,
 				AA8633D02A58007400AF11A2 /* UserBookingsView.swift in Sources */,
 				AAE4ED1D2A3BB50B00ED630C /* Color.swift in Sources */,
@@ -827,6 +862,7 @@
 				AA8633E32A5EB29E00AF11A2 /* ImagePicker.swift in Sources */,
 				AA0B356B2A40664800BD9A08 /* CachedImage.swift in Sources */,
 				AA6376552A7AB37D004B5C6A /* TeachersReviewsVM.swift in Sources */,
+				AADE8B362A7D0E0E00FED45B /* BookingInfoScreen.swift in Sources */,
 				AA0B35782A40A4D400BD9A08 /* MKCoordinateRegion.swift in Sources */,
 				AA63764B2A7A6DA1004B5C6A /* BookingDetailVM.swift in Sources */,
 			);
@@ -895,6 +931,8 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEBUG_ACTIVITY_MODE = "";
+				"DEBUG_ACTIVITY_MODE[sdk=iphonesimulator*]" = disable;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -913,7 +951,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_ENABLE_DEBUG_INFO = "";
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -955,6 +993,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEBUG_ACTIVITY_MODE = "";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;

@@ -66,7 +66,6 @@ struct UserDetails: Codable, Equatable {
         try container.encode(lastName, forKey: .lastName)
         try container.encode(email, forKey: .email)
         try container.encode(dobOutput, forKey: .dobOutput)
-
     }
 }
 

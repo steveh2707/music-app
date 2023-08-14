@@ -15,6 +15,8 @@ struct BookingDetailView: View {
     @StateObject var vm: BookingDetailVM
     @Binding var reloadUserBookings: Bool
     
+    var currentDate = Date()
+    
     
     init(bookingDetail: UserBooking, reloadUserBookings: Binding<Bool>) {
         //        _vm = StateObject(wrappedValue: vm)
@@ -59,45 +61,12 @@ struct BookingDetailView: View {
                     }
                 }
                 
-                if vm.bookingDetail.parsedStartTime > Date() {
-                    Section {
-                        TextField("Cancel Reason", text: $vm.cancelReason, axis: .vertical)
-                        HStack {
-                            Spacer()
-                            Button("Cancel Booking", role: .destructive) {
-                                
-                                Task {
-                                    await vm.cancelBooking(token: global.token)
-                                    reloadUserBookings = true
-                                    presentationMode.wrappedValue.dismiss()
-                                }
-                            }
-                            .disabled(vm.cancelReason == "")
-                            Spacer()
-                        }
-                    } header: {
-                        Text("Cancel Booking")
-                    }
-                }
-                else if vm.bookingDetail.teacherID != global.teacherDetails?.teacherID {
-                    Section {
-                        RatingView(rating: $vm.review.rating)
-                        TextField("Review Details", text: $vm.review.details, axis: .vertical)
-                        HStack {
-                            Spacer()
-                            Button("Save Review") {
-                                
-                                Task {
-                                    await vm.postReview(token: global.token)
-                                    presentationMode.wrappedValue.dismiss()
-                                }
-                            }
-                            .disabled(vm.review.details == "" || vm.review.rating == 0)
-                            Spacer()
-                        }
-                    } header: {
-                        Text("Leave Review")
-                    }
+                if vm.bookingDetail.parsedStartTime > currentDate.addOrSubtractDays(day: global.bookingCancellationMinDays) || vm.bookingDetail.teacherID == global.teacherDetails?.teacherID {
+                    cancelBookingSection
+                } else if vm.bookingDetail.parsedStartTime > currentDate {
+                    cancellationNotAllowedSection
+                } else if vm.bookingDetail.teacherID != global.teacherDetails?.teacherID {
+                    leaveReviewSection
                 }
             }
             .toolbar {
@@ -119,6 +88,70 @@ struct BookingDetailView: View {
                 .font(.headline)
         })
     }
+    
+    private var cancelBookingSection: some View {
+        Section {
+            TextField("Cancel Reason", text: $vm.cancelReason, axis: .vertical)
+            HStack {
+                Spacer()
+                Button("Cancel Booking", role: .destructive) {
+                    Task {
+                        await vm.cancelBooking(token: global.token)
+                        reloadUserBookings = true
+                        presentationMode.wrappedValue.dismiss()
+                    }
+                }
+                .disabled(vm.cancelReason == "")
+                Spacer()
+            }
+        } header: {
+            Text("Cancel Booking")
+        }
+    }
+    
+    private var cancellationNotAllowedSection: some View {
+        Section {
+            Text("Students cannot cancel bookings within \(global.bookingCancellationMinDays) days of lesson.")
+                .multilineTextAlignment(.center)
+                .foregroundColor(.red)
+            HStack {
+                Spacer()
+                Button("Cancel Booking", role: .destructive) {
+                    Task {
+                        await vm.cancelBooking(token: global.token)
+                        reloadUserBookings = true
+                        presentationMode.wrappedValue.dismiss()
+                    }
+                }
+                .disabled(true)
+                Spacer()
+            }
+        } header: {
+            Text("Cancel Booking")
+        }
+    }
+    
+    private var leaveReviewSection: some View {
+        Section {
+            RatingView(rating: $vm.review.rating)
+            TextField("Review Details", text: $vm.review.details, axis: .vertical)
+            HStack {
+                Spacer()
+                Button("Save Review") {
+                    
+                    Task {
+                        await vm.postReview(token: global.token)
+                        presentationMode.wrappedValue.dismiss()
+                    }
+                }
+                .disabled(vm.review.details == "" || vm.review.rating == 0)
+                Spacer()
+            }
+        } header: {
+            Text("Leave Review")
+        }
+    }
+    
 }
 
 //struct CancelUserBookingView_Previews: PreviewProvider {

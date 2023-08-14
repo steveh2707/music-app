@@ -14,7 +14,7 @@ class BookingVM: ObservableObject {
     
     @Published var teacher: Teacher
     @Published var teacherAvailability: TeacherAvailability? = nil
-    @Published var searchDate = Date(mySqlDateTimeString: "2023-09-09T12:00:00.000Z")
+    @Published var searchDate = Date(mySqlDateString: "2023-09-09T00:00:00.000Z")
     
     @Published var searchedDates: [Date] = []
     @Published var selectedDateTime: Date?
@@ -25,13 +25,8 @@ class BookingVM: ObservableObject {
     @Published var error: NetworkingManager.NetworkingError?
     
     @Published var showSuccessMessage = false
-    
-    
-    let hours: [String] = ["00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"]
-    @Published var firstBookingSlot = "23"
-    @Published var lastBookingSlot = "00"
-    var filteredHours: [String] { hours.filter { $0 >= firstBookingSlot && $0 < lastBookingSlot } }
-    
+    @Published var showInfoPage = false
+    @Published var showMakeBookingView = false
     
     private let networkingManager: NetworkingManagerImpl!
     
@@ -46,31 +41,14 @@ class BookingVM: ObservableObject {
         defer { viewState = .finished }
         
         do {
+            self.searchedDates = [searchDate.addOrSubtractDays(day: -1),
+                                  searchDate,
+                                  searchDate.addOrSubtractDays(day: 1)]
+            
             self.teacherAvailability = try await networkingManager.request(session: .shared,
-                                                                           .teacherAvailability(token: token ?? "", id: teacher.teacherID, date: searchDate.asSqlDateString()),
+                                                                           .teacherAvailability(token: token, id: teacher.teacherID, startDate: searchedDates[0], endDate: searchDate.addOrSubtractDays(day: 2)),
                                                                            type: TeacherAvailability.self)
-            searchedDates = [searchDate.addOrSubtractDays(day: -1),
-                             searchDate,
-                             searchDate.addOrSubtractDays(day: 1)
-            ]
-            
-            var earliestTimeslot = firstBookingSlot
-            var latestTimeSlot = "00"
-            for day in teacherAvailability!.availability {
-                for timeslot in day.slots {
-                    
-                    if let startTime = timeslot.parsedStartTime.asHour(), startTime < earliestTimeslot {
-                        print(startTime)
-                        earliestTimeslot = startTime
-                    }
-                    if let endTime = timeslot.parsedEndTime.asHour(), endTime > latestTimeSlot {
-                        latestTimeSlot = endTime
-                    }
-                }
-            }
-            
-            self.firstBookingSlot = earliestTimeslot
-            self.lastBookingSlot = latestTimeSlot
+
         } catch {
             
             if let errorCode = (error as NSError?)?.code, errorCode == NSURLErrorCancelled {

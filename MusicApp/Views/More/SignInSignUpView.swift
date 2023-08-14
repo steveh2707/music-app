@@ -52,15 +52,12 @@ struct SignInSignUpView: View {
                     }
                 }
             }
-            .navigationBarTitle("", displayMode: .inline)
+            .padding(.top, -10)
+            .navigationBarTitleDisplayMode(.inline)
 #if DEBUG
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    if global.isValidated {
-                        Button("Log out") {
-                            global.logout()
-                        }
-                    } else {
+                    HStack {
                         Button("Student") {
                             vm.credentials.email = "shanna@gmail.com"
                             vm.credentials.password = "password"
@@ -68,10 +65,6 @@ struct SignInSignUpView: View {
                                 await vm.login()
                             }
                         }
-                    }
-                }
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    if !global.isValidated {
                         Button("Teacher") {
                             vm.credentials.email = "johnsmith@hotmail.co.uk"
                             vm.credentials.password = "password"
@@ -120,13 +113,17 @@ struct SignInSignUpView: View {
             HStack {
                 TextField("First Name", text: $vm.newUser.firstName)
                 //                    .focused($focusedField, equals: .firstName)
+                    .disableAutocorrection(true)
                 TextField("Last Name", text: $vm.newUser.lastName)
                 //                    .focused($focusedField, equals: .lastName)
+                    .disableAutocorrection(true)
             }
             
             TextField("Email Address", text: $vm.newUser.email)
                 .keyboardType(.emailAddress)
             //                .focused($focusedField, equals: .email)
+                .disableAutocorrection(true)
+                .autocapitalization(.none)
             
             SecureField("Password", text: $vm.newUser.password)
             //                .focused($focusedField, equals: .password)
@@ -180,8 +177,10 @@ struct SignInSignUpView: View {
             Section {
                 TextField("Email", text: $vm.credentials.email)
                     .keyboardType(.emailAddress)
+                    .disableAutocorrection(true)
                 
                 SecureField("Password", text: $vm.credentials.password)
+                
             }
             .disabled(vm.submissionState == .submitting)
             
@@ -218,5 +217,6 @@ struct SignInSignUpView: View {
 struct SignInSignUpView_Previews: PreviewProvider {
     static var previews: some View {
         SignInSignUpView()
+            .environmentObject(dev.globalVM)
     }
 }

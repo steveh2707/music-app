@@ -68,22 +68,27 @@ struct NewBooking: Codable {
 // MARK: - Welcome
 struct TeacherAvailability: Codable, Equatable {
     let teacherID: Int
-    let availability: [Availability]
-
+//    let availability: [Availability]
+    let slots, bookings: [ExistingBooking]
+    
     enum CodingKeys: String, CodingKey {
         case teacherID = "teacher_id"
-        case availability
+        case slots, bookings
     }
+    
+
+    
+//    var parsedDate: Date { Date(mySqlDateString: date )}
 }
 
 // MARK: - Availability
-struct Availability: Codable, Identifiable, Equatable {
-    var id: UUID { UUID() }
-    let date: String
-    let slots, bookings: [ExistingBooking]
-    
-    var parsedDate: Date { Date(mySqlDateString: date )}
-}
+//struct Availability: Codable, Identifiable, Equatable {
+//    var id: UUID { UUID() }
+//    let date: String
+//    let slots, bookings: [ExistingBooking]
+//
+//    var parsedDate: Date { Date(mySqlDateString: date )}
+//}
 
 // MARK: - Booking
 struct ExistingBooking: Codable, Equatable {

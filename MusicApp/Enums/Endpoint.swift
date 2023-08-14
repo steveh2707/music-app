@@ -16,8 +16,12 @@ enum EndPoint {
     case newUser(submissionData: Data?)
     case login(submissionData: Data?)
     case search(submissionData: Data?, page: Int)
+    case favouriteTeachers(token: String?, page: Int)
     case updateUserDetails(token: String?, submissionData: Data?)
     case updateTeacherDetails(token: String?, submissionData: Data?)
+    case isTeacherFavourited(token: String?, id: Int)
+    case favouriteTeacher(token: String?, id: Int)
+    case unfavouriteTeacher(token: String?, id: Int)
     
     case chat(token: String?, id: Int)
     case chatFromTeacherId(token: String?, id: Int)
@@ -25,7 +29,8 @@ enum EndPoint {
     case allChats(token: String?)
     case allUnreadChats(token: String?)
     
-    case teacherAvailability(token: String?, id: Int, date: String)
+    case teacherAvailability(token: String?, id: Int, startDate: Date, endDate: Date)
+    
     case makeBooking(token: String?, submissionData: Data?)
     case allBookings(token: String?)
     case cancelBooking(token: String?, bookingId: Int, submissionData: Data?)
@@ -40,16 +45,17 @@ enum EndPoint {
         case .teacher,
                 .configuration,
                 .getTeachersReviews:
-               
             return .GET()
             
         case .chat(let token, _),
                 .chatFromTeacherId(let token, _),
                 .allChats(let token),
                 .allUnreadChats(let token),
-                .teacherAvailability(let token, _, _),
+                .teacherAvailability(let token, _, _, _),
                 .allBookings(let token),
-                .getUsersReviews(let token):
+                .getUsersReviews(let token),
+                .favouriteTeachers(let token, _),
+                .isTeacherFavourited(let token, _):
             return .GET(token: token)
             
         case .newUser(let data),
@@ -67,8 +73,14 @@ enum EndPoint {
                 .updateTeacherDetails(let token, let submissionData):
             return .PUT(token: token, data: submissionData)
             
+        case .favouriteTeacher(let token, _):
+            return .POST(token: token)
+
         case .image(let token, let submissionData):
             return .POSTImg(token: token, data: submissionData)
+            
+        case .unfavouriteTeacher(let token, _):
+            return .DELETE(token: token)
         }
     }
     
@@ -95,7 +107,7 @@ enum EndPoint {
             return "/chat"
         case .allUnreadChats:
             return "/chat/unread"
-        case .teacherAvailability(_, let id, _):
+        case .teacherAvailability(_, let id, _, _):
             return "/booking/availability/\(id)"
         case .makeBooking:
             return "/booking"
@@ -117,15 +129,22 @@ enum EndPoint {
             return "/teacher/\(id)/review"
         case .getUsersReviews:
             return "/user/review"
+        case .favouriteTeachers:
+            return "/teacher/favourite"
+        case .isTeacherFavourited(_, let id),
+                .favouriteTeacher(_, let id),
+                .unfavouriteTeacher(_, let id):
+            return "/teacher/\(id)/favourite"
         }
     }
     
     var queryItems: [String: String]? {
         switch self {
-        case .search(_, let page):
+        case .search(_, let page),
+                .favouriteTeachers(_, let page):
             return ["page": "\(page)"]
-        case .teacherAvailability(_, _, let date):
-            return ["date": "\(date)"]
+        case .teacherAvailability(_, _, let startDate, let endDate):
+            return ["start_date": "\(startDate)", "end_date": "\(endDate)"]
         case .chatFromTeacherId(_, let id):
             return ["teacher_id": "\(id)"]
         default:
@@ -165,4 +184,5 @@ enum MethodType : Equatable {
     case POST(token: String? = nil, data: Data? = nil)
     case PUT(token: String? = nil, data: Data? = nil)
     case POSTImg(token: String? = nil, data: Data? = nil)
+    case DELETE(token: String? = nil)
 }

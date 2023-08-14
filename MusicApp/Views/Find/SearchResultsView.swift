@@ -18,44 +18,54 @@ struct SearchResultsView: View {
     }
     
     var body: some View {
-
         ZStack(alignment: .bottom) {
-//                Color.theme.background
-//                    .ignoresSafeArea()
-                
-                if !vm.teachers.isEmpty {
-                    
-                    List {
-                        Section {
-                            resultsSection
-                        } header: {
-                            Text("\(vm.totalResults ?? 0) results found")
+            
+            if vm.teachers.isEmpty && vm.viewState == .finished {
+                NoContentView(description: "Please try a new search.")
+            } else {
+                List {
+                    Section {
+                        resultsSection
+                    } header: {
+                        if let totalResults = vm.totalResults {
+                            Text("\(totalResults) results found")
                         }
                     }
-                    
-                }
-                
-                if vm.viewState == .fetching {
-                    ProgressView()
-                }
-                
-            }
-            .task {
-                if !hasAppeared {
-                    await vm.fetchTeachers()
-                    hasAppeared = true
                 }
             }
-            .overlay {
-                if vm.viewState == .fetching {
-                    ProgressView()
+        }
+        .task {
+            if !hasAppeared {
+                await vm.fetchTeachers()
+                hasAppeared = true
+            }
+        }
+        .overlay {
+            if vm.viewState == .fetching {
+                ProgressView()
+            }
+        }
+        .navigationBarTitle("Results", displayMode: .inline)
+        .alert(isPresented: $vm.hasError, error: vm.error) { }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Picker("Sort By", selection: $vm.searchCriteria.selectedSort) {
+                    ForEach(vm.searchCriteria.userLatitude != nil ? SearchResultsSort.allCases : SearchResultsSort.allCasesExclLocation, id: \.self) { value in
+                        Text(value.sortName)
+                            .tag(value)
+                    }
                 }
             }
-            .navigationBarTitle("Results", displayMode: .inline)
-            .onAppear {
-                global.lessonCost = nil
+        }
+        .onAppear {
+            global.lessonCost = nil
+        }
+        .onChange(of: vm.searchCriteria.selectedSort) { newValue in
+            Task {
+                await vm.fetchTeachers()
             }
-
+        }
+        
     }
     
     private var resultsSection: some View {
@@ -81,8 +91,8 @@ struct SearchResultsView: View {
     }
 }
 
-struct SearchResultsView_Previews: PreviewProvider {
-    static var previews: some View {
-        SearchResultsView(searchCriteria: SearchCriteria(userLatitude: 1, userLongitude: 2))
-    }
-}
+//struct SearchResultsView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        SearchResultsView(searchCriteria: SearchCriteria(userLatitude: 1, userLongitude: 2))
+//    }
+//}

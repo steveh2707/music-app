@@ -94,4 +94,12 @@ struct Review: Codable, Identifiable, Equatable {
 }
 
 
+struct TeacherFavourite: Codable {
+    let count: Int
+    
+    enum CodingKeys: String, CodingKey {
+        case count
+    }
+}
+
 

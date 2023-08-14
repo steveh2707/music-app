@@ -15,28 +15,29 @@ struct SearchResultsRowView: View {
         ZStack {
             VStack(alignment: .leading) {
                 
-                HStack(alignment: .center) {
-
-                    InstrumentGradeView(sfSymbol: teacher.instrumentSfSymbol, instrumentName: teacher.instrumentName, gradeName: teacher.gradeTeachable, showGradeFrom: true, fixedLength: false)
-
-                    Spacer()
-                    if let baseCost = teacher.baseCost {
-                        Text("£"+baseCost.asNumberString())
-                            .font(.title3)
-                            .foregroundColor(Color.theme.accent)
+                if let instrumentSfSymbol = teacher.instrumentSfSymbol, let instrumentName = teacher.instrumentName, let gradeTeachable = teacher.gradeTeachable  {
+                    HStack(alignment: .center) {
+                        InstrumentGradeView(sfSymbol: instrumentSfSymbol, instrumentName: instrumentName, gradeName: gradeTeachable, showGradeFrom: true, fixedLength: false)
+                        
+                        Spacer()
+                        if let baseCost = teacher.baseCost {
+                            Text("£"+baseCost.asNumberString())
+                                .font(.title3)
+                                .foregroundColor(Color.theme.accent)
+                        }
                     }
-
+                    .font(.callout)
                 }
-                .font(.callout)
                 
                 HStack(alignment: .center) {
                     
-                    UserImageView(imageURL: teacher.profileImageURL ?? "")
+                    UserImageView(imageURL: teacher.profileImageURL)
                         .frame(width: 100, height: 100)
                     
                     VStack(alignment: .leading, spacing: 5) {
                         HStack {
-                            Text("\(teacher.firstName) \(teacher.lastName)")
+                            Text(teacher.fullName)
+                                .lineLimit(1)
                                 .font(.title2)
                             Spacer()
                             Image(systemName: "star.fill")

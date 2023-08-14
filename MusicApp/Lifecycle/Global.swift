@@ -30,6 +30,8 @@ class Global: ObservableObject {
     @Published var selectedGrade: Grade? = nil
     @Published var lessonCost: Double? = nil
     
+    var bookingCancellationMinDays = 2
+    
     
     func login(signInResponse: SignInResponse) {
         self.isValidated = true
@@ -38,9 +40,9 @@ class Global: ObservableObject {
         if let teacherDetails = signInResponse.teacherDetails {
             self.teacherDetails = teacherDetails
         }
-        Task {
-            await fetchUnreadMessages()
-        }
+//        Task {
+//            await fetchUnreadMessages()
+//        }
     }
     
     func logout() {

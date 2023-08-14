@@ -55,8 +55,8 @@ struct UserBookingsView: View {
                                     }
                                     
                                     .swipeActions {
-     
-                                        if booking.parsedStartTime > currentDate {
+                                        
+                                        if booking.parsedStartTime > currentDate.addOrSubtractDays(day: global.bookingCancellationMinDays) || (booking.teacherID == global.teacherDetails?.teacherID && booking.parsedStartTime > currentDate) {
                                             Button {
                                                 vm.bookingDetail = booking
                                                 showDetailSheet.toggle()
@@ -64,6 +64,8 @@ struct UserBookingsView: View {
                                                 Label("Cancel", systemImage: "calendar.badge.minus")
                                             }
                                             .tint(.red)
+                                        } else if booking.parsedStartTime > currentDate {
+                                            
                                         } else if booking.teacherID != global.teacherDetails?.teacherID {
                                             Button {
                                                 vm.bookingDetail = booking

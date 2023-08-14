@@ -86,14 +86,14 @@ struct ChatView: View {
                 }
                 
                 HStack {
-                    TextField("Type your message", text: $vm.newMessage.message)
+                    TextField("Type your message", text: $vm.newMessage.message, axis: .vertical)
+                        .lineLimit(1...5)
                         .textFieldStyle(.roundedBorder)
                     Button {
                         Task {
                             await vm.sendChatMessage(teacherId: chat.teacherID, token: global.token)
                             vm.newMessage.message = ""
                         }
-                        
                     } label: {
                         Image(systemName: "paperplane.circle.fill")
                             .rotationEffect(.degrees(45))
@@ -155,7 +155,7 @@ struct ChatView_Previews: PreviewProvider {
     
     static var previews: some View {
         
-        ChatView()
+        ChatView(chatID: 1)
             .environmentObject(dev.globalVM)
     }
 }

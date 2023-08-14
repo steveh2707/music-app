@@ -15,15 +15,18 @@ struct TeacherView: View {
     @EnvironmentObject var global: Global
     @Environment(\.dismiss) private var dismiss
     @StateObject private var vm = TeacherVM()
-    @State private var hasAppeared = false
+
     @State private var showFullDescription: Bool = false
     @State private var showLoginMessage: Bool = false
+    @State private var showOwnProfileMessage: Bool = false
+
+    
+    var teacherViewingOwnProfile: Bool {
+        global.teacherDetails?.teacherID == teacherId
+    }
     
     var body: some View {
         ZStack {
-            //                Color.theme.background
-            //                    .ignoresSafeArea()
-            
             if (vm.teacher != nil) {
                 VStack {
                     
@@ -56,17 +59,17 @@ struct TeacherView: View {
                 }
                 
             }
-            //                }
         }
+        .navigationBarTitleDisplayMode(.inline)
         .alert(isPresented: $vm.hasError, error: vm.error) { }
-        .alert("You must Sign In", isPresented: $showLoginMessage) {
-            Button("Sign In / Sign Up", action: {
+        .alert("You must Sign Up or Sign In to use this feature.", isPresented: $showLoginMessage) {
+            Button("Sign Up / Sign In", action: {
                 dismiss()
                 global.selectedTab = 3
             })
             Button("Cancel", role: .cancel, action: {})
         }
-        
+        .alert("Function unavailable on your own profile", isPresented: $showOwnProfileMessage) { }
         .toolbar(.hidden, for: .tabBar)
         .toolbar{
             ToolbarItem(placement: .navigationBarTrailing) {
@@ -74,9 +77,9 @@ struct TeacherView: View {
             }
         }
         .task {
-            if !hasAppeared {
-                await vm.getTeacherDetails(teacherId: teacherId)
-                hasAppeared = true
+            await vm.getTeacherDetails(teacherId: teacherId)
+            if global.isValidated && !teacherViewingOwnProfile {
+                await vm.checkIfTeacherHasBeenFavourited(token: global.token, teacherId: teacherId)
             }
         }
         .refreshable {
@@ -103,29 +106,53 @@ struct TeacherView: View {
     }
     
     private var headingSection: some View {
-        HStack(alignment: .center) {
+        
+        ZStack(alignment: .topTrailing) {
             if let teacher = vm.teacher {
-                UserImageView(imageURL: teacher.profileImageURL ?? "")
-                    .frame(width: 110, height: 110)
+            HStack(alignment: .center) {
                 
-                VStack(alignment: .leading) {
-                    Text("\(teacher.firstName) \(teacher.lastName)")
-                        .font(.title)
-                    Text(teacher.tagline)
-                        .lineLimit(2)
+                    UserImageView(imageURL: teacher.profileImageURL ?? "")
+                        .frame(width: 120, height: 120)
+                    
+                    VStack(alignment: .leading) {
+                        Text(teacher.fullName)
+                            .font(.title)
+                        Text(teacher.tagline)
+                            .lineLimit(2)
+                            .font(.footnote)
+                        HStack(alignment: .center) {
+                            Image(systemName: "star.fill")
+                                .foregroundColor(.yellow)
+                            Text(String(teacher.averageReviewScore))
+                                .padding(.horizontal, -5)
+                            Text("("+String(teacher.reviews.count) + " Reviews)")
+                        }
                         .font(.footnote)
-                    HStack(alignment: .center) {
-                        Image(systemName: "star.fill")
-                        Text(String(teacher.averageReviewScore))
-                            .padding(.horizontal, -5)
-                        Text("("+String(teacher.reviews.count) + " Reviews)")
+                        .padding(.top, 1)
                     }
-                    .font(.footnote)
-                    .padding(.top, 2)
-                }
-                .padding(.leading, 5)
-                Spacer()
+                    .padding(.leading, 5)
+                    Spacer()
             }
+            .padding(.top, 10)
+                Button {
+                    if teacherViewingOwnProfile {
+                        showOwnProfileMessage.toggle()
+                    } else if !global.isValidated {
+                        showLoginMessage.toggle()
+                    } else {
+                        Task {
+                            await vm.favouriteTeacher(token: global.token, teacherId: teacherId)
+                        }
+                    }
+                    
+                    // TODO: Save/ remove from CoreData
+                } label: {
+                    Image(systemName: vm.favTeacher ? "heart.fill" : "heart")
+                        .font(.title)
+                        .foregroundColor(.red)
+                }
+            }
+
         }
     }
     
@@ -216,31 +243,36 @@ struct TeacherView: View {
                     HStack {
                         Spacer()
                         
-                        if global.isValidated {
-                            NavigationLink {
-                                ChatView(teacherID: teacher.teacherID)
-                            } label: {
+                        if global.isValidated && !teacherViewingOwnProfile {
+                            NavigationLink(destination: ChatView(teacherID: teacher.teacherID)) {
                                 footerButton(buttonText: "Chat")
                             }
                             Spacer()
-                            NavigationLink {
-                                BookingView(teacher: teacher)
-                            } label: {
+                            NavigationLink(destination: BookingScheduleView(teacher: teacher)) {
                                 footerButton(buttonText: "Book Now")
                             }
                         } else {
                             Button {
-                                showLoginMessage = true
+                                if teacherViewingOwnProfile {
+                                    showOwnProfileMessage.toggle()
+                                } else {
+                                    showLoginMessage.toggle()
+                                }
                             } label: {
                                 footerButton(buttonText: "Chat")
                             }
                             Spacer()
                             Button {
-                                showLoginMessage = true
+                                if teacherViewingOwnProfile {
+                                    showOwnProfileMessage.toggle()
+                                } else {
+                                    showLoginMessage.toggle()
+                                }
                             } label: {
                                 footerButton(buttonText: "Book Now")
                             }
                         }
+
                         
                         Spacer()
                     }
