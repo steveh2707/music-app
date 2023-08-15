@@ -19,6 +19,7 @@ enum EndPoint {
     case favouriteTeachers(token: String?, page: Int)
     case updateUserDetails(token: String?, submissionData: Data?)
     case updateTeacherDetails(token: String?, submissionData: Data?)
+    case newTeacher(token: String?, submissionData: Data?)
     case isTeacherFavourited(token: String?, id: Int)
     case favouriteTeacher(token: String?, id: Int)
     case unfavouriteTeacher(token: String?, id: Int)
@@ -65,7 +66,8 @@ enum EndPoint {
             
         case .newMessage(let token, _, let data),
                 .makeBooking(let token, let data),
-                .newReview(let token, let data):
+                .newReview(let token, let data),
+                .newTeacher(let token, let data):
             return .POST(token: token, data: data)
             
         case .cancelBooking(let token, _, let submissionData),
@@ -121,7 +123,7 @@ enum EndPoint {
             return "/chat/conversation"
         case .updateUserDetails:
             return "/user"
-        case .updateTeacherDetails:
+        case .updateTeacherDetails, .newTeacher:
             return "/teacher"
         case .newReview:
             return "/teacher/review"

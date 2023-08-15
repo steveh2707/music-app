@@ -72,6 +72,7 @@ struct MusicApp: App {
                                 await global.fetchUnreadMessages()
                             }
                         }
+                        
                 } else {
                     SignInSignUpView()
                         .tabItem {

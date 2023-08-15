@@ -15,15 +15,17 @@ class EditTeacherDetailsVM: ObservableObject {
     @Published var error: FormError?
     @Published var searchableText = ""
     @Published var selectedLocation: SelectedLocation
-    @Published var editable = false
+    @Published var editable: Bool
     
     var teacherDetailsStart: TeacherDetails
+    var newTeacher: Bool
     
-    init(teacher: TeacherDetails) {
+    init(teacher: TeacherDetails, newTeacher: Bool) {
         self.teacherDetailsStart = teacher
         self.teacherDetails = teacher
-//        self.editable = editable
         self.selectedLocation = SelectedLocation(title: teacher.locationTitle, latitude: teacher.locationLatitude, longitude: teacher.locationLongitude)
+        self.editable = newTeacher
+        self.newTeacher = newTeacher
     }
     
     
@@ -37,9 +39,13 @@ class EditTeacherDetailsVM: ObservableObject {
             encoder.keyEncodingStrategy = .convertToSnakeCase
             let data = try encoder.encode(teacherDetails)
 
-            self.teacherDetails = try await NetworkingManager.shared.request(.updateTeacherDetails(token: token, submissionData: data), type: TeacherDetails.self)
-            
-            
+            if newTeacher {
+                self.teacherDetails = try await NetworkingManager.shared.request(.newTeacher(token: token, submissionData: data), type: TeacherDetails.self)
+                self.newTeacher = false
+            } else {
+                self.teacherDetails = try await NetworkingManager.shared.request(.updateTeacherDetails(token: token, submissionData: data), type: TeacherDetails.self)
+            }
+         
             self.teacherDetailsStart = self.teacherDetails
             
             self.editable = false

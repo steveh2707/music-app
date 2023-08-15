@@ -14,19 +14,12 @@ struct EditTeacherDetails: View {
     @StateObject var vm: EditTeacherDetailsVM
     @State private var showLocationSearch = false
     @State private var showSaveChangesAlert = false
+    @Binding var teacherDetailsUpdated: Int
     
-//    init (teacherDetails: TeacherDetails? = nil, updatingExistingTeacher: Bool = true) {
-//        if let teacherDetails {
-//            _vm = StateObject(wrappedValue: EditTeacherDetailsVM(teacher: teacherDetails, editable: false))
-//        } else {
-//            _vm = StateObject(wrappedValue: EditTeacherDetailsVM(teacher: TeacherDetails(teacherID: 0, tagline: "", bio: "", locationLatitude: 0.0, locationLongitude: 0.0, averageReviewScore: 0.0, instrumentsTeachable: []), editable:  true))
-//        }
-//    }
-    
-    init (teacherDetails: TeacherDetails) {
-        _vm = StateObject(wrappedValue: EditTeacherDetailsVM(teacher: teacherDetails))
+    init (teacherDetails: TeacherDetails, newTeacher: Bool = false, teacherDetailsUpdated: Binding<Int>) {
+        _vm = StateObject(wrappedValue: EditTeacherDetailsVM(teacher: teacherDetails, newTeacher: newTeacher))
+        _teacherDetailsUpdated = teacherDetailsUpdated
     }
-    
     
     // MARK: BODY
     var body: some View {
@@ -56,6 +49,10 @@ struct EditTeacherDetails: View {
             vm.teacherDetails.locationTitle = newLocation.title
             vm.teacherDetails.locationLatitude = newLocation.latitude
             vm.teacherDetails.locationLongitude = newLocation.longitude
+        })
+        .onChange(of: vm.teacherDetailsStart, perform: { newTeacherDetails in
+            global.teacherDetails = newTeacherDetails
+            teacherDetailsUpdated += 1
         })
         .alert("Do you want to save changes?", isPresented: $showSaveChangesAlert) {
             Button("Save", action: {
@@ -99,7 +96,6 @@ struct EditTeacherDetails: View {
     private var teacherDetailsSection: some View {
         Section {
             VStack(alignment: .leading) {
-//                if updatingExistingTeacher {
                 if vm.teacherDetailsStart.tagline != "" {
                     Text("Tagline")
                         .font(.headline)
@@ -110,7 +106,6 @@ struct EditTeacherDetails: View {
                     .disabled(!vm.editable)
             }
             VStack(alignment: .leading) {
-//                if updatingExistingTeacher {
                 if vm.teacherDetailsStart.bio != "" {
                     Text("Bio")
                         .font(.headline)
@@ -122,8 +117,10 @@ struct EditTeacherDetails: View {
             }
 
             locationSelector
-            MapView(latitude: $vm.selectedLocation.latitude, longitude: $vm.selectedLocation.longitude)
             
+            if !(vm.selectedLocation.latitude == 0 && vm.selectedLocation.longitude == 0) {
+                MapView(latitude: $vm.selectedLocation.latitude, longitude: $vm.selectedLocation.longitude)
+            }
         }
     }
     
@@ -134,7 +131,7 @@ struct EditTeacherDetails: View {
             HStack {
                 Text("Location")
                 Spacer()
-                Text(vm.selectedLocation.title)
+                Text(vm.selectedLocation.title != "" ? vm.selectedLocation.title : "Select")
                     .opacity(0.7)
             }
         }

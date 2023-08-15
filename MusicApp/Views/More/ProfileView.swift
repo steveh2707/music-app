@@ -17,6 +17,9 @@ struct ProfileView: View {
     @State private var showLocationFinderView = false
     @State private var showSaveChangesAlert = false
 
+    // State variables to update to force view update
+    @State var teacherDetailsUpdated = 0
+    @State var profileImageUpdated = 0
 
     init(userDetails: UserDetails, teacherDetails: TeacherDetails? = nil) {
         _vm = StateObject(wrappedValue: ProfileViewVM(userDetails: userDetails, teacherDetails: teacherDetails))
@@ -28,10 +31,10 @@ struct ProfileView: View {
             List {
                 userDetailsSection
                 
-                if let  teacherDetails = vm.teacherDetails {
+                if let teacherDetails = vm.teacherDetails {
                     Section {
                         NavigationLink("Teacher Details") {
-                            EditTeacherDetails(teacherDetails: teacherDetails)
+                            EditTeacherDetails(teacherDetails: teacherDetails, teacherDetailsUpdated: $teacherDetailsUpdated)
                         }
                         NavigationLink("Preview Profile") {
                             TeacherView(teacherId: teacherDetails.teacherID)
@@ -45,6 +48,12 @@ struct ProfileView: View {
                 }
                 
             }
+            .onChange(of: teacherDetailsUpdated, perform: { _ in
+                vm.teacherDetails = global.teacherDetails
+            })
+            .onChange(of: vm.userDetailsStart, perform: { newUserDetails in
+                global.userDetails = newUserDetails
+            })
             .navigationTitle("Profile")
             .sheet(isPresented: $showImagePickerView) {
                 ImagePicker(currentImageUrl: global.userDetails?.profileImageURL)
@@ -78,7 +87,7 @@ struct ProfileView: View {
     // MARK: VARIABLES
     private var settingsLink: some View {
         NavigationLink {
-            SettingsView()
+            SettingsView(teacherDetailsUpdated: $teacherDetailsUpdated)
         } label: {
             Image(systemName: "gear")
         }
