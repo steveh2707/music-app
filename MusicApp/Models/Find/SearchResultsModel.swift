@@ -56,13 +56,6 @@ struct TeacherResult: Codable, Identifiable, Hashable {
     let locationLatitude, locationLongitude: Double
     let averageReviewScore: Double
     let profileImageURL: String
-//    let teacherInstrumentTaughtId: Int?
-//    let instrumentID: Int?
-//    let lessonCost: Int?
-//    let instrumentName: String?
-//    let instrumentSfSymbol: String?
-//    let gradeTeachable: String?
-//    let rank: Int?
     let instrumentTeachable: InstrumentTaught?
     let distanceInKM: Double?
 
@@ -77,13 +70,6 @@ struct TeacherResult: Codable, Identifiable, Hashable {
         case locationLongitude = "location_longitude"
         case averageReviewScore = "average_review_score"
         case profileImageURL = "profile_image_url"
-//        case teacherInstrumentTaughtId = "teacher_instrument_taught_id"
-//        case instrumentID = "instrument_id"
-//        case lessonCost = "lesson_cost"
-//        case instrumentName = "instrument_name"
-//        case instrumentSfSymbol = "instrument_sf_symbol"
-//        case gradeTeachable = "grade_teachable"
-//        case rank
         case instrumentTeachable = "instrument_teachable"
         case distanceInKM = "distance_in_km"
     }
@@ -91,23 +77,4 @@ struct TeacherResult: Codable, Identifiable, Hashable {
     var fullName: String { firstName + " " + lastName }
 }
 
-
-//struct InstrumentTeachableResult: Codable, Equatable, Hashable {
-//    let teacherInstrumentTaughtId, instrumentId: Int
-//    let instrumentName, instrumentSfSymbol: String
-//    let gradeId: Int
-//    let gradeName: String
-//    let lessonCost, rank: Int
-//    
-//    enum CodingKeys: String, CodingKey {
-//        case teacherInstrumentTaughtId = "teacher_instrument_taught_id"
-//        case instrumentId = "instrument_id"
-//        case instrumentName = "instrument_name"
-//        case instrumentSfSymbol = "instrument_sf_symbol"
-//        case gradeId = "grade_id"
-//        case gradeName = "grade_name"
-//        case lessonCost = "lesson_cost"
-//        case rank
-//    }
-//}
 
