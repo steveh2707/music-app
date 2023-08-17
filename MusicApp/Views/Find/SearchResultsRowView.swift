@@ -15,16 +15,16 @@ struct SearchResultsRowView: View {
         ZStack {
             VStack(alignment: .leading) {
                 
-                if let instrumentSfSymbol = teacher.instrumentSfSymbol, let instrumentName = teacher.instrumentName, let gradeTeachable = teacher.gradeTeachable  {
+                if let instrumentTeachable = teacher.instrumentTeachable {
+                    
                     HStack(alignment: .center) {
-                        InstrumentGradeView(sfSymbol: instrumentSfSymbol, instrumentName: instrumentName, gradeName: gradeTeachable, showGradeFrom: true, fixedLength: false)
+                        InstrumentGradeView(sfSymbol: instrumentTeachable.sfSymbol, instrumentName: instrumentTeachable.instrumentName, gradeName: instrumentTeachable.gradeName, showGradeFrom: true, fixedLength: false)
                         
                         Spacer()
-                        if let baseCost = teacher.baseCost {
-                            Text("£"+baseCost.asNumberString())
-                                .font(.title3)
-                                .foregroundColor(Color.theme.accent)
-                        }
+                        Text("£\(instrumentTeachable.lessonCost)")
+                            .font(.title3)
+                            .foregroundColor(Color.theme.accent)
+
                     }
                     .font(.callout)
                 }

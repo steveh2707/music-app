@@ -128,7 +128,7 @@ final class NetworkingManager: NetworkingManagerImpl {
     
     private func buildRequest(from url: URL, methodType: MethodType) -> URLRequest {
         var request = URLRequest(url: url)
-        print(url.absoluteString)
+
         
         switch methodType {
         case .GET(let token):
@@ -160,6 +160,7 @@ final class NetworkingManager: NetworkingManagerImpl {
             if let token { request.setValue(token, forHTTPHeaderField: "authorization") }
         }
         
+        print(String(format: "%@ %@", request.httpMethod ?? "", url.absoluteString))
         return request
     }
     

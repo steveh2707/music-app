@@ -57,29 +57,8 @@ struct MakeBookingView: View {
                     HStack {
                         Image(systemName: "sterlingsign")
                             .frame(width: 25)
-                        Text(global.lessonCost?.asNumberStringWith2DecimalPlaces() ?? "")
+                        Text("\(global.lessonCost ?? 0)")
                     }
-//                    HStack {
-//                        Image(systemName: "banknote")
-//                            .frame(width: 30)
-//                        TextField("Discount Code", text: $discountCode)
-//                            .autocorrectionDisabled()
-//                            .focused($isFocusedTextField)
-//                            .onAppear {
-//                                isFocusedTextField = true
-//                            }
-//                        Button {
-//                            discountCode = ""
-//                        } label: {
-//                            Image(systemName: "multiply.circle.fill")
-//                        }
-//                        .opacity(discountCode.isEmpty ? 0 : 1)
-//                    }
-//                    if !discountCode.isEmpty {
-//                        Button("Check Code") {
-//
-//                        }
-//                    }
                 } header: {
                     Text("Price Details")
                 }
@@ -91,7 +70,7 @@ struct MakeBookingView: View {
                         }
                     }
                     Button("Cancel") {
-                        
+                        presentationMode.wrappedValue.dismiss()
                     }
                     .tint(Color.theme.red)
                 }

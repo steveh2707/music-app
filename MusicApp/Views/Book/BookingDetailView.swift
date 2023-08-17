@@ -11,7 +11,6 @@ struct BookingDetailView: View {
     
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var global: Global
-    //    @StateObject var vm: UserBookingsVM
     @StateObject var vm: BookingDetailVM
     @Binding var reloadUserBookings: Bool
     
@@ -19,7 +18,6 @@ struct BookingDetailView: View {
     
     
     init(bookingDetail: UserBooking, reloadUserBookings: Binding<Bool>) {
-        //        _vm = StateObject(wrappedValue: vm)
         _vm = StateObject(wrappedValue: BookingDetailVM(bookingDetail: bookingDetail))
         _reloadUserBookings = reloadUserBookings
     }
@@ -69,6 +67,7 @@ struct BookingDetailView: View {
                     leaveReviewSection
                 }
             }
+            .alert(isPresented: $vm.hasError, error: vm.error) { }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     closeButton

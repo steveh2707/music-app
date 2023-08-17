@@ -66,7 +66,7 @@ class BookingVM: ObservableObject {
     
     
     @MainActor
-    func makeBooking(token: String?, instrumentId: Int, gradeId: Int, priceFinal: Double) async {
+    func makeBooking(token: String?, instrumentId: Int, gradeId: Int, priceFinal: Int) async {
         
         do {
             submissionState = .submitting
@@ -95,6 +95,20 @@ class BookingVM: ObservableObject {
             }
         }
         
+    }
+    
+    
+    func getHoursBetweenTwoDates(startTime: Date, endTime: Date) -> [Date] {
+        var dates: [Date] = []
+        
+        var nextStartTime = startTime
+        
+        while nextStartTime < endTime {
+            dates.append(nextStartTime)
+            nextStartTime = Calendar.current.date(byAdding: .hour, value: 1, to: nextStartTime)!
+        }
+        
+        return dates
     }
     
 }

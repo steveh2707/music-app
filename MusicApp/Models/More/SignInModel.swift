@@ -118,10 +118,12 @@ struct TeacherDetails: Codable, Equatable {
 struct InstrumentsTeachable: Identifiable, Codable, Equatable, Hashable {
     let id: Int
     var instrumentID, gradeID: Int
+    var lessonCost: Int
 
     enum CodingKeys: String, CodingKey {
         case id
         case instrumentID = "instrument_id"
         case gradeID = "grade_id"
+        case lessonCost = "lesson_cost"
     }
 }

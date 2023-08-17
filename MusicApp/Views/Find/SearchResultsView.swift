@@ -74,7 +74,7 @@ struct SearchResultsView: View {
                 NavigationLink {
                     TeacherView(teacherId: teacher.teacherID)
                         .onAppear {
-                            global.lessonCost = teacher.baseCost
+                            global.lessonCost = teacher.instrumentTeachable?.lessonCost
                         }
                 } label: {
                     EmptyView()

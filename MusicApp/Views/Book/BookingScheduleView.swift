@@ -127,31 +127,62 @@ struct BookingScheduleView: View {
                 ForEach(vm.searchedDates, id: \.self) { day in
                     
                     VStack(spacing: 15) {
-                        ForEach(0..<24, id: \.self) {
-                            let hour = Calendar.current.date(byAdding: .hour, value: $0, to: day)!
+                        ForEach(teacherAvailability.slots) { slot in
                             
-                            let matchingSlot = teacherAvailability.slots.first {
-                                hour >= $0.parsedStartTime
-                                && hour < $0.parsedEndTime
-                            }
-                            
-                            if matchingSlot != nil {
-                                let matchingBooking = teacherAvailability.bookings.first {
-                                    hour >= $0.parsedStartTime
-                                    && hour < $0.parsedEndTime
-                                }
-                                Button(action: {
-                                    if matchingBooking == nil {
-                                        vm.showMakeBookingView.toggle()
-                                        vm.selectedDateTime = hour
+                            ForEach(vm.getHoursBetweenTwoDates(
+                                startTime: Date(mySqlDateTimeString: slot.startTime),
+                                endTime: Date(mySqlDateTimeString: slot.endTime)
+                            ), id: \.self) { hour in
+                                
+                                if Calendar.current.isDate(hour, inSameDayAs: day) {
+                                    let matchingBooking = teacherAvailability.bookings.first {
+                                        hour >= $0.parsedStartTime
+                                        && hour < $0.parsedEndTime
                                     }
-                                }, label: {
-                                    BookingSelectorButton(hour: hour, selectable: matchingBooking == nil)
-                                })
+                                    
+                                    Button(action: {
+                                        if matchingBooking == nil {
+                                            vm.showMakeBookingView.toggle()
+                                            vm.selectedDateTime = hour
+                                        }
+                                    }, label: {
+                                        BookingSelectorButton(hour: hour, selectable: matchingBooking == nil)
+                                    })
+                                }
                             }
+                            
+
+                            
                         }
                     }
                     .frame(width: 100)
+                    
+//                    VStack(spacing: 15) {
+//                        ForEach(0..<24, id: \.self) {
+//                            let hour = Calendar.current.date(byAdding: .hour, value: $0, to: day)!
+//
+//                            let matchingSlot = teacherAvailability.slots.first {
+//                                hour >= $0.parsedStartTime
+//                                && hour < $0.parsedEndTime
+//                            }
+//
+//                            if matchingSlot != nil {
+//                                let matchingBooking = teacherAvailability.bookings.first {
+//                                    hour >= $0.parsedStartTime
+//                                    && hour < $0.parsedEndTime
+//                                }
+//                                Button(action: {
+//                                    if matchingBooking == nil {
+//                                        vm.showMakeBookingView.toggle()
+//                                        vm.selectedDateTime = hour
+//                                    }
+//                                }, label: {
+//                                    BookingSelectorButton(hour: hour, selectable: matchingBooking == nil)
+//                                })
+//                            }
+//                        }
+//                    }
+//                    .frame(width: 100)
                 }
             }
         }

@@ -164,7 +164,7 @@ struct TeacherView: View {
                     .padding(.vertical, 5)
                 
                 ForEach(teacher.instrumentsTaught) { instrument in
-                    InstrumentGradeView(sfSymbol: instrument.sfSymbol, instrumentName: instrument.instrumentName, gradeName: instrument.gradeName, showGradeFrom: false, fixedLength: true)
+                    InstrumentGradeView(sfSymbol: instrument.sfSymbol, instrumentName: instrument.instrumentName, gradeName: instrument.gradeName, lessonCost: instrument.lessonCost, fixedLength: true)
                 }
             }
         }

@@ -11,16 +11,17 @@ struct InstrumentGradeView: View {
     let sfSymbol: String
     let instrumentName: String
     let gradeName: String
-    let showGradeFrom: Bool
-    let fixedLength: Bool
+    var lessonCost: Int? = nil
+    var showGradeFrom: Bool = false
+    var fixedLength: Bool = false
     
-    init(sfSymbol: String, instrumentName: String, gradeName: String, showGradeFrom: Bool = false, fixedLength: Bool = false) {
-        self.sfSymbol = sfSymbol
-        self.instrumentName = instrumentName
-        self.gradeName = gradeName
-        self.showGradeFrom = showGradeFrom
-        self.fixedLength = fixedLength
-    }
+//    init(sfSymbol: String, instrumentName: String, gradeName: String, showGradeFrom: Bool = false, fixedLength: Bool = false) {
+//        self.sfSymbol = sfSymbol
+//        self.instrumentName = instrumentName
+//        self.gradeName = gradeName
+//        self.showGradeFrom = showGradeFrom
+//        self.fixedLength = fixedLength
+//    }
     
     
     
@@ -38,6 +39,7 @@ struct InstrumentGradeView: View {
                         Image(systemName: "arrowshape.forward")
                     }
                     Text(gradeName)
+                    
                 }
                 .foregroundColor(Color.theme.primaryTextInverse)
                 .font(.footnote)
@@ -46,15 +48,21 @@ struct InstrumentGradeView: View {
                 .background(
                     Capsule()
                         .fill(Color.theme.accent)
-            )
+                )
+                if let lessonCost {
+                    Spacer()
+                    Text("£\(lessonCost)")
+                        .foregroundColor(Color.theme.accent)
+                    Spacer()
+                }
             }
         }
-       
+        
     }
 }
 
 struct InstrumentGradeView_Previews: PreviewProvider {
     static var previews: some View {
-        InstrumentGradeView(sfSymbol: "pianokeys", instrumentName: "Saxaphone", gradeName: "Grade 4")
+        InstrumentGradeView(sfSymbol: "pianokeys", instrumentName: "Saxaphone", gradeName: "Grade 4", lessonCost: 10)
     }
 }

@@ -15,7 +15,7 @@ struct NewBooking: Codable {
     var endTime: String
     var instrumentId: Int
     var gradeId: Int
-    var priceFinal: Double
+    var priceFinal: Int
     
 //    init(teacherId: Int, date: String?, startTime: String?, endTime: String?, instrumentId: Int, gradeId: Int, priceFinal: Double) {
 //        self.teacherId = teacherId
@@ -33,7 +33,7 @@ struct NewBooking: Codable {
 //        self.endTime = endTimeString
 //    }
   
-    init(teacherId: Int, startDateTime: Date, instrumentId: Int, gradeId: Int, priceFinal: Double) {
+    init(teacherId: Int, startDateTime: Date, instrumentId: Int, gradeId: Int, priceFinal: Int) {
         self.teacherId = teacherId
         self.instrumentId = instrumentId
         self.gradeId = gradeId
@@ -91,7 +91,9 @@ struct TeacherAvailability: Codable, Equatable {
 //}
 
 // MARK: - Booking
-struct ExistingBooking: Codable, Equatable {
+struct ExistingBooking: Codable, Equatable, Identifiable {
+    let id = UUID()
+    
     let startTime, endTime: String
     var parsedStartTime: Date { Date(mySqlDateTimeString: startTime) }
     var parsedEndTime: Date { Date(mySqlDateTimeString: endTime) }

@@ -52,15 +52,11 @@ struct SearchView: View {
             .sheet(isPresented: $showLocationSearch) {
                 LocationFinderView(selectedLocation: $selectedLocation)
             }
+            .alert(isPresented: $global.hasError, error: global.error) { }
             .navigationTitle("Search")
             .task {
-//                if !hasAppeared || vm.instruments.isEmpty {
-//                    await vm.getConfiguration()
-//                    hasAppeared = true
-//                }
                 if global.instruments.isEmpty {
                     await global.getConfiguration()
-//                    hasAppeared = true
                 }
             }
             

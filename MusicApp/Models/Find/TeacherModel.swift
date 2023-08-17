@@ -41,23 +41,34 @@ struct Teacher: Codable, Equatable {
 }
 
 // MARK: - InstrumentsTaught
-struct InstrumentTaught: Codable, Identifiable, Equatable {
-    let id: Int
+struct InstrumentTaught: Codable, Identifiable, Equatable, Hashable {
+    var id: Int {
+        teacherInstrumentTaughtId
+    }
+    
+    let teacherInstrumentTaughtId: Int
     let instrumentID: Int
     let instrumentName: String
     let sfSymbol: String
     let gradeID: Int
     let gradeName: String
+    let lessonCost: Int
+    let rank: Int?
 
     enum CodingKeys: String, CodingKey {
-        case id
+        case teacherInstrumentTaughtId = "teacher_instrument_taught_id"
         case instrumentID = "instrument_id"
         case instrumentName = "instrument_name"
         case sfSymbol = "sf_symbol"
         case gradeID = "grade_id"
         case gradeName = "grade_name"
+        case lessonCost = "lesson_cost"
+        case rank
     }
 }
+
+
+
 
 // MARK: - Review
 struct Review: Codable, Identifiable, Equatable {

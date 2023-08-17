@@ -53,6 +53,7 @@ struct UsersReviewsView: View {
         .task {
             await vm.getReviews(token: global.token)
         }
+        .alert(isPresented: $vm.hasError, error: vm.error) { }
     }
 }
 

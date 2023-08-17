@@ -65,6 +65,7 @@ struct EditTeacherDetails: View {
                  vm.editable.toggle()
              })
          }
+        .alert(isPresented: $vm.hasError, error: vm.error) { }
     }
     
     
@@ -161,6 +162,14 @@ struct EditTeacherDetails: View {
                         }
                         .pickerStyle(.menu)
                         .disabled(!vm.editable)
+                        
+                        Picker("Lesson Cost (£)", selection: $vm.teacherDetails.instrumentsTeachable[index].lessonCost) {
+                            ForEach(1...99, id: \.self) {
+                                Text("\($0)")
+                            }
+                        }
+                        .pickerStyle(.menu)
+                        .disabled(!vm.editable)
                     }
                     .swipeActions {
                         if vm.teacherDetails.instrumentsTeachable.count > 1 {
@@ -178,7 +187,7 @@ struct EditTeacherDetails: View {
             HStack {
                 Spacer()
                 Button {
-                    vm.teacherDetails.instrumentsTeachable.append(InstrumentsTeachable(id: 0, instrumentID: 1, gradeID: 1))
+                    vm.teacherDetails.instrumentsTeachable.append(InstrumentsTeachable(id: 0, instrumentID: 1, gradeID: 1, lessonCost: 20))
                     
                 } label: {
                     Image(systemName: "plus.app.fill")

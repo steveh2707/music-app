@@ -28,7 +28,7 @@ class Global: ObservableObject {
     
     @Published var selectedInstrument: Instrument? = nil
     @Published var selectedGrade: Grade? = nil
-    @Published var lessonCost: Double? = nil
+    @Published var lessonCost: Int? = nil
     
     var bookingCancellationMinDays = 2
     

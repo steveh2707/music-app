@@ -81,6 +81,7 @@ struct ProfileView: View {
                      vm.editable.toggle()
                  })
              }
+            .alert(isPresented: $vm.hasError, error: vm.error) { }
         }
     }
     
