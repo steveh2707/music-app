@@ -17,7 +17,14 @@ class SignInSignUpVM: ObservableObject {
     @Published var error: FormError?
     @Published var signInResponse: SignInResponse? = nil
     
-    private let validator = SignupValidator()
+    private let networkingManager: NetworkingManagerImpl!
+    private let validator: SignupValidatorImp!
+    
+    init(networkingManager: NetworkingManagerImpl = NetworkingManager.shared,
+         validator: SignupValidatorImp = SignupValidator()) {
+        self.networkingManager = networkingManager
+        self.validator = validator
+    }
     
     var loginDisabled: Bool {
         credentials.email.isEmpty || credentials.password.isEmpty
@@ -33,7 +40,7 @@ class SignInSignUpVM: ObservableObject {
             encoder.keyEncodingStrategy = .convertToSnakeCase
             let data = try encoder.encode(credentials)
             
-            self.signInResponse = try await NetworkingManager.shared.request(.login(submissionData: data), type: SignInResponse.self)
+            self.signInResponse = try await networkingManager.request(session: .shared, .login(submissionData: data), type: SignInResponse.self)
             
             credentials = Credentials()
             submissionState = .successful
@@ -63,7 +70,7 @@ class SignInSignUpVM: ObservableObject {
             let encoder = JSONEncoder()
             let data = try encoder.encode(newUser)
             
-            self.signInResponse = try await NetworkingManager.shared.request(.newUser(submissionData: data), type: SignInResponse.self)
+            self.signInResponse = try await networkingManager.request(session: .shared, .newUser(submissionData: data), type: SignInResponse.self)
             
             newUser = NewStudent()
             submissionState = .successful

@@ -77,50 +77,54 @@ struct SearchView: View {
                         } else {
                             global.selectedInstrument = instrument
                         }
-                        
                     } label: {
-                        VStack {
-                            CachedImage(url: instrument.imageUrl) { phase in
-                                switch phase {
-                                case .empty:
-                                    Color
-                                        .theme.accent
-                                        .overlay {
-                                            ProgressView()
-                                        }
-                                case .success(let image):
-                                    image
-                                        .resizable()
-                                        .scaledToFill()
-                                case .failure:
-                                    Color
-                                        .theme.accent
-                                        .opacity(0.75)
-                                        .overlay {
-                                            Image(systemName: "music.note")
-                                                .resizable()
-                                                .scaledToFit()
-                                                .frame(width: 20)
-                                                .foregroundColor(Color.theme.primaryTextInverse)
-                                                .opacity(0.5)
-                                        }
-                                @unknown default:
-                                    EmptyView()
-                                }
-                            }
-                            .frame(width: 100, height: 100)
-                            .cornerRadius(20)
-                            .padding(5) // Width of the border
-                            .background(instrument == global.selectedInstrument ? Color.theme.accent : Color.clear) // Color of the border
-                            .cornerRadius(25) // Outer corner radius
-                            
-                            Text(instrument.name)
-                                .foregroundColor(instrument == global.selectedInstrument ? Color.theme.accent : Color.theme.primaryText)
-                        }
+                        instrumentItemView(instrument: instrument)
                     }
-                    
+                    .accessibilityIdentifier("instrument_\(instrument.id)")
                 }
             }
+        }
+        .accessibilityIdentifier("instrumentsScrollView")
+    }
+    
+    private func instrumentItemView(instrument: Instrument) -> some View {
+        VStack {
+            CachedImage(url: instrument.imageUrl) { phase in
+                switch phase {
+                case .empty:
+                    Color
+                        .theme.accent
+                        .overlay {
+                            ProgressView()
+                        }
+                case .success(let image):
+                    image
+                        .resizable()
+                        .scaledToFill()
+                case .failure:
+                    Color
+                        .theme.accent
+                        .opacity(0.75)
+                        .overlay {
+                            Image(systemName: "music.note")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 20)
+                                .foregroundColor(Color.theme.primaryTextInverse)
+                                .opacity(0.5)
+                        }
+                @unknown default:
+                    EmptyView()
+                }
+            }
+            .frame(width: 100, height: 100)
+            .cornerRadius(20)
+            .padding(5) // Width of the border
+            .background(instrument == global.selectedInstrument ? Color.theme.accent : Color.clear) // Color of the border
+            .cornerRadius(25) // Outer corner radius
+            
+            Text(instrument.name)
+                .foregroundColor(instrument == global.selectedInstrument ? Color.theme.accent : Color.theme.primaryText)
         }
     }
     
@@ -145,9 +149,11 @@ struct SearchView: View {
                             .background(grade == global.selectedGrade ? Color.theme.accent : Color.clear) // Color of the border
                             .cornerRadius(25) // Outer corner radius
                     }
+                    .accessibilityIdentifier("grade_\(grade.id)")
                 }
             }
         }
+        .accessibilityIdentifier("gradesScrollView")
     }
     
     private var locationSelector: some View {
@@ -190,6 +196,7 @@ struct SearchView: View {
                     Spacer()
                 }
             }
+            .accessibilityIdentifier("searchButton")
         }
         .padding()
         .background(searchDisabled ? Color.gray : Color.theme.accent)

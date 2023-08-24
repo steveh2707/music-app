@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CachedImage<Content: View>: View {
     
-    @StateObject private var manager = CachedImageManager()
+    @StateObject private var vm = CachedImageVM()
     let url: String
     @ViewBuilder let content: (AsyncImagePhase) -> Content
     
@@ -21,7 +21,7 @@ struct CachedImage<Content: View>: View {
         
         ZStack {
             
-            switch manager.currentState {
+            switch vm.currentState {
             case .loading:
                 content(.empty)
             case .success(let data):
@@ -37,7 +37,7 @@ struct CachedImage<Content: View>: View {
             }
         }
         .task {
-            await manager.load(url)
+            await vm.load(url)
         }
         
         

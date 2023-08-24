@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 
+
 protocol NetworkingManagerImpl {
     func request<T:Codable>(session: URLSession,
                             _ endpoint: EndPoint,
@@ -45,10 +46,6 @@ final class NetworkingManager: NetworkingManagerImpl {
             }
             throw NetworkingError.apiError(message: apiError.message)
         }
-        
-//        guard let decodedResponse = try? decoder.decode(T.self, from: data) else {
-//            throw NetworkingError.failedToDecode
-//        }
         
         return try decoder.decode(T.self, from: data)
     }

@@ -14,7 +14,16 @@ struct SearchResultsView: View {
     @State private var hasAppeared = false
     
     init(searchCriteria: SearchCriteria) {
+#if DEBUG
+        if UITestingHelper.isUITesting {
+            let mock: NetworkingManagerImpl = UITestingHelper.isSearchResultsNetworkingSuccessful ? NetworkingManagerTeacherSearchResponseSuccessMock() : NetworkingManagerTeacherSearchResponseFailureMock()
+            _vm = StateObject(wrappedValue: SearchResultsVM(networkingManager: mock, searchCriteria: searchCriteria))
+        } else {
+            _vm = StateObject(wrappedValue: SearchResultsVM(searchCriteria: searchCriteria))
+        }
+#else
         _vm = StateObject(wrappedValue: SearchResultsVM(searchCriteria: searchCriteria))
+#endif
     }
     
     var body: some View {
@@ -31,6 +40,7 @@ struct SearchResultsView: View {
                             Text("\(totalResults) results found")
                         }
                     }
+                    .accessibilityIdentifier("resultsList")
                 }
             }
         }

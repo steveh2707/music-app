@@ -20,12 +20,18 @@ class EditTeacherDetailsVM: ObservableObject {
     var teacherDetailsStart: TeacherDetails
     var newTeacher: Bool
     
-    init(teacher: TeacherDetails, newTeacher: Bool) {
+    private let networkingManager: NetworkingManagerImpl!
+    private let validator: BecomeTeacherValidatorImp!
+    
+    init(teacher: TeacherDetails, newTeacher: Bool, networkingManager: NetworkingManagerImpl = NetworkingManager.shared,
+         validator: BecomeTeacherValidatorImp = BecomeTeacherValidator()) {
         self.teacherDetailsStart = teacher
         self.teacherDetails = teacher
         self.selectedLocation = SelectedLocation(title: teacher.locationTitle, latitude: teacher.locationLatitude, longitude: teacher.locationLongitude)
         self.editable = newTeacher
         self.newTeacher = newTeacher
+        self.networkingManager = networkingManager
+        self.validator = validator
     }
     
     
@@ -33,6 +39,8 @@ class EditTeacherDetailsVM: ObservableObject {
     func updateTeacherDetails(token: String?) async {
         
         do {
+            try validator.validate(teacherDetails)
+            
             submissionState = .submitting
             
             let encoder = JSONEncoder()

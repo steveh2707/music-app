@@ -32,7 +32,7 @@ final class SignupValidatorTest: XCTestCase {
             _ = try validator.validate(newStudent)
         } catch {
             guard let validationError = error as? SignupValidator.NewUserValidatorError else {
-                XCTFail("Got the wrong type of error, expecting a create validator error")
+                XCTFail("Got the wrong type of error, expecting a new user validator error")
                 return
             }
             
@@ -48,7 +48,7 @@ final class SignupValidatorTest: XCTestCase {
             _ = try validator.validate(newStudent)
         } catch {
             guard let validationError = error as? SignupValidator.NewUserValidatorError else {
-                XCTFail("Got the wrong type of error, expecting a create validator error")
+                XCTFail("Got the wrong type of error, expecting a new user validator error")
                 return
             }
             
@@ -64,7 +64,7 @@ final class SignupValidatorTest: XCTestCase {
             _ = try validator.validate(newStudent)
         } catch {
             guard let validationError = error as? SignupValidator.NewUserValidatorError else {
-                XCTFail("Got the wrong type of error, expecting a create validator error")
+                XCTFail("Got the wrong type of error, expecting a new user validator error")
                 return
             }
             
@@ -80,7 +80,7 @@ final class SignupValidatorTest: XCTestCase {
             _ = try validator.validate(newStudent)
         } catch {
             guard let validationError = error as? SignupValidator.NewUserValidatorError else {
-                XCTFail("Got the wrong type of error, expecting a create validator error")
+                XCTFail("Got the wrong type of error, expecting a new user validator error")
                 return
             }
             
@@ -96,7 +96,7 @@ final class SignupValidatorTest: XCTestCase {
             _ = try validator.validate(newStudent)
         } catch {
             guard let validationError = error as? SignupValidator.NewUserValidatorError else {
-                XCTFail("Got the wrong type of error, expecting a create validator error")
+                XCTFail("Got the wrong type of error, expecting a new user validator error")
                 return
             }
             
@@ -112,11 +112,11 @@ final class SignupValidatorTest: XCTestCase {
             _ = try validator.validate(newStudent)
         } catch {
             guard let validationError = error as? SignupValidator.NewUserValidatorError else {
-                XCTFail("Got the wrong type of error, expecting a create validator error")
+                XCTFail("Got the wrong type of error, expecting a new user validator error")
                 return
             }
             
-            XCTAssertEqual(validationError, SignupValidator.NewUserValidatorError.invalidDob, "Expecting an error where we have an invalid dob")
+            XCTAssertEqual(validationError, SignupValidator.NewUserValidatorError.invalidDob(ageLimt: 13), "Expecting an error where we have an invalid dob")
         }
     }
     
@@ -128,7 +128,7 @@ final class SignupValidatorTest: XCTestCase {
             _ = try validator.validate(newStudent)
         } catch {
             guard let validationError = error as? SignupValidator.NewUserValidatorError else {
-                XCTFail("Got the wrong type of error, expecting a create validator error")
+                XCTFail("Got the wrong type of error, expecting a new user validator error")
                 return
             }
             

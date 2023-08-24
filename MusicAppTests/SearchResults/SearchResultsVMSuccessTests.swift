@@ -28,7 +28,7 @@ final class SearchResultsVMSuccessTests: XCTestCase {
         XCTAssertEqual(vm.viewState, .none, "The view model shouldn't be loading any data")
         
         await vm.fetchTeachers()
-        XCTAssertEqual(vm.teachers.count, 6, "There should be 6 users within the teachers array")
+        XCTAssertEqual(vm.teachers.count, 4, "There should be 4 users within the teachers array")
         XCTAssertEqual(vm.viewState, .finished, "The view model state should be finished")
     }
     
@@ -37,10 +37,10 @@ final class SearchResultsVMSuccessTests: XCTestCase {
         XCTAssertEqual(vm.viewState, .none, "The view model shouldn't be loading any data")
         
         await vm.fetchTeachers()
-        XCTAssertEqual(vm.teachers.count, 6, "There should be 6 users within the teachers array")
+        XCTAssertEqual(vm.teachers.count, 4, "There should be 4 users within the teachers array")
         
         await vm.fetchNextSetOfTeachers()
-        XCTAssertEqual(vm.teachers.count, 12, "There should be 12 users within the teachers array")
+        XCTAssertEqual(vm.teachers.count, 8, "There should be 8 users within the teachers array")
         XCTAssertEqual(vm.page, 2, "The page should be 2")
         XCTAssertEqual(vm.viewState, .finished, "The view model state should be finished")
     }
@@ -48,17 +48,17 @@ final class SearchResultsVMSuccessTests: XCTestCase {
     func test_with_reset_called_values_is_reset() async throws {
 
         await vm.fetchTeachers()
-        XCTAssertEqual(vm.teachers.count, 6, "There should be 6 users within the teachers array")
+        XCTAssertEqual(vm.teachers.count, 4, "There should be 4 users within the teachers array")
         
         await vm.fetchNextSetOfTeachers()
-        XCTAssertEqual(vm.teachers.count, 12, "There should be 12 users within the teachers array")
+        XCTAssertEqual(vm.teachers.count, 8, "There should be 8 users within the teachers array")
         XCTAssertEqual(vm.page, 2, "The page should be 2")
         
         await vm.fetchTeachers()
-        XCTAssertEqual(vm.teachers.count, 6, "There should be 6 users within the teachers array")
-        XCTAssertEqual(vm.page, 1, "The page should be 2")
-        XCTAssertEqual(vm.totalPages, 5, "The page should be nil")
-        XCTAssertEqual(vm.viewState, .finished, "The page should be nil")
+        XCTAssertEqual(vm.teachers.count, 4, "There should be 4 users within the teachers array")
+        XCTAssertEqual(vm.page, 1, "The page should be 1")
+        XCTAssertEqual(vm.totalPages, 5, "The total pages should be 5")
+        XCTAssertEqual(vm.viewState, .finished, "The view model state should be finished")
     }
     
     func test_with_last_user_func_returns_true() async {

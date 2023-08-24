@@ -9,15 +9,18 @@ import SwiftUI
 
 struct BookingScheduleView: View {
     
+    // set up observable objects
     @EnvironmentObject var global: Global
     @StateObject private var vm: BookingVM
     
+    // initialise view
     init(teacher: Teacher) {
+        // pass teacher to StateObject
         _vm = StateObject(wrappedValue: BookingVM(teacher: teacher))
     }
     
+    // UI
     var body: some View {
-        
         ScrollView {
             VStack {
                 datePicker
@@ -33,7 +36,6 @@ struct BookingScheduleView: View {
             }
             .padding(.horizontal, 10)
         }
-        
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 infoButton
@@ -58,8 +60,6 @@ struct BookingScheduleView: View {
             BookingInfoScreen()
                     .presentationDetents([.fraction(0.4)])
         }
-//        .animation(.easeIn , value: vm.teacherAvailability)
-        
     }
     
     private var infoButton: some View {

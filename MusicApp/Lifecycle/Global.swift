@@ -94,8 +94,6 @@ class Global: ObservableObject {
     func getConfiguration() async {
         if self.viewState == .fetching { return }
         
-        print("Getting config")
-        
         viewState = .fetching
         defer { viewState = .finished }
        

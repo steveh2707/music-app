@@ -1,0 +1,62 @@
+{
+  "configurations" : [
+    {
+      "id" : "D3602FD5-C506-4BC3-8F73-77E7D3CB2321",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "environmentVariableEntries" : [
+      {
+        "key" : "OS_ACTIVITY_MODE",
+        "value" : "${DEBUG_ACTIVITY_MODE}"
+      },
+      {
+        "enabled" : false,
+        "key" : "TZ",
+        "value" : "SST"
+      },
+      {
+        "enabled" : false,
+        "key" : "TZ",
+        "value" : "GMT"
+      },
+      {
+        "enabled" : false,
+        "key" : "TZ",
+        "value" : "PST"
+      },
+      {
+        "enabled" : false,
+        "key" : "TZ",
+        "value" : "PKT"
+      }
+    ],
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:MusicApp.xcodeproj",
+      "identifier" : "AAF4C31C2A38AA5B0082C142",
+      "name" : "MusicApp"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:MusicApp.xcodeproj",
+        "identifier" : "AAF4C3412A39D4AF0082C142",
+        "name" : "MusicAppTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:MusicApp.xcodeproj",
+        "identifier" : "AADE8B572A8FA98000FED45B",
+        "name" : "MusicAppUITests"
+      }
+    }
+  ],
+  "version" : 1
+}

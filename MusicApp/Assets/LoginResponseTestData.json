@@ -1,1 +1,12 @@
-{"token":"eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxNiwiZmlyc3RfbmFtZSI6IlN0ZXBoZW4iLCJsYXN0X25hbWUiOiJIYW5uYSIsImVtYWlsIjoic2hhbm5hQGdtYWlsLmNvbSIsInBhc3N3b3JkX2hhc2giOiIkMmIkMTAkLklNRUVLRGguY0pLSm5Cd2dUS211dUZyL3JYR1dVVjYzVjUyRFpJYzdqRWYwT29vSmJLRVMiLCJkb2IiOiIxOTc4LTA3LTAyVDIzOjAwOjAwLjAwMFoiLCJyZWdpc3RlcmVkX3RpbWVzdGFtcCI6IjIwMjItMTAtMDNUMTY6NTI6NDkuMDAwWiIsInByb2ZpbGVfaW1hZ2VfdXJsIjoiIn0.RrXaROfv5lmpNcrc2Mohzb38Ub_RqsOvLxAgj1eTpKI","details":{"user_id":16,"first_name":"Stephen","last_name":"Hanna","email":"shanna@gmail.com","dob":"1978-07-02T23:00:00.000Z","registered_timestamp":"2022-10-03T16:52:49.000Z","profile_image_url":""}}
+{
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxNiwidGVhY2hlcl9pZCI6bnVsbH0.tUpPUFtU8yPaafM9-HMs4sKyf-eYiWNdQh-SfESmyqc",
+    "user_details": {
+        "user_id": 16,
+        "first_name": "Stephen",
+        "last_name": "Hanna",
+        "email": "shanna@gmail.com",
+        "dob": "1969-11-10T23:00:00.000Z",
+        "registered_timestamp": "2022-10-03T16:52:49.000Z",
+        "profile_image_url": "https://musicapp-file-storage.s3.eu-west-1.amazonaws.com/CC0CC6D5.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAQZSA5A6ZTDLDHQIK%2F20230818%2Feu-west-1%2Fs3%2Faws4_request&X-Amz-Date=20230818T115527Z&X-Amz-Expires=3600&X-Amz-Signature=414fe9d7a8cac2ec3d8cf6aae51a2e4d3c1b0294261ad6a72f89cb4049d2bafb&X-Amz-SignedHeaders=host&x-id=GetObject"
+    }
+}

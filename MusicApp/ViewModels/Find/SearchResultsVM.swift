@@ -38,7 +38,6 @@ class SearchResultsVM: ObservableObject {
         
         do {
             let encoder = JSONEncoder()
-//            encoder.keyEncodingStrategy = .convertToSnakeCase
             data = try encoder.encode(searchCriteria)
             
             let decodedResponse = try await networkingManager.request(session: .shared, .search(submissionData: data, page: page), type: SearchResults.self)

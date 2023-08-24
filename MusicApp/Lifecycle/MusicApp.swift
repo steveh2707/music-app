@@ -9,7 +9,8 @@ import SwiftUI
 
 @main
 struct MusicApp: App {
-    
+
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @StateObject var global = Global()
 
     
@@ -25,12 +26,11 @@ struct MusicApp: App {
                     }
                     .tag(1)
                     .task {
-                        if global.isValidated {
-                            await global.fetchUnreadMessages()
-                        }
+                        if global.isValidated { await global.fetchUnreadMessages() }
                     }
                 
-                if global.isValidated {
+                if global.isValidated, global.userDetails != nil {
+                    
                     AllChatsView()
                         .tabItem {
                             Image(systemName: "bubble.left.and.bubble.right")
@@ -38,28 +38,16 @@ struct MusicApp: App {
                         }
                         .badge(global.unreadMessages)
                         .tag(2)
-                        .task {
-                            if global.isValidated {
-                                await global.fetchUnreadMessages()
-                            }
-                        }
-                }
-                
-                if global.isValidated {
+                        .task { await global.fetchUnreadMessages() }
+                    
                     UserBookingsView()
                         .tabItem {
                             Image(systemName: "calendar")
                             Text("Bookings")
                         }
                         .tag(4)
-                        .task {
-                            if global.isValidated {
-                                await global.fetchUnreadMessages()
-                            }
-                        }
-                }
-                
-                if global.isValidated, global.userDetails != nil {
+                        .task { await global.fetchUnreadMessages() }
+                    
                     ProfileView(userDetails: global.userDetails!, teacherDetails: global.teacherDetails)
                         .tabItem {
                             Image(systemName: "person")
@@ -67,52 +55,49 @@ struct MusicApp: App {
 
                         }
                         .tag(3)
-                        .task {
-                            if global.isValidated {
-                                await global.fetchUnreadMessages()
-                            }
-                        }
+                        .task { await global.fetchUnreadMessages() }
                         
                 } else {
+                    
                     SignInSignUpView()
                         .tabItem {
                             Image(systemName: "person")
                             Text("Profile")
-                            
                         }
                         .tag(3)
                 }
 
-            
-//                SignInSignUpView()
-//                    .tabItem {
-//                        Image(systemName: "ellipsis")
-//                        Text("Sign In")
-//
-//                    }
-//                    .tag(5)
-
             }
             .environmentObject(global)
+            .task {
+                if global.instruments.isEmpty {
+                    await global.getConfiguration()
+                }
+            }
+            
 //            .task {
 //                if global.isValidated {
 //                    await global.fetchUnreadMessages()
 //                }
 //            }
-            .onAppear {
-#if DEBUG
-                UserDefaults.standard.set(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
-#endif
-            }
-            .task {
-                if global.viewState != .fetching && global.instruments.isEmpty {
-                    await global.getConfiguration()
-                }
-            }
-            
+//            .onAppear {
+//#if DEBUG
+//                UserDefaults.standard.set(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
+//#endif
+//            }
         }
         
         
         
+    }
+}
+
+
+class AppDelegate: UIResponder, UIApplicationDelegate {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        #if DEBUG
+        print("👷‍♂️ UI Test: \(UITestingHelper.isUITesting)")
+        #endif
+        return true
     }
 }

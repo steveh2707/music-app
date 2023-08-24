@@ -26,8 +26,13 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES"
-      shouldAutocreateTestPlan = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES">
+      <TestPlans>
+         <TestPlanReference
+            reference = "container:MusicApp.xctestplan"
+            default = "YES">
+         </TestPlanReference>
+      </TestPlans>
       <Testables>
          <TestableReference
             skipped = "NO"
@@ -37,6 +42,17 @@
                BlueprintIdentifier = "AAF4C3412A39D4AF0082C142"
                BuildableName = "MusicAppTests.xctest"
                BlueprintName = "MusicAppTests"
+               ReferencedContainer = "container:MusicApp.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "AADE8B572A8FA98000FED45B"
+               BuildableName = "MusicAppUITests.xctest"
+               BlueprintName = "MusicAppUITests"
                ReferencedContainer = "container:MusicApp.xcodeproj">
             </BuildableReference>
          </TestableReference>

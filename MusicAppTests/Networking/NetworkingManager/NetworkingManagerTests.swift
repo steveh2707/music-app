@@ -144,13 +144,6 @@ final class NetworkingManagerTests: XCTestCase {
                 return
             }
             
-            
-//            guard let decodingError = error as? NetworkingManager.NetworkingError else {
-//                XCTFail("Got the wroing type of error, expecting NetworkingManager NetworkingError")
-//                return
-//            }
-//
-//            XCTAssertEqual(decodingError, NetworkingManager.NetworkingError.failedToDecode, "Error should be a failed to decode error")
         }
     }
 }

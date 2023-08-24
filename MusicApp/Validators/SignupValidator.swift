@@ -7,7 +7,11 @@
 
 import Foundation
 
-struct SignupValidator {
+protocol SignupValidatorImp {
+    func validate(_ user: NewStudent) throws
+}
+
+struct SignupValidator: SignupValidatorImp {
     
     let ageLimit = 13
     
@@ -31,7 +35,7 @@ struct SignupValidator {
         
         if let userAge = Calendar.current.dateComponents([.year], from: user.inputDob, to: Date.now).year {
             if userAge < ageLimit {
-                throw NewUserValidatorError.invalidDob
+                throw NewUserValidatorError.invalidDob(ageLimt: ageLimit)
             }
         }
     
@@ -46,7 +50,7 @@ struct SignupValidator {
         case invalidLastName
         case invalidEmail
         case invalidPassword
-        case invalidDob
+        case invalidDob(ageLimt: Int)
         case invalidTos
         
         var errorDescription: String? {
@@ -59,8 +63,8 @@ struct SignupValidator {
                 return "Email cannot be empty"
             case .invalidPassword:
                 return "Password cannot be empty"
-            case .invalidDob:
-                return "User must be older than \(SignupValidator().ageLimit)"
+            case .invalidDob(let ageLimit):
+                return "User must be older than \(ageLimit)"
             case .invalidTos:
                 return "Please accept Terms of Service"
             }

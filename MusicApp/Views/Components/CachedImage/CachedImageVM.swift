@@ -8,11 +8,9 @@
 import Foundation
 
 
-final class CachedImageManager: ObservableObject {
+final class CachedImageVM: ObservableObject {
     
     @Published private(set) var currentState: CurrentState?
-    
-    private let imageRetriever = ImageRetriever()
     
     @MainActor
     func load(_ imgUrl: String, cache: ImageCache = .shared) async {
@@ -22,23 +20,19 @@ final class CachedImageManager: ObservableObject {
         // check if image is in cache and load if so
         if let imageData = cache.object(forKey: imgUrl as NSString) {
             self.currentState = .success(data: imageData)
-            
-            #if DEBUG
-//            print("📱 Fetching image from the cache: \(imgUrl)")
-            #endif
             return
         }
         
         // load image from url
         do {
-            let data = try await imageRetriever.fetch(imgUrl)
+            guard let url = URL(string: imgUrl) else {
+                throw NetworkingManager.NetworkingError.invalidUrl
+            }
+            
+            let (data, _) = try await URLSession.shared.data(from: url)
             
             self.currentState = .success(data: data)
             cache.set(object: data as NSData, forKey: imgUrl as NSString)
-
-            #if DEBUG
-//            print("📱 Caching image: \(imgUrl)")
-            #endif
         } catch {
             self.currentState = .failed(error: error)
         }

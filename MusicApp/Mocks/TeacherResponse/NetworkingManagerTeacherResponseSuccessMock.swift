@@ -5,8 +5,8 @@
 //  Created by Steve on 26/06/2023.
 //
 
+#if DEBUG
 import Foundation
-@testable import MusicApp
 
 class NetworkingManagerTeacherResponseSuccessMock: NetworkingManagerImpl {
     
@@ -19,3 +19,4 @@ class NetworkingManagerTeacherResponseSuccessMock: NetworkingManagerImpl {
     
     
 }
+#endif

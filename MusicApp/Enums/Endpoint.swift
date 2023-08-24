@@ -11,6 +11,7 @@ import SwiftUI
 
 enum EndPoint {
 
+    // all of the API endpoints being accessed by the app, with required parameters
     case configuration
     case teacher(id: Int)
     case newUser(submissionData: Data?)
@@ -31,7 +32,6 @@ enum EndPoint {
     case allUnreadChats(token: String?)
     
     case teacherAvailability(token: String?, id: Int, startDate: Date, endDate: Date)
-    
     case makeBooking(token: String?, submissionData: Data?)
     case allBookings(token: String?)
     case cancelBooking(token: String?, bookingId: Int, submissionData: Data?)
@@ -40,7 +40,8 @@ enum EndPoint {
     case newReview(token: String?, submissionData: Data?)
     case image(token: String?, submissionData: Data?)
 
-    // Use this for any items that need appended to request
+    
+    // defines the method type for each of the API endpoints from the MethodType enum
     var methodType: MethodType {
         switch self {
         case .teacher,
@@ -86,9 +87,8 @@ enum EndPoint {
         }
     }
     
-//    var host: String { "localhost" }
     
-    // Use this for any items that need included in the URL
+    // defines the URL path and applies parameters as required
     var path: String {
         switch self {
         case .configuration:
@@ -116,7 +116,7 @@ enum EndPoint {
         case .allBookings:
             return "/booking"
         case .cancelBooking(_, let bookingId, _):
-            return "/booking/cancel/\(bookingId)"
+            return "/booking/\(bookingId)"
         case .image:
             return "/image"
         case .chatFromTeacherId:
@@ -140,6 +140,7 @@ enum EndPoint {
         }
     }
     
+    // adds query items to path as required
     var queryItems: [String: String]? {
         switch self {
         case .search(_, let page),
@@ -154,17 +155,12 @@ enum EndPoint {
         }
     }
 
-
+    // builds up all the components of the URL, adding the path and query items from above
     var url: URL? {
         var urlComponents = URLComponents()
         urlComponents.scheme = "http"
-//        urlComponents.host = "192.168.1.159"
         urlComponents.host = "localhost"
         urlComponents.port = 4000
-        
-//        urlComponents.scheme = "https"
-//        urlComponents.host = "frail-seal-snaps.cyclic.app"
-        
         urlComponents.path = path
         
         var requestQueryItems = [URLQueryItem]()
@@ -181,6 +177,7 @@ enum EndPoint {
     
 }
 
+// all HTTP method types
 enum MethodType : Equatable {
     case GET(token: String? = nil)
     case POST(token: String? = nil, data: Data? = nil)
