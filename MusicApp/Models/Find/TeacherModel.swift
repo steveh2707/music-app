@@ -8,7 +8,8 @@
 import Foundation
 
 
-// MARK: - Welcome
+// MARK: - Teacher
+/// Data model for a teacher
 struct Teacher: Codable, Equatable {
     
     let userID, teacherID: Int
@@ -41,6 +42,7 @@ struct Teacher: Codable, Equatable {
 }
 
 // MARK: - InstrumentsTaught
+/// Data model for Instrument Taught by Teacher
 struct InstrumentTaught: Codable, Identifiable, Equatable, Hashable {
     var id: Int {
         teacherInstrumentTaughtId
@@ -71,6 +73,7 @@ struct InstrumentTaught: Codable, Identifiable, Equatable, Hashable {
 
 
 // MARK: - Review
+/// Data model for a review about a teacher
 struct Review: Codable, Identifiable, Equatable {
     let reviewID: Int
     let numStars: Int
@@ -105,6 +108,8 @@ struct Review: Codable, Identifiable, Equatable {
 }
 
 
+// MARK: - TeacherFavourite
+/// Data model for whether a teacher has been favourited by user
 struct TeacherFavourite: Codable {
     let count: Int
     

@@ -8,10 +8,12 @@
 import SwiftUI
 import MapKit
 
+
+/// View showing selected Teacher's profile
 struct TeacherView: View {
     
+    // MARK: PROPERTIES
     let teacherId: Int
-    
     @EnvironmentObject var global: Global
     @Environment(\.dismiss) private var dismiss
     @StateObject private var vm = TeacherVM()
@@ -20,11 +22,11 @@ struct TeacherView: View {
     @State private var showLoginMessage: Bool = false
     @State private var showOwnProfileMessage: Bool = false
 
-    
     var teacherViewingOwnProfile: Bool {
         global.teacherDetails?.teacherID == teacherId
     }
     
+    // MARK: BODY
     var body: some View {
         ZStack {
             if (vm.teacher != nil) {
@@ -94,6 +96,9 @@ struct TeacherView: View {
         }
     }
     
+    // MARK: VARIABLES/FUNCTIONS
+    
+    // Refresh button to allow view to be refreshed
     var refresh: some View {
         Button {
             Task {
@@ -105,6 +110,7 @@ struct TeacherView: View {
         .disabled(vm.viewState == .fetching)
     }
     
+    // Heading section of view showing profile picture, name, tagline and favourite button
     private var headingSection: some View {
         
         ZStack(alignment: .topTrailing) {
@@ -156,6 +162,7 @@ struct TeacherView: View {
         }
     }
     
+    // Section showing what instruments teacher can teach at what grade.
     private var instrumentSection: some View {
         VStack(alignment: .leading) {
             if let teacher = vm.teacher {
@@ -170,6 +177,7 @@ struct TeacherView: View {
         }
     }
     
+    // Section showing more details about teacher.
     private var aboutSection: some View {
         VStack(alignment: .leading) {
             if let teacher = vm.teacher {
@@ -194,6 +202,7 @@ struct TeacherView: View {
         }
     }
     
+    // Section showing teachers location on a map view.
     private var locationSection: some View {
         VStack(alignment: .leading) {
             if let teacher = vm.teacher {
@@ -213,9 +222,7 @@ struct TeacherView: View {
     }
     
     
-    
-    
-    
+    // Section showing teacher's reviews.
     private var reviewSection: some View {
         VStack(alignment: .leading) {
             if let teacher = vm.teacher {
@@ -231,7 +238,7 @@ struct TeacherView: View {
         }
     }
     
-    
+    // Buttons on bottom of screen to allow user to chat or book a lesson with teacher.
     private var footer: some View {
         ZStack {
             Color.theme.accent
@@ -284,6 +291,10 @@ struct TeacherView: View {
         .frame(height: 50)
     }
     
+    
+    /// Creates a button label based on the button text provided
+    /// - Parameter buttonText: Text to be displayed on button.
+    /// - Returns: Button label with styling
     private func footerButton(buttonText: String) -> some View {
         Text(buttonText)
             .fontWeight(.semibold)
@@ -297,10 +308,12 @@ struct TeacherView: View {
     
 }
 
+// MARK: PREVIEW
+
 struct TeacherView_Previews: PreviewProvider {
     static var previews: some View {
         TeacherView(teacherId: 1)
-            .environmentObject(dev.globalVM)
+            .environmentObject(dev.globalStudentVM)
     }
 }
 

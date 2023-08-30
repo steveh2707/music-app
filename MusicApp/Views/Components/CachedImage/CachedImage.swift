@@ -7,8 +7,10 @@
 
 import SwiftUI
 
+/// View to display a new image from URL and cache it or display a previous image from cache
 struct CachedImage<Content: View>: View {
     
+    // MARK: PROPERTIES
     @StateObject private var vm = CachedImageVM()
     let url: String
     @ViewBuilder let content: (AsyncImagePhase) -> Content
@@ -17,7 +19,8 @@ struct CachedImage<Content: View>: View {
         case invalidData
     }
     
-        var body: some View {
+    // MARK: BODY
+    var body: some View {
         
         ZStack {
             
@@ -39,11 +42,10 @@ struct CachedImage<Content: View>: View {
         .task {
             await vm.load(url)
         }
-        
-        
     }
 }
 
+// MARK: PREVIEW
 struct CachedImage_Previews: PreviewProvider {
     static var previews: some View {
         CachedImage(url: "https://www.rimmersmusic.co.uk/images/yamaha-gb1k-grand-piano-polished-ebony-p25773-139507_image.jpg") { _ in

@@ -7,8 +7,10 @@
 
 import Foundation
 
+/// View model for handling all business logic of Favourite Teachers View
 class FavouriteTeacherVM: ObservableObject {
     
+    // MARK: PROPERTIES
     @Published var teachers: [TeacherResult] = []
     
     @Published var viewState: ViewState?
@@ -22,11 +24,16 @@ class FavouriteTeacherVM: ObservableObject {
     
     private let networkingManager: NetworkingManagerImpl!
     
+    // MARK: INITALIZATION
     init(networkingManager: NetworkingManagerImpl = NetworkingManager.shared) {
         self.networkingManager = networkingManager
     }
     
+    // MARK: FUNCTIONS
+    
     @MainActor
+    /// Function to interface with API to find user's favouritre teachers and assign to local variable
+    /// - Parameter token: JWT token provided to user at login for authentication
     func fetchFavTeachers(token: String?) async {
         reset()
         viewState = .fetching
@@ -55,6 +62,7 @@ class FavouriteTeacherVM: ObservableObject {
     }
     
     @MainActor
+    /// Function to interface with API and append next batch of favourite teachers to existing local array
     func fetchNextSetOfTeachers() async {
         viewState = .fetching
         defer { viewState = .finished }
@@ -77,6 +85,7 @@ class FavouriteTeacherVM: ObservableObject {
     }
     
     
+    /// Function to reset view
     func reset() {
         if viewState == .finished {
             teachers.removeAll()
@@ -86,6 +95,9 @@ class FavouriteTeacherVM: ObservableObject {
         }
     }
     
+    /// Function to check whether the next set of teachers should be loaded to enable infinite scrolling
+    /// - Parameter id: id of teacher
+    /// - Returns: whether new set of teachers should be loaded
     func shouldLoadData(id: Int) -> Bool {
         return id == teachers.last?.id && page != totalPages && viewState == .finished
     }

@@ -7,11 +7,14 @@
 
 import SwiftUI
 
+/// View to allow teachers to see all reviews that have been made about them.
 struct TeachersReviewsView: View {
+    
+    // MARK: PROPERTIES
     @StateObject private var vm = TeacherReviewsVM()
     var teacherId: Int
     
-    
+    // MARK: BODY
     var body: some View {
         NavigationStack {
             List {
@@ -30,6 +33,7 @@ struct TeachersReviewsView: View {
     }
 }
 
+// MARK: PREVIEW
 struct TeachersReviewsView_Previews: PreviewProvider {
     static var previews: some View {
         TeachersReviewsView(teacherId: 1)

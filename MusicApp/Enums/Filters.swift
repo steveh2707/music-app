@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Enum for various filter options for exisiting bookings
 enum BookingFilter : String, CaseIterable {
     case upcoming = "Upcoming"
     case past = "Past"

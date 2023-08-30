@@ -7,8 +7,10 @@
 
 import Foundation
 
+/// View model for handling all business logic of Teachers Reviews View
 class TeacherReviewsVM: ObservableObject {
     
+    // MARK: PROPERTIES
     @Published var reviews: [Review] = []
     
     @Published var viewState: ViewState?
@@ -17,12 +19,16 @@ class TeacherReviewsVM: ObservableObject {
     
     private let networkingManager: NetworkingManagerImpl!
     
+    // MARK: INITALIZATION
     init(networkingManager: NetworkingManagerImpl = NetworkingManager.shared) {
         self.networkingManager = networkingManager
     }
     
+    // MARK: FUNCTIONS
 
     @MainActor
+    /// Function to interface with API to get teachers reviews and assign to local variable
+    /// - Parameter teacherId: Id of teacher
     func getReviews(teacherId: Int) async {
         
         viewState = .fetching

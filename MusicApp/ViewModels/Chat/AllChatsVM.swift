@@ -7,16 +7,21 @@
 
 import Foundation
 
+/// View model for handling all business logic of
 class AllChatsVM: ObservableObject {
     
+    // MARK: PROPERTIES
     @Published var chats: [ChatGeneral] = []
     
     @Published var viewState: ViewState?
     @Published var hasError = false
     @Published var error: NetworkingManager.NetworkingError?
     
+    // MARK: FUNCTIONS
     
     @MainActor
+    /// Function to interface with API and assign chats to local variable
+    /// - Parameter token: JWT token provided to user at login for authentication
     func getChats(token: String?) async {
         
         viewState = .fetching

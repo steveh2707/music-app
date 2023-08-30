@@ -7,8 +7,10 @@
 
 import SwiftUI
 
+/// View to allow users to select a star rating for a teacher when making a review.
 struct RatingView: View {
     
+    // MARK: PROPERTIES
     @Binding var rating: Int
     var label = ""
     var maximumRating = 5
@@ -17,8 +19,9 @@ struct RatingView: View {
     var offColor = Color.gray
     var onColor = Color.yellow
     var centered = true
-    var spacing:CGFloat = 10
+    var spacing: CGFloat = 10
     
+    // MARK: BODY
     var body: some View {
         HStack(spacing: spacing) {
             if centered {
@@ -42,6 +45,9 @@ struct RatingView: View {
 
     }
     
+    /// Decide whether star should be onImage or offImage based on rating
+    /// - Parameter number: number of star
+    /// - Returns: either off or on image for star rating
     func image(for number: Int) -> Image {
         if number > rating {
             return offImage ?? onImage
@@ -51,6 +57,7 @@ struct RatingView: View {
     }
 }
 
+// MARK: PREVIEW
 struct RatingView_Previews: PreviewProvider {
     static var previews: some View {
         RatingView(rating: .constant(4))

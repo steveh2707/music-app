@@ -7,14 +7,18 @@
 
 import Foundation
 
+/// Implementation of the SignupValidator to allow mocks to be created and used for testing
 protocol SignupValidatorImp {
     func validate(_ user: NewStudent) throws
 }
 
+/// Struct to handle validating the sign up form
 struct SignupValidator: SignupValidatorImp {
     
     let ageLimit = 13
     
+    /// Validate inputs of form
+    /// - Parameter user: user details to be validated
     func validate(_ user: NewStudent) throws {
 
         if user.firstName.isEmpty {
@@ -45,6 +49,7 @@ struct SignupValidator: SignupValidatorImp {
         
     }
     
+    /// Custom errors that can be thrown by validator
     enum NewUserValidatorError: LocalizedError, Equatable {
         case invalidFirstName
         case invalidLastName

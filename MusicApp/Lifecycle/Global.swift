@@ -7,17 +7,9 @@
 
 import Foundation
 
-struct UnreadResponse: Codable {
-    let unreadMessages: Int
-
-    enum CodingKeys: String, CodingKey {
-        case unreadMessages = "unread_messages"
-    }
-}
-
-
 class Global: ObservableObject {
     
+    // MARK: PROPERTIES
     @Published var selectedTab = 1
     
     @Published var isValidated = false
@@ -30,56 +22,6 @@ class Global: ObservableObject {
     @Published var selectedGrade: Grade? = nil
     @Published var lessonCost: Int? = nil
     
-    var bookingCancellationMinDays = 2
-    
-    
-    func login(signInResponse: SignInResponse) {
-        self.isValidated = true
-        self.token = signInResponse.token
-        self.userDetails = signInResponse.userDetails
-        if let teacherDetails = signInResponse.teacherDetails {
-            self.teacherDetails = teacherDetails
-        }
-//        Task {
-//            await fetchUnreadMessages()
-//        }
-    }
-    
-    func logout() {
-        self.isValidated = false
-        self.token = ""
-        self.userDetails = nil
-        self.teacherDetails = nil
-    }
-    
-    func updateImageUrl(url: String?) {
-        if let url {
-            self.userDetails?.profileImageURL = url
-        }
-    }
-
-    @MainActor
-    func fetchUnreadMessages() async {
-        do {
-            let decodedResponse = try await NetworkingManager.shared.request(.allUnreadChats(token: token), type: UnreadResponse.self)
-            self.unreadMessages = decodedResponse.unreadMessages
-        } catch {
-            print(error)
-        }
-        
-//        do {
-//            // Schedule the next execution of the function after 30 seconds
-//            try await Task.sleep(nanoseconds: 60 * 1_000_000_000)
-//        } catch {
-//            print(error)
-//        }
-
-//        if isValidated {
-//            await fetchUnreadMessages()
-//        }
-
-    }
-    
     @Published var instruments: [Instrument] = []
     @Published var grades: [Grade] = []
     
@@ -88,9 +30,58 @@ class Global: ObservableObject {
     @Published var hasError = false
     @Published var error: NetworkingManager.NetworkingError?
     
+    var bookingCancellationMinDays = 2
+    
+    
+    // MARK: FUNCTIONS
+    
+    /// Logs in user from API response.
+    ///
+    /// Takes variables from API response and assigns them to local variables.
+    /// - Parameter signInResponse: Response provided by API with authentication details.
+    func login(signInResponse: SignInResponse) {
+        self.isValidated = true
+        self.token = signInResponse.token
+        self.userDetails = signInResponse.userDetails
+        if let teacherDetails = signInResponse.teacherDetails {
+            self.teacherDetails = teacherDetails
+        }
+    }
+    
+    /// Logs out user.
+    ///
+    /// Removes user's details from all local variables.
+    func logout() {
+        self.isValidated = false
+        self.token = ""
+        self.userDetails = nil
+        self.teacherDetails = nil
+    }
+    
+    /// Update user's image to the URL provided.
+    /// - Parameter url: New Image URL to be assigned to user's details
+    func updateImageUrl(url: String?) {
+        if let url {
+            self.userDetails?.profileImageURL = url
+        }
+    }
+
+    @MainActor
+    /// Makes an API call to get number of unread chat messages for the user and assigns to local variable.
+    func fetchUnreadMessages() async {
+        viewState = .fetching
+        defer { viewState = .finished }
+        
+        do {
+            let decodedResponse = try await NetworkingManager.shared.request(.allUnreadChats(token: token), type: UnreadResponse.self)
+            self.unreadMessages = decodedResponse.unreadMessages
+        } catch {
+            print(error)
+        }
+    }
     
     @MainActor
-    /// Makes an API call to get instrument and grades available and assigns them to local variables
+    /// Makes an API call to get instrument and grades available and assigns them to local variables.
     func getConfiguration() async {
         if self.viewState == .fetching { return }
         
@@ -117,11 +108,18 @@ class Global: ObservableObject {
     }
     
     
-    
+#if DEBUG
+    /// Returns an instance of the Global class authentication provided.
+    ///
+    /// Funtion returns instance of Global class, setting token to value provided and setting isValidated to true. Function used to get authenticated instances of Global class to be used for PreviewProvider. Should only ever run in DEBUG mode.
+    /// - Parameter token: JWT to be assigned to class.
+    /// - Returns: Authenticated instance of Global class
     func test(token: String) -> Global {
         self.isValidated = true
         self.token = token
         return self
     }
+#endif
+
   
 }

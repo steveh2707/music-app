@@ -7,7 +7,10 @@
 
 import Foundation
 
+/// View model for handling all business logic of EditTeacherDetails View
 class EditTeacherDetailsVM: ObservableObject {
+    
+    // MARK: PROPERTIES
     @Published var teacherDetails: TeacherDetails
     
     @Published var submissionState: SubmissionState?
@@ -23,6 +26,8 @@ class EditTeacherDetailsVM: ObservableObject {
     private let networkingManager: NetworkingManagerImpl!
     private let validator: BecomeTeacherValidatorImp!
     
+    
+    // MARK: INITALIZATION
     init(teacher: TeacherDetails, newTeacher: Bool, networkingManager: NetworkingManagerImpl = NetworkingManager.shared,
          validator: BecomeTeacherValidatorImp = BecomeTeacherValidator()) {
         self.teacherDetailsStart = teacher
@@ -35,7 +40,11 @@ class EditTeacherDetailsVM: ObservableObject {
     }
     
     
+    // MARK: FUNCTIONS
+
     @MainActor
+    /// Function to interface with API to add a new teacher to database or update existing teachers details
+    /// - Parameter token: JWT token provided to user at login for authentication
     func updateTeacherDetails(token: String?) async {
         
         do {

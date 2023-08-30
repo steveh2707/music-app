@@ -7,16 +7,17 @@
 import PhotosUI
 import SwiftUI
 
+/// View to allow user to select an image from their photos app
 struct ImagePicker: View {
     
+    // MARK: PROPERTIES
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var global: Global
     @StateObject var vm = ImagePickerVM()
     @State private var avatarItem: PhotosPickerItem?
-
-
     var currentImageUrl: String?
     
+    // MARK: BODY
     var body: some View {
         NavigationView {
             VStack {
@@ -50,7 +51,6 @@ struct ImagePicker: View {
         }
         .onChange(of: avatarItem) { _ in
             avatarItem?.loadTransferable(type: Data.self) { result in
-                
                 switch result {
                 case .success(let data):
                     if let data = data {
@@ -69,6 +69,9 @@ struct ImagePicker: View {
         }
     }
     
+    // MARK: VARIABLES/FUNCTIONS
+    
+    // button to close view
     private var closeButton: some View {
         Button(action: {
             presentationMode.wrappedValue.dismiss()
@@ -78,6 +81,8 @@ struct ImagePicker: View {
         })
     }
     
+    
+    // button to save updates
     private var saveButton: some View {
         Button("SAVE") {
             Task {
@@ -89,8 +94,3 @@ struct ImagePicker: View {
     }
 }
 
-//struct ImagePicker_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ImagePicker()
-//    }
-//}

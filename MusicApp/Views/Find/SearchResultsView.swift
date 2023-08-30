@@ -7,13 +7,17 @@
 
 import SwiftUI
 
+// View to display results of search and provide links to profiles.
 struct SearchResultsView: View {
     
+    // MARK: PROPERTIES
     @EnvironmentObject var global: Global
     @StateObject private var vm: SearchResultsVM
     @State private var hasAppeared = false
     
+    // MARK: INITALIZATION
     init(searchCriteria: SearchCriteria) {
+        // Conditional initializer to allow mock networking manager to be injected if UI Testing is running.
 #if DEBUG
         if UITestingHelper.isUITesting {
             let mock: NetworkingManagerImpl = UITestingHelper.isSearchResultsNetworkingSuccessful ? NetworkingManagerTeacherSearchResponseSuccessMock() : NetworkingManagerTeacherSearchResponseFailureMock()
@@ -26,6 +30,7 @@ struct SearchResultsView: View {
 #endif
     }
     
+    // MARK: BODY
     var body: some View {
         ZStack(alignment: .bottom) {
             
@@ -78,6 +83,9 @@ struct SearchResultsView: View {
         
     }
     
+    // MARK: VARIABLES/FUNCTIONS
+    
+    // Generates a list of search results witgh navigation links.
     private var resultsSection: some View {
         ForEach(vm.teachers, id: \.self) { teacher in
             ZStack {
@@ -100,9 +108,3 @@ struct SearchResultsView: View {
         }
     }
 }
-
-//struct SearchResultsView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SearchResultsView(searchCriteria: SearchCriteria(userLatitude: 1, userLongitude: 2))
-//    }
-//}

@@ -7,19 +7,21 @@
 
 import SwiftUI
 
+/// View showing teacher's schedule with selectable time slots.
 struct BookingScheduleView: View {
     
-    // set up observable objects
+    // MARK: PROPERTIES
+    
     @EnvironmentObject var global: Global
     @StateObject private var vm: BookingVM
     
-    // initialise view
+    // MARK: INITALIZATION
     init(teacher: Teacher) {
         // pass teacher to StateObject
         _vm = StateObject(wrappedValue: BookingVM(teacher: teacher))
     }
     
-    // UI
+    // MARK: BODY
     var body: some View {
         ScrollView {
             VStack {
@@ -28,7 +30,7 @@ struct BookingScheduleView: View {
                 dayHeadings
                 
                 if vm.teacherAvailability?.slots == [] {
-                    noAvailability
+                    NoContentView(description: vm.teacher.fullName + " has no availability on any of the selected dates. Please try a new date.")
                 } else {
                     bookingButtons
                 }
@@ -62,6 +64,9 @@ struct BookingScheduleView: View {
         }
     }
     
+    // MARK: VARIABLES/FUNCTIONS
+    
+    // Button to toggle info modal screen.
     private var infoButton: some View {
         Button(action: {
             vm.showInfoPage.toggle()
@@ -71,6 +76,7 @@ struct BookingScheduleView: View {
         })
     }
     
+    // Let user select a date in the future for booking.
     private var datePicker: some View {
         DatePicker(selection: $vm.searchDate, in: Date.now..., displayedComponents: .date) {
             Text("Selected Date")
@@ -80,6 +86,7 @@ struct BookingScheduleView: View {
         .padding(.bottom)
     }
     
+    // Headings for each of the days to be displayed with buttons to navigate to next/previous days.
     private var dayHeadings: some View {
         HStack {
             
@@ -108,18 +115,8 @@ struct BookingScheduleView: View {
         }
         .padding(.bottom, 10)
     }
-    
-    private var noAvailability: some View {
-        VStack {
-            Spacer()
-            Image(systemName: "magnifyingglass")
-                .font(.title)
-            Spacer()
-            Text(vm.teacher.fullName + " has no availability on any of the selected dates. Please try a new date.")
-                .multilineTextAlignment(.center)
-        }
-    }
-    
+
+    // Loop through each day included in the search
     private var bookingButtons: some View {
         HStack(alignment: .top) {
             if let teacherAvailability = vm.teacherAvailability {
@@ -157,41 +154,9 @@ struct BookingScheduleView: View {
                     }
                     .frame(width: 100)
                     
-//                    VStack(spacing: 15) {
-//                        ForEach(0..<24, id: \.self) {
-//                            let hour = Calendar.current.date(byAdding: .hour, value: $0, to: day)!
-//
-//                            let matchingSlot = teacherAvailability.slots.first {
-//                                hour >= $0.parsedStartTime
-//                                && hour < $0.parsedEndTime
-//                            }
-//
-//                            if matchingSlot != nil {
-//                                let matchingBooking = teacherAvailability.bookings.first {
-//                                    hour >= $0.parsedStartTime
-//                                    && hour < $0.parsedEndTime
-//                                }
-//                                Button(action: {
-//                                    if matchingBooking == nil {
-//                                        vm.showMakeBookingView.toggle()
-//                                        vm.selectedDateTime = hour
-//                                    }
-//                                }, label: {
-//                                    BookingSelectorButton(hour: hour, selectable: matchingBooking == nil)
-//                                })
-//                            }
-//                        }
-//                    }
-//                    .frame(width: 100)
                 }
             }
         }
     }
     
 }
-
-//struct BookingView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        BookingView(teacherId: 1)
-//    }
-//}

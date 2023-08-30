@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// View to allow users to access the teachers they have previously favourited.
 struct FavouriteTeachersView: View {
     
     @EnvironmentObject var global: Global
@@ -42,8 +43,9 @@ struct FavouriteTeachersView: View {
         }
     }
     
+    // MARK: VARIABLES/FUNCTIONS
     
-    
+    // list of all the teachers favourited with links to profiles.
     private var resultsSection: some View {
         ForEach(vm.teachers, id: \.self) { teacher in
             ZStack {
@@ -64,9 +66,10 @@ struct FavouriteTeachersView: View {
     }
 }
 
+// MARK: PREVIEW
 struct FavouriteTeachersView_Previews: PreviewProvider {
     static var previews: some View {
         FavouriteTeachersView()
-            .environmentObject(dev.globalVM)
+            .environmentObject(dev.globalStudentVM)
     }
 }

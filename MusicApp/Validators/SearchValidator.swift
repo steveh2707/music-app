@@ -7,8 +7,11 @@
 
 import Foundation
 
+/// Struct to handle validating the search form
 struct SearchValidator {
     
+    /// Validate inputs of form
+    /// - Parameter searchCriteria: search criteria to be validated
     func validate(_ searchCriteria: SearchCriteria) throws {
         
         if searchCriteria.instrumentId == nil {
@@ -21,6 +24,7 @@ struct SearchValidator {
         
     }
     
+    /// Custom errors that can be thrown by validator
     enum SearchValidatorError: LocalizedError, Equatable {
         case invalidInstrumentId
         case invalidGradeRankId

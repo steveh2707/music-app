@@ -7,12 +7,14 @@
 
 import SwiftUI
 
+/// View to display the users image handling the success and failure states for accessing the image from the CachedImage View
 struct UserImageView: View {
     
+    // MARK: PROPERTIES
     var imageURL: String
     
+    // MARK: BODY
     var body: some View {
-//        GeometryReader { geo in
             CachedImage(url: imageURL) { phase in
                 switch phase {
                 case .empty:
@@ -34,7 +36,6 @@ struct UserImageView: View {
                             Image(systemName: "person.fill")
                                 .resizable()
                                 .scaledToFit()
-//                                .frame(width: geo.size.width * 0.5)
                                 .foregroundColor(Color.theme.primaryTextInverse)
                                 .opacity(0.5)
                         }
@@ -43,11 +44,10 @@ struct UserImageView: View {
                 }
             }
             .clipShape(Circle())
-//        }
-        
     }
 }
 
+// MARK: PREVIEW
 struct UserImageView_Previews: PreviewProvider {
     static var previews: some View {
         UserImageView(imageURL: "https://images.unsplash.com/photo-1540569014015-19a7be504e3a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=735&q=80")

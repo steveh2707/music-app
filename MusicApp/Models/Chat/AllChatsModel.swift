@@ -7,12 +7,14 @@
 
 import Foundation
 
-// MARK: - Welcome
+// MARK: - AllChatsResponse
+/// Data model for API response for all chats for a user
 struct AllChatsResponse: Codable {
     let results: [ChatGeneral]
 }
 
-// MARK: - Result
+// MARK: - ChatGeneral
+/// Data model for general chat information for all user's chats
 struct ChatGeneral: Codable, Identifiable {
     let chatID: Int
     let createdTimestampUTC: String

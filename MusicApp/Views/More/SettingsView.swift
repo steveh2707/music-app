@@ -7,22 +7,20 @@
 
 import SwiftUI
 
+/// View showing app settings
 struct SettingsView: View {
     
+    // MARK: PROPERTIES
     @EnvironmentObject var global: Global
-    
     @Binding var teacherDetailsUpdated: Int
     
+    // MARK: BODY
     var body: some View {
         List {
-            Section {
-               Text("Settings go here")
-            }
-            
+
             Section {
                 if global.teacherDetails == nil {
                     NavigationLink {
-                        //                    EditTeacherDetails(updatingExistingTeacher: false)
                         let newTeacher = TeacherDetails(teacherID: 0, tagline: "", bio: "", locationTitle: "", locationLatitude: 0, locationLongitude: 0, averageReviewScore: 0, instrumentsTeachable: [])
                         EditTeacherDetails(teacherDetails: newTeacher, newTeacher: true, teacherDetailsUpdated: $teacherDetailsUpdated)
                     } label: {
@@ -30,12 +28,12 @@ struct SettingsView: View {
                     }
                 }
                 NavigationLink {
-                    EmptyView()
+                    MarkdownView(title: "Terms of Service", fileName: "TOS")
                 } label: {
                     Text("Terms of Service")
                 }
                 NavigationLink {
-                    EmptyView()
+                    MarkdownView(title: "Privacy Policy", fileName: "PP")
                 } label: {
                     Text("Privacy Policy")
                 }
@@ -45,8 +43,3 @@ struct SettingsView: View {
     }
 }
 
-//struct SettingsView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SettingsView()
-//    }
-//}

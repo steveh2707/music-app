@@ -7,13 +7,51 @@
 
 import Foundation
 
+// MARK: - NewStudent
+/// Data model for a new student signing up
+struct NewStudent: Encodable {
+    var firstName: String = ""
+    var lastName: String = ""
+    var email: String = ""
+    var password: String = ""
+    var inputDob: Date = Date.now
+    var tos: Bool = false
+    
+    var dob: String {
+        inputDob.asSqlDateString()
+    }
+    
+    enum CodingKeys: String, CodingKey {
+        case firstName = "first_name"
+        case lastName = "last_name"
+        case email
+        case password
+        case inputDob = "input_dob"
+        case tos
+        case dob
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(firstName, forKey: .firstName)
+        try container.encode(lastName, forKey: .lastName)
+        try container.encode(email, forKey: .email)
+        try container.encode(password, forKey: .password)
+        try container.encode(dob, forKey: .dob)
+
+    }
+}
+
+// MARK: - Credentials
+/// Data model for login credentials
 struct Credentials: Codable {
     var email: String = ""
     var password: String = ""
 }
 
 
-// MARK: - Welcome
+// MARK: - SignInResponse
+/// Data model for the API response for logging in
 struct SignInResponse: Codable {
     let token: String
     let userDetails: UserDetails
@@ -26,7 +64,8 @@ struct SignInResponse: Codable {
     }
 }
 
-// MARK: - Details
+// MARK: - UserDetails
+/// Data model for users details
 struct UserDetails: Codable, Equatable {
     let userID: Int
     var firstName, lastName, email, dob: String
@@ -70,6 +109,7 @@ struct UserDetails: Codable, Equatable {
 }
 
 // MARK: - TeacherDetails
+/// Data model for users teaching details
 struct TeacherDetails: Codable, Equatable {
     let teacherID: Int
     var tagline, bio, locationTitle: String
@@ -115,6 +155,7 @@ struct TeacherDetails: Codable, Equatable {
 }
 
 // MARK: - InstrumentsTeachable
+/// Data model for instruments teachable by teacher
 struct InstrumentsTeachable: Identifiable, Codable, Equatable, Hashable {
     let id: Int
     var instrumentID, gradeID: Int

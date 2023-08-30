@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// View for users to see a list of their upcoming and past bookings
 struct UserBookingsView: View {
     
     // MARK: PROPERTIES
@@ -18,7 +19,7 @@ struct UserBookingsView: View {
     @State var showDetailSheet = false
     @State var reloadUserBookings = false
     
-    var currentDate = Date()
+    let currentDate = Date()
     
     var filteredBookings: [UserBooking] {
         switch selectedFilter {
@@ -38,7 +39,7 @@ struct UserBookingsView: View {
             
             ZStack {
                 VStack {
-            
+                    
                     List {
                         Section {
                             filterSelector
@@ -56,6 +57,7 @@ struct UserBookingsView: View {
                                     
                                     .swipeActions {
                                         
+                                        // only allow students to cancel bookings up to 2 days before booking or allow teachers to cancel bookings right up to before booking starts
                                         if booking.parsedStartTime > currentDate.addOrSubtractDays(day: global.bookingCancellationMinDays) || (booking.teacherID == global.teacherDetails?.teacherID && booking.parsedStartTime > currentDate) {
                                             Button {
                                                 vm.bookingDetail = booking
@@ -67,6 +69,7 @@ struct UserBookingsView: View {
                                         } else if booking.parsedStartTime > currentDate {
                                             
                                         } else if booking.teacherID != global.teacherDetails?.teacherID {
+                                            // allow students to review teachers after booking has happened
                                             Button {
                                                 vm.bookingDetail = booking
                                                 showDetailSheet.toggle()
@@ -114,8 +117,6 @@ struct UserBookingsView: View {
             Button("OK", role: .cancel) { }
         }
         .sheet(isPresented: $showDetailSheet) {
-//            BookingDetailView(vm: vm)
-//                    .presentationDetents([.fraction(0.7)])
             BookingDetailView(bookingDetail: vm.bookingDetail!, reloadUserBookings: $reloadUserBookings)
                 .presentationDetents([.fraction(0.7)])
         }
@@ -123,6 +124,7 @@ struct UserBookingsView: View {
     
     // MARK: VARIABLES/FUNCTIONS
     
+    // button to refresh view using API request
     var refresh: some View {
         Button {
             Task {
@@ -134,6 +136,7 @@ struct UserBookingsView: View {
         .disabled(vm.viewState == .fetching)
     }
     
+    // selector to filter bookings on screen by upcoming, past or all
     private var filterSelector: some View {
         Picker("Test", selection: $selectedFilter) {
             ForEach(BookingFilter.allCases, id: \.self) { item in
@@ -146,6 +149,7 @@ struct UserBookingsView: View {
         .padding(.bottom, 5)
     }
     
+    // row in list for each booking
     private func bookingRowView(_ booking: UserBooking) -> some View {
         HStack {
             VStack(alignment: .leading) {
@@ -184,14 +188,13 @@ struct UserBookingsView: View {
                     VStack(alignment: .leading, spacing: 5) {
                         HStack(spacing: 5) {
                             var userIsTeacher: Bool { booking.teacherID == global.teacherDetails?.teacherID }
-                            
                             if userIsTeacher {
                                 Image(systemName: "studentdesk")
                             }
                             Text(userIsTeacher ? booking.student.fullName : booking.teacher.fullName)
                                 .font(.title3)
                         }
-                            .lineLimit(1)
+                        .lineLimit(1)
                         
                         HStack(spacing: 5) {
                             Text(booking.instrument.name)
@@ -200,9 +203,6 @@ struct UserBookingsView: View {
                         }
                         .font(.subheadline)
                         .lineLimit(1)
-                        
-//                        Text("\(booking.startTime) - \(booking.endTime)")
-//                            .font(.footnote)
                         Text("\(booking.parsedStartTime.asTime() ?? "") - \(booking.parsedEndTime.asTime() ?? "")")
                             .font(.footnote)
                     }
@@ -230,6 +230,6 @@ struct UserBookingsView_Previews: PreviewProvider {
     static var previews: some View {
         
         UserBookingsView()
-            .environmentObject(dev.globalVM)
+            .environmentObject(dev.globalStudentVM)
     }
 }

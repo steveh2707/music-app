@@ -7,21 +7,23 @@
 
 import SwiftUI
 
+/// Modal view to allow user to select their location
 struct LocationFinderView: View {
     
+    // MARK: PROPERTIES
     @Environment(\.presentationMode) var presentationMode
-    
     @StateObject var vm = LocationFinderVM()
     @FocusState private var isFocusedTextField: Bool
     @Binding var selectedLocation: SelectedLocation
     
+    // MARK: BODY
     var body: some View {
         NavigationView {
             Form {
                 searchInput
                 
                 List {
-                    useCurrentLocationButton
+//                    useCurrentLocationButton
                     
                     searchResults
                 }
@@ -44,7 +46,9 @@ struct LocationFinderView: View {
         }
     }
     
+    // MARK: VARIABLES/FUNCTIONS
     
+    /// The input field for searching locations.
     private var searchInput: some View {
         HStack {
             Image(systemName: "magnifyingglass")
@@ -73,17 +77,19 @@ struct LocationFinderView: View {
         }
     }
     
-    private var useCurrentLocationButton: some View {
-        Button {
-            // TODO: write code to get users current location
-        } label: {
-            HStack {
-                Image(systemName: "location")
-                Text("Use Current Location")
-            }
-        }
-    }
+//    /// Button to use the user's current location.
+//    private var useCurrentLocationButton: some View {
+//        Button {
+//            // TODO: write code to get users current location
+//        } label: {
+//            HStack {
+//                Image(systemName: "location")
+//                Text("Use Current Location")
+//            }
+//        }
+//    }
     
+    /// List of search results.
     private var searchResults: some View {
         ForEach(vm.results) { address in
             Button {
@@ -100,6 +106,7 @@ struct LocationFinderView: View {
         }
     }
     
+    /// Button to close the location finder.
     private var closeButton: some View {
         Button(action: {
             presentationMode.wrappedValue.dismiss()
@@ -110,9 +117,3 @@ struct LocationFinderView: View {
     }
     
 }
-
-//struct LocationFinderView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        LocationFinderView()
-//    }
-//}

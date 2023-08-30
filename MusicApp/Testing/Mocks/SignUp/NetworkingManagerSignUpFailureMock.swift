@@ -1,8 +1,8 @@
 //
 //  NetworkingManagerSignUpFailureMock.swift
-//  MusicAppTests
+//  MusicApp
 //
-//  Created by Steve on 18/08/2023.
+//  Created by Steve on 30/08/2023.
 //
 
 #if DEBUG

@@ -7,7 +7,8 @@
 
 import Foundation
 
-
+// MARK: - SearchCriteria
+/// Data model for the search criteria
 struct SearchCriteria: Encodable {
     var userLatitude: Double?
     var userLongitude: Double?
@@ -35,6 +36,7 @@ struct SearchCriteria: Encodable {
 
 
 // MARK: - SearchResults
+/// Data model for the API response of the teacher search
 struct SearchResults: Codable {
     let numResults, page, totalPages: Int
     let results: [TeacherResult]
@@ -47,7 +49,8 @@ struct SearchResults: Codable {
     }
 }
 
-// MARK: - Result
+// MARK: - TeacherResult
+/// Data model for each teacher listed in the search results
 struct TeacherResult: Codable, Identifiable, Hashable {
     var id: Int { teacherID }
     

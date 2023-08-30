@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// View to allow teachers to access and update their teacher details.
 struct EditTeacherDetails: View {
 
     // MARK: PROPERTIES
@@ -16,6 +17,7 @@ struct EditTeacherDetails: View {
     @State private var showSaveChangesAlert = false
     @Binding var teacherDetailsUpdated: Int
     
+    // MARK: INITALIZATION
     init (teacherDetails: TeacherDetails, newTeacher: Bool = false, teacherDetailsUpdated: Binding<Int>) {
         _vm = StateObject(wrappedValue: EditTeacherDetailsVM(teacher: teacherDetails, newTeacher: newTeacher))
         _teacherDetailsUpdated = teacherDetailsUpdated
@@ -70,6 +72,8 @@ struct EditTeacherDetails: View {
     
     
     // MARK: VARIABLES
+    
+    // button to toggle whether details are editable or not
     private var editableToggleButton: some View {
         Button {
             if vm.teacherDetailsStart == vm.teacherDetails {
@@ -86,6 +90,7 @@ struct EditTeacherDetails: View {
         }
     }
     
+    // button to log user out by calling global function
     private var logoutButton: some View {
         Button {
             global.logout()
@@ -94,6 +99,7 @@ struct EditTeacherDetails: View {
         }
     }
     
+    // teacher's details which can be edited when editable variable set to true
     private var teacherDetailsSection: some View {
         Section {
             VStack(alignment: .leading) {
@@ -125,6 +131,7 @@ struct EditTeacherDetails: View {
         }
     }
     
+    // show location search view in a modal screen
     private var locationSelector: some View {
         Button {
             showLocationSearch = true
@@ -140,6 +147,7 @@ struct EditTeacherDetails: View {
         .disabled(!vm.editable)
     }
     
+    // list of instruments taught by teacher, to what grade, with lesson price. Also allows new instruments to be added or old instruments to be removed.
     private var instrumentsTeachableSection: some View {
         Section {
             ForEach(Array(vm.teacherDetails.instrumentsTeachable.enumerated()), id: \.offset) { index, element in
@@ -188,7 +196,6 @@ struct EditTeacherDetails: View {
                 Spacer()
                 Button {
                     vm.teacherDetails.instrumentsTeachable.append(InstrumentsTeachable(id: 0, instrumentID: 1, gradeID: 1, lessonCost: 20))
-                    
                 } label: {
                     Image(systemName: "plus.app.fill")
                         .font(.title)
@@ -201,14 +208,6 @@ struct EditTeacherDetails: View {
         }
     }
 }
-
-// MARK: PREVIEW
-//struct BecomeTeacherView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        EditTeacherDetails()
-//    }
-//}
-
 
 
 

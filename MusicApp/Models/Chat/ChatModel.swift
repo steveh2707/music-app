@@ -7,7 +7,8 @@
 
 import Foundation
 
-// MARK: - Welcome
+// MARK: - ChatDetails
+/// Data model for details of a chat conversation
 struct ChatDetails: Codable, Equatable {
     let chatID: Int
     let createdTimestampUtc: String
@@ -25,6 +26,7 @@ struct ChatDetails: Codable, Equatable {
 }
 
 // MARK: - Message
+/// Data model for each message within a chat conversation
 struct Message: Codable, Hashable {
     let chatMessageID: Int
     let message, createdTimestamp: String
@@ -36,4 +38,11 @@ struct Message: Codable, Hashable {
         case createdTimestamp = "created_timestamp"
         case senderID = "sender_id"
     }
+}
+
+
+// MARK: - NewMessage
+/// Data model for a new message to be posted to the database
+struct NewMessage: Codable {
+    var message = ""
 }

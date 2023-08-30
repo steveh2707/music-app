@@ -7,15 +7,13 @@
 
 import Foundation
 
-
-
-// View model for handling all business logic of bookingScheduleView
+/// View model for handling all business logic of bookingScheduleView
 class BookingVM: ObservableObject {
     
-    // set up variables
+    // MARK: PROPERTIES
     @Published var teacher: Teacher
     @Published var teacherAvailability: TeacherAvailability? = nil
-    @Published var searchDate = Date()
+    @Published var searchDate: Date
     
     @Published var searchedDates: [Date] = []
     @Published var selectedDateTime: Date?
@@ -31,14 +29,23 @@ class BookingVM: ObservableObject {
     
     private let networkingManager: NetworkingManagerImpl!
     
-    // initialise object setting input variables
+    // MARK: INITALIZATION
+    
     init(networkingManager: NetworkingManagerImpl = NetworkingManager.shared, teacher: Teacher) {
         self.networkingManager = networkingManager
         self.teacher = teacher
+        
+        let calendar = Calendar.current
+        let today = Date()
+        let midnight = calendar.startOfDay(for: today)
+        let tomorrow = calendar.date(byAdding: .day, value: 1, to: midnight)!
+        
+        self.searchDate = tomorrow
     }
     
-    // function to return availability of selected teacher
     @MainActor
+    /// Function to interface with API and assign teachers availability slots to local variable
+    /// - Parameter token: JWT token provided to user at login for authentication
     func getTeacherAvailability(token: String?) async {
         viewState = .fetching
         defer { viewState = .finished }
@@ -53,7 +60,7 @@ class BookingVM: ObservableObject {
             self.teacherAvailability = try await networkingManager.request(session: .shared,
                                                                            .teacherAvailability(token: token, id: teacher.teacherID, startDate: searchedDates[0], endDate: searchDate.addOrSubtractDays(day: 2)),
                                                                            type: TeacherAvailability.self)
-
+            
         } catch {
             // if error is caused by user cancelling request before completed, end function
             if let errorCode = (error as NSError?)?.code, errorCode == NSURLErrorCancelled {
@@ -72,13 +79,17 @@ class BookingVM: ObservableObject {
     
     
     @MainActor
+    /// Sends request to API to create new booking.
+    /// - Parameters:
+    ///   - token: JWT provided on sign in. Used to identify user making booking.
+    ///   - instrumentId: Id of instrument associated with booking
+    ///   - gradeId: Id of grade associated with booking
+    ///   - priceFinal: Price of lesson
     func makeBooking(token: String?, instrumentId: Int, gradeId: Int, priceFinal: Int) async {
         
         do {
             submissionState = .submitting
-            
-//            let newBooking = NewBooking(teacherId: teacher.teacherID, date: selectedDate, startTime: selectedTime, endTime: selectedTime, instrumentId: instrumentId, gradeId: gradeId, priceFinal: priceFinal)
-            
+
             let newBooking = NewBooking(teacherId: teacher.teacherID, startDateTime: selectedDateTime ?? Date(), instrumentId: instrumentId, gradeId: gradeId, priceFinal: priceFinal)
             
             let encoder = JSONEncoder()
@@ -104,16 +115,19 @@ class BookingVM: ObservableObject {
     }
     
     
+    /// Function to return an array each hour between a start and end time
+    /// - Parameters:
+    ///   - startTime: start time of array
+    ///   - endTime: end time of array
+    /// - Returns: array of each hour between start and end time
     func getHoursBetweenTwoDates(startTime: Date, endTime: Date) -> [Date] {
         var dates: [Date] = []
-        
         var nextStartTime = startTime
         
         while nextStartTime < endTime {
             dates.append(nextStartTime)
             nextStartTime = Calendar.current.date(byAdding: .hour, value: 1, to: nextStartTime)!
         }
-        
         return dates
     }
     

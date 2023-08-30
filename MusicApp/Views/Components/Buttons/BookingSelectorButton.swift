@@ -7,13 +7,16 @@
 
 import SwiftUI
 
+/// Booking selector button label
 struct BookingSelectorButton: View {
     
+    // MARK: PROPERTIES
     var hour: Date
     var selectable: Bool
     var selectableTrueColor = Color.theme.accent
     var selectableFalseColor = Color.theme.red
     
+    // MARK: BODY
     var body: some View {
         Text(hour.asTime() ?? "")
             .fontWeight(.semibold)
@@ -27,6 +30,7 @@ struct BookingSelectorButton: View {
     }
 }
 
+// MARK: PREVIEW
 struct BookingSelectorButton_Previews: PreviewProvider {
     static var previews: some View {
         BookingSelectorButton(hour: Date(), selectable: true)

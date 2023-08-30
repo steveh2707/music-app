@@ -8,11 +8,12 @@
 import SwiftUI
 import MapKit
 
+/// View for displaying a map view based on provided latitude and longitude
 struct MapView: View {
     
+    // MARK: PROPERTIES
     @Binding var latitude: Double
     @Binding var longitude: Double
-    
     var spanDelta: Double = 0.03
     
     private var mapRegion: MKCoordinateRegion {
@@ -22,6 +23,7 @@ struct MapView: View {
         [Location(id: UUID(), latitude: latitude, longitude: longitude)]
     }
     
+    // MARK: BODY
     var body: some View {
         ZStack {
             Map(coordinateRegion: .constant(mapRegion), interactionModes: [.zoom], annotationItems: locations) { location in
@@ -33,6 +35,7 @@ struct MapView: View {
     }
 }
 
+// MARK: PREVIEW
 struct MapView_Previews: PreviewProvider {
     static var previews: some View {
         MapView(latitude: .constant(51.509865), longitude: .constant(-0.118092))
@@ -40,9 +43,4 @@ struct MapView_Previews: PreviewProvider {
 }
 
 
-struct Location: Identifiable, Codable, Equatable {
-    let id: UUID
-    let latitude: Double
-    let longitude: Double
-}
 

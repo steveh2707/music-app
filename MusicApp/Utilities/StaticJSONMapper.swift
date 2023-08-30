@@ -7,8 +7,14 @@
 
 import Foundation
 
+/// Function to map local JSON files to Data Model
 struct StaticJSONMapper {
     
+    /// Decode JSON file to Data Model
+    /// - Parameters:
+    ///   - file: file name
+    ///   - type: Data model type to decode to
+    /// - Returns: Data model of selected type
     static func decode<T: Decodable>(file: String, type: T.Type) throws -> T {
         
         guard !file.isEmpty,
@@ -24,6 +30,7 @@ struct StaticJSONMapper {
 }
 
 extension StaticJSONMapper {
+    /// Custom error for mapping JSON
     enum MappingError: Error {
         case failedToGetContents
     }

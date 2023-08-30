@@ -8,9 +8,10 @@
 import Foundation
 import MapKit
 
-
+/// View model for handling all business logic of Teacher View
 class TeacherVM: ObservableObject {
     
+    // MARK: PROPERTIES
     @Published var teacher: Teacher? = nil
     @Published var mapLatitude: Double = 0
     @Published var mapLongitude: Double = 0
@@ -23,12 +24,16 @@ class TeacherVM: ObservableObject {
     
     private let networkingManager: NetworkingManagerImpl!
     
+    // MARK: INITALIZATION
     init(networkingManager: NetworkingManagerImpl = NetworkingManager.shared) {
         self.networkingManager = networkingManager
     }
     
+    // MARK: FUNCTIONS
     
     @MainActor
+    /// Function to interface with API and assign teacher to local variable
+    /// - Parameter teacherId: ID of teacher being searched for
     func getTeacherDetails(teacherId: Int) async {
         if hasAppeared { return }
         
@@ -58,6 +63,10 @@ class TeacherVM: ObservableObject {
     }
     
     @MainActor
+    /// Function to interface with API to check whether user has favourited teacher
+    /// - Parameters:
+    ///   - token: JWT token provided to user at login for authentication
+    ///   - teacherId: ID of teacher to check
     func checkIfTeacherHasBeenFavourited(token: String?, teacherId: Int) async {
         do {
             let decodedResponse = try await networkingManager.request(session: .shared,
@@ -80,6 +89,10 @@ class TeacherVM: ObservableObject {
     }
     
     @MainActor
+    /// Function to interface with API to handle favouriting and unfavouriting teachers.
+    /// - Parameters:
+    ///   - token: JWT token provided to user at login for authentication
+    ///   - teacherId: ID of teacher to favourite
     func favouriteTeacher(token: String?, teacherId: Int) async {
         do {
             if favTeacher {

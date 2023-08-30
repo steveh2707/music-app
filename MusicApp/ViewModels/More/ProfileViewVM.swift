@@ -7,8 +7,10 @@
 
 import Foundation
 
+/// View model for handling all business logic of Profile View
 class ProfileViewVM: ObservableObject {
     
+    // MARK: PROPERTIES
     @Published var userDetails: UserDetails
     @Published var teacherDetails: TeacherDetails?
     @Published var submissionState: SubmissionState?
@@ -18,13 +20,18 @@ class ProfileViewVM: ObservableObject {
     
     var userDetailsStart: UserDetails
 
+    // MARK: INITALIZATION
     init(userDetails: UserDetails, teacherDetails: TeacherDetails? = nil) {
         self.userDetails = userDetails
         self.teacherDetails = teacherDetails
         self.userDetailsStart = userDetails
     }
     
+    // MARK: FUNCTIONS
+    
     @MainActor
+    /// Function to interface with API to update existing user details
+    /// - Parameter token: JWT token provided to user at login for authentication
     func updateUserDetails(token: String?) async {
         
         do {

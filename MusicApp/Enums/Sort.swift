@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Enum for the different sort options for teacher search results
 enum SearchResultsSort: String, CaseIterable {
     
     case distanceAsc = "distance_in_km ASC"
@@ -15,32 +16,6 @@ enum SearchResultsSort: String, CaseIterable {
     case avReviewScoreDesc = "average_review_score DESC"
     case lessonCostAsc = "base_cost ASC"
     case lessonCostDesc = "base_cost DESC"
-    
-//    case distanceAsc = "distance.desc"
-//    case distanceDesc = "distance.asc"
-//    case avReviewScoreAsc = "average_review_score.asc"
-//    case avReviewScoreDesc = "average_review_score.desc"
-//    case lessonCostAsc = "lesson_cost.asc"
-//    case lessonCostDesc = "lesson_cost.desc"
-    
-//    var sortString: String {
-//        switch self {
-//        case .distanceAsc:
-//            return "distance.desc"
-//        case .distanceDesc:
-//            return "distance.asc"
-//        case .avReviewScoreAsc:
-//            return "average_review_score.asc"
-//        case .avReviewScoreDesc:
-//            return "average_review_score.desc"
-//        case .lessonCostAsc:
-//            return "lesson_cost.asc"
-//        case .lessonCostDesc:
-//            return "lesson_cost.desc"
-//        }
-//    }
-    
-
     
     var sortName: String {
         switch self {

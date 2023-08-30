@@ -7,19 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AA005CBB2A9E3F48005AB524 /* MarkdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA005CBA2A9E3F48005AB524 /* MarkdownView.swift */; };
+		AA005CBD2A9E44C6005AB524 /* TOS.md in Resources */ = {isa = PBXBuildFile; fileRef = AA005CBC2A9E44C6005AB524 /* TOS.md */; };
+		AA005CBF2A9E47CD005AB524 /* PP.md in Resources */ = {isa = PBXBuildFile; fileRef = AA005CBE2A9E47CC005AB524 /* PP.md */; };
+		AA005CC12A9F4517005AB524 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA005CC02A9F4517005AB524 /* Location.swift */; };
+		AA005CC92A9F6897005AB524 /* NetworkingManagerSignUpFailureMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA005CC82A9F6897005AB524 /* NetworkingManagerSignUpFailureMock.swift */; };
+		AA005CCB2A9F68B3005AB524 /* NetworkingManagerSignUpSuccessMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA005CCA2A9F68B3005AB524 /* NetworkingManagerSignUpSuccessMock.swift */; };
 		AA0B35672A40646100BD9A08 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0B35662A40646100BD9A08 /* ImageCache.swift */; };
 		AA0B35692A4065E900BD9A08 /* CachedImageVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0B35682A4065E900BD9A08 /* CachedImageVM.swift */; };
 		AA0B356B2A40664800BD9A08 /* CachedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0B356A2A40664800BD9A08 /* CachedImage.swift */; };
 		AA0B356D2A40737A00BD9A08 /* UserImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0B356C2A40737A00BD9A08 /* UserImageView.swift */; };
 		AA0B356F2A4094A700BD9A08 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0B356E2A4094A700BD9A08 /* Double.swift */; };
-		AA0B35762A40A1E200BD9A08 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0B35752A40A1E200BD9A08 /* LocationManager.swift */; };
 		AA0B35782A40A4D400BD9A08 /* MKCoordinateRegion.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0B35772A40A4D400BD9A08 /* MKCoordinateRegion.swift */; };
+		AA0E2A982A97A71F00DF1D77 /* TeacherScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0E2A972A97A71F00DF1D77 /* TeacherScheduleView.swift */; };
+		AA0E2A9A2A97ACBD00DF1D77 /* TeacherScheduleVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0E2A992A97ACBD00DF1D77 /* TeacherScheduleVM.swift */; };
+		AA0E2A9C2A97AD1D00DF1D77 /* TeacherScheduleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0E2A9B2A97AD1D00DF1D77 /* TeacherScheduleModel.swift */; };
+		AA0E2A9E2A97B75900DF1D77 /* TeacherScheduleModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0E2A9D2A97B75900DF1D77 /* TeacherScheduleModal.swift */; };
 		AA17C6492A3CA0D2006F04FD /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA17C6482A3CA0D2006F04FD /* Date.swift */; };
 		AA17C64C2A3CB3F5006F04FD /* SearchResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA17C64B2A3CB3F5006F04FD /* SearchResultsView.swift */; };
 		AA17C64E2A3CB501006F04FD /* SearchResultsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA17C64D2A3CB501006F04FD /* SearchResultsVM.swift */; };
 		AA17C6502A3CB51E006F04FD /* SearchResultsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA17C64F2A3CB51E006F04FD /* SearchResultsModel.swift */; };
-		AA400A3A2A3B2FBF006C5448 /* SignInVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA400A392A3B2FBF006C5448 /* SignInVM.swift */; };
-		AA400A3C2A3B3173006C5448 /* ApiGenericResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA400A3B2A3B3173006C5448 /* ApiGenericResponse.swift */; };
+		AA400A3C2A3B3173006C5448 /* APIResponses.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA400A3B2A3B3173006C5448 /* APIResponses.swift */; };
 		AA400A402A3B370D006C5448 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA400A3F2A3B370D006C5448 /* Global.swift */; };
 		AA55201F2A41A2BB0089225B /* LocationFinderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA55201E2A41A2BB0089225B /* LocationFinderView.swift */; };
 		AA5520272A41B6A40089225B /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5520262A41B6A40089225B /* SearchView.swift */; };
@@ -28,7 +36,7 @@
 		AA55202E2A4326750089225B /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA55202D2A4326750089225B /* ChatView.swift */; };
 		AA5520302A434CB30089225B /* ChatModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA55202F2A434CB30089225B /* ChatModel.swift */; };
 		AA5520322A434CCA0089225B /* ChatVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5520312A434CCA0089225B /* ChatVM.swift */; };
-		AA5520342A449FD10089225B /* SignInModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5520332A449FD10089225B /* SignInModel.swift */; };
+		AA5520342A449FD10089225B /* SignInSignUpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5520332A449FD10089225B /* SignInSignUpModel.swift */; };
 		AA5520362A45897D0089225B /* PreviewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5520352A45897D0089225B /* PreviewProvider.swift */; };
 		AA5520392A45D2FB0089225B /* AllChatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5520382A45D2FB0089225B /* AllChatsView.swift */; };
 		AA55203B2A45D3650089225B /* AllChatsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA55203A2A45D3650089225B /* AllChatsModel.swift */; };
@@ -78,7 +86,6 @@
 		AA8633F72A6581D800AF11A2 /* LocationFinderVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8633F62A6581D800AF11A2 /* LocationFinderVM.swift */; };
 		AA8633FB2A66D04600AF11A2 /* ProfileViewVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8633FA2A66D04600AF11A2 /* ProfileViewVM.swift */; };
 		AAA2B82D2A964E7100095F40 /* BecomeTeacherValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA2B82C2A964E7100095F40 /* BecomeTeacherValidator.swift */; };
-		AADE8B342A7CFECF00FED45B /* TempView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADE8B332A7CFECF00FED45B /* TempView.swift */; };
 		AADE8B362A7D0E0E00FED45B /* BookingInfoScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADE8B352A7D0E0E00FED45B /* BookingInfoScreen.swift */; };
 		AADE8B392A7D0E3500FED45B /* BookingSelectorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADE8B382A7D0E3500FED45B /* BookingSelectorButton.swift */; };
 		AADE8B3B2A8A327C00FED45B /* Sort.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADE8B3A2A8A327C00FED45B /* Sort.swift */; };
@@ -91,8 +98,6 @@
 		AADE8B652A8FAA6F00FED45B /* SearchResultsSuccessUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADE8B642A8FAA6F00FED45B /* SearchResultsSuccessUITests.swift */; };
 		AADE8B682A8FAC2A00FED45B /* UITestingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADE8B672A8FAC2A00FED45B /* UITestingHelper.swift */; };
 		AADE8B6B2A8FB27000FED45B /* MockURLSessionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8633842A49B18C00AF11A2 /* MockURLSessionProtocol.swift */; };
-		AADE8B6C2A8FB27800FED45B /* NetworkingManagerSignUpSuccessMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADE8B432A8F848500FED45B /* NetworkingManagerSignUpSuccessMock.swift */; };
-		AADE8B6D2A8FB27D00FED45B /* NetworkingManagerSignUpFailureMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADE8B502A8F90B900FED45B /* NetworkingManagerSignUpFailureMock.swift */; };
 		AADE8B6E2A8FB28100FED45B /* NetworkingManagerTeacherResponseSuccessMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8633932A49E36F00AF11A2 /* NetworkingManagerTeacherResponseSuccessMock.swift */; };
 		AADE8B6F2A8FB28900FED45B /* NetworkingManagerTeacherResponseFailureMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8633A22A4B2BE400AF11A2 /* NetworkingManagerTeacherResponseFailureMock.swift */; };
 		AADE8B702A8FB28E00FED45B /* NetworkingManagerTeacherSearchResponseSuccessMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8633982A4AD52E00AF11A2 /* NetworkingManagerTeacherSearchResponseSuccessMock.swift */; };
@@ -110,8 +115,6 @@
 		AAF4C3362A38AB220082C142 /* TeacherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF4C3352A38AB220082C142 /* TeacherModel.swift */; };
 		AAF4C3392A38B6770082C142 /* NetworkingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF4C3382A38B6770082C142 /* NetworkingManager.swift */; };
 		AAF4C33D2A38CA6F0082C142 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF4C33C2A38CA6F0082C142 /* Endpoint.swift */; };
-		AAF4C34C2A39D8C50082C142 /* SignupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF4C34B2A39D8C50082C142 /* SignupModel.swift */; };
-		AAF4C34F2A39D91E0082C142 /* SignUpVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF4C34E2A39D91E0082C142 /* SignUpVM.swift */; };
 		AAF4C3542A39F9040082C142 /* SignupValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF4C3532A39F9040082C142 /* SignupValidator.swift */; };
 /* End PBXBuildFile section */
 
@@ -133,19 +136,27 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AA005CBA2A9E3F48005AB524 /* MarkdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownView.swift; sourceTree = "<group>"; };
+		AA005CBC2A9E44C6005AB524 /* TOS.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = TOS.md; sourceTree = "<group>"; };
+		AA005CBE2A9E47CC005AB524 /* PP.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = PP.md; sourceTree = "<group>"; };
+		AA005CC02A9F4517005AB524 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		AA005CC82A9F6897005AB524 /* NetworkingManagerSignUpFailureMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingManagerSignUpFailureMock.swift; sourceTree = "<group>"; };
+		AA005CCA2A9F68B3005AB524 /* NetworkingManagerSignUpSuccessMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingManagerSignUpSuccessMock.swift; sourceTree = "<group>"; };
 		AA0B35662A40646100BD9A08 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		AA0B35682A4065E900BD9A08 /* CachedImageVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedImageVM.swift; sourceTree = "<group>"; };
 		AA0B356A2A40664800BD9A08 /* CachedImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedImage.swift; sourceTree = "<group>"; };
 		AA0B356C2A40737A00BD9A08 /* UserImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserImageView.swift; sourceTree = "<group>"; };
 		AA0B356E2A4094A700BD9A08 /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
-		AA0B35752A40A1E200BD9A08 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		AA0B35772A40A4D400BD9A08 /* MKCoordinateRegion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKCoordinateRegion.swift; sourceTree = "<group>"; };
+		AA0E2A972A97A71F00DF1D77 /* TeacherScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherScheduleView.swift; sourceTree = "<group>"; };
+		AA0E2A992A97ACBD00DF1D77 /* TeacherScheduleVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherScheduleVM.swift; sourceTree = "<group>"; };
+		AA0E2A9B2A97AD1D00DF1D77 /* TeacherScheduleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherScheduleModel.swift; sourceTree = "<group>"; };
+		AA0E2A9D2A97B75900DF1D77 /* TeacherScheduleModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherScheduleModal.swift; sourceTree = "<group>"; };
 		AA17C6482A3CA0D2006F04FD /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		AA17C64B2A3CB3F5006F04FD /* SearchResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsView.swift; sourceTree = "<group>"; };
 		AA17C64D2A3CB501006F04FD /* SearchResultsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsVM.swift; sourceTree = "<group>"; };
 		AA17C64F2A3CB51E006F04FD /* SearchResultsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsModel.swift; sourceTree = "<group>"; };
-		AA400A392A3B2FBF006C5448 /* SignInVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInVM.swift; sourceTree = "<group>"; };
-		AA400A3B2A3B3173006C5448 /* ApiGenericResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiGenericResponse.swift; sourceTree = "<group>"; };
+		AA400A3B2A3B3173006C5448 /* APIResponses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResponses.swift; sourceTree = "<group>"; };
 		AA400A3F2A3B370D006C5448 /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		AA55201E2A41A2BB0089225B /* LocationFinderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationFinderView.swift; sourceTree = "<group>"; };
 		AA5520262A41B6A40089225B /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
@@ -154,7 +165,7 @@
 		AA55202D2A4326750089225B /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		AA55202F2A434CB30089225B /* ChatModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatModel.swift; sourceTree = "<group>"; };
 		AA5520312A434CCA0089225B /* ChatVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatVM.swift; sourceTree = "<group>"; };
-		AA5520332A449FD10089225B /* SignInModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInModel.swift; sourceTree = "<group>"; };
+		AA5520332A449FD10089225B /* SignInSignUpModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInSignUpModel.swift; sourceTree = "<group>"; };
 		AA5520352A45897D0089225B /* PreviewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewProvider.swift; sourceTree = "<group>"; };
 		AA5520382A45D2FB0089225B /* AllChatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllChatsView.swift; sourceTree = "<group>"; };
 		AA55203A2A45D3650089225B /* AllChatsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllChatsModel.swift; sourceTree = "<group>"; };
@@ -209,20 +220,17 @@
 		AA8633F62A6581D800AF11A2 /* LocationFinderVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationFinderVM.swift; sourceTree = "<group>"; };
 		AA8633FA2A66D04600AF11A2 /* ProfileViewVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewVM.swift; sourceTree = "<group>"; };
 		AAA2B82C2A964E7100095F40 /* BecomeTeacherValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BecomeTeacherValidator.swift; sourceTree = "<group>"; };
-		AADE8B332A7CFECF00FED45B /* TempView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempView.swift; sourceTree = "<group>"; };
 		AADE8B352A7D0E0E00FED45B /* BookingInfoScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingInfoScreen.swift; sourceTree = "<group>"; };
 		AADE8B382A7D0E3500FED45B /* BookingSelectorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingSelectorButton.swift; sourceTree = "<group>"; };
 		AADE8B3A2A8A327C00FED45B /* Sort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sort.swift; sourceTree = "<group>"; };
 		AADE8B3C2A8A62B300FED45B /* FavouriteTeachersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteTeachersView.swift; sourceTree = "<group>"; };
 		AADE8B3E2A8A62F400FED45B /* FavouriteTeachersVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteTeachersVM.swift; sourceTree = "<group>"; };
 		AADE8B402A8A699900FED45B /* NoContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoContentView.swift; sourceTree = "<group>"; };
-		AADE8B432A8F848500FED45B /* NetworkingManagerSignUpSuccessMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingManagerSignUpSuccessMock.swift; sourceTree = "<group>"; };
 		AADE8B472A8F854100FED45B /* SignupValidatorSuccessMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupValidatorSuccessMock.swift; sourceTree = "<group>"; };
 		AADE8B492A8F85E600FED45B /* SignUpVMSuccessTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVMSuccessTests.swift; sourceTree = "<group>"; };
 		AADE8B4B2A8F8BF000FED45B /* MusicApp.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = MusicApp.xctestplan; sourceTree = "<group>"; };
 		AADE8B4C2A8F8D2E00FED45B /* SignupValidatorFailureMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupValidatorFailureMock.swift; sourceTree = "<group>"; };
 		AADE8B4E2A8F8D9A00FED45B /* SignUpVMValidationFailureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVMValidationFailureTests.swift; sourceTree = "<group>"; };
-		AADE8B502A8F90B900FED45B /* NetworkingManagerSignUpFailureMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingManagerSignUpFailureMock.swift; sourceTree = "<group>"; };
 		AADE8B522A8F910200FED45B /* SignUpVMFailureTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVMFailureTest.swift; sourceTree = "<group>"; };
 		AADE8B582A8FA98000FED45B /* MusicAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MusicAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AADE8B642A8FAA6F00FED45B /* SearchResultsSuccessUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsSuccessUITests.swift; sourceTree = "<group>"; };
@@ -240,8 +248,6 @@
 		AAF4C3382A38B6770082C142 /* NetworkingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingManager.swift; sourceTree = "<group>"; };
 		AAF4C33C2A38CA6F0082C142 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		AAF4C3422A39D4AF0082C142 /* MusicAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MusicAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		AAF4C34B2A39D8C50082C142 /* SignupModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupModel.swift; sourceTree = "<group>"; };
-		AAF4C34E2A39D91E0082C142 /* SignUpVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVM.swift; sourceTree = "<group>"; };
 		AAF4C3532A39F9040082C142 /* SignupValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupValidator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -270,6 +276,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AA005CC22A9F6585005AB524 /* Testing */ = {
+			isa = PBXGroup;
+			children = (
+				AADE8B692A8FB12700FED45B /* Mocks */,
+				AADE8B662A8FAC1B00FED45B /* UITesting */,
+			);
+			path = Testing;
+			sourceTree = "<group>";
+		};
+		AA005CC72A9F687D005AB524 /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				AA005CC82A9F6897005AB524 /* NetworkingManagerSignUpFailureMock.swift */,
+				AA005CCA2A9F68B3005AB524 /* NetworkingManagerSignUpSuccessMock.swift */,
+			);
+			path = SignUp;
+			sourceTree = "<group>";
+		};
 		AA400A422A3B5AF4006C5448 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -319,6 +343,8 @@
 		AA8633892A49C4C600AF11A2 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				AA005CBE2A9E47CC005AB524 /* PP.md */,
+				AA005CBC2A9E44C6005AB524 /* TOS.md */,
 				AA8633E02A5DA24100AF11A2 /* LoginResponseTestData.json */,
 				AA86339A2A4AD6EB00AF11A2 /* TeacherSearchStaticTestData.json */,
 				AA86338C2A49C54F00AF11A2 /* TeacherStaticTestData.json */,
@@ -418,8 +444,8 @@
 		AA8633AF2A4C4EE100AF11A2 /* CachedImage */ = {
 			isa = PBXGroup;
 			children = (
-				AA0B35682A4065E900BD9A08 /* CachedImageVM.swift */,
 				AA0B356A2A40664800BD9A08 /* CachedImage.swift */,
+				AA0B35682A4065E900BD9A08 /* CachedImageVM.swift */,
 			);
 			path = CachedImage;
 			sourceTree = "<group>";
@@ -467,6 +493,8 @@
 				AA63764C2A7AA30B004B5C6A /* UsersReviewsView.swift */,
 				AA6376522A7AB28D004B5C6A /* TeachersReviewsView.swift */,
 				AADE8B3C2A8A62B300FED45B /* FavouriteTeachersView.swift */,
+				AA0E2A972A97A71F00DF1D77 /* TeacherScheduleView.swift */,
+				AA0E2A9D2A97B75900DF1D77 /* TeacherScheduleModal.swift */,
 			);
 			path = More;
 			sourceTree = "<group>";
@@ -474,13 +502,13 @@
 		AA8633C72A56FA3D00AF11A2 /* More */ = {
 			isa = PBXGroup;
 			children = (
-				AA8633EF2A657C6A00AF11A2 /* _ss */,
 				AA8633EA2A65732600AF11A2 /* SignInSignUpVM.swift */,
 				AA8633F42A657E5500AF11A2 /* EditTeacherDetailsVM.swift */,
 				AA8633FA2A66D04600AF11A2 /* ProfileViewVM.swift */,
 				AA63764E2A7AA31D004B5C6A /* UsersReviewsVM.swift */,
 				AA6376542A7AB37D004B5C6A /* TeachersReviewsVM.swift */,
 				AADE8B3E2A8A62F400FED45B /* FavouriteTeachersVM.swift */,
+				AA0E2A992A97ACBD00DF1D77 /* TeacherScheduleVM.swift */,
 			);
 			path = More;
 			sourceTree = "<group>";
@@ -517,9 +545,10 @@
 		AA8633CB2A56FA8300AF11A2 /* More */ = {
 			isa = PBXGroup;
 			children = (
-				AA5520332A449FD10089225B /* SignInModel.swift */,
-				AAF4C34B2A39D8C50082C142 /* SignupModel.swift */,
+				AA5520332A449FD10089225B /* SignInSignUpModel.swift */,
 				AA8633F22A657E1400AF11A2 /* BecomeTeacherModel.swift */,
+				AA0E2A9B2A97AD1D00DF1D77 /* TeacherScheduleModel.swift */,
+				AA005CC02A9F4517005AB524 /* Location.swift */,
 			);
 			path = More;
 			sourceTree = "<group>";
@@ -552,15 +581,6 @@
 			path = Find;
 			sourceTree = "<group>";
 		};
-		AA8633EF2A657C6A00AF11A2 /* _ss */ = {
-			isa = PBXGroup;
-			children = (
-				AA400A392A3B2FBF006C5448 /* SignInVM.swift */,
-				AAF4C34E2A39D91E0082C142 /* SignUpVM.swift */,
-			);
-			path = _ss;
-			sourceTree = "<group>";
-		};
 		AA8633FC2A69D23600AF11A2 /* ImagePicker */ = {
 			isa = PBXGroup;
 			children = (
@@ -576,16 +596,6 @@
 				AADE8B382A7D0E3500FED45B /* BookingSelectorButton.swift */,
 			);
 			path = Buttons;
-			sourceTree = "<group>";
-		};
-		AADE8B422A8F845D00FED45B /* SignUp */ = {
-			isa = PBXGroup;
-			children = (
-				AADE8B432A8F848500FED45B /* NetworkingManagerSignUpSuccessMock.swift */,
-				AADE8B502A8F90B900FED45B /* NetworkingManagerSignUpFailureMock.swift */,
-			);
-			name = SignUp;
-			path = ../../MusicAppTests/Networking/Mocks/SignUp;
 			sourceTree = "<group>";
 		};
 		AADE8B452A8F850500FED45B /* SignUp */ = {
@@ -627,7 +637,7 @@
 			isa = PBXGroup;
 			children = (
 				AA8633842A49B18C00AF11A2 /* MockURLSessionProtocol.swift */,
-				AADE8B422A8F845D00FED45B /* SignUp */,
+				AA005CC72A9F687D005AB524 /* SignUp */,
 				AA8633A12A4B285300AF11A2 /* TeacherResponse */,
 				AA8633A02A4B284200AF11A2 /* TeacherSearchResponse */,
 				AADE8B6A2A8FB13A00FED45B /* SignUpValidator */,
@@ -647,6 +657,7 @@
 		AAE4ED172A3BAFBF00ED630C /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				AA005CBA2A9E3F48005AB524 /* MarkdownView.swift */,
 				AADE8B372A7D0E1E00FED45B /* Buttons */,
 				AA8633FC2A69D23600AF11A2 /* ImagePicker */,
 				AA8633AF2A4C4EE100AF11A2 /* CachedImage */,
@@ -691,15 +702,13 @@
 				AA8633A72A4C3DBF00AF11A2 /* ViewModels */,
 				AAF4C3342A38AB0E0082C142 /* Models */,
 				AA8633AA2A4C4BDF00AF11A2 /* Enums */,
-				AA400A422A3B5AF4006C5448 /* Extensions */,
 				AAF4C3372A38B66A0082C142 /* Utilities */,
+				AA400A422A3B5AF4006C5448 /* Extensions */,
 				AA8633A92A4C3F2300AF11A2 /* Validators */,
-				AADE8B662A8FAC1B00FED45B /* UITesting */,
-				AADE8B692A8FB12700FED45B /* Mocks */,
+				AA005CC22A9F6585005AB524 /* Testing */,
 				AA8633892A49C4C600AF11A2 /* Assets */,
 				AAF4C3242A38AA5C0082C142 /* Assets.xcassets */,
 				AAF4C3262A38AA5C0082C142 /* Preview Content */,
-				AADE8B332A7CFECF00FED45B /* TempView.swift */,
 			);
 			path = MusicApp;
 			sourceTree = "<group>";
@@ -715,7 +724,7 @@
 		AAF4C3342A38AB0E0082C142 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				AA400A3B2A3B3173006C5448 /* ApiGenericResponse.swift */,
+				AA400A3B2A3B3173006C5448 /* APIResponses.swift */,
 				AA8633CE2A56FAC000AF11A2 /* Find */,
 				AA8633CD2A56FA8C00AF11A2 /* Book */,
 				AA8633CC2A56FA8800AF11A2 /* Chat */,
@@ -728,7 +737,6 @@
 			isa = PBXGroup;
 			children = (
 				AAF4C3382A38B6770082C142 /* NetworkingManager.swift */,
-				AA0B35752A40A1E200BD9A08 /* LocationManager.swift */,
 				AA86338E2A49C8F100AF11A2 /* StaticJSONMapper.swift */,
 				AA0B35662A40646100BD9A08 /* ImageCache.swift */,
 			);
@@ -867,6 +875,8 @@
 				AA86339B2A4AD6EB00AF11A2 /* TeacherSearchStaticTestData.json in Resources */,
 				AA86338D2A49C54F00AF11A2 /* TeacherStaticTestData.json in Resources */,
 				AA8633E12A5DA24100AF11A2 /* LoginResponseTestData.json in Resources */,
+				AA005CBD2A9E44C6005AB524 /* TOS.md in Resources */,
+				AA005CBF2A9E47CD005AB524 /* PP.md in Resources */,
 				AAF4C3282A38AA5C0082C142 /* Preview Assets.xcassets in Resources */,
 				AAF4C3252A38AA5C0082C142 /* Assets.xcassets in Resources */,
 			);
@@ -903,7 +913,6 @@
 				AA8633B72A4DC4F900AF11A2 /* BookingScheduleView.swift in Sources */,
 				AA5520302A434CB30089225B /* ChatModel.swift in Sources */,
 				AA6376472A77FA67004B5C6A /* MapView.swift in Sources */,
-				AA0B35762A40A1E200BD9A08 /* LocationManager.swift in Sources */,
 				AA8633F32A657E1400AF11A2 /* BecomeTeacherModel.swift in Sources */,
 				AA8633D22A58008300AF11A2 /* UserBookingsVM.swift in Sources */,
 				AA8633E92A616BD200AF11A2 /* SignInSignUpView.swift in Sources */,
@@ -915,23 +924,25 @@
 				AA17C64E2A3CB501006F04FD /* SearchResultsVM.swift in Sources */,
 				AA8633FB2A66D04600AF11A2 /* ProfileViewVM.swift in Sources */,
 				AA8633E72A61557200AF11A2 /* Data.swift in Sources */,
-				AA400A3C2A3B3173006C5448 /* ApiGenericResponse.swift in Sources */,
+				AA400A3C2A3B3173006C5448 /* APIResponses.swift in Sources */,
 				AA63764F2A7AA31D004B5C6A /* UsersReviewsVM.swift in Sources */,
 				AA8633B52A4DC33D00AF11A2 /* BookingModel.swift in Sources */,
+				AA005CC92A9F6897005AB524 /* NetworkingManagerSignUpFailureMock.swift in Sources */,
 				AA0B356F2A4094A700BD9A08 /* Double.swift in Sources */,
 				AADE8B712A8FB29500FED45B /* NetworkingManagerTeacherSearchResponseFailureMock.swift in Sources */,
 				AA8633DD2A5D709700AF11A2 /* ProfileView.swift in Sources */,
 				AADE8B412A8A699900FED45B /* NoContentView.swift in Sources */,
+				AA005CCB2A9F68B3005AB524 /* NetworkingManagerSignUpSuccessMock.swift in Sources */,
 				AA0B356D2A40737A00BD9A08 /* UserImageView.swift in Sources */,
-				AAF4C34C2A39D8C50082C142 /* SignupModel.swift in Sources */,
+				AA005CC12A9F4517005AB524 /* Location.swift in Sources */,
 				AA55202E2A4326750089225B /* ChatView.swift in Sources */,
 				AADE8B702A8FB28E00FED45B /* NetworkingManagerTeacherSearchResponseSuccessMock.swift in Sources */,
 				AADE8B682A8FAC2A00FED45B /* UITestingHelper.swift in Sources */,
 				AA8633F52A657E5500AF11A2 /* EditTeacherDetailsVM.swift in Sources */,
-				AAF4C34F2A39D91E0082C142 /* SignUpVM.swift in Sources */,
 				AA8633EE2A65790300AF11A2 /* SettingsView.swift in Sources */,
 				AA5520362A45897D0089225B /* PreviewProvider.swift in Sources */,
 				AADE8B722A8FB29B00FED45B /* SignupValidatorSuccessMock.swift in Sources */,
+				AA005CBB2A9E3F48005AB524 /* MarkdownView.swift in Sources */,
 				AA0B35672A40646100BD9A08 /* ImageCache.swift in Sources */,
 				AA0B35692A4065E900BD9A08 /* CachedImageVM.swift in Sources */,
 				AA55202B2A41F7010089225B /* SearchResultsRowView.swift in Sources */,
@@ -943,10 +954,9 @@
 				AADE8B6E2A8FB28100FED45B /* NetworkingManagerTeacherResponseSuccessMock.swift in Sources */,
 				AAF4C3362A38AB220082C142 /* TeacherModel.swift in Sources */,
 				AA8633B92A54410100AF11A2 /* MakeBookingView.swift in Sources */,
-				AADE8B342A7CFECF00FED45B /* TempView.swift in Sources */,
+				AA0E2A9E2A97B75900DF1D77 /* TeacherScheduleModal.swift in Sources */,
 				AA17C6492A3CA0D2006F04FD /* Date.swift in Sources */,
 				AA5520272A41B6A40089225B /* SearchView.swift in Sources */,
-				AADE8B6D2A8FB27D00FED45B /* NetworkingManagerSignUpFailureMock.swift in Sources */,
 				AADE8B3D2A8A62B300FED45B /* FavouriteTeachersView.swift in Sources */,
 				AA55201F2A41A2BB0089225B /* LocationFinderView.swift in Sources */,
 				AADE8B392A7D0E3500FED45B /* BookingSelectorButton.swift in Sources */,
@@ -958,6 +968,7 @@
 				AA5520322A434CCA0089225B /* ChatVM.swift in Sources */,
 				AAF4C3332A38AAE20082C142 /* TeacherVM.swift in Sources */,
 				AA8633D92A5C3D2500AF11A2 /* InstrumentGradeView.swift in Sources */,
+				AA0E2A9A2A97ACBD00DF1D77 /* TeacherScheduleVM.swift in Sources */,
 				AAF4C3392A38B6770082C142 /* NetworkingManager.swift in Sources */,
 				AA8633F72A6581D800AF11A2 /* LocationFinderVM.swift in Sources */,
 				AA8633E52A6151F400AF11A2 /* ImagePickerVM.swift in Sources */,
@@ -970,13 +981,13 @@
 				AA5520392A45D2FB0089225B /* AllChatsView.swift in Sources */,
 				AA6376512A7AA865004B5C6A /* ReviewRowView.swift in Sources */,
 				AA17C6502A3CB51E006F04FD /* SearchResultsModel.swift in Sources */,
+				AA0E2A982A97A71F00DF1D77 /* TeacherScheduleView.swift in Sources */,
 				AA8633D72A5C2A6900AF11A2 /* Filters.swift in Sources */,
-				AA5520342A449FD10089225B /* SignInModel.swift in Sources */,
-				AADE8B6C2A8FB27800FED45B /* NetworkingManagerSignUpSuccessMock.swift in Sources */,
+				AA5520342A449FD10089225B /* SignInSignUpModel.swift in Sources */,
 				AAA2B82D2A964E7100095F40 /* BecomeTeacherValidator.swift in Sources */,
 				AA63764D2A7AA30B004B5C6A /* UsersReviewsView.swift in Sources */,
 				AAF4C3312A38AACF0082C142 /* TeacherView.swift in Sources */,
-				AA400A3A2A3B2FBF006C5448 /* SignInVM.swift in Sources */,
+				AA0E2A9C2A97AD1D00DF1D77 /* TeacherScheduleModel.swift in Sources */,
 				AA400A402A3B370D006C5448 /* Global.swift in Sources */,
 				AA8633E32A5EB29E00AF11A2 /* ImagePicker.swift in Sources */,
 				AA0B356B2A40664800BD9A08 /* CachedImage.swift in Sources */,

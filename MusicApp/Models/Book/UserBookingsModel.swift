@@ -8,15 +8,16 @@
 import Foundation
 
 
-// MARK: - Welcome
+// MARK: - UserBookingsResponse
+/// Data model for API response for user's bookings
 struct UserBookingsResponse: Codable {
     let results: [UserBooking]
 }
 
-// MARK: - Result
+// MARK: - UserBooking
+/// Data model for a user's booking
 struct UserBooking: Codable, Identifiable {
     var id: Int { bookingID }
-//    var formattedDate: Date { Date(mySqlDateTimeString: date) }
     var parsedStartTime: Date { Date(mySqlDateTimeString: startTime) }
     var parsedEndTime: Date { Date(mySqlDateTimeString: endTime) }
     
@@ -32,7 +33,6 @@ struct UserBooking: Codable, Identifiable {
     enum CodingKeys: String, CodingKey {
         case bookingID = "booking_id"
         case dateCreated = "date_created"
-//        case date
         case startTime = "start_time"
         case endTime = "end_time"
         case priceFinal = "price_final"
@@ -45,7 +45,8 @@ struct UserBooking: Codable, Identifiable {
 }
 
 
-// MARK: - Grade
+// MARK: - BookingGrade
+/// Data model for the music grade associated with the booking
 struct BookingGrade: Codable {
     let gradeID: Int
     let name: String
@@ -56,7 +57,8 @@ struct BookingGrade: Codable {
     }
 }
 
-// MARK: - Instrument
+// MARK: - BookingInstrument
+/// Data model for the instrument associated with the booking
 struct BookingInstrument: Codable {
     let instrumentID: Int
     let name: String
@@ -71,7 +73,8 @@ struct BookingInstrument: Codable {
     }
 }
 
-// MARK: - Student
+// MARK: - UserSimple
+/// Data model for user details associated with booking
 struct UserSimple: Codable, Equatable {
     let userID: Int
     let lastName, firstName: String
@@ -91,6 +94,7 @@ struct UserSimple: Codable, Equatable {
 
 
 // MARK: - NewReview
+/// Data model for a new review for a past booking
 struct NewReview: Codable {
     let teacherId: Int
     var rating: Int
@@ -104,4 +108,16 @@ struct NewReview: Codable {
         case gradeId = "grade_id"
         case instrumentId = "instrument_id"
     }
+}
+
+
+// MARK: - CancelBooking
+/// Data model for cancelling an upcoming booking
+struct CancelBooking: Codable {
+    let cancelReason: String
+    
+    enum CodingKeys: String, CodingKey {
+        case cancelReason = "cancel_reason"
+    }
+    
 }

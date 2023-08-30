@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 
 
+/// Enum to handle building URL paths and assigning HTTP method types for all API endpoints to be used by the buildRequest function in NetworkingManager
 enum EndPoint {
 
     // all of the API endpoints being accessed by the app, with required parameters
@@ -24,6 +25,7 @@ enum EndPoint {
     case isTeacherFavourited(token: String?, id: Int)
     case favouriteTeacher(token: String?, id: Int)
     case unfavouriteTeacher(token: String?, id: Int)
+    case teacherSchedule(token: String?)
     
     case chat(token: String?, id: Int)
     case chatFromTeacherId(token: String?, id: Int)
@@ -57,7 +59,8 @@ enum EndPoint {
                 .allBookings(let token),
                 .getUsersReviews(let token),
                 .favouriteTeachers(let token, _),
-                .isTeacherFavourited(let token, _):
+                .isTeacherFavourited(let token, _),
+                .teacherSchedule(let token):
             return .GET(token: token)
             
         case .newUser(let data),
@@ -137,6 +140,8 @@ enum EndPoint {
                 .favouriteTeacher(_, let id),
                 .unfavouriteTeacher(_, let id):
             return "/teacher/\(id)/favourite"
+        case .teacherSchedule:
+            return "/teacher/availability"
         }
     }
     
@@ -171,10 +176,8 @@ enum EndPoint {
         if requestQueryItems.count > 0 {
             urlComponents.queryItems = requestQueryItems
         }
-
         return urlComponents.url
     }
-    
 }
 
 // all HTTP method types

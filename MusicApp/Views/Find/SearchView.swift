@@ -7,10 +7,10 @@
 
 import SwiftUI
 
+/// View to allow user to select search parameters
 struct SearchView: View {
     
     // MARK: PROPERTIES
-    
     @EnvironmentObject var global: Global
     @State var selectedLocation: SelectedLocation = SelectedLocation(title: "", latitude: 200, longitude: 200)
     @State var searchCrtieria: SearchCriteria?
@@ -22,7 +22,6 @@ struct SearchView: View {
     }
     
     // MARK: BODY
-    
     var body: some View {
         NavigationView {
             VStack(alignment: .leading, spacing: 20) {
@@ -65,7 +64,7 @@ struct SearchView: View {
     
     // MARK: VARIABLES
     
-    /// This is the instrument selector that holds a horizontal ScrollView
+    /// Instrument selector variable that holds a horizontal ScrollView for each instrument
     private var instrumentSelector: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 5) {
@@ -87,6 +86,10 @@ struct SearchView: View {
         .accessibilityIdentifier("instrumentsScrollView")
     }
     
+    
+    /// Returns a view for each instrument based on the instrument variable passed in.
+    /// - Parameter instrument: instrument to be displayed.
+    /// - Returns: View of the instrument 
     private func instrumentItemView(instrument: Instrument) -> some View {
         VStack {
             CachedImage(url: instrument.imageUrl) { phase in
@@ -128,6 +131,7 @@ struct SearchView: View {
         }
     }
     
+    /// Grade selector variable that holds a horizontal ScrollView for each grade
     private var gradeSelector: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 5) {
@@ -156,6 +160,7 @@ struct SearchView: View {
         .accessibilityIdentifier("gradesScrollView")
     }
     
+    /// Location selector variable displays a modal screen for the user to select their location.
     private var locationSelector: some View {
         Button {
             showLocationSearch = true
@@ -176,6 +181,7 @@ struct SearchView: View {
         .padding(.bottom)
     }
     
+    /// Search button view. Creates a NavigationLink to SearchResultsView passing in all the variables selected in this view.
     private var searchButton: some View {
         ZStack {
             NavigationLink {
@@ -207,10 +213,3 @@ struct SearchView: View {
     
 }
 
-// MARK: PREVIEW
-
-//struct SearchView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SearchView()
-//    }
-//}

@@ -8,8 +8,11 @@ import PhotosUI
 import Foundation
 import SwiftUI
 
+/// View model for handling all business logic of ImagePicker View
 class ImagePickerVM: ObservableObject {
 
+    
+    // MARK: PROPERTIES
     @Published var uiImage: UIImage?
     @Published var imageUrl: String?
     
@@ -19,9 +22,12 @@ class ImagePickerVM: ObservableObject {
     @Published var signInResponse: SignInResponse? = nil
     
     
+    // MARK: FUNCTIONS
+    
     @MainActor
+    /// Function to interface with API to upload new image
+    /// - Parameter token: JWT token provided to user at login for authentication
     func uploadImage(token: String?) async {
-        
         do {
             submissionState = .submitting
             

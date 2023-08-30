@@ -7,16 +7,18 @@
 
 import SwiftUI
 
+/// Set up app and tab views.
+///
+/// This struct sets up the app and defines what views are shown in the TabView based on whether the user is logged in or not.
 @main
 struct MusicApp: App {
-
+    // MARK: PROPERTIES
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @StateObject var global = Global()
-
     
+    // MARK: BODY
     var body: some Scene {
         WindowGroup {
-            
             TabView(selection: $global.selectedTab) {
                 
                 SearchView()
@@ -31,6 +33,7 @@ struct MusicApp: App {
                 
                 if global.isValidated, global.userDetails != nil {
                     
+                    // only show these tabs if user is logged in
                     AllChatsView()
                         .tabItem {
                             Image(systemName: "bubble.left.and.bubble.right")
@@ -59,6 +62,7 @@ struct MusicApp: App {
                         
                 } else {
                     
+                    // show this view if the user is not logged in
                     SignInSignUpView()
                         .tabItem {
                             Image(systemName: "person")
@@ -66,7 +70,6 @@ struct MusicApp: App {
                         }
                         .tag(3)
                 }
-
             }
             .environmentObject(global)
             .task {
@@ -74,21 +77,7 @@ struct MusicApp: App {
                     await global.getConfiguration()
                 }
             }
-            
-//            .task {
-//                if global.isValidated {
-//                    await global.fetchUnreadMessages()
-//                }
-//            }
-//            .onAppear {
-//#if DEBUG
-//                UserDefaults.standard.set(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
-//#endif
-//            }
         }
-        
-        
-        
     }
 }
 

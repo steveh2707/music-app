@@ -7,6 +7,8 @@
 
 import Foundation
 
+// MARK: - NewTeacher
+/// Data model for a new teacher signing up
 struct NewTeacher: Encodable {
     var tagline: String = ""
     var bio: String = ""
@@ -16,6 +18,8 @@ struct NewTeacher: Encodable {
     var instrumentsTeachable = [InstrumentTeachable]()
 }
 
+// MARK: - InstrumentTeachable
+/// Data model for instruments teachable by new teacher
 struct InstrumentTeachable: Encodable {
     var gradeId: Int = 0
     var instrumentId: Int = 0

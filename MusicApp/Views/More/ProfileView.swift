@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// View to allow users to access and edit their user user details and link to their teacher details if applicable
 struct ProfileView: View {
     
     // MARK: PROPERTIES
@@ -31,22 +32,7 @@ struct ProfileView: View {
             List {
                 userDetailsSection
                 
-                if let teacherDetails = vm.teacherDetails {
-                    Section {
-                        NavigationLink("Teacher Details") {
-                            EditTeacherDetails(teacherDetails: teacherDetails, teacherDetailsUpdated: $teacherDetailsUpdated)
-                        }
-                        NavigationLink("Preview Profile") {
-                            TeacherView(teacherId: teacherDetails.teacherID)
-                        }
-                        NavigationLink("Teaching Reviews") {
-                            TeachersReviewsView(teacherId: teacherDetails.teacherID)
-                        }
-                    } header: {
-                        Text("Teacher Details")
-                    }
-                }
-                
+                teacherDetailsSection
             }
             .onChange(of: teacherDetailsUpdated, perform: { _ in
                 vm.teacherDetails = global.teacherDetails
@@ -86,6 +72,8 @@ struct ProfileView: View {
     }
     
     // MARK: VARIABLES
+    
+    // link to settings view
     private var settingsLink: some View {
         NavigationLink {
             SettingsView(teacherDetailsUpdated: $teacherDetailsUpdated)
@@ -94,6 +82,7 @@ struct ProfileView: View {
         }
     }
     
+    // button to make details editable or uneditable
     private var editableToggleButton: some View {
         Button {
             if vm.userDetailsStart == vm.userDetails {
@@ -110,6 +99,7 @@ struct ProfileView: View {
         }
     }
     
+    // button to log user out by calling global function
     private var logoutButton: some View {
         Button {
             global.logout()
@@ -118,6 +108,7 @@ struct ProfileView: View {
         }
     }
     
+    // section showing users details that becomes editable when editable variable is set to true. Also contains links to user's reviews and favourite teachers.
     private var userDetailsSection: some View {
         Section {
             HStack {
@@ -189,6 +180,31 @@ struct ProfileView: View {
         } header: {
             Text("User Details")
         }
+    }
+    
+    // section showing links to teaching schedule, teacher details, preview profile, and teaching reviews. Only visible if user logged in has a teaching account.
+    private var teacherDetailsSection: some View {
+        Group {
+            if let teacherDetails = vm.teacherDetails {
+                Section {
+                    NavigationLink("Teaching Schedule") {
+                        TeacherScheduleView()
+                    }
+                    NavigationLink("Teacher Details") {
+                        EditTeacherDetails(teacherDetails: teacherDetails, teacherDetailsUpdated: $teacherDetailsUpdated)
+                    }
+                    NavigationLink("Preview Profile") {
+                        TeacherView(teacherId: teacherDetails.teacherID)
+                    }
+                    NavigationLink("Teaching Reviews") {
+                        TeachersReviewsView(teacherId: teacherDetails.teacherID)
+                    }
+                } header: {
+                    Text("Teacher Details")
+                }
+            }
+        }
+        
     }
     
 }

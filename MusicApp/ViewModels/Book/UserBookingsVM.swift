@@ -7,22 +7,24 @@
 
 import Foundation
 
+/// View model for handling all business logic of User Bookings View
 class UserBookingsVM: ObservableObject {
     
+    // MARK: PROPERTIES
     @Published var bookings: [UserBooking] = []
     @Published var bookingDetail: UserBooking?
-//    @Published var cancelReason = ""
-//    @Published var reviewDetails = ""
-//    @Published var reviewRating = 0
-//    @Published var review: NewReview?
     
     @Published var viewState: ViewState?
-//    @Published var submissionState: SubmissionState?
     @Published var hasError = false
     @Published var error: NetworkingManager.NetworkingError?
     @Published var showBookingCancelledMessage = false
     
+    
+    // MARK: FUNCTIONS
+    
     @MainActor
+    /// Function to interface with API and assign bookings to local variable
+    /// - Parameter token: JWT token provided to user at login for authentication
     func getBookings(token: String?) async {
         
         viewState = .fetching
@@ -47,46 +49,6 @@ class UserBookingsVM: ObservableObject {
         }
     }
     
-//    @MainActor
-//    func cancelBooking(token: String?) async {
-//        do {
-//            submissionState = .submitting
-//            
-//            let cancelReason = CancelBooking(cancelReason: cancelReason)
-//            
-//            let encoder = JSONEncoder()
-//            let data = try encoder.encode(cancelReason)
-//            
-//            try await NetworkingManager.shared.request(.cancelBooking(token: token, bookingId: bookingDetail?.bookingID ?? 0, submissionData: data))
-//            
-//            submissionState = .successful
-//            showBookingCancelledMessage = true
-//            
-//            await getBookings(token: token)
-//            
-//        } catch {
-//            
-//            self.hasError = true
-//            self.submissionState = .unsuccessful
-//            
-//            if let networkingError = error as? NetworkingManager.NetworkingError {
-//                self.error = networkingError
-//            } else {
-//                self.error = .custom(error: error)
-//            }
-//        }
-//        
-//        
-//    }
-    
 }
 
 
-struct CancelBooking: Codable {
-    let cancelReason: String
-    
-    enum CodingKeys: String, CodingKey {
-        case cancelReason = "cancel_reason"
-    }
-    
-}

@@ -8,11 +8,15 @@
 import Foundation
 import MapKit
 
+/// View model for handling all business logic of Location Finder View
 class LocationFinderVM: NSObject, ObservableObject {
+    
+    // MARK: PROPERTIES
     @Published var searchableText = ""
     @Published var results: Array<AddressResult> = []
     @Published var selectedLocation: SelectedLocation?
     
+    // MARK: FUNCTIONS
     
     @MainActor
     /// Finds the latitude and longitude of the location selected by the user and assigns to the local selectedLocation variable
@@ -31,7 +35,6 @@ class LocationFinderVM: NSObject, ObservableObject {
             }
         }
     }
-    
     
     private lazy var localSearchCompleter: MKLocalSearchCompleter = {
         let completer = MKLocalSearchCompleter()
@@ -60,7 +63,6 @@ extension LocationFinderVM: MKLocalSearchCompleterDelegate {
             }
         }
     }
-    
     
     /// Handle errors from the MKLocalSearchCompleter
     /// - Parameters:

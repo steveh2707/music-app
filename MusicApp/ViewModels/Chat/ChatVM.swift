@@ -7,13 +7,10 @@
 
 import Foundation
 
-struct NewMessage: Codable {
-    var message = ""
-}
-
-
+/// View model for handling all business logic of chat view
 class ChatVM: ObservableObject {
     
+    // MARK: PROPERTIES
     @Published var chat: ChatDetails? = nil
     @Published var newMessage = NewMessage()
     
@@ -22,8 +19,15 @@ class ChatVM: ObservableObject {
     @Published var hasError = false
     @Published var error: NetworkingManager.NetworkingError?
     
+    // MARK: FUNCTIONS
+    
     @MainActor
-    func searchForChatUsingChatID(chatID: Int?, teacherID: Int?, token: String?) async {
+    /// Function to interface with API and get chat details using either chat ID or teacher ID and assign to local variable
+    /// - Parameters:
+    ///   - chatID: ID of chat
+    ///   - teacherID: ID of teacher in chat
+    ///   - token: JWT token provided to user at login for authentication
+    func searchForChatUsingChatIdOrTeacherId(chatID: Int?, teacherID: Int?, token: String?) async {
         
         viewState = .fetching
         defer { viewState = .finished }
@@ -53,7 +57,10 @@ class ChatVM: ObservableObject {
     }
     
     @MainActor
-    func sendChatMessage(teacherId: Int, token: String?) async {
+    /// Function to interface with API to send a chat message
+    /// - Parameters:
+    ///   - token: JWT token provided to user at login for authentication
+    func sendChatMessage(token: String?) async {
         do {
             submissionState = .submitting
             

@@ -12,6 +12,7 @@ extension Color {
     static let theme = ColorTheme()
 }
 
+/// Create theme to be used throughout app
 struct ColorTheme {
     let accent = Color("AccentColor")
     let background = Color("BackgroundColor")

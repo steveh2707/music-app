@@ -7,8 +7,10 @@
 
 import SwiftUI
 
+/// View to show all chats a user has
 struct AllChatsView: View {
     
+    // MARK: PROPERTIES
     @EnvironmentObject var global: Global
     @StateObject var vm = AllChatsVM()
     @State var searchText = ""
@@ -24,47 +26,12 @@ struct AllChatsView: View {
         }
     }
     
+    // MARK: BODY
     var body: some View {
         NavigationStack {
             List {
                 ForEach(filteredChats) { chat in
-                    var userIsTeacher: Bool { chat.teacherID == global.teacherDetails?.teacherID }
-                    
-                    ZStack {
-                        NavigationLink {
-                            ChatView(chatID: chat.chatID)
-                        } label: {
-                            HStack(spacing: 20) {
-                                UserImageView(imageURL: userIsTeacher ? chat.student.profileImageURL : chat.teacher.profileImageURL)
-                                        .frame(width: 80, height: 80)
-                                    VStack(alignment: .leading, spacing: 5) {
-                                        HStack {
-                                            if userIsTeacher {
-                                                Image(systemName: "studentdesk")
-                                            }
-                                            Text(userIsTeacher ? chat.student.fullName : chat.teacher.fullName)
-                                                .font(.title3)
-                                        }
-   
-                                        if let message = chat.mostRecentMessage {
-                                            Text(message)
-                                                .font(.callout)
-                                        }
-
-                                    }
-                                Spacer()
-                            }
-                        }
-                        if chat.unreadMessages > 0 {
-                            HStack {
-                                Spacer()
-                                NotificationCountView(value: chat.unreadMessages)
-                            }
-                        }
- 
-                        
-                    }
-
+                    chatRowView(chat: chat)
                 }
             }
             .navigationTitle("Chats")
@@ -77,9 +44,9 @@ struct AllChatsView: View {
         .searchable(text: $searchText)
         .task {
             await vm.getChats(token: global.token)
-//            await global.fetchUnreadMessages()
+            await global.fetchUnreadMessages()
         }
-        .onChange(of: global.unreadMessages, perform: { newValue in
+        .onChange(of: global.unreadMessages, perform: { _ in
             Task {
                 await vm.getChats(token: global.token)
             }
@@ -94,6 +61,46 @@ struct AllChatsView: View {
     }
     
     
+    /// Row view for each chat displaying user info and photo
+    /// - Parameter chat: details of the chat to be displayed
+    /// - Returns: chat row view
+    private func chatRowView(chat: ChatGeneral) -> some View {
+        ZStack {
+            var userIsTeacher: Bool { chat.teacherID == global.teacherDetails?.teacherID }
+            NavigationLink {
+                ChatView(chatID: chat.chatID)
+            } label: {
+                HStack(spacing: 20) {
+                    UserImageView(imageURL: userIsTeacher ? chat.student.profileImageURL : chat.teacher.profileImageURL)
+                            .frame(width: 80, height: 80)
+                        VStack(alignment: .leading, spacing: 5) {
+                            HStack {
+                                if userIsTeacher {
+                                    Image(systemName: "studentdesk")
+                                }
+                                Text(userIsTeacher ? chat.student.fullName : chat.teacher.fullName)
+                                    .font(.title3)
+                            }
+
+                            if let message = chat.mostRecentMessage {
+                                Text(message)
+                                    .font(.callout)
+                            }
+
+                        }
+                    Spacer()
+                }
+            }
+            if chat.unreadMessages > 0 {
+                HStack {
+                    Spacer()
+                    NotificationCountView(value: chat.unreadMessages)
+                }
+            }
+        }
+    }
+    
+    // refresh button to make API request again
     var refresh: some View {
         Button {
             Task {
@@ -106,9 +113,11 @@ struct AllChatsView: View {
     }
 }
 
+
+// MARK: PREVIEW
 struct AllChatsView_Previews: PreviewProvider {
     static var previews: some View {
         AllChatsView()
-            .environmentObject(dev.globalVM)
+            .environmentObject(dev.globalStudentVM)
     }
 }

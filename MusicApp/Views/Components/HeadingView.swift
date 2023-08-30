@@ -7,12 +7,11 @@
 
 import SwiftUI
 
+/// View to show the logo of the app
 struct HeadingView: View {
     var body: some View {
         HStack(spacing: 10) {
             Spacer(minLength: 0)
-//            Image(systemName: "music.note.list")
-//                .font(.largeTitle)
             Image("Treble")
                 .resizable()
                 .scaledToFit()
@@ -25,24 +24,6 @@ struct HeadingView: View {
         }
         .foregroundColor(Color.theme.accent)
     }
-    
-//    var body: some View {
-//        HStack {
-//            Spacer(minLength: 0)
-//            Image(systemName: "music.note.list")
-//                .font(.largeTitle)
-//            Text("Treble")
-//                .font(.system(size: 30))
-//                .monospaced()
-//                .kerning(/*@START_MENU_TOKEN@*/2.0/*@END_MENU_TOKEN@*/)
-//            Spacer(minLength: 0)
-//        }
-//        .foregroundColor(Color.theme.primaryTextInverse)
-//
-//        .frame(height: 80)
-//        .background(Color.theme.accent)
-//        .cornerRadius(20)
-//    }
 }
 
 struct HeadingView_Previews: PreviewProvider {

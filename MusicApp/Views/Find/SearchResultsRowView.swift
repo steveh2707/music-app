@@ -7,10 +7,13 @@
 
 import SwiftUI
 
+/// Subview of SearchResults view for displaying each row of results
 struct SearchResultsRowView: View {
     
+    // MARK: PROPERTIES
     var teacher: TeacherResult
     
+    // MARK: BODY
     var body: some View {
         ZStack {
             VStack(alignment: .leading) {
@@ -78,12 +81,4 @@ struct SearchResultsRowView: View {
         
     }
     
-    
-    
 }
-
-//struct SearchResultsRowView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SearchResultsRowView()
-//    }
-//}

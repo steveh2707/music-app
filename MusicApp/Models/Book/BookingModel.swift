@@ -7,7 +7,8 @@
 
 import Foundation
 
-
+// MARK: - NewBooking
+/// Data model for a new booking
 struct NewBooking: Codable {
     var teacherId: Int
     var startTime: String
@@ -21,11 +22,8 @@ struct NewBooking: Codable {
         self.instrumentId = instrumentId
         self.gradeId = gradeId
         self.priceFinal = priceFinal
-        
         self.startTime = startDateTime.asSqlDateTimeString()
         self.endTime = startDateTime.addOrSubtractMinutes(minutes: 60).asSqlDateTimeString()
-        
-
     }
     
     enum CodingKeys: String, CodingKey {
@@ -40,7 +38,8 @@ struct NewBooking: Codable {
 }
 
 
-// MARK: - TeacherAvailability Model
+// MARK: - TeacherAvailability
+/// Data model for teacher availability API response
 struct TeacherAvailability: Codable, Equatable {
     let teacherID: Int
     let slots, bookings: [TimeSlot]
@@ -53,6 +52,7 @@ struct TeacherAvailability: Codable, Equatable {
 
 
 // MARK: - TimeSlot
+/// Data model for a time slot
 struct TimeSlot: Codable, Equatable, Identifiable {
     let id = UUID()
     

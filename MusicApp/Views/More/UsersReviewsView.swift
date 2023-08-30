@@ -7,18 +7,19 @@
 
 import SwiftUI
 
+/// View showing a list of all reviews made by a user.
 struct UsersReviewsView: View {
     
+    // MARK: PROPERTIES
     @EnvironmentObject var global: Global
     @StateObject private var vm = UsersReviewsVM()
     
+    // MARK: BODY
     var body: some View {
         ZStack {
-            
             if vm.reviews.isEmpty && vm.viewState == .finished {
                 NoContentView(description: "You haven't written any reviews yet. Write teacher reviews on any previous booking.")
             } else {
-                
                 List {
                     ForEach(vm.reviews) { review in
                         
@@ -57,9 +58,10 @@ struct UsersReviewsView: View {
     }
 }
 
+// MARK: PREVIEW
 struct ReviewView_Previews: PreviewProvider {
     static var previews: some View {
         UsersReviewsView()
-            .environmentObject(dev.globalVM)
+            .environmentObject(dev.globalStudentVM)
     }
 }

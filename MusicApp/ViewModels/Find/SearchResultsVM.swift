@@ -7,9 +7,11 @@
 
 import Foundation
 
-
+/// View model for handling all business logic of Search Results View
 class SearchResultsVM: ObservableObject {
     
+    
+    // MARK: PROPERTIES
     @Published var searchCriteria: SearchCriteria
     @Published var teachers: [TeacherResult] = []
     
@@ -24,13 +26,18 @@ class SearchResultsVM: ObservableObject {
     
     private let networkingManager: NetworkingManagerImpl!
     
+    
+    // MARK: INITALIZATION
     init(networkingManager: NetworkingManagerImpl = NetworkingManager.shared, searchCriteria: SearchCriteria) {
         self.networkingManager = networkingManager
         self.searchCriteria = searchCriteria
     }
     
     
+    // MARK: FUNCTIONS
+    
     @MainActor
+    /// Function to interface with API and assign teachers to local variable
     func fetchTeachers() async {
         reset()
         viewState = .fetching
@@ -62,6 +69,7 @@ class SearchResultsVM: ObservableObject {
     }
     
     @MainActor
+    /// Function to interface with API and append new teachers to existing local array
     func fetchNextSetOfTeachers() async {
         viewState = .fetching
         defer { viewState = .finished }
@@ -84,6 +92,7 @@ class SearchResultsVM: ObservableObject {
     }
     
     
+    /// Function to reset view
     func reset() {
         if viewState == .finished {
             teachers.removeAll()
@@ -93,6 +102,9 @@ class SearchResultsVM: ObservableObject {
         }
     }
     
+    /// Function to check whether the next set of teachers should be loaded to enable infinite scrolling
+    /// - Parameter id: id of teacher
+    /// - Returns: whether new set of teachers should be loaded
     func shouldLoadData(id: Int) -> Bool {
         return id == teachers.last?.id && page != totalPages && viewState == .finished
     }

@@ -7,9 +7,12 @@
 
 import SwiftUI
 
+/// Modal view to show user information about how the booking screen works
 struct BookingInfoScreen: View {
+    // MARK: PROPERTIES
     @Environment(\.presentationMode) var presentationMode
     
+    // MARK: BODY
     var body: some View {
         NavigationStack {
             VStack(alignment: .leading) {
@@ -43,6 +46,7 @@ struct BookingInfoScreen: View {
     }
 }
 
+// MARK: PREVIEW
 struct BookingInfoScreen_Previews: PreviewProvider {
     static var previews: some View {
         BookingInfoScreen()

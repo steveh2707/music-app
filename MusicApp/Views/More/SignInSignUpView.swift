@@ -7,46 +7,37 @@
 
 import SwiftUI
 
+/// View to allow new users to sign up to the app and let existing users sign in
 struct SignInSignUpView: View {
     
+    // MARK: PROPERTIES
     @EnvironmentObject var global: Global
     @StateObject var vm = SignInSignUpVM()
     @State var showSignIn = false
     
+    // MARK: INITALIZATION
     var body: some View {
         NavigationStack {
-            
             Form {
-                
-                Picker("Teat", selection: $showSignIn) {
-                    Text("Sign Up")
-                        .tag(false)
-                    Text("Sign In")
-                        .tag(true)
-                }
-                .pickerStyle(.segmented)
-                .padding(.top,-10)
-                .listRowBackground(Color.clear)
-                .listRowSeparator(.hidden)
-                .padding(.bottom)
+                signInSignUpPicker
                 
                 HeadingView()
                     .listRowBackground(Color.clear)
                 
-                if !showSignIn {
-                    signUpView
-                } else {
+                if showSignIn {
                     signInView
+                } else {
+                    signUpView
                 }
+                
                 Section {
-                    
                     NavigationLink {
-                        EmptyView()
+                        MarkdownView(title: "Terms of Service", fileName: "TOS")
                     } label: {
                         Text("Terms of Service")
                     }
                     NavigationLink {
-                        EmptyView()
+                        MarkdownView(title: "Privacy Policy", fileName: "PP")
                     } label: {
                         Text("Privacy Policy")
                     }
@@ -84,13 +75,30 @@ struct SignInSignUpView: View {
             }
         }
     }
+    
+    // MARK: VARIABLES/FUNCTIONS
+    
+    // picker to allow switching between sign in and sign up screens
+    private var signInSignUpPicker: some View {
+        Picker("Sign In / Sign Up", selection: $showSignIn) {
+            Text("Sign Up")
+                .tag(false)
+            Text("Sign In")
+                .tag(true)
+        }
+        .pickerStyle(.segmented)
+        .padding(.top,-10)
+        .listRowBackground(Color.clear)
+        .listRowSeparator(.hidden)
+        .padding(.bottom)
+    }
 
     
+    // sign up screen
     private var signUpView: some View {
         Group {
             Section {
                 userDetailsSection
-                
             } footer: {
                 if case .validation(let err) = vm.error, let errorDesc = err.errorDescription {
                     HStack {
@@ -101,38 +109,32 @@ struct SignInSignUpView: View {
                     }
                 }
             }
-            
             signUpButton
                 .listRowBackground(Color.clear)
         }
     }
     
-    
+    // section for users to fill in their details for sign up
     private var userDetailsSection: some View {
         Group {
             HStack {
                 TextField("First Name", text: $vm.newUser.firstName)
-                //                    .focused($focusedField, equals: .firstName)
                     .disableAutocorrection(true)
                 TextField("Last Name", text: $vm.newUser.lastName)
-                //                    .focused($focusedField, equals: .lastName)
                     .disableAutocorrection(true)
             }
             
             TextField("Email Address", text: $vm.newUser.email)
                 .keyboardType(.emailAddress)
-            //                .focused($focusedField, equals: .email)
                 .disableAutocorrection(true)
                 .autocapitalization(.none)
             
             SecureField("Password", text: $vm.newUser.password)
-            //                .focused($focusedField, equals: .password)
             
             DatePicker(selection: $vm.newUser.inputDob, in: ...Date.now, displayedComponents: .date) {
                 Text("Date of Birth")
             }
             .datePickerStyle(.automatic)
-            //            .focused($focusedField, equals: .dob)
             
             Button {
                 vm.newUser.tos.toggle()
@@ -152,7 +154,7 @@ struct SignInSignUpView: View {
         
     }
     
-    
+    // button to allow users to post details to API to create account
     private var signUpButton: some View {
         Button {
             Task {
@@ -172,6 +174,7 @@ struct SignInSignUpView: View {
     }
     
     
+    // sign in screen where user can enter email and password
     private var signInView: some View {
         Group {
             Section {
@@ -190,6 +193,7 @@ struct SignInSignUpView: View {
     }
     
     
+    // button to send username and password to API to validate
     private var signInButton: some View {
         Button {
             Task {
@@ -209,14 +213,13 @@ struct SignInSignUpView: View {
         .opacity(vm.loginDisabled ? 0.6 : 1)
         .disabled(vm.loginDisabled)
     }
-    
-
-    
 }
+
+// MARK: PREVIEW
 
 struct SignInSignUpView_Previews: PreviewProvider {
     static var previews: some View {
         SignInSignUpView()
-            .environmentObject(dev.globalVM)
+            .environmentObject(dev.globalStudentVM)
     }
 }

@@ -7,12 +7,16 @@
 
 import Foundation
 
+/// Implementation of the BecomeTeacherValidator to allow mocks to be created and used for testing
 protocol BecomeTeacherValidatorImp {
     func validate(_ teacher: TeacherDetails) throws
 }
 
+/// Struct to handle validating the become teacher form
 struct BecomeTeacherValidator: BecomeTeacherValidatorImp {
     
+    /// Validate inputs of form
+    /// - Parameter teacher: teacher details to be validated
     func validate(_ teacher: TeacherDetails) throws {
 
         if teacher.tagline.isEmpty {
@@ -33,6 +37,7 @@ struct BecomeTeacherValidator: BecomeTeacherValidatorImp {
         
     }
     
+    /// Custom errors that can be thrown by validator
     enum BecomeTeacherValidatorError: LocalizedError, Equatable {
         case invalidTagline
         case invalidBio

@@ -7,8 +7,10 @@
 
 import Foundation
 
+/// View model for handling all business logic of Booking Detail Modal View
 class BookingDetailVM: ObservableObject {
     
+    // MARK: PROPERTIES
     @Published var bookingDetail: UserBooking
     @Published var review: NewReview
     @Published var cancelReason = ""
@@ -18,12 +20,17 @@ class BookingDetailVM: ObservableObject {
     @Published var error: NetworkingManager.NetworkingError?
     @Published var showBookingCancelledMessage = false
     
+    // MARK: INITALIZATION
     init(bookingDetail: UserBooking) {
         self.bookingDetail = bookingDetail
         self.review = NewReview(teacherId: bookingDetail.teacherID, rating: 0, details: "", gradeId: bookingDetail.grade.gradeID, instrumentId: bookingDetail.instrument.instrumentID)
     }
     
+    // MARK: FUNCTIONS
+    
     @MainActor
+    /// Function to interface with API and allow user to cancel a booking
+    /// - Parameter token: JWT token provided to user at login for authentication
     func cancelBooking(token: String?) async {
         do {
             submissionState = .submitting
@@ -52,6 +59,8 @@ class BookingDetailVM: ObservableObject {
     }
     
     @MainActor
+    /// Function to interface with API and post a review of a past lesson
+    /// - Parameter token: JWT token provided to user at login for authentication
     func postReview(token: String?) async {
         do {
             submissionState = .submitting

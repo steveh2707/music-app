@@ -7,8 +7,10 @@
 
 import Foundation
 
+/// View model for handling all business logic of Sign In Sign Up View
 class SignInSignUpVM: ObservableObject {
     
+    // MARK: PROPERTIES
     @Published var credentials = Credentials()
     @Published var newUser = NewStudent()
     
@@ -20,6 +22,7 @@ class SignInSignUpVM: ObservableObject {
     private let networkingManager: NetworkingManagerImpl!
     private let validator: SignupValidatorImp!
     
+    // MARK: INITALIZATION
     init(networkingManager: NetworkingManagerImpl = NetworkingManager.shared,
          validator: SignupValidatorImp = SignupValidator()) {
         self.networkingManager = networkingManager
@@ -31,6 +34,7 @@ class SignInSignUpVM: ObservableObject {
     }
     
     @MainActor
+    /// Function to interface with API to allow a user to sign in with existing details
     func login() async {
         
         do {
@@ -60,6 +64,7 @@ class SignInSignUpVM: ObservableObject {
     
     
     @MainActor
+    /// Function to interface with API  to sign up with valid details
     func signUp() async {
     
         do {
