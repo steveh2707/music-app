@@ -13,26 +13,33 @@ struct TeacherScheduleModal: View {
     // MARK: PROPERTIES
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var global: Global
-    @State var availabilitySlot: AvailabilitySlot
-    var newTimeSlot: Bool
+    
+    @ObservedObject var vm: TeacherScheduleVM
+        
+    var newTimeSlot: Bool { vm.slot.teacherAvailabilityID == 0 }
+    
+    
+//    @State var availabilitySlot: AvailabilitySlot
+//
+//    var newTimeSlot: Bool
     
     
     // MARK: INITALIZATION
     
-    // initialize for a new time slot
-    init(dateTimeStart: Date) {
-        let roundedDateTimeStart = dateTimeStart.nearestHour()
-        let slot = AvailabilitySlot(teacherAvailabilityID: 0, startTime: roundedDateTimeStart, endTime: roundedDateTimeStart.addOrSubtractMinutes(minutes: 60))
-        
-        _availabilitySlot = State(initialValue: slot)
-        newTimeSlot = true
-    }
-    
-    // initialize for an existing time slot
-    init(availabilitySlot: AvailabilitySlot) {
-        _availabilitySlot = State(initialValue: availabilitySlot)
-        newTimeSlot = false
-    }
+//    // initialize for a new time slot
+//    init(dateTimeStart: Date) {
+//        let roundedDateTimeStart = dateTimeStart.nearestHour()
+//        let slot = AvailabilitySlot(teacherAvailabilityID: 0, startTime: roundedDateTimeStart, endTime: roundedDateTimeStart.addOrSubtractMinutes(minutes: 60))
+//
+//        _availabilitySlot = State(initialValue: slot)
+//        newTimeSlot = true
+//    }
+//
+//    // initialize for an existing time slot
+//    init(availabilitySlot: AvailabilitySlot) {
+//        _availabilitySlot = State(initialValue: availabilitySlot)
+//        newTimeSlot = false
+//    }
     
     // MARK: BODY
     var body: some View {
@@ -42,10 +49,10 @@ struct TeacherScheduleModal: View {
                     HStack {
                         Text("Date")
                         Spacer()
-                        Text(availabilitySlot.parsedStartTime.asMediumDateString())
+                        Text(vm.slot.parsedStartTime.asMediumDateString())
                     }
-                    DatePicker("Starts", selection: $availabilitySlot.parsedStartTime, displayedComponents: .hourAndMinute)
-                    DatePicker("Ends", selection: $availabilitySlot.parsedEndTime, displayedComponents: .hourAndMinute)
+                    DatePicker("Starts", selection: $vm.slot.parsedStartTime, displayedComponents: .hourAndMinute)
+                    DatePicker("Ends", selection: $vm.slot.parsedEndTime, displayedComponents: .hourAndMinute)
                 }
             }
             .toolbar {
@@ -58,12 +65,7 @@ struct TeacherScheduleModal: View {
                     }
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    if newTimeSlot {
-                        addButton
-                    } else {
-                        saveEditButton
-                    }
-
+                    addOrSaveButton
                 }
             }
             .navigationBarTitle(newTimeSlot ? "New Time Slot": "Edit Time Slot", displayMode: .inline)
@@ -79,24 +81,43 @@ struct TeacherScheduleModal: View {
         }
     }
     
-    // Add button to add new timeslot
-    private var addButton: some View {
-        Button("Add") {
-            //TODO: Add timeslot
+//    // Add button to add new timeslot
+//    private var addButton: some View {
+//        Button("Add") {
+//            Task {
+//                await vm.addOrEditTimeSlot(token: global.token)
+//            }
+//        }
+//    }
+    
+    // Add new or save edited timeslot
+    private var addOrSaveButton: some View {
+        Button(newTimeSlot ? "Add" : "Save") {
+            Task {
+                await vm.addOrEditTimeSlot(token: global.token)
+                if vm.submissionState == .successful {
+                    presentationMode.wrappedValue.dismiss()
+                }
+            }
         }
     }
     
-    // Save button to save changes to a timeslot
-    private var saveEditButton: some View {
-        Button("Save") {
-            //TODO: Edit timeslot
-        }
-    }
+//    // Save button to save changes to a timeslot
+//    private var saveEditButton: some View {
+//        Button("Save") {
+//            //TODO: Edit timeslot
+//        }
+//    }
     
     // Delete a timeslot
     private var deleteButton: some View {
         Button("Delete") {
-            //TODO: Delete timeslot
+            Task {
+                await vm.deleteTimeSlot(token: global.token)
+                if vm.submissionState == .successful {
+                    presentationMode.wrappedValue.dismiss()
+                }
+            }
         }
     }
 
@@ -105,8 +126,8 @@ struct TeacherScheduleModal: View {
 
 // MARK: PREVIEW
 
-struct TeacherScheduleModal_Previews: PreviewProvider {
-    static var previews: some View {
-        TeacherScheduleModal(dateTimeStart: Date())
-    }
-}
+//struct TeacherScheduleModal_Previews: PreviewProvider {
+//    static var previews: some View {
+//        TeacherScheduleModal(dateTimeStart: Date())
+//    }
+//}

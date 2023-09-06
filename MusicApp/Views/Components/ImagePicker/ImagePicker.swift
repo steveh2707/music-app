@@ -87,7 +87,10 @@ struct ImagePicker: View {
         Button("SAVE") {
             Task {
                 await vm.uploadImage(token: global.token)
-                global.updateImageUrl(url: vm.imageUrl)
+                if vm.submissionState == .successful {
+//                    global.updateImageUrl(url: vm.imageUrl)
+                    global.userDetails?.profileImageURL = vm.imageUrl!
+                }
             }
             presentationMode.wrappedValue.dismiss()
         }

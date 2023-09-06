@@ -150,8 +150,6 @@ struct TeacherView: View {
                             await vm.favouriteTeacher(token: global.token, teacherId: teacherId)
                         }
                     }
-                    
-                    // TODO: Save/ remove from CoreData
                 } label: {
                     Image(systemName: vm.favTeacher ? "heart.fill" : "heart")
                         .font(.title)

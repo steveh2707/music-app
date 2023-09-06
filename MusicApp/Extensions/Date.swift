@@ -53,9 +53,12 @@ extension Date {
     /// Find the nearest of date
     /// - Returns: date modified to be to the nearest hour
     func nearestHour() -> Date {
-        var components = NSCalendar.current.dateComponents([.minute], from: self)
+        var components = NSCalendar.current.dateComponents([.minute, .second, .nanosecond], from: self)
         let minute = components.minute ?? 0
-        components.minute = minute >= 30 ? 60 - minute : -minute
+//        components.minute = minute >= 30 ? 60 - minute : -minute
+        components.minute = 60 - minute
+        components.second = -(components.second ?? 0)
+        components.nanosecond = -(components.nanosecond ?? 0)
         return Calendar.current.date(byAdding: components, to: self) ?? Date()
     }
     

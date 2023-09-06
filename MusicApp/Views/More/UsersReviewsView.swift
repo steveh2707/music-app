@@ -24,20 +24,6 @@ struct UsersReviewsView: View {
                     ForEach(vm.reviews) { review in
                         
                         ReviewRowView(review: review)
-                            .swipeActions(allowsFullSwipe: false) {
-                                Button(role: .destructive) {
-                                    //TODO: Delete
-                                } label: {
-                                    Label("Delete", systemImage: "trash.fill")
-                                }
-                                
-                                Button {
-                                    //TODO: Edit
-                                } label: {
-                                    Label("Edit", systemImage: "pencil")
-                                }
-                                .tint(Color.theme.accent)
-                            }
                     }
                 }
                 .padding(.top, 5)

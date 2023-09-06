@@ -14,8 +14,6 @@ enum SearchResultsSort: String, CaseIterable {
     case distanceDesc = "distance_in_km DESC"
     case avReviewScoreAsc = "average_review_score ASC"
     case avReviewScoreDesc = "average_review_score DESC"
-    case lessonCostAsc = "base_cost ASC"
-    case lessonCostDesc = "base_cost DESC"
     
     var sortName: String {
         switch self {
@@ -27,16 +25,12 @@ enum SearchResultsSort: String, CaseIterable {
             return "Rating Asc"
         case .avReviewScoreDesc:
             return "Rating Desc"
-        case .lessonCostAsc:
-            return "Cost Asc"
-        case .lessonCostDesc:
-            return "Cost Desc"
         }
     }
     
     static var allCasesExclLocation: [SearchResultsSort] {
         return [
-            .avReviewScoreAsc, .avReviewScoreDesc, .lessonCostAsc, .lessonCostDesc
+            .avReviewScoreAsc, .avReviewScoreDesc
         ]
     }
 }

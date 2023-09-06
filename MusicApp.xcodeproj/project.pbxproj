@@ -288,8 +288,8 @@
 		AA005CC72A9F687D005AB524 /* SignUp */ = {
 			isa = PBXGroup;
 			children = (
-				AA005CC82A9F6897005AB524 /* NetworkingManagerSignUpFailureMock.swift */,
 				AA005CCA2A9F68B3005AB524 /* NetworkingManagerSignUpSuccessMock.swift */,
+				AA005CC82A9F6897005AB524 /* NetworkingManagerSignUpFailureMock.swift */,
 			);
 			path = SignUp;
 			sourceTree = "<group>";
@@ -657,10 +657,10 @@
 		AAE4ED172A3BAFBF00ED630C /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				AA005CBA2A9E3F48005AB524 /* MarkdownView.swift */,
 				AADE8B372A7D0E1E00FED45B /* Buttons */,
 				AA8633FC2A69D23600AF11A2 /* ImagePicker */,
 				AA8633AF2A4C4EE100AF11A2 /* CachedImage */,
+				AA005CBA2A9E3F48005AB524 /* MarkdownView.swift */,
 				AAE4ED1A2A3BAFED00ED630C /* HeadingView.swift */,
 				AA0B356C2A40737A00BD9A08 /* UserImageView.swift */,
 				AA8633C12A55B7E200AF11A2 /* NotificationCountView.swift */,

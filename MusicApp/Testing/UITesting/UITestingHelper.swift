@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Helper struct for simulating values to facilitate UI Testing
 struct UITestingHelper {
     
     static var isUITesting: Bool {

@@ -38,7 +38,6 @@ struct NewStudent: Encodable {
         try container.encode(email, forKey: .email)
         try container.encode(password, forKey: .password)
         try container.encode(dob, forKey: .dob)
-
     }
 }
 

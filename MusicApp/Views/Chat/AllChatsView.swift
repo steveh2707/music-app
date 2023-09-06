@@ -85,6 +85,7 @@ struct AllChatsView: View {
                             if let message = chat.mostRecentMessage {
                                 Text(message)
                                     .font(.callout)
+                                    .lineLimit(1)
                             }
 
                         }

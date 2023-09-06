@@ -70,6 +70,8 @@ struct SignInSignUpView: View {
             .alert(isPresented: $vm.hasError, error: vm.error) { }
             .onChange(of: vm.submissionState) { newState in
                 if newState == .successful, let signInResponse = vm.signInResponse {
+                    vm.error = nil
+                    vm.newUser = NewStudent()
                     global.login(signInResponse: signInResponse)
                 }
             }

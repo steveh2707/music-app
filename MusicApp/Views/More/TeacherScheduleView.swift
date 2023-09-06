@@ -13,8 +13,10 @@ struct TeacherScheduleView: View {
     // MARK: PROPERTIES
     @EnvironmentObject var global: Global
     @StateObject private var vm = TeacherScheduleVM()
-    @State var showNewTimeslotView = false
-    @State var showEditTimeslotView = false
+//    @State var showNewTimeslotView = false
+//    @State var showEditTimeslotView = false
+    
+    @State var showTimeSlotModal = false
     
     // MARK: BODY
     var body: some View {
@@ -32,12 +34,19 @@ struct TeacherScheduleView: View {
                 listOfSlotsAvailableOnDay
             }
         }
-        .sheet(isPresented: $showNewTimeslotView) {
-            TeacherScheduleModal(dateTimeStart: vm.date)
-                .presentationDetents([.fraction(0.4)])
-        }
-        .sheet(isPresented: $showEditTimeslotView) {
-            TeacherScheduleModal(availabilitySlot: vm.slot!)
+//        .sheet(isPresented: $showNewTimeslotView) {
+//            TeacherScheduleModal(dateTimeStart: vm.date)
+//                .presentationDetents([.fraction(0.4)])
+//        }
+//        .sheet(isPresented: $showEditTimeslotView) {
+//            TeacherScheduleModal(availabilitySlot: vm.slot!)
+//                .presentationDetents([.fraction(0.4)])
+//        }
+        .onChange(of: vm.date, perform: { newDate in
+            vm.slot = AvailabilitySlot(date: newDate)
+        })
+        .sheet(isPresented: $showTimeSlotModal) {
+            TeacherScheduleModal(vm: vm)
                 .presentationDetents([.fraction(0.4)])
         }
         .toolbar {
@@ -74,7 +83,7 @@ struct TeacherScheduleView: View {
             ForEach(vm.selectedDaySlots, id: \.self) { slot in
                 Button {
                     vm.slot = slot
-                    showEditTimeslotView.toggle()
+                    showTimeSlotModal.toggle()
                 } label: {
                     Text((slot.parsedStartTime.asTime() ?? "" ) + " - " + (slot.parsedEndTime.asTime() ?? ""))
                 }
@@ -86,7 +95,8 @@ struct TeacherScheduleView: View {
     // Button to add a new slot
     private var addButton: some View {
         Button {
-            showNewTimeslotView.toggle()
+            vm.slot = AvailabilitySlot(date: vm.date)
+            showTimeSlotModal.toggle()
         } label: {
             Image(systemName: "plus")
         }

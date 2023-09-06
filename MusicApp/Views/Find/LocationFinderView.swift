@@ -22,9 +22,7 @@ struct LocationFinderView: View {
             Form {
                 searchInput
                 
-                List {
-//                    useCurrentLocationButton
-                    
+                List {                
                     searchResults
                 }
                 .foregroundColor(Color.theme.primaryText)
@@ -77,24 +75,11 @@ struct LocationFinderView: View {
         }
     }
     
-//    /// Button to use the user's current location.
-//    private var useCurrentLocationButton: some View {
-//        Button {
-//            // TODO: write code to get users current location
-//        } label: {
-//            HStack {
-//                Image(systemName: "location")
-//                Text("Use Current Location")
-//            }
-//        }
-//    }
-    
     /// List of search results.
     private var searchResults: some View {
         ForEach(vm.results) { address in
             Button {
                 vm.getPlace(from: address)
-//                presentationMode.wrappedValue.dismiss()
             } label: {
                 VStack(alignment: .leading) {
                     Text(address.title)

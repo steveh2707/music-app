@@ -16,6 +16,7 @@ struct TeacherScheduleApiResponse: Codable {
 // MARK: - AvailabilitySlot
 /// Data model for each availability timeslot
 struct AvailabilitySlot: Codable, Hashable {
+    
     let teacherAvailabilityID: Int
     var parsedStartTime: Date
     var parsedEndTime: Date
@@ -26,12 +27,19 @@ struct AvailabilitySlot: Codable, Hashable {
         case parsedEndTime = "end_time"
     }
 
+    init(date: Date = Date()) {
+        let roundedDateTimeStart = date.nearestHour()
+        self.teacherAvailabilityID = 0
+        self.parsedStartTime =  roundedDateTimeStart
+        self.parsedEndTime = roundedDateTimeStart.addOrSubtractMinutes(minutes: 60)
+    }
+    
     init(teacherAvailabilityID: Int, startTime: Date, endTime: Date) {
         self.teacherAvailabilityID = teacherAvailabilityID
         self.parsedStartTime =  startTime
         self.parsedEndTime = endTime
     }
-
+    
     init(teacherAvailabilityID: Int, startTime: String, endTime: String) {
         self.teacherAvailabilityID = teacherAvailabilityID
         self.parsedStartTime =  Date(mySqlDateTimeString: startTime)
@@ -48,8 +56,8 @@ struct AvailabilitySlot: Codable, Hashable {
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(teacherAvailabilityID, forKey: .teacherAvailabilityID)
-        try container.encode(parsedStartTime, forKey: .parsedStartTime)
-        try container.encode(parsedEndTime, forKey: .parsedEndTime)
+        try container.encode(parsedStartTime.asSqlDateTimeString(), forKey: .parsedStartTime)
+        try container.encode(parsedEndTime.asSqlDateTimeString(), forKey: .parsedEndTime)
     }
 }
 

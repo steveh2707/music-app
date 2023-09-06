@@ -28,16 +28,15 @@ class AllChatsVM: ObservableObject {
         defer { viewState = .finished }
        
         do {
-            
+            // interact with API and assign response to decodedResponse variable
             let decodedResponse = try await NetworkingManager.shared.request(.allChats(token: token), type: AllChatsResponse.self)
             self.chats = decodedResponse.results
                         
         } catch {
+            // ignore error from cancellation by user
+            if let errorCode = (error as NSError?)?.code, errorCode == NSURLErrorCancelled { return }
             
-            if let errorCode = (error as NSError?)?.code, errorCode == NSURLErrorCancelled {
-                return
-            }
-            
+            // assign any other error to local error variable to be displayed to user
             self.hasError = true
             if let networkingError = error as? NetworkingManager.NetworkingError {
                 self.error = networkingError

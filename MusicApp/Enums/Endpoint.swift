@@ -26,6 +26,9 @@ enum EndPoint {
     case favouriteTeacher(token: String?, id: Int)
     case unfavouriteTeacher(token: String?, id: Int)
     case teacherSchedule(token: String?)
+    case addTimeSlotToSchedule(token: String?, submissionData: Data?)
+    case editTimeSlotInSchedule(token: String?, submissionData: Data?)
+    case deleteTimeSlotFromSchedule(token: String?, id: Int)
     
     case chat(token: String?, id: Int)
     case chatFromTeacherId(token: String?, id: Int)
@@ -71,21 +74,24 @@ enum EndPoint {
         case .newMessage(let token, _, let data),
                 .makeBooking(let token, let data),
                 .newReview(let token, let data),
-                .newTeacher(let token, let data):
+                .newTeacher(let token, let data),
+                .addTimeSlotToSchedule(let token, let data):
             return .POST(token: token, data: data)
             
-        case .cancelBooking(let token, _, let submissionData),
-                .updateUserDetails(let token, let submissionData),
-                .updateTeacherDetails(let token, let submissionData):
-            return .PUT(token: token, data: submissionData)
+        case .cancelBooking(let token, _, let data),
+                .updateUserDetails(let token, let data),
+                .updateTeacherDetails(let token, let data),
+                .editTimeSlotInSchedule(let token, let data):
+            return .PUT(token: token, data: data)
             
         case .favouriteTeacher(let token, _):
             return .POST(token: token)
 
-        case .image(let token, let submissionData):
-            return .POSTImg(token: token, data: submissionData)
+        case .image(let token, let data):
+            return .POSTImg(token: token, data: data)
             
-        case .unfavouriteTeacher(let token, _):
+        case .unfavouriteTeacher(let token, _),
+                .deleteTimeSlotFromSchedule(let token, _):
             return .DELETE(token: token)
         }
     }
@@ -140,8 +146,12 @@ enum EndPoint {
                 .favouriteTeacher(_, let id),
                 .unfavouriteTeacher(_, let id):
             return "/teacher/\(id)/favourite"
-        case .teacherSchedule:
+        case .teacherSchedule,
+                .addTimeSlotToSchedule,
+                .editTimeSlotInSchedule:
             return "/teacher/availability"
+        case .deleteTimeSlotFromSchedule(_, let id):
+            return "/teacher/availability/\(id)"
         }
     }
     
