@@ -95,7 +95,6 @@
 		AADE8B4A2A8F85E600FED45B /* SignUpVMSuccessTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADE8B492A8F85E600FED45B /* SignUpVMSuccessTests.swift */; };
 		AADE8B4F2A8F8D9A00FED45B /* SignUpVMValidationFailureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADE8B4E2A8F8D9A00FED45B /* SignUpVMValidationFailureTests.swift */; };
 		AADE8B532A8F910200FED45B /* SignUpVMFailureTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADE8B522A8F910200FED45B /* SignUpVMFailureTest.swift */; };
-		AADE8B652A8FAA6F00FED45B /* SearchResultsSuccessUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADE8B642A8FAA6F00FED45B /* SearchResultsSuccessUITests.swift */; };
 		AADE8B682A8FAC2A00FED45B /* UITestingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADE8B672A8FAC2A00FED45B /* UITestingHelper.swift */; };
 		AADE8B6B2A8FB27000FED45B /* MockURLSessionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8633842A49B18C00AF11A2 /* MockURLSessionProtocol.swift */; };
 		AADE8B6E2A8FB28100FED45B /* NetworkingManagerTeacherResponseSuccessMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8633932A49E36F00AF11A2 /* NetworkingManagerTeacherResponseSuccessMock.swift */; };
@@ -104,7 +103,6 @@
 		AADE8B712A8FB29500FED45B /* NetworkingManagerTeacherSearchResponseFailureMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA86339E2A4B1F5300AF11A2 /* NetworkingManagerTeacherSearchResponseFailureMock.swift */; };
 		AADE8B722A8FB29B00FED45B /* SignupValidatorSuccessMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADE8B472A8F854100FED45B /* SignupValidatorSuccessMock.swift */; };
 		AADE8B732A8FB2A100FED45B /* SignupValidatorFailureMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADE8B4C2A8F8D2E00FED45B /* SignupValidatorFailureMock.swift */; };
-		AADE8B752A8FC37400FED45B /* SearchResultsFailureUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADE8B742A8FC37400FED45B /* SearchResultsFailureUITests.swift */; };
 		AAE4ED1B2A3BAFED00ED630C /* HeadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE4ED1A2A3BAFED00ED630C /* HeadingView.swift */; };
 		AAE4ED1D2A3BB50B00ED630C /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE4ED1C2A3BB50B00ED630C /* Color.swift */; };
 		AAF4C3212A38AA5B0082C142 /* MusicApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF4C3202A38AA5B0082C142 /* MusicApp.swift */; };
@@ -233,9 +231,7 @@
 		AADE8B4E2A8F8D9A00FED45B /* SignUpVMValidationFailureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVMValidationFailureTests.swift; sourceTree = "<group>"; };
 		AADE8B522A8F910200FED45B /* SignUpVMFailureTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVMFailureTest.swift; sourceTree = "<group>"; };
 		AADE8B582A8FA98000FED45B /* MusicAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MusicAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		AADE8B642A8FAA6F00FED45B /* SearchResultsSuccessUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsSuccessUITests.swift; sourceTree = "<group>"; };
 		AADE8B672A8FAC2A00FED45B /* UITestingHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITestingHelper.swift; sourceTree = "<group>"; };
-		AADE8B742A8FC37400FED45B /* SearchResultsFailureUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsFailureUITests.swift; sourceTree = "<group>"; };
 		AAE4ED1A2A3BAFED00ED630C /* HeadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadingView.swift; sourceTree = "<group>"; };
 		AAE4ED1C2A3BB50B00ED630C /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		AAF4C31D2A38AA5B0082C142 /* MusicApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -608,23 +604,6 @@
 			path = SignUp;
 			sourceTree = "<group>";
 		};
-		AADE8B592A8FA98000FED45B /* MusicAppUITests */ = {
-			isa = PBXGroup;
-			children = (
-				AADE8B632A8FAA4600FED45B /* SearchResults */,
-			);
-			path = MusicAppUITests;
-			sourceTree = "<group>";
-		};
-		AADE8B632A8FAA4600FED45B /* SearchResults */ = {
-			isa = PBXGroup;
-			children = (
-				AADE8B642A8FAA6F00FED45B /* SearchResultsSuccessUITests.swift */,
-				AADE8B742A8FC37400FED45B /* SearchResultsFailureUITests.swift */,
-			);
-			path = SearchResults;
-			sourceTree = "<group>";
-		};
 		AADE8B662A8FAC1B00FED45B /* UITesting */ = {
 			isa = PBXGroup;
 			children = (
@@ -679,7 +658,6 @@
 				AADE8B4B2A8F8BF000FED45B /* MusicApp.xctestplan */,
 				AAF4C31F2A38AA5B0082C142 /* MusicApp */,
 				AAF4C3432A39D4AF0082C142 /* MusicAppTests */,
-				AADE8B592A8FA98000FED45B /* MusicAppUITests */,
 				AAF4C31E2A38AA5B0082C142 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -896,8 +874,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AADE8B752A8FC37400FED45B /* SearchResultsFailureUITests.swift in Sources */,
-				AADE8B652A8FAA6F00FED45B /* SearchResultsSuccessUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
