@@ -78,7 +78,7 @@ struct BookingScheduleView: View {
     
     // Let user select a date in the future for booking.
     private var datePicker: some View {
-        DatePicker(selection: $vm.searchDate, in: Date.now..., displayedComponents: .date) {
+        DatePicker(selection: $vm.searchDate, displayedComponents: .date) {
             Text("Selected Date")
         }
         .datePickerStyle(.automatic)
@@ -126,28 +126,27 @@ struct BookingScheduleView: View {
                     VStack(spacing: 15) {
                         ForEach(teacherAvailability.slots) { slot in
                             
-                            ForEach(vm.getHoursBetweenTwoDates(
-                                startTime: Date(mySqlDateTimeString: slot.startTime),
-                                endTime: Date(mySqlDateTimeString: slot.endTime)
-                            ), id: \.self) { hour in
+                            if Calendar.current.isDate(slot.parsedStartTime, inSameDayAs: day) || Calendar.current.isDate(slot.parsedEndTime, inSameDayAs: day) {
                                 
-                                if Calendar.current.isDate(hour, inSameDayAs: day) {
-                                    let matchingBooking = teacherAvailability.bookings.first {
-                                        hour >= $0.parsedStartTime
-                                        && hour < $0.parsedEndTime
-                                    }
+                                ForEach(vm.getHoursBetweenTwoDates(startTime: slot.parsedStartTime, endTime: slot.parsedEndTime), id: \.self) { hour in
                                     
-                                    Button(action: {
-                                        if matchingBooking == nil {
-                                            vm.showMakeBookingView.toggle()
-                                            vm.selectedDateTime = hour
+                                    if Calendar.current.isDate(hour, inSameDayAs: day) {
+                                        let matchingBooking = teacherAvailability.bookings.first {
+                                            hour >= $0.parsedStartTime
+                                            && hour < $0.parsedEndTime
                                         }
-                                    }, label: {
-                                        BookingSelectorButton(hour: hour, selectable: matchingBooking == nil)
-                                    })
+                                        
+                                        Button(action: {
+                                            if matchingBooking == nil {
+                                                vm.showMakeBookingView.toggle()
+                                                vm.selectedDateTime = hour
+                                            }
+                                        }, label: {
+                                            BookingSelectorButton(hour: hour, selectable: matchingBooking == nil)
+                                        })
+                                    }
                                 }
                             }
-                            
 
                             
                         }

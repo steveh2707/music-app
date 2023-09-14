@@ -87,7 +87,7 @@
          </EnvironmentVariable>
          <EnvironmentVariable
             key = "TZ"
-            value = "SST"
+            value = "Australia/ACT"
             isEnabled = "NO">
          </EnvironmentVariable>
          <EnvironmentVariable
@@ -97,13 +97,8 @@
          </EnvironmentVariable>
          <EnvironmentVariable
             key = "TZ"
-            value = "PST"
-            isEnabled = "NO">
-         </EnvironmentVariable>
-         <EnvironmentVariable
-            key = "TZ"
-            value = "PKT"
-            isEnabled = "NO">
+            value = "PDT"
+            isEnabled = "YES">
          </EnvironmentVariable>
       </EnvironmentVariables>
    </LaunchAction>

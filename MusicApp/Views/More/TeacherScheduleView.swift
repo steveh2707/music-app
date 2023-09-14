@@ -34,14 +34,6 @@ struct TeacherScheduleView: View {
                 listOfSlotsAvailableOnDay
             }
         }
-//        .sheet(isPresented: $showNewTimeslotView) {
-//            TeacherScheduleModal(dateTimeStart: vm.date)
-//                .presentationDetents([.fraction(0.4)])
-//        }
-//        .sheet(isPresented: $showEditTimeslotView) {
-//            TeacherScheduleModal(availabilitySlot: vm.slot!)
-//                .presentationDetents([.fraction(0.4)])
-//        }
         .onChange(of: vm.date, perform: { newDate in
             vm.slot = AvailabilitySlot(date: newDate)
         })

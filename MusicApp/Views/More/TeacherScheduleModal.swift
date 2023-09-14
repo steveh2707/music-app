@@ -19,28 +19,6 @@ struct TeacherScheduleModal: View {
     var newTimeSlot: Bool { vm.slot.teacherAvailabilityID == 0 }
     
     
-//    @State var availabilitySlot: AvailabilitySlot
-//
-//    var newTimeSlot: Bool
-    
-    
-    // MARK: INITALIZATION
-    
-//    // initialize for a new time slot
-//    init(dateTimeStart: Date) {
-//        let roundedDateTimeStart = dateTimeStart.nearestHour()
-//        let slot = AvailabilitySlot(teacherAvailabilityID: 0, startTime: roundedDateTimeStart, endTime: roundedDateTimeStart.addOrSubtractMinutes(minutes: 60))
-//
-//        _availabilitySlot = State(initialValue: slot)
-//        newTimeSlot = true
-//    }
-//
-//    // initialize for an existing time slot
-//    init(availabilitySlot: AvailabilitySlot) {
-//        _availabilitySlot = State(initialValue: availabilitySlot)
-//        newTimeSlot = false
-//    }
-    
     // MARK: BODY
     var body: some View {
         NavigationView {
@@ -81,15 +59,6 @@ struct TeacherScheduleModal: View {
         }
     }
     
-//    // Add button to add new timeslot
-//    private var addButton: some View {
-//        Button("Add") {
-//            Task {
-//                await vm.addOrEditTimeSlot(token: global.token)
-//            }
-//        }
-//    }
-    
     // Add new or save edited timeslot
     private var addOrSaveButton: some View {
         Button(newTimeSlot ? "Add" : "Save") {
@@ -101,13 +70,6 @@ struct TeacherScheduleModal: View {
             }
         }
     }
-    
-//    // Save button to save changes to a timeslot
-//    private var saveEditButton: some View {
-//        Button("Save") {
-//            //TODO: Edit timeslot
-//        }
-//    }
     
     // Delete a timeslot
     private var deleteButton: some View {
@@ -123,11 +85,3 @@ struct TeacherScheduleModal: View {
 
 }
 
-
-// MARK: PREVIEW
-
-//struct TeacherScheduleModal_Previews: PreviewProvider {
-//    static var previews: some View {
-//        TeacherScheduleModal(dateTimeStart: Date())
-//    }
-//}
