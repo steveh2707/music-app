@@ -160,10 +160,10 @@ struct ChatView: View {
 
 // MARK: PREVIEW
 
-struct ChatView_Previews: PreviewProvider {
-    
-    static var previews: some View {
-        ChatView(chatID: 1)
-            .environmentObject(dev.globalStudentVM)
-    }
-}
+//struct ChatView_Previews: PreviewProvider {
+//    
+//    static var previews: some View {
+//        ChatView(chatID: 1)
+//            .environmentObject(dev.globalStudentVM)
+//    }
+//}

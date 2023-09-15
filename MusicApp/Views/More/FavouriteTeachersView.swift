@@ -67,9 +67,9 @@ struct FavouriteTeachersView: View {
 }
 
 // MARK: PREVIEW
-struct FavouriteTeachersView_Previews: PreviewProvider {
-    static var previews: some View {
-        FavouriteTeachersView()
-            .environmentObject(dev.globalStudentVM)
-    }
-}
+//struct FavouriteTeachersView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        FavouriteTeachersView()
+//            .environmentObject(dev.globalStudentVM)
+//    }
+//}

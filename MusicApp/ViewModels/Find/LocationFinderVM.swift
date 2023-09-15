@@ -36,6 +36,7 @@ class LocationFinderVM: NSObject, ObservableObject {
         }
     }
     
+    /// Autocompletes location names from search text
     private lazy var localSearchCompleter: MKLocalSearchCompleter = {
         let completer = MKLocalSearchCompleter()
         completer.delegate = self
